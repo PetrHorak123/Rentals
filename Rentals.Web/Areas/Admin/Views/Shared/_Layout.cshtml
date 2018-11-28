@@ -1,0 +1,63 @@
+﻿@using Rentals.Web.Localization
+@using Rentals.Common.Enums
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@(ViewBag.Title ?? Admin.Title)</title>
+
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/css/admin.css" />
+	<script src="~/lib/jquery/dist/jquery.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="~/js/uploadFile.js" asp-append-version="true"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" />
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink(Admin.Overview, "Index", "Home", null, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink(Admin.Calendar, "Index", "Calendar")</li>
+					<li>@Html.ActionLink(Admin.Items, "Index", "Items")</li>
+					@if (User.IsInRole(RoleType.Administrator.ToString()))
+					{
+						<li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
+						<li><a>@Admin.Employees</a></li>
+					}
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>@Html.ActionLink(Admin.Logout, "Logout", "Account")</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container body-content">
+		@RenderBody()
+	</div>
+
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

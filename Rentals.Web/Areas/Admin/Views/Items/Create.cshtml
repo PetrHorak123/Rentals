@@ -1,0 +1,64 @@
+﻿@model Rentals.Web.Areas.Admin.Models.ItemTypeEditorViewModel
+@using Rentals.Web.Localization
+@using Rentals.Common.Extensions
+
+@{
+	ViewBag.Title = Admin.Items;
+}
+
+<div class="row">
+	<h2>@Admin.CreateType</h2>
+</div>
+
+<hr />
+<div class="row">
+	<div class="col-md-6">
+		@using (Html.BeginForm("Create", "Items", FormMethod.Post))
+		{
+			@Html.ValidationSummary(true)
+			<div class="form-group">
+				@Html.LabelFor(m => m.Name, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.Name, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.NumberOfItems, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.NumberOfItems, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.NumberOfItems, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.Description, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+			</div>
+			<div class="form-group">
+				@Html.HiddenFor(m => m.CoverImage)
+
+				@if (Model.CoverImage.IsNullOrEmpty())
+				{
+					<input id="file" type="file" size="1" onchange="uploadFile('file', OnSuccess, OnFailure)" />
+					<p style="display: none;" id="summary" class="text-success">@Admin.FileUploaded</p>
+
+					<script type="text/javascript">
+						function OnSuccess(data) {
+							$("#@Html.IdFor(m => m.CoverImage)").val(data);
+							$("#file").hide();
+							$("#summary").show();
+						}
+
+						function OnFailure(data) {
+							alert("@Html.Raw(Admin.FileUploadFailed)");
+						}
+					</script>
+				}
+				else
+				{
+					<p class="text-success">@Admin.FileUploaded</p>
+				}
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">@Admin.Save</button>
+			</div>
+		}
+		Listbox s provázáním
+	</div>
+</div>

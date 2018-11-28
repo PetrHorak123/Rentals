@@ -1,0 +1,114 @@
+﻿@model Rentals.Web.Areas.Admin.Models.ItemTypeEditorViewModel
+@using Rentals.Web.Localization
+
+@{
+	ViewBag.Title = $"{Admin.EditItemType} - {Model.Name}";
+}
+
+<h2>@($"{Admin.EditItemType} - {Model.Name}")</h2>
+
+<hr />
+<div class="row">
+	<div class="col-md-12" id="editor">
+		@using (Html.BeginForm("", "", FormMethod.Post, new { id = "editor-form" }))
+		{
+			@Html.HiddenFor(m => m.NumberOfItems)
+			@Html.HiddenFor(m => m.Id)
+
+			@Html.ValidationSummary(true)
+			<div class="form-group">
+				@Html.LabelFor(m => m.Name, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.Name, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.Description, new { @class = "control-label" })
+				@Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+			</div>
+			<div class="form-group">
+				<button type="button" id="show-edit-all-pictures" class="btn btn-info">@Admin.ChangeAllImages</button>
+
+				<div id="edit-all-pictures" style="display: none;">
+					<input id="file" type="file" size="1" onchange="uploadFile('file', OnSuccess, OnFailure)" />
+					<p style="display: none;" id="summary" class="text-success">@Admin.FileChanged</p>
+				</div>
+			</div>
+
+			<div class="row">
+				@for (int i = 0; i < Model.NumberOfItems; i++)
+				{
+					<div class="col-md-4">
+						@Html.HiddenFor(m => m.Items[i].Id)
+						@Html.HiddenFor(m => m.Items[i].CoverImage)
+						<h3>@Model.Items[i].UniqueIdentifier</h3>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<img src="@Model.Items[i].CoverImage" alt="@Model.Items[i].UniqueIdentifier"
+									 class="img-responsive image" onclick="beginFileUpload(@i)" id="image_@i"/>
+								<input id="file_@i" type="file" size="1" onchange="uploadFile('file_@i', OnSuccessItem, OnFailure)" style="display:none" />
+							</div>
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									@Html.LabelFor(m => m.Items[i].UniqueIdentifier, new { @class = "control-label" })
+									@Html.TextBoxFor(m => m.Items[i].UniqueIdentifier, new { @class = "form-control" })
+									@Html.ValidationMessageFor(m => m.Items[i].UniqueIdentifier, string.Empty, new { @class = "text-danger" })
+								</div>
+								<div class="form-group">
+									@Html.LabelFor(m => m.Items[i].Note, new { @class = "control-label" })
+									@Html.TextAreaFor(m => m.Items[i].Note, new { @class = "form-control" })
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-danger btn-sm pull-right" onclick="return confirm('@(string.Format(Admin.DeleteMessage, Model.Items[i].UniqueIdentifier))');"
+									formaction="@Url.Action("Delete", "Items", new { itemId = Model.Items[i].Id })">@Admin.Delete</button>
+						</div>
+					</div>
+				}
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" formaction="@Url.Action("Edit", "Items")">@Admin.Save</button>
+				<button type="submit" class="btn btn-primary" formaction="@Url.Action("AddItem", "Items")">@Admin.AddItem</button>
+			</div>
+		}
+
+		<script type="text/javascript">
+			var index;
+
+			function OnSuccess(data) {
+				$("#file").hide();
+				$("#summary").show();
+				$(".image").each(function() {
+					$(this).attr("src", data);
+				});
+
+				for (var i = 0; i < @Model.NumberOfItems; i++) {
+					$("#Items_" + i + "__CoverImage").val(data);
+				}
+			};
+
+			function OnSuccessItem(data) {
+				$("#Items_" + index + "__CoverImage").val(data);
+				$("#image_" + index).attr("src", data);
+			};
+
+			function OnFailure(data) {
+				alert("@Html.Raw(Admin.FileUploadFailed)");
+			};
+
+			function beginFileUpload(i) {
+				$("#file_" + i).trigger("click");
+				index = i;
+			};
+
+			$("#show-edit-all-pictures").click(function(e) {
+				$("#show-edit-all-pictures").hide();
+				$("#edit-all-pictures").show();
+			});
+		</script>
+	</div>
+</div>

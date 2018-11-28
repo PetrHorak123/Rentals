@@ -1,0 +1,107 @@
+﻿@model Rentals.Web.Areas.Admin.Models.ItemTypesViewModel
+@using Rentals.Web.Localization
+
+@{
+	ViewBag.Title = Admin.Calendar;
+}
+
+<h2 class="row">
+	@Admin.Calendar
+	@Html.ActionLink(Admin.CreateRenting, "Create", "Renting", null, new { @class = "btn btn-primary pull-right" })
+</h2>
+
+<div class="row">
+	@*<ul class="col-sm-3 list-group">
+			@foreach (var item in Model.ItemTypes)
+			{
+				<li class="list-group-item clearfix">
+					<input type="checkbox">
+					@item.Name
+				</li>
+			}
+		</ul>*@
+	<div class="col-sm-12">
+		<div class="row">
+			<div class="form-group col-sm-3 padding-0">
+				<input type="text" name="datetimes" class="form-control" />
+			</div>
+		</div>
+		<div id="visualization" class="row"></div>
+	</div>
+</div>
+
+<script>
+	var startDate;
+	var endDate;
+	var timeline;
+	var groups = new vis.DataSet();
+
+	function updateTimeline(start, end, data) {
+		var container = $("#visualization");
+		container.empty();
+		var options = {
+			groupOrder: 'content',  // groupOrder can be a property name or a sorting function
+			locale: "cs",
+			min: start,
+			max: end
+		};
+
+		console.log(groups);
+		console.log(data);
+
+		timeline = new vis.Timeline(container[0], data, groups, options);
+		timeline.setOptions(options);
+
+		$(".vis-timeline").css('visibility', 'visible');
+	}
+
+	$(function () {
+		startDate = moment().startOf('day');
+		endDate = moment().add(1, "week").endOf("day");
+
+
+		@* To je zde jenom kvůli správnému načtení lokalizace *@
+		timeline = new vis.Timeline($("#visualization")[0], { id: 1 }, { locale: "cs" });
+
+		getItems();
+
+		$('input[name="datetimes"]').daterangepicker({
+			startDate: startDate,
+			endDate: endDate,
+			locale: "cs"
+		},
+		function (start, end) {
+			getData(start, end.add(1, "seconds"));
+		});
+	});
+
+	function getData(start, end) {
+		$.ajax({
+			url: '@Url.Action("GetRentings", "Calendar")',
+			data: {
+				from: start.toJSON(),
+				to: end.toJSON()
+			},
+			success: function (data) {
+				updateTimeline(start, end, data);
+			},
+			error: function (data) {
+				alert("Huups");
+			}
+		});
+	}
+
+	function getItems() {
+		$.ajax({
+			url: '@Url.Action("GetTypesAndItems", "Calendar")',
+			success: function (data) {
+				groups.add(data.types);
+				groups.add(data.items);
+				getData(startDate, endDate.add(1, "seconds"));
+			},
+			error: function (data) {
+				alert("Huups");
+			}
+		});
+	}
+</script>

@@ -1,0 +1,31 @@
+﻿@model Rentals.Web.Areas.Admin.Models.ExtendedItemTypeViewModel
+@using Rentals.Web.Localization
+
+@{
+	ViewBag.Title = string.Format(Admin.Detail, Model.Name);
+}
+
+<div class="row">
+	<h2>
+		@string.Format(Admin.Detail, Model.Name)
+		@Html.ActionLink(Admin.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('"+ string.Format(Admin.DeleteMessage, Model.Name) + "');" })
+		@Html.ActionLink(Admin.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+	</h2>
+</div>
+
+<div class="row">
+	<h3>@Model.Name</h3>
+	<p>@Model.Description</p>
+
+	<h4>@Admin.ListOfItems <small>@Admin.CustomersView</small></h4>
+
+	@foreach(var item in Model.Items)
+	{
+		<div class="col-sm-3">
+			<h4>@Model.Name</h4>
+			<img src="@item.CoverImage" alt="@Model.Name" class="img-responsive"/>
+			<p>@string.Format(Admin.NumberOfItems, item.NumberOfItems)</p>
+			<p>@item.Note</p>
+		</div>
+	}
+</div>

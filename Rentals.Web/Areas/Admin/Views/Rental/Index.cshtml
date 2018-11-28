@@ -1,0 +1,16 @@
+﻿@model Rentals.Web.Models.BaseViewModel
+@using Rentals.Web.Localization
+
+@if(Model.Rental == null)
+{
+	<h2>@Admin.CreateFirst</h2>
+	@Html.ActionLink(Admin.Create, "Edit", "Rental", null ,new { @class = "btn btn-primary" })
+}
+else
+{
+	<h2>@Model.Rental.Name</h2>
+
+	<address></address>
+
+	@Html.ActionLink(Admin.Edit, "Edit", "Rental", null, new { @class = "btn btn-warning"})
+}

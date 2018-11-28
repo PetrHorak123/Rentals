@@ -1,0 +1,34 @@
+﻿@model Rentals.Web.Areas.Admin.Models.RentalEditorViewModel
+@using Rentals.Web.Localization
+
+<div class="row">
+	<h2>@Admin.EditRental</h2>
+	<div class="col-md-4">
+		@using (Html.BeginForm("Edit", "Rental", FormMethod.Post))
+		{
+			@Html.ValidationSummary(true)
+			<div class="form-group">
+				@Html.LabelFor(m => m.Name, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.Name, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.City, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.Street, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.Street, new { @class = "form-control" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.ZipCode, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.ZipCode, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">@Admin.Save</button>
+				@Html.ActionLink(Admin.Cancel, "Index", "Rental", null, new { @class = "btn btn-default" })
+			</div>
+		}
+	</div>
+</div>

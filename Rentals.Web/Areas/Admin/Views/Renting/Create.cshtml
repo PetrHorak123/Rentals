@@ -1,0 +1,213 @@
+﻿@model Rentals.Web.Areas.Admin.Models.RentingEditorViewModel
+@using Rentals.Common.Enums
+@using Rentals.Web.Localization
+@using Rentals.Web.Code
+
+@{
+	ViewBag.Title = Admin.Renting_Create;
+}
+
+<div class="row">
+	<h2>
+		@Admin.Renting_Create
+	</h2>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		@using (Html.BeginForm("Create", "Renting", FormMethod.Post))
+		{
+			@Html.ValidationSummary(true)
+			@Html.HiddenFor(m => m.RentalId)
+
+			<div class="form-group">
+				@Html.HiddenFor(m => m.CustomerId)
+				@Html.LabelFor(m => m.CustomerId, new { @class = "control-label" })
+				<input type="text" id="autocomplete" class="form-control" value="@Model.CustomerName">
+				@Html.ValidationMessageFor(m => m.CustomerId, string.Empty, new { @class = "text-danger" })
+			</div>
+
+			<div class="form-group row">
+				<div class="col-xs-12">
+					@Html.LabelFor(m => m.StartsAtDate, new { @class = "control-label" })
+					<div class="row">
+						<div class="col-sm-6">
+							@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.StartsAtDate, string.Empty, new { @class = "text-danger" })
+						</div>
+						<div class="col-sm-6">
+							@Html.DropDownListFor(
+								m => m.StartsAtTime,
+								new SelectList(Model.Rental.TimeList),
+								null,
+								new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.StartsAtTime, string.Empty, new { @class = "text-danger" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-xs-12">
+					@Html.LabelFor(m => m.EndsAtDate, new { @class = "control-label" })
+					<div class="row">
+						<div class="col-sm-6">
+							@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.EndsAtDate, string.Empty, new { @class = "text-danger" })
+						</div>
+						<div class="col-sm-6">
+							@Html.DropDownListFor(
+								m => m.EndsAtTime,
+								new SelectList(Model.Rental.TimeList),
+								null,
+								new { @class = "form-control" })
+							@Html.ValidationMessageFor(m => m.EndsAtTime, string.Empty, new { @class = "text-danger" })
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-xs-12">
+					@Html.LabelFor(m => m.ItemIds, new { @class = "control-label" })
+					<div class="row">
+						<div class="col-sm-6">
+							<select class="form-control" id="item-type-selector">
+								<option value="0">----------</option>
+								@foreach (var type in Model.ItemTypes)
+								{
+									<option value="@type.Id">@type.Name</option>
+								}
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="btn-group col-xs-12">
+									<button type="button" id="item-selector" class="btn btn-default btn dropdown-toggle col-xs-12" data-toggle="dropdown" disabled="disabled">
+										<p class="pull-left margin-0">@Admin.Renting_ChooseItems</p>
+										<p class="pull-right margin-0"><span class="caret"></span></p>
+									</button>
+									<ul class="dropdown-menu col-xs-12"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="items" class="row">
+						@if (Model.Items != null)
+						{
+							for (int i = 0; i < Model.Items.Count(); i++)
+							{
+								<div class="col-xs-4" id="@Model.Items[i].UniqueIdentifier.Replace(" ", string.Empty)">
+									<h5>
+										@Model.Items[i].UniqueIdentifier
+										<a class="btn btn-xs btn-danger pull-right" onclick="removeItem('@Model.Items[i].UniqueIdentifier.Replace(" ", string.Empty)')">x</a>
+									</h5>
+								</div>
+								@Html.HiddenFor(m => m.ItemIds[i])
+							}
+						}
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.State, new { @class = "control-label" })
+
+				@Html.DropDownListFor(m => m.State,
+					Html.GetEnumSelectList(RentalState.Canceled),
+					null,
+					new {@class = "form-control"})
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">@Admin.Save</button>
+				@Html.ActionLink(Admin.Cancel, "Index", "Calendar", null, new { @class = "btn btn-default" })
+			</div>
+		}
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#autocomplete").autocomplete({
+			source:'@Url.Action("GetCustomers", "Renting")',
+			autofocus: true,
+			select: function (event, ui) {
+				event.preventDefault();
+				$("#autocomplete").val(ui.item.name);
+				$("#" + "@Html.IdFor(m => m.CustomerId)").val(ui.item.id);
+			}
+		});
+
+		$("#autocomplete").data("ui-autocomplete")._renderItem = function (ul, item) {
+			console.log(item);
+			var content = "<span>" + item.name + "</span></br>";
+
+			return $("<li>")
+				.append("<div>" + content + "</div>")
+				.appendTo(ul);
+		};
+
+		$("#autocomplete").data("ui-autocomplete")._renderMenu = function (ul, items) {
+			var that = this;
+			$.each( items, function(index, item) {
+				that._renderItemData(ul, item);
+			});
+		};
+
+		$("#item-type-selector").change(function (event) {
+			$("#item-selector").attr("disabled", "disabled");
+
+			$.ajax({
+				url: "@Url.Action("GetAvaibleItems", "Items")",
+				data: {
+					itemTypeId: $("#item-type-selector").val(),
+					startsAt: $("#@Html.IdFor(m => m.StartsAtDate)").val() + " " + $("#@Html.IdFor(m => m.StartsAtTime)").val(),
+					endsAt: $("#@Html.IdFor(m => m.EndsAtDate)").val() + " " +$("#@Html.IdFor(m => m.EndsAtTime)").val()
+				},
+				success: function (data) {
+					$elem = $(".dropdown-menu");
+					$elem.empty();
+					$.each(data, function (index, value) {
+						$elem.append(
+							'<li><a tabIndex=" - 1"><button onclick="addItem(\'' + value.id + '\', \'' + value.uniqueIdentifier + '\')" type="button" class="btn btn-xs btn-info pull-right">@GlobalResources.Add</button>&nbsp;' + value.uniqueIdentifier + '</a></li>'
+						);
+					});
+
+					$("#item-selector").removeAttr("disabled");
+				},
+				error: function () {
+					alert("Failed");
+				}
+			});
+		});
+
+		$('.dropdown-toggle').dropdown();
+
+		$("#@Html.IdFor(m => m.StartsAtDate)").datepicker({
+			dateFormat: "@GlobalResources.Js_TimeFormat"
+		});
+
+		$("#@Html.IdFor(m => m.EndsAtDate)").datepicker({
+			dateFormat: "@GlobalResources.Js_TimeFormat"
+		});
+	});
+
+	var itemsCount = @(Model.ItemIds?.Length ?? 0);
+
+	function addItem(id, identifier) {
+		if (!$("#" + identifier.replace(/\s/g, ''))[0]) {
+			$("#items").append(
+				'<div class="col-xs-4" id="' + identifier.replace(/\s/g, '') + '">' +
+					'<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'' + identifier.replace(/\s/g, '') + '\')">x</a></h5>' +
+				'</div>' + 
+				'<input type="hidden" value="' + id + '" name="ItemIds[' + itemsCount + ']" class="item-id"/>'
+			);
+			itemsCount++;
+		}
+	}
+
+	function removeItem(elem) {
+		var $elem = $("#" + elem);
+		$elem.next("input").val(0);
+		$elem.remove();
+	}
+</script>
