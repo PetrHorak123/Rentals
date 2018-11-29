@@ -90,6 +90,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			return View(model);
 		}
 
+		// Udělat jako komponentu celej seznam předmětů ?
 		[HttpPost]
 		public ActionResult AddItem(ItemTypeEditorViewModel postedModel)
 		{

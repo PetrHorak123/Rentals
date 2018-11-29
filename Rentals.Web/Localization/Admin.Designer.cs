@@ -520,6 +520,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poznámka.
+        /// </summary>
+        public static string Renting_Note {
+            get {
+                return ResourceManager.GetString("Renting_Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předmět {0} není z této půjčovny..
         /// </summary>
         public static string Renting_NotValidItem {
@@ -561,6 +570,24 @@ namespace Rentals.Web.Localization {
         public static string Renting_WrongDate {
             get {
                 return ResourceManager.GetString("Renting_WrongDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přehled.
+        /// </summary>
+        public static string RentingOverview {
+            get {
+                return ResourceManager.GetString("RentingOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přehled dnešních výpůjček.
+        /// </summary>
+        public static string RentingOverview_Today {
+            get {
+                return ResourceManager.GetString("RentingOverview_Today", resourceCulture);
             }
         }
         

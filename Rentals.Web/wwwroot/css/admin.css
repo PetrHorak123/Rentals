@@ -9,3 +9,7 @@
 .padding-0{
 	padding: 0;
 }
+
+.vis-item{
+	top:0!important;
+}

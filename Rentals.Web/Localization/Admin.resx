@@ -318,4 +318,13 @@
   <data name="Renting_StartsAtNotInWorkingHours" xml:space="preserve">
     <value>Začátek výpůjčky musí být v pracovní době.</value>
   </data>
+  <data name="Renting_Note" xml:space="preserve">
+    <value>Poznámka</value>
+  </data>
+  <data name="RentingOverview" xml:space="preserve">
+    <value>Přehled</value>
+  </data>
+  <data name="RentingOverview_Today" xml:space="preserve">
+    <value>Přehled dnešních výpůjček</value>
+  </data>
 </root>

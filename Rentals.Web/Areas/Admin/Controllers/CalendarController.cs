@@ -48,7 +48,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 					items.Add(new
 					{
-						id = id,
+						id,
 						content = item.UniqueIdentifier,
 						visible = false,
 						nestedInGroup = itemType.Id
@@ -58,7 +58,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				itemTypes.Add(itemTypeToAdd);
 			}
 
-			return Json(new { types = itemTypes, items = items });
+			return Json(new { types = itemTypes, items });
 		}
 
 		public JsonResult GetRentings(DateTime from, DateTime to)

@@ -1,3 +1,16 @@
-﻿
-<h2>Index</h2>
+﻿@using Rentals.Web.Localization
+@using Rentals.Web.Areas.Admin.ViewComponents
 
+@{ 
+	ViewBag.Title = Admin.RentingOverview;
+}
+
+<h2>
+	@Admin.RentingOverview_Today
+</h2>
+
+<div class="row">
+	<div class="col-xs-12">
+		@await Component.InvokeAsync(nameof(RentingOverview))
+	</div>
+</div>

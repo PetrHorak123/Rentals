@@ -18,6 +18,11 @@ namespace Rentals.Web.Areas.Admin.Models
 	{
 		public RentingEditorViewModel()
 		{
+			// Inicializační hodnoty, připravím si je tady, abych se o ně nemusel starat ve view.
+			var today = DateTime.Today;
+
+			this.StartsAtDate = today;
+			this.EndsAtDate = today;
 		}
 
 		/// <summary>
@@ -107,6 +112,16 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
+		/// Poznámka k výpůjčce.
+		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_Note), ResourceType = typeof(Localization.Admin))]
+		public string Note
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Typy předmětů.
 		/// </summary>
 		public IEnumerable<ItemTypeViewModel> ItemTypes
@@ -127,6 +142,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Id půjčovny, ze které se půjčuje.
 		/// </summary>
+		/// <remarks>Je zde kvůli validaci, protože se volá před <see cref="IAfterFetchModel"/>.</remarks>
 		public int RentalId
 		{
 			get;
@@ -139,10 +155,6 @@ namespace Rentals.Web.Areas.Admin.Models
 
 		public void AfterFetchModel(IRepositoriesFactory repositoriesFactory)
 		{
-			var today = DateTime.Today;
-
-			this.StartsAtDate = today;
-			this.EndsAtDate = today;
 			this.RentalId = this.Rental.Id;
 
 			this.ItemTypes = repositoriesFactory.Types.GetItemTypes()
@@ -241,7 +253,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		{
 			var renting = Renting.Create(
 				this.CustomerId, this.StartsAt, this.EndsAt,
-				this.State, this.ItemIds
+				this.State, this.Note, this.ItemIds
 			);
 
 			return renting;
