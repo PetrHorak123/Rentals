@@ -327,4 +327,22 @@
   <data name="RentingOverview_Today" xml:space="preserve">
     <value>Přehled dnešních výpůjček</value>
   </data>
+  <data name="RentingOverview_NonReturned" xml:space="preserve">
+    <value>Nenavrácené výpůjčky</value>
+  </data>
+  <data name="RentingOverview_NoRenting" xml:space="preserve">
+    <value>Žádné takové výpůjčky nejsou</value>
+  </data>
+  <data name="RentingOverview_OnGoing" xml:space="preserve">
+    <value>Probíhající výpůjčky</value>
+  </data>
+  <data name="RentingOverview_Returned" xml:space="preserve">
+    <value>Dnes navrácené výpůjčky</value>
+  </data>
+  <data name="RentingOverview_StartingToday" xml:space="preserve">
+    <value>Výpůjčky startující dnes</value>
+  </data>
+  <data name="RentingOverview_ToBeReturned" xml:space="preserve">
+    <value>Výpůjčky, které budou navráceny</value>
+  </data>
 </root>

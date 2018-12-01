@@ -1,3 +1,17 @@
 ﻿@model Rentals.Web.Areas.Admin.Models.RentingOverviewViewModel
+@using Rentals.Web.Localization
 
-<div>Rendered</div>
+<h3>@Admin.RentingOverview_NonReturned</h3>
+@await Html.PartialAsync("_Rentings", Model.ShouldBeRetuned)
+
+<h3>@Admin.RentingOverview_ToBeReturned</h3>
+@await Html.PartialAsync("_Rentings", Model.ToBeRetuned)
+
+<h3>@Admin.RentingOverview_StartingToday</h3>
+@await Html.PartialAsync("_Rentings", Model.StartingToday)
+
+<h3>@Admin.RentingOverview_OnGoing</h3>
+@await Html.PartialAsync("_Rentings", Model.OnGoing)
+
+<h3>@Admin.RentingOverview_Returned</h3>
+@await Html.PartialAsync("_Rentings", Model.Returned)

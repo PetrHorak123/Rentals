@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System;
@@ -26,6 +27,20 @@ namespace Rentals.DL.Repositories
 
 			return renting;
 		}
+
+		public Task<Renting[]> GetNonRetruned()
+		{
+			var now = DateTime.Now;
+
+			var renting = this.Context.Rentings.Where(
+				r => !r.IsCanceled &&
+				r.EndsAt < now &&
+				r.State == RentalState.Lended
+			).ToArrayAsync();
+
+			return renting;
+		}
+
 
 		/// <summary>
 		/// Vytvoří pouze query pro databázi, které následně metody pouštějí.

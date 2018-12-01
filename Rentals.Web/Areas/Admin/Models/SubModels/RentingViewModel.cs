@@ -15,6 +15,7 @@ namespace Rentals.Web.Areas.Admin.Models.SubModels
 		{
 			this.Id = renting.Id;
 			this.CustomerName = renting.User.UserName;
+			this.CustomerEmail = renting.User.Email;
 			this.Note = renting.Note;
 			this.StartsAt = renting.StartsAt;
 			this.EndsAt = renting.EndsAt;
@@ -33,6 +34,15 @@ namespace Rentals.Web.Areas.Admin.Models.SubModels
 		/// Zákazník, kterému byly(budou) předměty půjčeny.
 		/// </summary>
 		public string CustomerName
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Zákazník, kterému byly(budou) předměty půjčeny.
+		/// </summary>
+		public string CustomerEmail
 		{
 			get;
 			set;

@@ -40,6 +40,7 @@ namespace Rentals.Web.Areas.Admin.Models
 							this.OnGoing.Add(new RentingViewModel(renting));
 							break;
 						}
+						// Pokud skončili v minulosti.
 						else if (renting.EndsAt < now)
 						{
 							this.ShouldBeRetuned.Add(new RentingViewModel(renting));

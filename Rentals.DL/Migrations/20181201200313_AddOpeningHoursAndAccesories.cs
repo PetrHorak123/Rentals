@@ -11,7 +11,7 @@ namespace Rentals.DL.Migrations
                 name: "EndsAt",
                 table: "Rentals",
                 nullable: false,
-                defaultValue: new TimeSpan(0, 8, 0, 0, 0));
+                defaultValue: new TimeSpan(0, 15, 0, 0, 0));
 
             migrationBuilder.AddColumn<int>(
                 name: "MinTimeUnit",
@@ -23,7 +23,7 @@ namespace Rentals.DL.Migrations
                 name: "StartsAt",
                 table: "Rentals",
                 nullable: false,
-                defaultValue: new TimeSpan(0, 15, 0, 0, 0));
+                defaultValue: new TimeSpan(0, 8, 0, 0, 0));
 
             migrationBuilder.CreateTable(
                 name: "Accessories",

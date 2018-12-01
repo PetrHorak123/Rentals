@@ -583,6 +583,60 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nenavrácené výpůjčky.
+        /// </summary>
+        public static string RentingOverview_NonReturned {
+            get {
+                return ResourceManager.GetString("RentingOverview_NonReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žádné takové výpůjčky nejsou.
+        /// </summary>
+        public static string RentingOverview_NoRenting {
+            get {
+                return ResourceManager.GetString("RentingOverview_NoRenting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probíhající výpůjčky.
+        /// </summary>
+        public static string RentingOverview_OnGoing {
+            get {
+                return ResourceManager.GetString("RentingOverview_OnGoing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dnes navrácené výpůjčky.
+        /// </summary>
+        public static string RentingOverview_Returned {
+            get {
+                return ResourceManager.GetString("RentingOverview_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výpůjčky startující dnes.
+        /// </summary>
+        public static string RentingOverview_StartingToday {
+            get {
+                return ResourceManager.GetString("RentingOverview_StartingToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výpůjčky, které budou navráceny.
+        /// </summary>
+        public static string RentingOverview_ToBeReturned {
+            get {
+                return ResourceManager.GetString("RentingOverview_ToBeReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přehled dnešních výpůjček.
         /// </summary>
         public static string RentingOverview_Today {

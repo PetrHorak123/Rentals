@@ -214,7 +214,7 @@ namespace Rentals.Web.Areas.Admin.Models
 				yield return new ValidationResult(Localization.Admin.Renting_WrongDate);
 			}
 
-			if (this.StartsAt <= DateTime.Now)
+			if (this.StartsAtDate <= DateTime.Now.Date)
 			{
 				yield return new ValidationResult(Localization.Admin.Renting_DateInPast);
 			}

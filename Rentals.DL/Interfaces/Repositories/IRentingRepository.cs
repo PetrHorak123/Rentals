@@ -12,5 +12,10 @@ namespace Rentals.DL.Interfaces
 		Renting[] GetRentingInTime(DateTime from, DateTime to);
 
 		Task<Renting[]> GetRentingInTimeAsync(DateTime from, DateTime to);
+
+		/// <summary>
+		/// Vrací všenchy výpůjčky, které nebyly navráceny.
+		/// </summary>
+		Task<Renting[]> GetNonRetruned();
 	}
 }
