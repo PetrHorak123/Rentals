@@ -484,7 +484,7 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Předmět {0}, je od {1} do {2} již vypůjčen, vyberte prosím jiný..
+        ///   Looks up a localized string similar to Předmět {0} nemůže být vypůjčen od {1} do {2}, protože je již zapůjčený..
         /// </summary>
         public static string Renting_ItemUnavaible {
             get {

@@ -295,7 +295,7 @@
     <value>Některý z vypůjčených předmětů neexistuje.</value>
   </data>
   <data name="Renting_ItemUnavaible" xml:space="preserve">
-    <value>Předmět {0}, je od {1} do {2} již vypůjčen, vyberte prosím jiný.</value>
+    <value>Předmět {0} nemůže být vypůjčen od {1} do {2}, protože je již zapůjčený.</value>
   </data>
   <data name="Renting_NoCustomer" xml:space="preserve">
     <value>Neexistující zákazník si nemůže nice vypůjčit.</value>

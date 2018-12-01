@@ -20,7 +20,7 @@ namespace Rentals.DL.Repositories
 					!i.RentingToItems
 						.Any(r =>
 							(r.Renting.StartsAt >= startsAt && r.Renting.StartsAt <= endsAt) ||
-							(r.Renting.EndsAt >= startsAt && r.Renting.EndsAt <= startsAt)
+							(r.Renting.EndsAt >= startsAt && r.Renting.EndsAt <= endsAt)
 						))
 				.ToArray();
 

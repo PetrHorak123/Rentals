@@ -32,7 +32,7 @@
 					@Html.LabelFor(m => m.StartsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control" })
+							@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
 							@Html.ValidationMessageFor(m => m.StartsAtDate, string.Empty, new { @class = "text-danger" })
 						</div>
 						<div class="col-sm-6">
@@ -40,7 +40,7 @@
 								m => m.StartsAtTime,
 								new SelectList(Model.Rental.TimeList),
 								null,
-								new { @class = "form-control" })
+								new { @class = "form-control reload-items" })
 							@Html.ValidationMessageFor(m => m.StartsAtTime, string.Empty, new { @class = "text-danger" })
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 					@Html.LabelFor(m => m.EndsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control" })
+							@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
 							@Html.ValidationMessageFor(m => m.EndsAtDate, string.Empty, new { @class = "text-danger" })
 						</div>
 						<div class="col-sm-6">
@@ -60,7 +60,7 @@
 								m => m.EndsAtTime,
 								new SelectList(Model.Rental.TimeList),
 								null,
-								new { @class = "form-control" })
+								new { @class = "form-control reload-items" })
 							@Html.ValidationMessageFor(m => m.EndsAtTime, string.Empty, new { @class = "text-danger" })
 						</div>
 					</div>
@@ -158,30 +158,11 @@
 		};
 
 		$("#item-type-selector").change(function (event) {
-			$("#item-selector").attr("disabled", "disabled");
+			GetItems();
+		});
 
-			$.ajax({
-				url: "@Url.Action("GetAvaibleItems", "Items")",
-				data: {
-					itemTypeId: $("#item-type-selector").val(),
-					startsAt: $("#@Html.IdFor(m => m.StartsAtDate)").val() + " " + $("#@Html.IdFor(m => m.StartsAtTime)").val(),
-					endsAt: $("#@Html.IdFor(m => m.EndsAtDate)").val() + " " +$("#@Html.IdFor(m => m.EndsAtTime)").val()
-				},
-				success: function (data) {
-					$elem = $(".dropdown-menu");
-					$elem.empty();
-					$.each(data, function (index, value) {
-						$elem.append(
-							'<li><a tabIndex=" - 1"><button onclick="addItem(\'' + value.id + '\', \'' + value.uniqueIdentifier + '\')" type="button" class="btn btn-xs btn-info pull-right">@GlobalResources.Add</button>&nbsp;' + value.uniqueIdentifier + '</a></li>'
-						);
-					});
-
-					$("#item-selector").removeAttr("disabled");
-				},
-				error: function () {
-					alert("Failed");
-				}
-			});
+		$(".reload-items").change(function (event) {
+			GetItems();
 		});
 
 		$('.dropdown-toggle').dropdown();
@@ -197,12 +178,46 @@
 
 	var itemsCount = @(Model.ItemIds?.Length ?? 0);
 
+	function GetItems() {
+		$("#item-selector").attr("disabled", "disabled");
+
+		var itemTypeId = $("#item-type-selector").val();
+
+		@* pokud nemám itemType nemusím nic hledat *@
+		if (itemTypeId == 0) {
+			return;
+		}
+
+		$.ajax({
+			url: "@Url.Action("GetAvaibleItems", "Items")",
+			data: {
+				itemTypeId: itemTypeId,
+				startsAt: $("#@Html.IdFor(m => m.StartsAtDate)").val() + " " + $("#@Html.IdFor(m => m.StartsAtTime)").val(),
+				endsAt: $("#@Html.IdFor(m => m.EndsAtDate)").val() + " " +$("#@Html.IdFor(m => m.EndsAtTime)").val()
+			},
+			success: function (data) {
+				$elem = $(".dropdown-menu");
+				$elem.empty();
+				$.each(data, function (index, value) {
+					$elem.append(
+						'<li><a tabIndex=" - 1"><button onclick="addItem(\'' + value.id + '\', \'' + value.uniqueIdentifier + '\')" type="button" class="btn btn-xs btn-info pull-right">@GlobalResources.Add</button>&nbsp;' + value.uniqueIdentifier + '</a></li>'
+					);
+				});
+
+				$("#item-selector").removeAttr("disabled");
+			},
+			error: function () {
+				alert("Failed");
+			}
+		});
+	}
+
 	function addItem(id, identifier) {
 		if (!$("#" + identifier.replace(/\s/g, ''))[0]) {
 			$("#items").append(
 				'<div class="col-xs-4" id="' + identifier.replace(/\s/g, '') + '">' +
 					'<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'' + identifier.replace(/\s/g, '') + '\')">x</a></h5>' +
-				'</div>' + 
+				'</div>' +
 				'<input type="hidden" value="' + id + '" name="ItemIds[' + itemsCount + ']" class="item-id"/>'
 			);
 			itemsCount++;
