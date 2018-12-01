@@ -56,6 +56,15 @@ namespace Rentals.DL
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje vázací tabulku mezi dvěmi typy. (příslušenství)
+		/// </summary>
+		public DbSet<ItemTypeToItemType> Accessories
+		{
+			get;
+			set;
+		}
+
 		#endregion
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,6 +82,22 @@ namespace Rentals.DL
 				.HasOne(rti => rti.Item)
 				.WithMany(i => i.RentingToItems)
 				.HasForeignKey(rti => rti.ItemId);
+
+			// Nastavení vázací tabulky.
+			modelBuilder.Entity<ItemTypeToItemType>()
+				.HasKey(iti => new { iti.AccesoryId, iti.AccesoryToId});
+
+			modelBuilder.Entity<ItemType>()
+				.HasMany(t => t.Accessories)
+				.WithOne(a => a.Accesory)
+				.HasForeignKey(a => a.AccesoryId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			modelBuilder.Entity<ItemType>()
+				.HasMany(t => t.AccesoryTo)
+				.WithOne(a => a.AccesoryTo)
+				.HasForeignKey(iti => iti.AccesoryToId)
+				.OnDelete(DeleteBehavior.Restrict);
 
 			// Unikátní identifikátor na předmětu.
 			modelBuilder.Entity<Item>()

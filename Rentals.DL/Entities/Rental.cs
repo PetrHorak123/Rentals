@@ -14,10 +14,6 @@ namespace Rentals.DL.Entities
 		public Rental()
 		{
 			this.ItemTypes = new HashSet<ItemType>();
-			this.MinTimeUnit = 30;
-			this.WorksOnWeekend = false;
-			this.StartsAt = new TimeSpan(8, 0, 0);
-			this.EndsAt = new TimeSpan(15, 0, 0);
 		}
 
 		[Key]
@@ -41,7 +37,6 @@ namespace Rentals.DL.Entities
 		/// Vrací nebo nastavuje minimální časový úsek výpůjčky v minutách.
 		/// </summary>
 		[Required]
-		[NotMapped]
 		public int MinTimeUnit
 		{
 			get;
@@ -51,7 +46,6 @@ namespace Rentals.DL.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje začátek pracovní doby.
 		/// </summary>
-		[NotMapped]
 		[Required]
 		public TimeSpan StartsAt
 		{
@@ -62,19 +56,8 @@ namespace Rentals.DL.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje konec pracovní doby.
 		/// </summary>
-		[NotMapped]
 		[Required]
 		public TimeSpan EndsAt
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Vrací nebo nastavuje, zda-li je otevřeno i přes víkend.
-		/// </summary>
-		[NotMapped]
-		public bool WorksOnWeekend
 		{
 			get;
 			set;
