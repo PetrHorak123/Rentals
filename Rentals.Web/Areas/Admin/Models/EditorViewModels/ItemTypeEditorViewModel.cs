@@ -45,7 +45,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Název předmětu.
 		/// </summary>
 		[Required]
-		[Display(Name = nameof(Localization.Admin.Name), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_Name), ResourceType = typeof(Localization.Admin))]
 		public string Name
 		{
 			get;

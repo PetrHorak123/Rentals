@@ -22,7 +22,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 		public ActionResult Edit()
 		{
-			var model = FetchModel(new RentalEditorViewModel(this.Rental));
+			var model = new RentalEditorViewModel(this.Rental);
 		
 			return View(model);
 		}
@@ -32,16 +32,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				if(this.Rental == null)
-				{
-					var rental = postedModel.CreateEntity();
-					RepositoriesFactory.Rentals.Add(rental);
-				}
-				else
-				{
-					postedModel.UpdateEntity(this.Rental);
-				}
-
+				postedModel.UpdateEntity(this.Rental);
 				RepositoriesFactory.SaveChanges();
 
 				return RedirectToAction(nameof(Index));

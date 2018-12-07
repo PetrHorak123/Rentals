@@ -106,15 +106,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Město.
-        /// </summary>
-        public static string City {
-            get {
-                return ResourceManager.GetString("City", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Náhledový obrázek.
         /// </summary>
         public static string CoverImage {
@@ -277,6 +268,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Název předmětu.
+        /// </summary>
+        public static string Item_Name {
+            get {
+                return ResourceManager.GetString("Item_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předměty.
         /// </summary>
         public static string Items {
@@ -340,15 +340,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Název.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Poznámka.
         /// </summary>
         public static string Note {
@@ -408,6 +399,78 @@ namespace Rentals.Web.Localization {
         public static string Rental {
             get {
                 return ResourceManager.GetString("Rental", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Město.
+        /// </summary>
+        public static string Rental_City {
+            get {
+                return ResourceManager.GetString("Rental_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zavírá.
+        /// </summary>
+        public static string Rental_EndsAt {
+            get {
+                return ResourceManager.GetString("Rental_EndsAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimální časový úsek pro výpůjčku (v minutách).
+        /// </summary>
+        public static string Rental_MinTimeUnit {
+            get {
+                return ResourceManager.GetString("Rental_MinTimeUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Název půjčovny.
+        /// </summary>
+        public static string Rental_Name {
+            get {
+                return ResourceManager.GetString("Rental_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nemůžete zavírat dříve než otvíráte.
+        /// </summary>
+        public static string Rental_OpeningHoursError {
+            get {
+                return ResourceManager.GetString("Rental_OpeningHoursError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Otevírá.
+        /// </summary>
+        public static string Rental_StartsAt {
+            get {
+                return ResourceManager.GetString("Rental_StartsAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ulice.
+        /// </summary>
+        public static string Rental_Street {
+            get {
+                return ResourceManager.GetString("Rental_Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSČ.
+        /// </summary>
+        public static string Rental_ZipCode {
+            get {
+                return ResourceManager.GetString("Rental_ZipCode", resourceCulture);
             }
         }
         
@@ -718,15 +781,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ulice.
-        /// </summary>
-        public static string Street {
-            get {
-                return ResourceManager.GetString("Street", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Administrace.
         /// </summary>
         public static string Title {
@@ -777,15 +831,6 @@ namespace Rentals.Web.Localization {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PSČ.
-        /// </summary>
-        public static string ZipCode {
-            get {
-                return ResourceManager.GetString("ZipCode", resourceCulture);
             }
         }
     }

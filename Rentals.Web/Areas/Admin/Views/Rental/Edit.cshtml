@@ -3,7 +3,7 @@
 
 <div class="row">
 	<h2>@Admin.EditRental</h2>
-	<div class="col-md-4">
+	<div class="col-md-6">
 		@using (Html.BeginForm("Edit", "Rental", FormMethod.Post))
 		{
 			@Html.ValidationSummary(true)
@@ -11,6 +11,21 @@
 				@Html.LabelFor(m => m.Name, new { @class = "control-label" })
 				@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
 				@Html.ValidationMessageFor(m => m.Name, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.StartsAt, new { @class = "control-label" })
+				<input type="time" name="@Html.NameFor(m => m.StartsAt)" id="@Html.IdFor(m => m.StartsAt)" value="@Model.StartsAt" class="form-control"/>
+				@Html.ValidationMessageFor(m => m.StartsAt, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.EndsAt, new { @class = "control-label" })
+				<input type="time" name="@Html.NameFor(m => m.EndsAt)" id="@Html.IdFor(m => m.EndsAt)" value="@Model.EndsAt" class="form-control" />
+				@Html.ValidationMessageFor(m => m.EndsAt, string.Empty, new { @class = "text-danger" })
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(m => m.MinTimeUnit, new { @class = "control-label" })
+				@Html.TextBoxFor(m => m.MinTimeUnit, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.MinTimeUnit, string.Empty, new { @class = "text-danger" })
 			</div>
 			<div class="form-group">
 				@Html.LabelFor(m => m.City, new { @class = "control-label" })

@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
@@ -25,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

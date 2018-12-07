@@ -51,7 +51,13 @@ namespace Rentals.Web.Data
 			{
 				if(context.Rentals.GetFirst() == null)
 				{
-					context.Rentals.Add(new Rental() { Name = Configuration.GetSection("UserSettings")["RentalName"] });
+					context.Rentals.Add(new Rental()
+					{
+						Name = Configuration.GetSection("RentalSettings")["RentalName"],
+						StartsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["StartsAt"]), 0, 0),
+						EndsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["EndsAt"]), 0, 0),
+						MinTimeUnit = int.Parse(Configuration.GetSection("RentalSettings")["MinTimeUnit"])
+					});
 
 					context.SaveChanges();
 				}

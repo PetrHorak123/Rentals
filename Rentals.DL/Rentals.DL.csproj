@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Validators\**" />
+    <EmbeddedResource Remove="Validators\**" />
+    <None Remove="Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20181201195535_OpeningHoursAndAccesories.cs" />
     <Compile Remove="Migrations\20181201200030_AddOpeningHoursAndAccesories.cs" />
   </ItemGroup>
@@ -29,10 +35,6 @@
     <Reference Include="Microsoft.Extensions.Identity.Stores">
       <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.identity.stores\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Identity.Stores.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>

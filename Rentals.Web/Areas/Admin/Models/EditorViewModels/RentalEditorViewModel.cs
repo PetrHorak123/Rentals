@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Rentals.DL.Entities;
-using Rentals.Web.Models;
 
 namespace Rentals.Web.Areas.Admin.Models
 {
-	public class RentalEditorViewModel : BaseViewModel
+	/// <summary>
+	/// Nedědí z <see cref="Web.Models.BaseViewModel"/>, prootže to nedává smysl.
+	/// </summary>
+	public class RentalEditorViewModel: IValidatableObject
 	{
 		public RentalEditorViewModel()
 		{
@@ -15,6 +19,9 @@ namespace Rentals.Web.Areas.Admin.Models
 			if (rental != null)
 			{
 				this.Name = rental.Name;
+				this.StartsAt = rental.StartsAt;
+				this.EndsAt = rental.EndsAt;
+				this.MinTimeUnit = rental.MinTimeUnit;
 				this.City = rental.City;
 				this.Street = rental.Street;
 				this.ZipCode = rental.ZipCode;
@@ -25,8 +32,42 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Vrací nebo nastavuje název půjčovny.
 		/// </summary>
 		[Required]
-		[Display(Name = nameof(Localization.Admin.Name), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Rental_Name), ResourceType = typeof(Localization.Admin))]
 		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje název půjčovny.
+		/// </summary>
+		[Required]
+		[Display(Name = nameof(Localization.Admin.Rental_StartsAt), ResourceType = typeof(Localization.Admin))]
+		public TimeSpan StartsAt
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje název půjčovny.
+		/// </summary>
+		[Required]
+		[Display(Name = nameof(Localization.Admin.Rental_EndsAt), ResourceType = typeof(Localization.Admin))]
+		public TimeSpan EndsAt
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje název půjčovny.
+		/// </summary>
+		[Required]
+		[Display(Name = nameof(Localization.Admin.Rental_MinTimeUnit), ResourceType = typeof(Localization.Admin))]
+		[Range(15, 60)]
+		public int MinTimeUnit
 		{
 			get;
 			set;
@@ -35,7 +76,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Adresa - Vrací nebo nastavuje město.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.City), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Rental_City), ResourceType = typeof(Localization.Admin))]
 		public string City
 		{
 			get;
@@ -45,7 +86,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Adresa - Vrací nebo nastavuje ulici.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Street), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Rental_Street), ResourceType = typeof(Localization.Admin))]
 		public string Street
 		{
 			get;
@@ -56,8 +97,8 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Adresa - Vrací nebo nastavuje poštovní směrovací číslo.
 		/// </summary>
 		[MaxLength(7)]
-		[MinLength(6)]
-		[Display(Name = nameof(Localization.Admin.ZipCode), ResourceType = typeof(Localization.Admin))]
+		[MinLength(6)] // předělat na validaci zip code
+		[Display(Name = nameof(Localization.Admin.Rental_ZipCode), ResourceType = typeof(Localization.Admin))]
 		public string ZipCode
 		{
 			get;
@@ -74,11 +115,22 @@ namespace Rentals.Web.Areas.Admin.Models
 		public Rental UpdateEntity(Rental rental)
 		{
 			rental.Name = this.Name;
+			rental.StartsAt = this.StartsAt;
+			rental.EndsAt = this.EndsAt;
+			rental.MinTimeUnit = this.MinTimeUnit;
 			rental.Street = this.Street;
 			rental.City = this.City;
 			rental.ZipCode = this.ZipCode;
 
 			return rental;
+		}
+
+		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+		{
+			if (this.StartsAt >= this.EndsAt)
+			{
+				yield return new ValidationResult(Localization.Admin.Rental_OpeningHoursError, new[] { nameof(this.StartsAt), nameof(this.EndsAt) });
+			}
 		}
 	}
 }

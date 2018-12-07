@@ -126,7 +126,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>Storno</value>
   </data>
-  <data name="City" xml:space="preserve">
+  <data name="Rental_City" xml:space="preserve">
     <value>Město</value>
   </data>
   <data name="Create" xml:space="preserve">
@@ -177,8 +177,8 @@
   <data name="LogoutSuccesful" xml:space="preserve">
     <value>Odhlášení z administrativy proběhlo úspěšně.</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Název</value>
+  <data name="Rental_Name" xml:space="preserve">
+    <value>Název půjčovny</value>
   </data>
   <data name="Overview" xml:space="preserve">
     <value>Přehled</value>
@@ -201,7 +201,7 @@
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
   </data>
-  <data name="Street" xml:space="preserve">
+  <data name="Rental_Street" xml:space="preserve">
     <value>Ulice</value>
   </data>
   <data name="Title" xml:space="preserve">
@@ -219,7 +219,7 @@
   <data name="UserName" xml:space="preserve">
     <value>Přihlašovací jméno</value>
   </data>
-  <data name="ZipCode" xml:space="preserve">
+  <data name="Rental_ZipCode" xml:space="preserve">
     <value>PSČ</value>
   </data>
   <data name="ChangeAllImages" xml:space="preserve">
@@ -359,5 +359,20 @@
   </data>
   <data name="Renting_EndsInPast" xml:space="preserve">
     <value>Výpůjčka nemůže končit v minulosti, pokud není vrácena.</value>
+  </data>
+  <data name="Rental_EndsAt" xml:space="preserve">
+    <value>Zavírá</value>
+  </data>
+  <data name="Rental_MinTimeUnit" xml:space="preserve">
+    <value>Minimální časový úsek pro výpůjčku (v minutách)</value>
+  </data>
+  <data name="Rental_StartsAt" xml:space="preserve">
+    <value>Otevírá</value>
+  </data>
+  <data name="Rental_OpeningHoursError" xml:space="preserve">
+    <value>Nemůžete zavírat dříve než otvíráte</value>
+  </data>
+  <data name="Item_Name" xml:space="preserve">
+    <value>Název předmětu</value>
   </data>
 </root>
