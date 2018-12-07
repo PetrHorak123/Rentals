@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 
-namespace Rentals.Web.Areas.Admin.Models.SubModels
+namespace Rentals.Web.Areas.Admin.Models
 {
 	/// <summary>
 	/// ViewModel pro zobrazení výpůjčky.
@@ -16,9 +16,21 @@ namespace Rentals.Web.Areas.Admin.Models.SubModels
 			this.Id = renting.Id;
 			this.CustomerName = renting.User.UserName;
 			this.CustomerEmail = renting.User.Email;
+			this.State = renting.State;
 			this.Note = renting.Note;
 			this.StartsAt = renting.StartsAt;
 			this.EndsAt = renting.EndsAt;
+			this.Items = renting.RentingToItems
+				.Select(i => i.Item)
+				.GroupBy(i => i.Type)
+				.ToDictionary(
+					k => new ItemTypeViewModel()
+					{
+						Id = k.Key.Id,
+						Name = k.Key.Name
+					},
+					v => string.Join(", ", v.Select(i => i.UniqueIdentifier)).TrimEnd()
+			);
 		}
 
 		/// <summary>
@@ -52,6 +64,24 @@ namespace Rentals.Web.Areas.Admin.Models.SubModels
 		/// Poznámka k výpůjčce.
 		/// </summary>
 		public string Note
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Dictionary, kde klíč je typ předmětu a hodnota jsou jednotlivé předmety z typu.
+		/// </summary>
+		public Dictionary<ItemTypeViewModel, string> Items
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Udává, zda se mají vykreslit editační tlačítka.
+		/// </summary>
+		public RentalState State
 		{
 			get;
 			set;

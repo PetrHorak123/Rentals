@@ -466,6 +466,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Výpůjčka nemůže končit v minulosti, pokud není vrácena..
+        /// </summary>
+        public static string Renting_EndsInPast {
+            get {
+                return ResourceManager.GetString("Renting_EndsInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Některý z vypůjčených předmětů neexistuje..
         /// </summary>
         public static string Renting_ItemNotFound {
@@ -583,6 +592,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zrušit výpůjčku.
+        /// </summary>
+        public static string RentingOverview_Cancel {
+            get {
+                return ResourceManager.GetString("RentingOverview_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změny nebyly dokončeny, dejte F5 a zkuste to znovu..
+        /// </summary>
+        public static string RentingOverview_CannotChangeState {
+            get {
+                return ResourceManager.GetString("RentingOverview_CannotChangeState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nenavrácené výpůjčky.
         /// </summary>
         public static string RentingOverview_NonReturned {
@@ -615,6 +642,24 @@ namespace Rentals.Web.Localization {
         public static string RentingOverview_Returned {
             get {
                 return ResourceManager.GetString("RentingOverview_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vypůjčeno.
+        /// </summary>
+        public static string RentingOverview_SetLended {
+            get {
+                return ResourceManager.GetString("RentingOverview_SetLended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navráceno.
+        /// </summary>
+        public static string RentingOverview_SetReturned {
+            get {
+                return ResourceManager.GetString("RentingOverview_SetReturned", resourceCulture);
             }
         }
         

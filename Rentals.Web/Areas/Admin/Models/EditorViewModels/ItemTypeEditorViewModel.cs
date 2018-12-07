@@ -169,7 +169,9 @@ namespace Rentals.Web.Areas.Admin.Models
 		{
 			if (this.Items != null)
 			{
-				var itemRepository = RepositoriesFactory.Create().Items;
+				var factory = (IRepositoriesFactory)validationContext.GetService(typeof(IRepositoriesFactory));
+				var itemRepository = factory.Items;
+
 				var groupedItems = this.Items.GroupBy(i => i.UniqueIdentifier).ToArray();
 
 				if (groupedItems.Any(g => g.Count() > 1))

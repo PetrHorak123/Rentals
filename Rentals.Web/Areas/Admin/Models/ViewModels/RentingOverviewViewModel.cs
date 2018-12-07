@@ -1,5 +1,4 @@
 ﻿using Rentals.DL.Entities;
-using Rentals.Web.Areas.Admin.Models.SubModels;
 using Rentals.Web.Models;
 using System.Collections.Generic;
 using Rentals.Common.Enums;
@@ -28,14 +27,14 @@ namespace Rentals.Web.Areas.Admin.Models
 				switch (renting.State)
 				{
 					case RentalState.NotLended:
-						this.StartingToday.Add(new RentingViewModel(renting));
-						break;
+							this.StartingToday.Add(new RentingViewModel(renting));
+							break;
 					case RentalState.Returned:
 						this.Returned.Add(new RentingViewModel(renting));
 						break;
 					case RentalState.Lended:
 						// Pokud nekončí dnes.
-						if (renting.EndsAt > today)
+						if (renting.EndsAt.Date > today)
 						{
 							this.OnGoing.Add(new RentingViewModel(renting));
 							break;

@@ -177,11 +177,11 @@ namespace Rentals.Web.Areas.Admin.Models
 
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
-			var context = RepositoriesFactory.Create();
+			var factory = (IRepositoriesFactory)validationContext.GetService(typeof(IRepositoriesFactory));
 
 			#region Customer
 
-			var user = context.Users.GetById(this.CustomerId);
+			var user = factory.Users.GetById(this.CustomerId);
 
 			if (user == null)
 			{
@@ -193,7 +193,7 @@ namespace Rentals.Web.Areas.Admin.Models
 
 			#region Dates
 
-			var rental = context.Rentals.GetById(this.RentalId);
+			var rental = factory.Rentals.GetById(this.RentalId);
 
 			if(rental == null)
 			{
@@ -214,9 +214,14 @@ namespace Rentals.Web.Areas.Admin.Models
 				yield return new ValidationResult(Localization.Admin.Renting_WrongDate);
 			}
 
-			if (this.StartsAtDate <= DateTime.Now.Date)
+			if (this.StartsAtDate < DateTime.Now.Date)
 			{
 				yield return new ValidationResult(Localization.Admin.Renting_DateInPast);
+			}
+
+			if(this.EndsAt < DateTime.Now && this.State != RentalState.Returned)
+			{
+				yield return new ValidationResult(Localization.Admin.Renting_EndsInPast);
 			}
 
 			#endregion
@@ -227,7 +232,7 @@ namespace Rentals.Web.Areas.Admin.Models
 			{
 				foreach (var i in this.ItemIds)
 				{
-					var item = context.Items.GetById(i);
+					var item = factory.Items.GetById(i);
 
 					if (item == null)
 					{

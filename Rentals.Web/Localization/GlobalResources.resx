@@ -123,8 +123,14 @@
   <data name="Cs_TimeFormat" xml:space="preserve">
     <value>{0:dd.MM.yyyy}</value>
   </data>
+  <data name="Cs_TimeFormatWithTime" xml:space="preserve">
+    <value>{0:dd.MM.yyyy hh:mm}</value>
+  </data>
   <data name="Day" xml:space="preserve">
     <value>Den</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editovat</value>
   </data>
   <data name="Js_TimeFormat" xml:space="preserve">
     <value>dd.mm.yy</value>

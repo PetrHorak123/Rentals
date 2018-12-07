@@ -1,5 +1,6 @@
-﻿@model ICollection<Rentals.Web.Areas.Admin.Models.SubModels.RentingViewModel>
+﻿@model ICollection<Rentals.Web.Areas.Admin.Models.RentingViewModel>
 @using Rentals.Web.Localization
+@using Rentals.Common.Enums
 
 <div class="row">
 	<div class="col-xs-12">
@@ -9,10 +10,37 @@
 		}
 		else
 		{
-			foreach (var renting in Model)
-			{
-				<div>Renting</div>
-			}
+			<div class="list-group">
+				@foreach (var renting in Model)
+				{
+					<div class="list-group-item">
+						@if (renting.State != RentalState.Returned)
+						{
+							<div class="btn-group pull-right">
+								@if (renting.State == RentalState.NotLended)
+								{
+									<a class="btn btn-primary btn-sm" onclick="setLended('@renting.Id', 'Lended', '@((renting.EndsAt.ToUniversalTime()-new DateTime(1970,1,1)).TotalMilliseconds)')">@Admin.RentingOverview_SetLended</a>
+								}
+								else
+								{
+									<a class="btn btn-primary btn-sm" onclick="setState('@renting.Id', 'Returned')">@Admin.RentingOverview_SetReturned</a>
+								}
+								<a class="btn btn-warning btn-sm" href="@Url.Action("Edit", "Renting", new { id = renting.Id })">@GlobalResources.Edit</a>
+								<a class="btn btn-danger btn-sm" onclick="setState('@renting.Id', 'Canceled')">@Admin.RentingOverview_Cancel</a>
+							</div>
+						}
+						<div>
+							@foreach (var item in renting.Items)
+							{
+								<p class="h4"><a class="non-underlined" href="@Url.Action("Detail", "Items", new { item.Key.Id })">@item.Key.Name</a> (@item.Value)</p>
+							}
+							<p class="h4">@renting.CustomerName, <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p>
+							<p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p>
+							<p class="h4">@renting.Note</p>
+						</div>
+					</div>
+				}
+			</div>
 		}
 	</div>
 </div>

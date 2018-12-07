@@ -345,4 +345,19 @@
   <data name="RentingOverview_ToBeReturned" xml:space="preserve">
     <value>Výpůjčky, které budou navráceny</value>
   </data>
+  <data name="RentingOverview_Cancel" xml:space="preserve">
+    <value>Zrušit výpůjčku</value>
+  </data>
+  <data name="RentingOverview_SetLended" xml:space="preserve">
+    <value>Vypůjčeno</value>
+  </data>
+  <data name="RentingOverview_SetReturned" xml:space="preserve">
+    <value>Navráceno</value>
+  </data>
+  <data name="RentingOverview_CannotChangeState" xml:space="preserve">
+    <value>Změny nebyly dokončeny, dejte F5 a zkuste to znovu.</value>
+  </data>
+  <data name="Renting_EndsInPast" xml:space="preserve">
+    <value>Výpůjčka nemůže končit v minulosti, pokud není vrácena.</value>
+  </data>
 </root>

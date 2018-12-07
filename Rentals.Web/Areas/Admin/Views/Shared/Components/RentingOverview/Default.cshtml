@@ -15,3 +15,32 @@
 
 <h3>@Admin.RentingOverview_Returned</h3>
 @await Html.PartialAsync("_Rentings", Model.Returned)
+
+<script type="text/javascript">
+	function setState(id, state) {
+		$.ajax({
+			url: '@Url.Action("SetState", "Renting")',
+			data: {
+				id: id,
+				state: state
+			},
+			success: function (data) {
+				$("#component-container").load('@Url.Action("ReloadComponentView", "Home")');
+			},
+			error: function (data) {
+				alert('@Html.Raw(Admin.RentingOverview_CannotChangeState)');
+			}
+		});
+	}
+
+	function setLended(id, state, time) {
+		if (time < Date.now()) {
+			@* pokud již skončila, a che nastavit že je vypůjčená, zeptát se jestli si tím je jist, nebo jestli zapomněl, pokud zapomněl, rovnou se zeptám jestli ji chce označit jako vrácenou *@
+			alert("You dumb shit");
+		}
+		else {
+			// return setState(id, state);
+			@* pro teď počítám že předměty již jsou vybraný, později možná dialog jestli chce ještě změnit předměty, což by asi neměl, jestli je chce změnit tak ať zruší výpůjčku a vytvoří novou For now. *@
+		}
+	}
+</script>

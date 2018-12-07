@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Rentals.Web.Areas.Admin.Controllers
@@ -43,6 +42,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			return View(model);
 		}
 
+		// Do customer controlleru, kterej ještě neextistuje..
 		public JsonResult GetCustomers(string term)
 		{
 			if (term == null)
@@ -56,6 +56,22 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				}).ToArray();
 
 			return Json(customers);
+		}
+
+		public ActionResult SetState(int id, RentalState? state)
+		{
+			if (state == null)
+				return BadRequest();
+
+			var renting = this.RepositoriesFactory.Rentings.GetById(id);
+
+			if (renting == null)
+				return NotFound();
+
+			renting.State = state.Value;
+			RepositoriesFactory.SaveChanges();
+
+			return Content("OK");
 		}
 	}
 }
