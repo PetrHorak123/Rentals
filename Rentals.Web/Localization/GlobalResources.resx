@@ -120,14 +120,26 @@
   <data name="Add" xml:space="preserve">
     <value>Přidat</value>
   </data>
+  <data name="CancelRenting" xml:space="preserve">
+    <value>Zrušit výpůjčku</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
   <data name="Cs_TimeFormat" xml:space="preserve">
     <value>{0:dd.MM.yyyy}</value>
   </data>
   <data name="Cs_TimeFormatWithTime" xml:space="preserve">
-    <value>{0:dd.MM.yyyy hh:mm}</value>
+    <value>{0:dd.MM.yyyy HH:mm}</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Zákazník</value>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Den</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editovat</value>

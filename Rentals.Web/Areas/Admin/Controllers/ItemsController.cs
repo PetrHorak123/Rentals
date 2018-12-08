@@ -139,6 +139,18 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			return RedirectToAction("Index", "Items");
 		}
 
+		public JsonResult GetItemTypes()
+		{
+			var itemTypes = this.RepositoriesFactory.Types.GetItemTypes()
+				.Select(t => new ItemTypeViewModel()
+				{
+					Id = t.Id,
+					Name = t.Name,
+				});
+
+			return Json(itemTypes);
+		}
+
 		public JsonResult GetAvaibleItems(int itemTypeId, string startsAt, string endsAt)
 		{
 			var itemType = RepositoriesFactory.Types.GetById(itemTypeId);

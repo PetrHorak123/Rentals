@@ -13,3 +13,18 @@
 .vis-item{
 	top:0!important;
 }
+
+dl.inline dd {
+	display: inline;
+	margin: 0;
+}
+
+	dl.inline dd:after {
+		display: block;
+		content: '';
+	}
+
+dl.inline dt {
+	display: inline-block;
+	min-width: 175px;
+}

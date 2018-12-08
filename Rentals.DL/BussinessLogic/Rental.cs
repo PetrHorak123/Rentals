@@ -10,11 +10,11 @@ namespace Rentals.DL.Entities
 		/// Vrací možné začátky výpůjčky.
 		/// </summary>
 		[NotMapped]
-		public List<string> TimeList
+		public List<TimeSpan> TimeList
 		{
 			get
 			{
-				var timeList = new List<string>();
+				var timeList = new List<TimeSpan>();
 
 				TimeSpan ts = this.StartsAt;
 				TimeSpan tsMinTimeUnit = TimeSpan.FromMinutes(MinTimeUnit);
@@ -23,7 +23,7 @@ namespace Rentals.DL.Entities
 				while (ts < tsLast)
 				{
 					var timeValue = ts.ToString("hh':'mm");
-					timeList.Add(timeValue);
+					timeList.Add(ts);
 					ts += tsMinTimeUnit;
 				}
 

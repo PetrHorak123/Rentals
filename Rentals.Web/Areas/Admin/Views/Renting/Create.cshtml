@@ -1,4 +1,4 @@
-﻿@model Rentals.Web.Areas.Admin.Models.RentingEditorViewModel
+﻿@model Rentals.Web.Areas.Admin.Models.RentingCreatorViewModel
 @using Rentals.Common.Enums
 @using Rentals.Web.Localization
 @using Rentals.Web.Code
@@ -33,17 +33,16 @@
 					<div class="row">
 						<div class="col-sm-6">
 							@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
-							@Html.ValidationMessageFor(m => m.StartsAtDate, string.Empty, new { @class = "text-danger" })
 						</div>
 						<div class="col-sm-6">
 							@Html.DropDownListFor(
 								m => m.StartsAtTime,
-								new SelectList(Model.Rental.TimeList),
+								Html.WorkingHourSelectList(Model.Rental.TimeList.ToArray(), Model.StartsAtTime),
 								null,
 								new { @class = "form-control reload-items" })
-							@Html.ValidationMessageFor(m => m.StartsAtTime, string.Empty, new { @class = "text-danger" })
 						</div>
 					</div>
+					@Html.ValidationMessageFor(m => m.StartsAtDate, string.Empty, new { @class = "text-danger" })
 				</div>
 			</div>
 
@@ -53,17 +52,16 @@
 					<div class="row">
 						<div class="col-sm-6">
 							@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
-							@Html.ValidationMessageFor(m => m.EndsAtDate, string.Empty, new { @class = "text-danger" })
 						</div>
 						<div class="col-sm-6">
 							@Html.DropDownListFor(
 								m => m.EndsAtTime,
-								new SelectList(Model.Rental.TimeList),
+								Html.WorkingHourSelectList(Model.Rental.TimeList.ToArray(), Model.EndsAtTime),
 								null,
 								new { @class = "form-control reload-items" })
-							@Html.ValidationMessageFor(m => m.EndsAtTime, string.Empty, new { @class = "text-danger" })
 						</div>
 					</div>
+					@Html.ValidationMessageFor(m => m.EndsAtDate, string.Empty, new { @class = "text-danger" })
 				</div>
 			</div>
 

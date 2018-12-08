@@ -231,7 +231,7 @@
   <data name="DeleteMessage" xml:space="preserve">
     <value>Opravdu chcete smazat předmět "{0}"</value>
   </data>
-  <data name="NumberOfItems" xml:space="preserve">
+  <data name="Item_NumberOfItems" xml:space="preserve">
     <value>Počet předmětů: {0}</value>
   </data>
   <data name="AddNewItemType" xml:space="preserve">
@@ -240,13 +240,13 @@
   <data name="ItemTypes" xml:space="preserve">
     <value>Přehled předmětů</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Item_Description" xml:space="preserve">
     <value>Popisek</value>
   </data>
-  <data name="NumberOfItemsLabel" xml:space="preserve">
+  <data name="Item_NumberOfItemsLabel" xml:space="preserve">
     <value>Počet předmětů</value>
   </data>
-  <data name="CoverImage" xml:space="preserve">
+  <data name="Item_CoverImage" xml:space="preserve">
     <value>Náhledový obrázek</value>
   </data>
   <data name="Detail" xml:space="preserve">
@@ -269,9 +269,6 @@
   </data>
   <data name="Renting_Create" xml:space="preserve">
     <value>Nová výpůjčka</value>
-  </data>
-  <data name="Renting_Customer" xml:space="preserve">
-    <value>Zákazník</value>
   </data>
   <data name="Renting_EndsAt" xml:space="preserve">
     <value>Konec výpůjčky</value>
@@ -345,9 +342,6 @@
   <data name="RentingOverview_ToBeReturned" xml:space="preserve">
     <value>Výpůjčky, které budou navráceny</value>
   </data>
-  <data name="RentingOverview_Cancel" xml:space="preserve">
-    <value>Zrušit výpůjčku</value>
-  </data>
   <data name="RentingOverview_SetLended" xml:space="preserve">
     <value>Vypůjčeno</value>
   </data>
@@ -374,5 +368,59 @@
   </data>
   <data name="Item_Name" xml:space="preserve">
     <value>Název předmětu</value>
+  </data>
+  <data name="RentingOverView_CancelConfrim" xml:space="preserve">
+    <value>Opravdu chcete zákazníkovi "{0}" zrušít výpůjčku ?</value>
+  </data>
+  <data name="RentingOverView_MarkAs" xml:space="preserve">
+    <value>Označit výpůjčku jako</value>
+  </data>
+  <data name="RentingOverView_MarkAsLended" xml:space="preserve">
+    <value>Vypůjčenou</value>
+  </data>
+  <data name="RentingOverView_MarkAsReturned" xml:space="preserve">
+    <value>Navrácenou</value>
+  </data>
+  <data name="RentingOverView_RentingInPast" xml:space="preserve">
+    <value>Snažíte se označit výpůjčku, která již skončila jako vypůjčenou.</value>
+  </data>
+  <data name="RentingOverView_RentingInPastHeader" xml:space="preserve">
+    <value>Výpůjčka již skončila</value>
+  </data>
+  <data name="Renting_Detail" xml:space="preserve">
+    <value>Detail výpůjčky</value>
+  </data>
+  <data name="Renting_Cancel" xml:space="preserve">
+    <value>Opravdu chcete tudo výpůjčku zrušit ?</value>
+  </data>
+  <data name="Renting_Edit" xml:space="preserve">
+    <value>Editace výpůjčky</value>
+  </data>
+  <data name="Renting_NoRenting" xml:space="preserve">
+    <value>Snažíte se editovat neexistující výpůjčku.</value>
+  </data>
+  <data name="Renting_ExtendUnavaible" xml:space="preserve">
+    <value>Prodloužení nemůže být dokončeno, protože předmět {0} bude v tuto dobu vypůjčen.</value>
+  </data>
+  <data name="Renting_CannotBeSetInPast" xml:space="preserve">
+    <value>Výpůjčka nemůže být posunuta do minulosti</value>
+  </data>
+  <data name="Renting_NoEdit" xml:space="preserve">
+    <value>Výpůjčku, která již skončila nelze upravit</value>
+  </data>
+  <data name="Item_Accessory" xml:space="preserve">
+    <value>Příslušenství</value>
+  </data>
+  <data name="Item_AccessoryTo" xml:space="preserve">
+    <value>Příslušenství k</value>
+  </data>
+  <data name="Item_ChooseAccessory" xml:space="preserve">
+    <value>Vybrat příslušenství</value>
+  </data>
+  <data name="Item_ChooseAccessoryTo" xml:space="preserve">
+    <value>Vybrat příslušenství k</value>
+  </data>
+  <data name="Item_DuplicateAccessory" xml:space="preserve">
+    <value>Některé předměty jsou označeny zárověň jako příslušenství a příslušenství k</value>
   </data>
 </root>

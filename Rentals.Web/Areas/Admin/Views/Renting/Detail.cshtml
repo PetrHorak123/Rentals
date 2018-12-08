@@ -1,0 +1,70 @@
+﻿@model Rentals.Web.Areas.Admin.Models.RentingViewModel
+@using Rentals.Web.Localization
+@using Rentals.Common.Enums
+
+@{
+	ViewBag.Title = Admin.Renting_Detail;
+}
+
+<div class="row">
+	<h2>
+		@Admin.Renting_Detail
+		@if (Model.EndsAt > DateTime.Now)
+		{
+			@Html.ActionLink(GlobalResources.CancelRenting, "SetState", "Renting", new { id = Model.Id, state = RentalState.Canceled, redirectToIndex = true }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + Admin.Renting_Cancel + "');" })
+			@Html.ActionLink(GlobalResources.Edit, "Edit", "Renting", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+		}
+		else
+		{
+			<span class="pull-right h4">@Admin.Renting_NoEdit</span>
+		}
+	</h2>
+</div>
+
+<div class="row col-xs-12">
+	<dl class="inline">
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.CustomerName)</strong>
+		</dt>
+		<dd class="h4">
+			<span>@Html.DisplayFor(m => m.CustomerName), <a href="mailto:@Model.CustomerEmail">@Html.DisplayFor(m => m.CustomerEmail)</a></span>
+		</dd>
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.State)</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.State)
+		</dd>
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.StartsAt)</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.StartsAt)
+		</dd>
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.EndsAt)</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.EndsAt)
+		</dd>
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.Items)</strong>
+		</dt>
+		<dd class="h4">
+			@foreach (var item in Model.Items)
+			{
+				<span><a class="non-underlined" href="@Url.Action("Detail", "Items", new { item.Key.Id })">@item.Key.Name</a> (@item.Value)</span>
+			}
+		</dd>
+		<dt class="h4">
+			<strong>@Html.DisplayNameFor(m => m.Note)</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.Note)
+		</dd>
+	</dl>
+</div>
+
+<script type="text/javascript">
+
+</script>

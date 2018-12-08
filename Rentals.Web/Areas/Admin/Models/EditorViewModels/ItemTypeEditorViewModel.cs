@@ -1,5 +1,4 @@
 ﻿using Rentals.Common.Extensions;
-using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.Web.Models;
 using System.Collections.Generic;
@@ -57,7 +56,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// </summary>
 		[Range(1, 50)]
 		[Required]
-		[Display(Name = nameof(Localization.Admin.NumberOfItemsLabel), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_NumberOfItemsLabel), ResourceType = typeof(Localization.Admin))]
 		public int NumberOfItems
 		{
 			get;
@@ -67,7 +66,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Popisek tohoto typu předmětu.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Description), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_Description), ResourceType = typeof(Localization.Admin))]
 		public string Description
 		{
 			get;
@@ -80,8 +79,26 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <remarks>
 		/// Je zde kvůli možnosti přidat/editovat obrázek u všech předmětů naráz.
 		/// </remarks>
-		[Display(Name = nameof(Localization.Admin.CoverImage), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_CoverImage), ResourceType = typeof(Localization.Admin))]
 		public string CoverImage
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Příslušenství k tomuto předmětu.
+		/// </summary>
+		public int[] Accessories
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Příslušenství k tomuto předmětu.
+		/// </summary>
+		public int[] AccessoryTo
 		{
 			get;
 			set;
@@ -167,6 +184,17 @@ namespace Rentals.Web.Areas.Admin.Models
 
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
+			if(this.Accessories != null && this.AccessoryTo != null)
+			{
+				var intersectingItems = this.Accessories.Intersect(this.AccessoryTo);
+
+				// Nenastane, pokud někdo nezeditoval stránku, ale tak pro jistotu :).
+				if(intersectingItems.Count() > 0)
+				{
+					yield return new ValidationResult(Localization.Admin.Item_DuplicateAccessory);
+				}
+			}
+
 			if (this.Items != null)
 			{
 				var factory = (IRepositoriesFactory)validationContext.GetService(typeof(IRepositoriesFactory));

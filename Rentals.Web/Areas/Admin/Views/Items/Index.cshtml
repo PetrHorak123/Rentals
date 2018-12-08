@@ -18,7 +18,7 @@
 		<div class="col-sm-4">
 			<h3>@Html.ActionLink(item.Name, "Detail", "Items", new { id = item.Id }, new { @class = "non-underlined" })</h3>
 			<img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
-			<h4>@string.Format(Admin.NumberOfItems, item.NumberOfItems)</h4>
+			<h4>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</h4>
 			<p class="text-justify">@item.Description</p>
 		</div>
 	}

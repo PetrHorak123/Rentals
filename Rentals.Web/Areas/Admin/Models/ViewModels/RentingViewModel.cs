@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Rentals.Common.Enums;
 using Rentals.DL.Entities;
@@ -43,8 +44,9 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
-		/// Zákazník, kterému byly(budou) předměty půjčeny.
+		/// Zákazník, kterému byly (budou) předměty půjčeny.
 		/// </summary>
+		[Display(Name = nameof(Localization.GlobalResources.Customer), ResourceType = typeof(Localization.GlobalResources))]
 		public string CustomerName
 		{
 			get;
@@ -63,6 +65,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Poznámka k výpůjčce.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_Note), ResourceType = typeof(Localization.Admin))]
 		public string Note
 		{
 			get;
@@ -81,6 +84,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Udává, zda se mají vykreslit editační tlačítka.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_State), ResourceType = typeof(Localization.Admin))]
 		public RentalState State
 		{
 			get;
@@ -90,6 +94,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Začátek výpůjčky.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_StartsAt), ResourceType = typeof(Localization.Admin))]
 		public DateTime StartsAt
 		{
 			get;
@@ -99,6 +104,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Konec výpůjčky.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_EndsAt), ResourceType = typeof(Localization.Admin))]
 		public DateTime EndsAt
 		{
 			get;

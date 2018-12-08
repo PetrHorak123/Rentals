@@ -1,90 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Rentals.Common.Enums;
-using Rentals.DL;
+﻿using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Interfaces;
 using Rentals.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Rentals.Web.Areas.Admin.Models
 {
 	/// <summary>
-	/// Model pro práci s výpůjčkami.
+	/// Model, používaný pro editaci výpůjčky, jsou zde pouze vlastnosti, které dovoluji editovat.
 	/// </summary>
 	public class RentingEditorViewModel : BaseViewModel, IValidatableObject, IAfterFetchModel
 	{
 		public RentingEditorViewModel()
 		{
-			// Inicializační hodnoty, připravím si je tady, abych se o ně nemusel starat ve view.
-			var today = DateTime.Today;
+		}
 
-			this.StartsAtDate = today;
-			this.EndsAtDate = today;
+		public RentingEditorViewModel(Renting renting)
+		{
+			this.RentingId = renting.Id;
+			this.EndsAt = renting.EndsAt;
+			this.Note = renting.Note;
+			this.State = renting.State;
 		}
 
 		/// <summary>
-		/// Id zákazníka.
+		/// Id výpůjčky.
 		/// </summary>
-		[Required]
-		[Display(Name = nameof(Localization.Admin.Renting_Customer), ResourceType = typeof(Localization.Admin))]
-		public int CustomerId
+		public int RentingId
 		{
 			get;
 			set;
 		}
 
 		/// <summary>
-		/// Jméno zákazníka (pouze pro zobrazení do formuláře)
+		/// Id půjčovny.
 		/// </summary>
-		public string CustomerName
+		public int RentalId
 		{
 			get;
 			set;
 		}
 
 		/// <summary>
-		/// Začátek výpůjčky - datum.
+		/// Čas kdy výpůjčka končí.
 		/// </summary>
-		[Required]
-		[DataType(DataType.Date)]
-		[Display(Name = nameof(Localization.Admin.Renting_StartsAt), ResourceType = typeof(Localization.Admin))]
-		public DateTime StartsAtDate
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Začátek výpůjčky - čas.
-		/// </summary>
-		[Required]
 		[DataType(DataType.Time)]
-		public TimeSpan StartsAtTime
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Začátek výpůjčky.
-		/// </summary>
-		[Required]
-		[DataType(DataType.Date)]
-		[Display(Name = nameof(Localization.Admin.Renting_EndsAt), ResourceType = typeof(Localization.Admin))]
-		public DateTime EndsAtDate
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Začátek výpůjčky - čas.
-		/// </summary>
-		[Required]
-		[DataType(DataType.Time)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm}")]
+		[Range(typeof(TimeSpan), "00:00", "23:59")]
 		public TimeSpan EndsAtTime
 		{
 			get;
@@ -92,20 +57,9 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
-		/// Idčka Zapůjčených předmětů.
+		/// Datum kdy výpůjčka končí.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Renting_Items), ResourceType = typeof(Localization.Admin))]
-		public int[] ItemIds
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Stav výpůjčky.
-		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Renting_State), ResourceType = typeof(Localization.Admin))]
-		public RentalState State
+		public DateTime EndsAtDate
 		{
 			get;
 			set;
@@ -114,7 +68,6 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Poznámka k výpůjčce.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Renting_Note), ResourceType = typeof(Localization.Admin))]
 		public string Note
 		{
 			get;
@@ -122,146 +75,77 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
-		/// Typy předmětů.
+		/// Stav rezervace.
 		/// </summary>
-		public IEnumerable<ItemTypeViewModel> ItemTypes
+		public RentalState State
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Předměty, které budou zapůjčeny.
-		/// </summary>
-		public ItemSearchModel[] Items
+		public DateTime EndsAt
 		{
-			get;
-			set;
+			get
+			{
+				return this.EndsAtDate.Add(this.EndsAtTime);
+			}
+			set
+			{
+				this.EndsAtTime = value.TimeOfDay;
+				this.EndsAtDate = value.Date;
+			}
 		}
 
-		/// <summary>
-		/// Id půjčovny, ze které se půjčuje.
-		/// </summary>
-		/// <remarks>Je zde kvůli validaci, protože se volá před <see cref="IAfterFetchModel"/>.</remarks>
-		public int RentalId
+		public void UpdateEntity(Renting renting)
 		{
-			get;
-			set;
+			renting.EndsAt = this.EndsAt;
+			renting.Note = this.Note;
+			renting.State = this.State;
 		}
-
-		private DateTime StartsAt => this.StartsAtDate.Add(this.StartsAtTime);
-
-		private DateTime EndsAt => this.EndsAtDate.Add(this.EndsAtTime);
 
 		public void AfterFetchModel(IRepositoriesFactory repositoriesFactory)
 		{
 			this.RentalId = this.Rental.Id;
-
-			this.ItemTypes = repositoriesFactory.Types.GetItemTypes()
-				.Select(t => new ItemTypeViewModel()
-				{
-					Id = t.Id,
-					Name = t.Name,
-				});
-
-			this.CustomerName = repositoriesFactory.Users.GetById(this.CustomerId)?.UserName;
-
-			if (this.ItemIds != null)
-			{
-				this.ItemIds = this.ItemIds.Distinct().Where(i => i != 0).ToArray();
-
-				this.Items = repositoriesFactory.Items.GetByIds(this.ItemIds)
-					.Select(i => new ItemSearchModel(i)).ToArray();
-			}
 		}
 
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			var factory = (IRepositoriesFactory)validationContext.GetService(typeof(IRepositoriesFactory));
 
-			#region Customer
-
-			var user = factory.Users.GetById(this.CustomerId);
-
-			if (user == null)
-			{
-				// Tato situace nenastane, pokud někdo nezedituje kód, tudíž vyhodím pouze obecnou validační zprávu.
-				yield return new ValidationResult(Localization.Admin.Renting_NoCustomer);
-			}
-
-			#endregion
-
-			#region Dates
-
+			var renting = factory.Rentings.GetById(this.RentingId);
 			var rental = factory.Rentals.GetById(this.RentalId);
 
-			if(rental == null)
+			if (rental == null)
 			{
-				// Todle taky nenastane pokud někdo nezedituje kód stránky.
+				// Nenastane pokud někdo nezedituje kód stránky.
 				yield return new ValidationResult(Localization.Admin.Renting_NoRental);
 			}
-			else if (!rental.IsInWorkingHours(this.StartsAt))
+
+			if (!rental.IsInWorkingHours(this.EndsAt))
 			{
-				yield return new ValidationResult(Localization.Admin.Renting_StartsAtNotInWorkingHours);
-			}
-			else if (!rental.IsInWorkingHours(this.EndsAt))
-			{
-				yield return new ValidationResult(Localization.Admin.Renting_EndsAtNotInWorkingHours);
+				yield return new ValidationResult(Localization.Admin.Renting_EndsAtNotInWorkingHours, new[] { nameof(this.EndsAtDate) });
 			}
 
-			if (this.StartsAt >= this.EndsAt)
+			if (this.EndsAt <= DateTime.Now)
 			{
-				yield return new ValidationResult(Localization.Admin.Renting_WrongDate);
+				yield return new ValidationResult(Localization.Admin.Renting_CannotBeSetInPast, new[] { nameof(this.EndsAtDate) });
 			}
 
-			if (this.StartsAtDate < DateTime.Now.Date)
+			if (renting != null)
 			{
-				yield return new ValidationResult(Localization.Admin.Renting_DateInPast);
-			}
-
-			if(this.EndsAt < DateTime.Now && this.State != RentalState.Returned)
-			{
-				yield return new ValidationResult(Localization.Admin.Renting_EndsInPast);
-			}
-
-			#endregion
-
-			#region Items
-
-			if (this.ItemIds != null)
-			{
-				foreach (var i in this.ItemIds)
+				foreach (var item in renting.Items)
 				{
-					var item = factory.Items.GetById(i);
-
-					if (item == null)
+					if (!item.IsAvaible(renting.EndsAt, this.EndsAt))
 					{
-						// Tato situace nenastane, pokud někdo nezedituje kód, tudíž vyhodím pouze obecnou validační zprávu.
-						yield return new ValidationResult(Localization.Admin.Renting_ItemNotFound);
-					}
-					else if (!item.IsAvaible(this.StartsAt, this.EndsAt))
-					{
-						yield return new ValidationResult(string.Format(Localization.Admin.Renting_ItemUnavaible, item.UniqueIdentifier, this.StartsAt, this.EndsAt));
+						yield return new ValidationResult(string.Format(Localization.Admin.Renting_ExtendUnavaible, item.UniqueIdentifier));
 					}
 				}
 			}
 			else
 			{
-				yield return new ValidationResult(Localization.Admin.Renting_NoItem);
+				// Nenastane pokud někdo nezedituje kód stránky.
+				yield return new ValidationResult(Localization.Admin.Renting_NoRenting);
 			}
-
-			#endregion
-
-		}
-
-		public Renting CreateEntity()
-		{
-			var renting = Renting.Create(
-				this.CustomerId, this.StartsAt, this.EndsAt,
-				this.State, this.Note, this.ItemIds
-			);
-
-			return renting;
 		}
 	}
 }

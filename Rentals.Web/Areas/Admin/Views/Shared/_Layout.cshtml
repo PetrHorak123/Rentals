@@ -28,28 +28,30 @@
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				@Html.ActionLink(Admin.Overview, "Index", "Home", null, new { @class = "navbar-brand" })
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink(Admin.Calendar, "Index", "Calendar")</li>
-					<li>@Html.ActionLink(Admin.Items, "Index", "Items")</li>
-					@if (User.IsInRole(RoleType.Administrator.ToString()))
-					{
-						<li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
-						<li><a>@Admin.Employees</a></li>
-					}
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>@Html.ActionLink(Admin.Logout, "Logout", "Account")</li>
-				</ul>
+			<div class="row">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					@Html.ActionLink(Admin.Overview, "Index", "Home", null, new { @class = "navbar-brand" })
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>@Html.ActionLink(Admin.Calendar, "Index", "Calendar")</li>
+						<li>@Html.ActionLink(Admin.Items, "Index", "Items")</li>
+						@if (User.IsInRole(RoleType.Administrator.ToString()))
+						{
+							<li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
+							<li><a>@Admin.Employees</a></li>
+						}
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>@Html.ActionLink(Admin.Logout, "Logout", "Account")</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>

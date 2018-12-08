@@ -10,10 +10,9 @@
 	<h2>@Admin.CreateType</h2>
 </div>
 
-<hr />
 <div class="row">
 	<div class="col-md-6">
-		@using (Html.BeginForm("Create", "Items", FormMethod.Post))
+		@using (Html.BeginForm("Create", "Items", FormMethod.Post, new { id = "create-form" }))
 		{
 			@Html.ValidationSummary(true)
 			<div class="form-group">
@@ -32,6 +31,7 @@
 			</div>
 			<div class="form-group">
 				@Html.HiddenFor(m => m.CoverImage)
+				<label for="file">@Admin.Item_CoverImage</label>
 
 				@if (Model.CoverImage.IsNullOrEmpty())
 				{
@@ -56,9 +56,103 @@
 				}
 			</div>
 			<div class="form-group">
+				<label class="control-label">@Admin.Item_Accessory</label>
+				<div class="row">
+					<div class="btn-group col-xs-12">
+						<button type="button" class="btn btn-default btn dropdown-toggle col-xs-12" data-toggle="dropdown" disabled="disabled">
+							<p class="pull-left margin-0">@Admin.Item_ChooseAccessory</p>
+							<p class="pull-right margin-0"><span class="caret"></span></p>
+						</button>
+						<ul class="dropdown-menu accessory-list col-xs-12"></ul>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">@Admin.Item_AccessoryTo</label>
+				<div class="row">
+					<div class="btn-group col-xs-12">
+						<button type="button" class="btn btn-default btn dropdown-toggle col-xs-12" data-toggle="dropdown" disabled="disabled">
+							<p class="pull-left margin-0">@Admin.Item_ChooseAccessoryTo</p>
+							<p class="pull-right margin-0"><span class="caret"></span></p>
+						</button>
+						<ul class="dropdown-menu accessory-to-list col-xs-12"></ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
 				<button type="submit" class="btn btn-primary">@Admin.Save</button>
 			</div>
 		}
-		Listbox s provázáním
+
+		<script type="text/javascript">
+			var accessorries =  @Html.Raw(Json.Serialize(Model.Accessories)) || [];
+			var accessoryTo = @Html.Raw(Json.Serialize(Model.AccessoryTo)) || [];
+
+			$(document).ready(function () {
+				$("#create-form").submit(function (event) {
+					$(accessorries).each(function (index, value) {
+						$("#create-form").append('<input type="hidden" name="Accessories[' + index + ']" value="' + value + '">');
+					});
+					$(accessoryTo).each(function (index, value) {
+						$("#create-form").append('<input type="hidden" name="AccessoryTo[' + index + ']" value="' + value + '">');
+					});
+
+				});
+
+				$.ajax({
+					url: '@Url.Action("GetItemTypes", "Items")',
+					success: function (data) {
+						$(".dropdown-toggle").removeAttr("disabled");
+
+						$(data).each(function (index, value) {
+							render($(".accessory-list"), accessorries, accessoryTo, value);
+							render($(".accessory-to-list"), accessoryTo, accessorries, value);
+						})
+
+						$('.accessory-list a').on('click', function (event) {
+							return setValue(event, accessorries, $(".accessory-to-list"));
+						});
+
+						$('.accessory-to-list a').on('click', function (event) {
+							return setValue(event, accessoryTo, $(".accessory-list"));
+						});
+					}
+				})
+			});
+
+			function render($elem, checked, disabled, item) {
+				$elem.append(
+					'<li><a href="#" data-value="' + item.id +
+					'" tabIndex=" - 1"><input type="checkbox"' +
+					(checked.includes(item.id) ? 'checked="checked"' : '') +
+					(disabled.includes(item.id) ? 'disabled' : '') +
+					'/>&nbsp;' + item.name + '</a></li>'
+				);
+			}
+
+			function setValue(event, fieldToAdd, $whereToDisable) {
+				var $target = $(event.currentTarget);
+				var val = Number($target.attr('data-value'));
+				var $inp = $target.find('input');
+				var idx;
+
+				if ($inp.is(":disabled"))
+					return false;
+
+				if ((idx = fieldToAdd.indexOf(val)) > -1) {
+					fieldToAdd.splice(idx, 1);
+					$inp.prop('checked', false);
+					$whereToDisable.find("[data-value='" + val + "']").find("input").removeAttr("disabled");
+				} else {
+					fieldToAdd.push(val);
+					$inp.prop('checked', true);
+					$whereToDisable.find("[data-value='" + val + "']").find("input").attr("disabled", true);
+				}
+
+				return false;
+			}
+		</script>
+
 	</div>
 </div>

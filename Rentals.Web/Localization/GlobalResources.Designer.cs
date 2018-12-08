@@ -70,6 +70,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zrušit výpůjčku.
+        /// </summary>
+        public static string CancelRenting {
+            get {
+                return ResourceManager.GetString("CancelRenting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zavřít.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0:dd.MM.yyyy}.
         /// </summary>
         public static string Cs_TimeFormat {
@@ -79,11 +97,20 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0:dd.MM.yyyy hh:mm}.
+        ///   Looks up a localized string similar to {0:dd.MM.yyyy HH:mm}.
         /// </summary>
         public static string Cs_TimeFormatWithTime {
             get {
                 return ResourceManager.GetString("Cs_TimeFormatWithTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník.
+        /// </summary>
+        public static string Customer {
+            get {
+                return ResourceManager.GetString("Customer", resourceCulture);
             }
         }
         
@@ -93,6 +120,15 @@ namespace Rentals.Web.Localization {
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        public static string Detail {
+            get {
+                return ResourceManager.GetString("Detail", resourceCulture);
             }
         }
         

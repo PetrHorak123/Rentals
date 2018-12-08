@@ -5,12 +5,10 @@
 	ViewBag.Title = Admin.RentingOverview;
 }
 
-<h2>
+<h2 class="row">
 	@Admin.RentingOverview_Today
 </h2>
 
-<div class="row">
-	<div class="col-xs-12" id="component-container">
-		@await Component.InvokeAsync(nameof(RentingOverview))
-	</div>
+<div class="row" id="component-container">
+	@await Component.InvokeAsync(nameof(RentingOverview))
 </div>

@@ -1,6 +1,7 @@
 ﻿using Rentals.Common.Enums;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Rentals.DL.Entities
 {
@@ -16,6 +17,19 @@ namespace Rentals.DL.Entities
 			{
 				bool result = this.State == RentalState.Canceled;
 				return result;
+			}
+		}
+
+		/// <summary>
+		/// Všechny předměty, které tato výpůjčka obsahuje.
+		/// </summary>
+		[NotMapped]
+		public Item[] Items
+		{
+			get
+			{
+				var items = this.RentingToItems.Select(r => r.Item).ToArray();
+				return items;
 			}
 		}
 

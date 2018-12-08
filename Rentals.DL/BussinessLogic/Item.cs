@@ -35,7 +35,7 @@ namespace Rentals.DL.Entities
 				.Any(r =>
 					!r.IsCanceled &&
 					(r.StartsAt >= from && r.StartsAt <= to) || // začíná v rozmezí from - to
-					(r.EndsAt >= from && r.EndsAt <= to) // končí v rozmezí from - to
+					(r.EndsAt > from && r.EndsAt < to) // končí v rozmezí from - to
 				);
 
 			return !result;
