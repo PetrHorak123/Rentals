@@ -14,5 +14,10 @@ namespace Rentals.DL.Interfaces
 		/// Vrací příslušenství k předmětu.
 		/// </summary>
 		Task<ItemType[]> GetAccessoriesAsync(int id);
+
+		/// <summary>
+		/// Vrací všechy typy předmětů, které mužou být danému předmětu přiřazeny jako příslušenství.
+		/// </summary>
+		ItemType[] GetAvaibleAccessories(int id);
 	}
 }

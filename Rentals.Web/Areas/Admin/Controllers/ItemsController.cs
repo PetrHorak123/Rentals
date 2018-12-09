@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
+using Rentals.Web.Areas.Admin.ViewComponents;
 using System;
 using System.Linq;
 
@@ -109,7 +110,6 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			return RedirectToAction("Edit", "Items", new { id = postedModel.Id });
 		}
 
-
 		public ActionResult Delete(int itemId)
 		{
 			var item = this.RepositoriesFactory.Items.GetById(itemId);
@@ -134,6 +134,41 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			this.RepositoriesFactory.SaveChanges();
 
 			return RedirectToAction("Index", "Items");
+		}
+
+		public ActionResult RemoveAccessory(int accessoryToId, int accessoryId)
+		{
+			var itemType = RepositoriesFactory.Types.GetById(accessoryToId);
+
+			if (itemType == null)
+				return NotFound();
+
+			itemType.Accessories.Remove(itemType.Accessories.Single(a => a.AccesoryId == accessoryId));
+
+			return Content("OK");
+		}
+
+		public ActionResult ReloadComponentView(int id)
+		{
+			return ViewComponent(nameof(Accessories), new { id });
+		}
+
+		public JsonResult AvaibleAccessories(int id)
+		{
+			var itemType = RepositoriesFactory.Types.GetById(id);
+
+			if (itemType == null)
+				return null;
+
+			var itemTypes = this.RepositoriesFactory.Types.GetAvaibleAccessories(id)
+				.Select(t => new ItemTypeViewModel()
+				{
+					Id = t.Id,
+					Name = t.Name,
+				});
+
+			return Json(itemTypes);
+
 		}
 
 		public JsonResult GetItemTypes()

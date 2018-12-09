@@ -402,4 +402,7 @@
   <data name="Item_Type" xml:space="preserve">
     <value>Typy předmětů</value>
   </data>
+  <data name="Item_AddAccessory" xml:space="preserve">
+    <value>Přidat příslušenství</value>
+  </data>
 </root>

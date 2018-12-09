@@ -17,7 +17,7 @@ namespace Rentals.Web.Areas.Admin.ViewComponents
 		public async Task<IViewComponentResult> InvokeAsync(int id)
 		{
 			var data = await factory.Types.GetAccessoriesAsync(id);
-			var model = new AccesoryItemTypesViewModel(data, id);
+			var model = new AccessoryItemTypesViewModel(data, id);
 
 			return View(model);
 		}

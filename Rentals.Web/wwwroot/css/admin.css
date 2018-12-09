@@ -10,6 +10,10 @@
 	padding: 0;
 }
 
+.margin-top-1 {
+	margin-top: 1em;
+}
+
 .vis-item{
 	top:0!important;
 }
@@ -28,3 +32,16 @@ dl.inline dt {
 	display: inline-block;
 	min-width: 175px;
 }
+
+.row-eq-height {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+	.row-eq-height > [class*='col-'] {
+		display: flex;
+		flex-direction: column;
+	}

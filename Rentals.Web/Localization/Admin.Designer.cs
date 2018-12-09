@@ -115,6 +115,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Přidat příslušenství.
+        /// </summary>
+        public static string Item_AddAccessory {
+            get {
+                return ResourceManager.GetString("Item_AddAccessory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uložit a přidat předmět.
         /// </summary>
         public static string Item_AddItem {

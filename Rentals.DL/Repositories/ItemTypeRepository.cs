@@ -31,5 +31,19 @@ namespace Rentals.DL.Repositories
 
 			return result;
 		}
+
+		public ItemType[] GetAvaibleAccessories(int id)
+		{
+			var itemType = this.Context.ItemTypes.Find(id);
+
+			var itemTypes = this.Context.ItemTypes.Where(
+				t => !t.IsDeleted &&
+				t.Id != id &&
+				!itemType.Accessories.Select(a => a.AccesoryId).Contains(t.Id) &&
+				!itemType.AccesoryTo.Select(a => a.AccesoryToId).Contains(t.Id)
+			).ToArray();
+
+			return itemTypes;
+		}
 	}
 }
