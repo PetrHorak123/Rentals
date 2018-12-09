@@ -61,24 +61,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uložit a přidat předmět.
-        /// </summary>
-        public static string AddItem {
-            get {
-                return ResourceManager.GetString("AddItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Přidat nový.
-        /// </summary>
-        public static string AddNewItemType {
-            get {
-                return ResourceManager.GetString("AddNewItemType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Kalendář.
         /// </summary>
         public static string Calendar {
@@ -88,155 +70,29 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Storno.
-        /// </summary>
-        public static string Cancel {
-            get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Změnit všechny obrázky.
-        /// </summary>
-        public static string ChangeAllImages {
-            get {
-                return ResourceManager.GetString("ChangeAllImages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vytvořit.
-        /// </summary>
-        public static string Create {
-            get {
-                return ResourceManager.GetString("Create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nejdříve vytvořte půjčovnu.
-        /// </summary>
-        public static string CreateFirst {
-            get {
-                return ResourceManager.GetString("CreateFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nová výpůjčka.
-        /// </summary>
-        public static string CreateRenting {
-            get {
-                return ResourceManager.GetString("CreateRenting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vytvořit typ.
-        /// </summary>
-        public static string CreateType {
-            get {
-                return ResourceManager.GetString("CreateType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Zákazníci.
         /// </summary>
-        public static string Customers {
+        public static string Customer {
             get {
-                return ResourceManager.GetString("Customers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Takto je uvidí vaši zákazníci.
-        /// </summary>
-        public static string CustomersView {
-            get {
-                return ResourceManager.GetString("CustomersView", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Smazat.
-        /// </summary>
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Opravdu chcete smazat předmět &quot;{0}&quot;.
-        /// </summary>
-        public static string DeleteMessage {
-            get {
-                return ResourceManager.GetString("DeleteMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Editovat.
-        /// </summary>
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Editace předmětu.
-        /// </summary>
-        public static string EditItemType {
-            get {
-                return ResourceManager.GetString("EditItemType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Editace půjčovny.
-        /// </summary>
-        public static string EditRental {
-            get {
-                return ResourceManager.GetString("EditRental", resourceCulture);
+                return ResourceManager.GetString("Customer", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Zaměstnanci.
         /// </summary>
-        public static string Employees {
+        public static string Employee {
             get {
-                return ResourceManager.GetString("Employees", resourceCulture);
+                return ResourceManager.GetString("Employee", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Obrázek úspěšně změněn.
+        ///   Looks up a localized string similar to Předměty.
         /// </summary>
-        public static string FileChanged {
+        public static string Item {
             get {
-                return ResourceManager.GetString("FileChanged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Soubor úspěšně nahrán.
-        /// </summary>
-        public static string FileUploaded {
-            get {
-                return ResourceManager.GetString("FileUploaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Soubor se nepodařilo nahrát, zkotrolujte zda nahráváte obrázek a zkuste to znovu..
-        /// </summary>
-        public static string FileUploadFailed {
-            get {
-                return ResourceManager.GetString("FileUploadFailed", resourceCulture);
+                return ResourceManager.GetString("Item", resourceCulture);
             }
         }
         
@@ -255,6 +111,33 @@ namespace Rentals.Web.Localization {
         public static string Item_AccessoryTo {
             get {
                 return ResourceManager.GetString("Item_AccessoryTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložit a přidat předmět.
+        /// </summary>
+        public static string Item_AddItem {
+            get {
+                return ResourceManager.GetString("Item_AddItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat nový.
+        /// </summary>
+        public static string Item_AddNew {
+            get {
+                return ResourceManager.GetString("Item_AddNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit všechny obrázky.
+        /// </summary>
+        public static string Item_ChangeAllImages {
+            get {
+                return ResourceManager.GetString("Item_ChangeAllImages", resourceCulture);
             }
         }
         
@@ -286,6 +169,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vytvořit typ.
+        /// </summary>
+        public static string Item_Create {
+            get {
+                return ResourceManager.GetString("Item_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opravdu chcete smazat předmět &quot;{0}&quot;.
+        /// </summary>
+        public static string Item_DeleteMessage {
+            get {
+                return ResourceManager.GetString("Item_DeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Popisek.
         /// </summary>
         public static string Item_Description {
@@ -313,6 +214,51 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Editace předmětu - {0}.
+        /// </summary>
+        public static string Item_Edit {
+            get {
+                return ResourceManager.GetString("Item_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obrázek úspěšně změněn.
+        /// </summary>
+        public static string Item_FileChanged {
+            get {
+                return ResourceManager.GetString("Item_FileChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nahrát soubor.
+        /// </summary>
+        public static string Item_FileUpload {
+            get {
+                return ResourceManager.GetString("Item_FileUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soubor úspěšně nahrán.
+        /// </summary>
+        public static string Item_FileUploaded {
+            get {
+                return ResourceManager.GetString("Item_FileUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soubor se nepodařilo nahrát, zkotrolujte zda nahráváte obrázek a zkuste to znovu..
+        /// </summary>
+        public static string Item_FileUploadFailed {
+            get {
+                return ResourceManager.GetString("Item_FileUploadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Seznam fyzických předmětů.
         /// </summary>
         public static string Item_ListOfItems {
@@ -327,6 +273,15 @@ namespace Rentals.Web.Localization {
         public static string Item_Name {
             get {
                 return ResourceManager.GetString("Item_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poznámka.
+        /// </summary>
+        public static string Item_Note {
+            get {
+                return ResourceManager.GetString("Item_Note", resourceCulture);
             }
         }
         
@@ -349,20 +304,56 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Předměty.
+        ///   Looks up a localized string similar to Přehled předmětů.
         /// </summary>
-        public static string Items {
+        public static string Item_Overview {
             get {
-                return ResourceManager.GetString("Items", resourceCulture);
+                return ResourceManager.GetString("Item_Overview", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Přehled předmětů.
+        ///   Looks up a localized string similar to Opravdu {0} už není příslušenství ?.
         /// </summary>
-        public static string ItemTypes {
+        public static string Item_RemoveAccessory {
             get {
-                return ResourceManager.GetString("ItemTypes", resourceCulture);
+                return ResourceManager.GetString("Item_RemoveAccessory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dva nebo více předmětů nemůže mít stejné unikatní identifikátory.
+        /// </summary>
+        public static string Item_SameUniqueIdentifiers1 {
+            get {
+                return ResourceManager.GetString("Item_SameUniqueIdentifiers1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unikátní klíč &quot;{0}&quot; nemůže být použit, protože již náleží jinému předmětu.
+        /// </summary>
+        public static string Item_SameUniqueIdentifiers2 {
+            get {
+                return ResourceManager.GetString("Item_SameUniqueIdentifiers2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typy předmětů.
+        /// </summary>
+        public static string Item_Type {
+            get {
+                return ResourceManager.GetString("Item_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unikátní identifikátor.
+        /// </summary>
+        public static string Item_UniqueIdentifier {
+            get {
+                return ResourceManager.GetString("Item_UniqueIdentifier", resourceCulture);
             }
         }
         
@@ -378,9 +369,54 @@ namespace Rentals.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Nesprávné přihlašovací jméno nebo heslo..
         /// </summary>
-        public static string LoginError {
+        public static string Login_Error {
             get {
-                return ResourceManager.GetString("LoginError", resourceCulture);
+                return ResourceManager.GetString("Login_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heslo.
+        /// </summary>
+        public static string Login_Password {
+            get {
+                return ResourceManager.GetString("Login_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pamatovat si mě?.
+        /// </summary>
+        public static string Login_RememberMe {
+            get {
+                return ResourceManager.GetString("Login_RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Použít místní přihlášení.
+        /// </summary>
+        public static string Login_UseAdminAccount {
+            get {
+                return ResourceManager.GetString("Login_UseAdminAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Použít externí služby.
+        /// </summary>
+        public static string Login_UseExternalLogin {
+            get {
+                return ResourceManager.GetString("Login_UseExternalLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přihlašovací jméno.
+        /// </summary>
+        public static string Login_UserName {
+            get {
+                return ResourceManager.GetString("Login_UserName", resourceCulture);
             }
         }
         
@@ -396,45 +432,9 @@ namespace Rentals.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Odhlášení z administrativy proběhlo úspěšně..
         /// </summary>
-        public static string LogoutSuccesful {
+        public static string Logout_Succesful {
             get {
-                return ResourceManager.GetString("LogoutSuccesful", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Poznámka.
-        /// </summary>
-        public static string Note {
-            get {
-                return ResourceManager.GetString("Note", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Přehled.
-        /// </summary>
-        public static string Overview {
-            get {
-                return ResourceManager.GetString("Overview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Heslo.
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pamatovat si mě?.
-        /// </summary>
-        public static string RememberMe {
-            get {
-                return ResourceManager.GetString("RememberMe", resourceCulture);
+                return ResourceManager.GetString("Logout_Succesful", resourceCulture);
             }
         }
         
@@ -453,6 +453,15 @@ namespace Rentals.Web.Localization {
         public static string Rental_City {
             get {
                 return ResourceManager.GetString("Rental_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editace půjčovny.
+        /// </summary>
+        public static string Rental_Edit {
+            get {
+                return ResourceManager.GetString("Rental_Edit", resourceCulture);
             }
         }
         
@@ -898,83 +907,11 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dva nebo více předmětů nemůže mít stejné unikatní identifikátory.
-        /// </summary>
-        public static string SameUniqueIdentifiers1 {
-            get {
-                return ResourceManager.GetString("SameUniqueIdentifiers1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unikátní klíč &quot;{0}&quot; nemůže být použit, protože již náleží jinému předmětu.
-        /// </summary>
-        public static string SameUniqueIdentifiers2 {
-            get {
-                return ResourceManager.GetString("SameUniqueIdentifiers2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uložit.
-        /// </summary>
-        public static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Administrace.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unikátní identifikátor.
-        /// </summary>
-        public static string UniqueIdentifier {
-            get {
-                return ResourceManager.GetString("UniqueIdentifier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nahrát soubor.
-        /// </summary>
-        public static string UploadFile {
-            get {
-                return ResourceManager.GetString("UploadFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Použít místní přihlášení.
-        /// </summary>
-        public static string UseAdminAccount {
-            get {
-                return ResourceManager.GetString("UseAdminAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Použít externí služby.
-        /// </summary>
-        public static string UseExternalLogin {
-            get {
-                return ResourceManager.GetString("UseExternalLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Přihlašovací jméno.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

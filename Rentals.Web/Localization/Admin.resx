@@ -117,89 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddItem" xml:space="preserve">
+  <data name="Item_AddItem" xml:space="preserve">
     <value>Uložit a přidat předmět</value>
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Kalendář</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Storno</value>
-  </data>
   <data name="Rental_City" xml:space="preserve">
     <value>Město</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>Vytvořit</value>
-  </data>
-  <data name="CreateFirst" xml:space="preserve">
-    <value>Nejdříve vytvořte půjčovnu</value>
-  </data>
-  <data name="CreateType" xml:space="preserve">
+  <data name="Item_Create" xml:space="preserve">
     <value>Vytvořit typ</value>
   </data>
-  <data name="Customers" xml:space="preserve">
+  <data name="Customer" xml:space="preserve">
     <value>Zákazníci</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Smazat</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Editovat</value>
-  </data>
-  <data name="EditItemType" xml:space="preserve">
-    <value>Editace předmětu</value>
-  </data>
-  <data name="EditRental" xml:space="preserve">
-    <value>Editace půjčovny</value>
-  </data>
-  <data name="Employees" xml:space="preserve">
+  <data name="Employee" xml:space="preserve">
     <value>Zaměstnanci</value>
   </data>
-  <data name="FileUploaded" xml:space="preserve">
+  <data name="Item_FileUploaded" xml:space="preserve">
     <value>Soubor úspěšně nahrán</value>
   </data>
-  <data name="FileUploadFailed" xml:space="preserve">
+  <data name="Item_FileUploadFailed" xml:space="preserve">
     <value>Soubor se nepodařilo nahrát, zkotrolujte zda nahráváte obrázek a zkuste to znovu.</value>
   </data>
-  <data name="Items" xml:space="preserve">
+  <data name="Item" xml:space="preserve">
     <value>Předměty</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Přihlášení</value>
   </data>
-  <data name="LoginError" xml:space="preserve">
+  <data name="Login_Error" xml:space="preserve">
     <value>Nesprávné přihlašovací jméno nebo heslo.</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Odhlásit</value>
   </data>
-  <data name="LogoutSuccesful" xml:space="preserve">
+  <data name="Logout_Succesful" xml:space="preserve">
     <value>Odhlášení z administrativy proběhlo úspěšně.</value>
   </data>
   <data name="Rental_Name" xml:space="preserve">
     <value>Název půjčovny</value>
   </data>
-  <data name="Overview" xml:space="preserve">
-    <value>Přehled</value>
-  </data>
-  <data name="Password" xml:space="preserve">
+  <data name="Login_Password" xml:space="preserve">
     <value>Heslo</value>
   </data>
-  <data name="RememberMe" xml:space="preserve">
+  <data name="Login_RememberMe" xml:space="preserve">
     <value>Pamatovat si mě?</value>
   </data>
   <data name="Rental" xml:space="preserve">
     <value>Půjčovna</value>
   </data>
-  <data name="SameUniqueIdentifiers1" xml:space="preserve">
+  <data name="Item_SameUniqueIdentifiers1" xml:space="preserve">
     <value>Dva nebo více předmětů nemůže mít stejné unikatní identifikátory</value>
   </data>
-  <data name="SameUniqueIdentifiers2" xml:space="preserve">
+  <data name="Item_SameUniqueIdentifiers2" xml:space="preserve">
     <value>Unikátní klíč "{0}" nemůže být použit, protože již náleží jinému předmětu</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Uložit</value>
   </data>
   <data name="Rental_Street" xml:space="preserve">
     <value>Ulice</value>
@@ -207,37 +180,37 @@
   <data name="Title" xml:space="preserve">
     <value>Administrace</value>
   </data>
-  <data name="UploadFile" xml:space="preserve">
+  <data name="Item_FileUpload" xml:space="preserve">
     <value>Nahrát soubor</value>
   </data>
-  <data name="UseAdminAccount" xml:space="preserve">
+  <data name="Login_UseAdminAccount" xml:space="preserve">
     <value>Použít místní přihlášení</value>
   </data>
-  <data name="UseExternalLogin" xml:space="preserve">
+  <data name="Login_UseExternalLogin" xml:space="preserve">
     <value>Použít externí služby</value>
   </data>
-  <data name="UserName" xml:space="preserve">
+  <data name="Login_UserName" xml:space="preserve">
     <value>Přihlašovací jméno</value>
   </data>
   <data name="Rental_ZipCode" xml:space="preserve">
     <value>PSČ</value>
   </data>
-  <data name="ChangeAllImages" xml:space="preserve">
+  <data name="Item_ChangeAllImages" xml:space="preserve">
     <value>Změnit všechny obrázky</value>
   </data>
-  <data name="FileChanged" xml:space="preserve">
+  <data name="Item_FileChanged" xml:space="preserve">
     <value>Obrázek úspěšně změněn</value>
   </data>
-  <data name="DeleteMessage" xml:space="preserve">
+  <data name="Item_DeleteMessage" xml:space="preserve">
     <value>Opravdu chcete smazat předmět "{0}"</value>
   </data>
   <data name="Item_NumberOfItems" xml:space="preserve">
     <value>Počet předmětů: {0}</value>
   </data>
-  <data name="AddNewItemType" xml:space="preserve">
+  <data name="Item_AddNew" xml:space="preserve">
     <value>Přidat nový</value>
   </data>
-  <data name="ItemTypes" xml:space="preserve">
+  <data name="Item_Overview" xml:space="preserve">
     <value>Přehled předmětů</value>
   </data>
   <data name="Item_Description" xml:space="preserve">
@@ -252,20 +225,11 @@
   <data name="Item_Detail" xml:space="preserve">
     <value>Detail předmětu {0}</value>
   </data>
-  <data name="Note" xml:space="preserve">
-    <value>Poznámka</value>
-  </data>
-  <data name="UniqueIdentifier" xml:space="preserve">
+  <data name="Item_UniqueIdentifier" xml:space="preserve">
     <value>Unikátní identifikátor</value>
-  </data>
-  <data name="CustomersView" xml:space="preserve">
-    <value>Takto je uvidí vaši zákazníci</value>
   </data>
   <data name="Item_ListOfItems" xml:space="preserve">
     <value>Seznam fyzických předmětů</value>
-  </data>
-  <data name="CreateRenting" xml:space="preserve">
-    <value>Nová výpůjčka</value>
   </data>
   <data name="Renting_Create" xml:space="preserve">
     <value>Nová výpůjčka</value>
@@ -422,5 +386,20 @@
   </data>
   <data name="Item_DuplicateAccessory" xml:space="preserve">
     <value>Některé předměty jsou označeny zárověň jako příslušenství a příslušenství k</value>
+  </data>
+  <data name="Item_RemoveAccessory" xml:space="preserve">
+    <value>Opravdu {0} už není příslušenství ?</value>
+  </data>
+  <data name="Item_Edit" xml:space="preserve">
+    <value>Editace předmětu - {0}</value>
+  </data>
+  <data name="Rental_Edit" xml:space="preserve">
+    <value>Editace půjčovny</value>
+  </data>
+  <data name="Item_Note" xml:space="preserve">
+    <value>Poznámka</value>
+  </data>
+  <data name="Item_Type" xml:space="preserve">
+    <value>Typy předmětů</value>
   </data>
 </root>

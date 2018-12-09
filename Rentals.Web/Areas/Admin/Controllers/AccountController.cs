@@ -56,7 +56,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 					return RedirectToAction(nameof(Lockout), "Account");
 				}
 
-				ModelState.AddModelError(string.Empty, Localization.Admin.LoginError);
+				ModelState.AddModelError(string.Empty, Localization.Admin.Login_Error);
 			}
 
 			return View(postedModel);

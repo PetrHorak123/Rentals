@@ -1,0 +1,23 @@
+﻿@model Rentals.Web.Areas.Admin.Models.ItemTypesViewModel
+@using Rentals.Web.Localization
+
+@foreach (var item in Model.ItemTypes)
+{
+	<div class="col-sm-3">
+		<h4>
+			<a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined">@item.Name</a>
+			<a class="btn btn-danger btn-xs pull-right" onclick="removeAccessory(@item.Id, '@(string.Format(Admin.Item_RemoveAccessory, item.Name))')">x</a>
+		</h4>
+		<img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
+		<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
+		<p>@item.Description</p>
+	</div>
+}
+
+<script type="text/javascript">
+	function removeAccessory(id, message) {
+		if (confirm(message)) {
+			
+		}
+	}
+</script>

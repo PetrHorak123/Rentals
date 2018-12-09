@@ -19,7 +19,7 @@ namespace Rentals.Web.Areas.Admin.Models
 			this.CoverImage = type.ActualItems.FirstOrDefault()?.CoverImage;
 			this.NumberOfItems = type.ActualItems.Count;
 			this.Description = type.Description;
-		}	
+		}
 
 		public int Id
 		{

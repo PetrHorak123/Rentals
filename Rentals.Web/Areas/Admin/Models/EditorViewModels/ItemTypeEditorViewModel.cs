@@ -205,7 +205,7 @@ namespace Rentals.Web.Areas.Admin.Models
 				var groupedItems = this.Items.GroupBy(i => i.UniqueIdentifier).ToArray();
 
 				if (groupedItems.Any(g => g.Count() > 1))
-					yield return new ValidationResult(Localization.Admin.SameUniqueIdentifiers1);
+					yield return new ValidationResult(Localization.Admin.Item_SameUniqueIdentifiers1);
 
 				foreach (var item in this.Items)
 				{
@@ -218,7 +218,7 @@ namespace Rentals.Web.Areas.Admin.Models
 					string oldIdentifier = item.UniqueIdentifier;
 					item.UniqueIdentifier = itemRepository.GetById(item.Id).UniqueIdentifier;
 
-					yield return new ValidationResult(string.Format(Localization.Admin.SameUniqueIdentifiers2, oldIdentifier));
+					yield return new ValidationResult(string.Format(Localization.Admin.Item_SameUniqueIdentifiers2, oldIdentifier));
 				}
 			}
 		}

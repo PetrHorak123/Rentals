@@ -16,7 +16,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Unikátní identifikátor předmětu (napříč všemi).
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.UniqueIdentifier), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_UniqueIdentifier), ResourceType = typeof(Localization.Admin))]
 		public string UniqueIdentifier
 		{
 			get;
@@ -35,7 +35,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Poznámka k předmětu, např může být trošku rozbitý.
 		/// </summary>
-		[Display(Name = nameof(Localization.Admin.Note), ResourceType = typeof(Localization.Admin))]
+		[Display(Name = nameof(Localization.Admin.Item_Note), ResourceType = typeof(Localization.Admin))]
 		public string Note
 		{
 			get;

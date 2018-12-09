@@ -47,8 +47,8 @@
 				@Html.TextAreaFor(m => m.Note, 4, 8, new { @class = "form-control" })
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">@Admin.Save</button>
-				@Html.ActionLink(Admin.Cancel, "Index", "Rental", null, new { @class = "btn btn-default" })
+				<button type="submit" class="btn btn-primary">@GlobalResources.Save</button>
+				@Html.ActionLink(GlobalResources.Cancel, "Index", "Rental", null, new { @class = "btn btn-default" })
 			</div>
 		}
 	</div>

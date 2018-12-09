@@ -14,7 +14,7 @@
 	<div class="col-md-4">
 		@using (Html.BeginForm("Login", "Account", FormMethod.Post))
 		{
-			<h4>@Admin.UseAdminAccount</h4>
+			<h4>@Admin.Login_UseAdminAccount</h4>
 			<hr />
 			@Html.ValidationSummary(true)
 			<div class="form-group">
@@ -38,7 +38,7 @@
 		}
 	</div>
 	<div class="col-md-6 col-md-offset-2">
-		<h4>@Admin.UseExternalLogin</h4>
+		<h4>@Admin.Login_UseExternalLogin</h4>
 		<hr />
 		<form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
 			<div>

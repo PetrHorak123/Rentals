@@ -2,13 +2,13 @@
 @using Rentals.Web.Localization
 
 @{
-	ViewBag.Title = Admin.Items;
+	ViewBag.Title = Admin.Item;
 }
 
 <div class="row">
 	<h2>
-		@Admin.ItemTypes 
-		@Html.ActionLink(Admin.AddNewItemType, "Create", "Items", null, new {@class = "btn btn-primary pull-right"})
+		@Admin.Item_Type 
+		@Html.ActionLink(Admin.Item_AddNew, "Create", "Items", null, new {@class = "btn btn-primary pull-right"})
 	</h2>
 </div>
 

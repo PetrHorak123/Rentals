@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Přidat</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Storno</value>
+  </data>
   <data name="CancelRenting" xml:space="preserve">
     <value>Zrušit výpůjčku</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Uložit</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Dnes</value>

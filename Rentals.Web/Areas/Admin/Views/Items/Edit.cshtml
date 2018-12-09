@@ -1,11 +1,12 @@
 ﻿@model Rentals.Web.Areas.Admin.Models.ItemTypeEditorViewModel
 @using Rentals.Web.Localization
+@using Rentals.Web.Areas.Admin.ViewComponents
 
 @{
-	ViewBag.Title = $"{Admin.EditItemType} - {Model.Name}";
+	ViewBag.Title = string.Format(Admin.Item_Edit, Model.Name);
 }
 
-<h2>@($"{Admin.EditItemType} - {Model.Name}")</h2>
+<h2>@string.Format(Admin.Item_Edit, Model.Name)</h2>
 
 <hr />
 <div class="row">
@@ -26,13 +27,25 @@
 				@Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
 			</div>
 			<div class="form-group">
-				<button type="button" id="show-edit-all-pictures" class="btn btn-info">@Admin.ChangeAllImages</button>
+				<button type="button" id="show-edit-all-pictures" class="btn btn-info">@Admin.Item_ChangeAllImages</button>
 
 				<div id="edit-all-pictures" style="display: none;">
 					<input id="file" type="file" size="1" onchange="uploadFile('file', OnSuccess, OnFailure)" />
-					<p style="display: none;" id="summary" class="text-success">@Admin.FileChanged</p>
+					<p style="display: none;" id="summary" class="text-success">@Admin.Item_FileChanged</p>
 				</div>
 			</div>
+
+			<hr />
+
+			<h4><strong>@Admin.Item_Accessories</strong></h4>
+
+			<div class="row" id="component-container">
+				@await Component.InvokeAsync(nameof(Accessories), new { id = Model.Id })
+			</div>
+
+			<hr />
+
+			<h4><strong>@Admin.Item</strong></h4>
 
 			<div class="row">
 				@for (int i = 0; i < Model.NumberOfItems; i++)
@@ -45,7 +58,7 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<img src="@Model.Items[i].CoverImage" alt="@Model.Items[i].UniqueIdentifier"
-									 class="img-responsive image" onclick="beginFileUpload(@i)" id="image_@i"/>
+									 class="img-responsive image" onclick="beginFileUpload(@i)" id="image_@i" />
 								<input id="file_@i" type="file" size="1" onchange="uploadFile('file_@i', OnSuccessItem, OnFailure)" style="display:none" />
 							</div>
 
@@ -63,16 +76,18 @@
 						</div>
 
 						<div class="form-group">
-							<button type="submit" class="btn btn-danger btn-sm pull-right" onclick="return confirm('@(string.Format(Admin.DeleteMessage, Model.Items[i].UniqueIdentifier))');"
-									formaction="@Url.Action("Delete", "Items", new { itemId = Model.Items[i].Id })">@Admin.Delete</button>
+							<button type="submit" class="btn btn-danger btn-sm pull-right" onclick="return confirm('@(string.Format(Admin.Item_DeleteMessage, Model.Items[i].UniqueIdentifier))');"
+									formaction="@Url.Action("Delete", "Items", new { itemId = Model.Items[i].Id })">
+								@GlobalResources.Delete
+								</button>
+							</div>
 						</div>
-					</div>
-				}
+					}
 			</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary" formaction="@Url.Action("Edit", "Items")">@Admin.Save</button>
-				<button type="submit" class="btn btn-primary" formaction="@Url.Action("AddItem", "Items")">@Admin.AddItem</button>
+				<button type="submit" class="btn btn-primary" formaction="@Url.Action("Edit", "Items")">@GlobalResources.Save</button>
+				<button type="submit" class="btn btn-primary" formaction="@Url.Action("AddItem", "Items")">@Admin.Item_AddItem</button>
 			</div>
 		}
 
@@ -97,7 +112,7 @@
 			};
 
 			function OnFailure(data) {
-				alert("@Html.Raw(Admin.FileUploadFailed)");
+				alert("@Html.Raw(Admin.Item_FileUploadFailed)");
 			};
 
 			function beginFileUpload(i) {

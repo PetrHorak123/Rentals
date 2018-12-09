@@ -8,7 +8,7 @@
 <div class="row">
 	<h2>
 		@string.Format(Admin.Item_Detail, Model.Name)
-		@Html.ActionLink(GlobalResources.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + string.Format(Admin.DeleteMessage, Model.Name) + "');" })
+		@Html.ActionLink(GlobalResources.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + string.Format(Admin.Item_DeleteMessage, Model.Name) + "');" })
 		@Html.ActionLink(GlobalResources.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
 	</h2>
 </div>
@@ -17,7 +17,9 @@
 	<h3>@Model.Name</h3>
 	<p>@Model.Description</p>
 
-	<h4>@Admin.Item_ListOfItems</h4>
+	<hr />
+
+	<h4><strong>@Admin.Item_ListOfItems</strong></h4>
 
 	<div class="row">
 		@foreach (var item in Model.Items)
@@ -30,8 +32,10 @@
 			</div>
 		}
 	</div>
+	
+	<hr />
 
-	<h4>@Admin.Item_Accessories</h4>
+	<h4><strong>@Admin.Item_Accessories</strong></h4>
 
 	<div class="row">
 		@foreach (var item in Model.Accessories)
