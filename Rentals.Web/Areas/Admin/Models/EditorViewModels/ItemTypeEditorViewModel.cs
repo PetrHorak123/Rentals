@@ -89,6 +89,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Příslušenství k tomuto předmětu.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Item_Accessories), ResourceType = typeof(Localization.Admin))]
 		public int[] Accessories
 		{
 			get;
@@ -98,6 +99,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Příslušenství k tomuto předmětu.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Item_AccessoryTo), ResourceType = typeof(Localization.Admin))]
 		public int[] AccessoryTo
 		{
 			get;
@@ -116,9 +118,9 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Vytvoří entitu typu, kterou je možné vložit do databáze.
 		/// </summary>
-		public ItemType CreateEntity()
+		public ItemType CreateEntity(IRepositoriesFactory factory, Rental rental)
 		{
-			var type = ItemType.CreateEntity(this.Name, this.Description, this.CreateItems());
+			var type = ItemType.CreateEntity(this.Name, this.Description, this.CreateItems(), factory, rental, this.Accessories, this.AccessoryTo);
 
 			return type;
 		}

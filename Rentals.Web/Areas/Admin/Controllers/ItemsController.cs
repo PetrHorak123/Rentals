@@ -45,11 +45,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			if (ModelState.IsValid)
 			{
-				// Vytvořím si typ a předměty (ty se vytvářejí ve vnitř)
-				var type = model.CreateEntity();
-				this.Rental.ItemTypes.Add(type);
-
-				this.RepositoriesFactory.SaveChanges();
+				// Vytvořím si typ a předměty (ty se vytvářejí ve vnitř), volá SaveChanges
+				var type = model.CreateEntity(this.RepositoriesFactory, this.Rental);
 
 				return RedirectToAction("Index", "Items");
 			}

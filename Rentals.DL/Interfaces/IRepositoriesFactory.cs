@@ -17,6 +17,8 @@ namespace Rentals.DL.Interfaces
 
 		IUserRepository Users { get; }
 
+		IRepository<ItemTypeToItemType> Accessories { get; }
+
 		int SaveChanges();
 	}
 }

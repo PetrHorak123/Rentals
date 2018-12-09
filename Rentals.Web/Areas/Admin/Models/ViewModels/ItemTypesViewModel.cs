@@ -12,14 +12,7 @@ namespace Rentals.Web.Areas.Admin.Models
 	{
 		public ItemTypesViewModel(IEnumerable<ItemType> types)
 		{
-			this.ItemTypes = types.Select(t => new ItemTypeViewModel()
-			{
-				Id = t.Id,
-				Name = t.Name,
-				CoverImage = t.ActualItems.FirstOrDefault()?.CoverImage,
-				NumberOfItems = t.ActualItems.Count,
-				Description = t.Description,
-			});
+			this.ItemTypes = types.Select(t => new ItemTypeViewModel(t));
 		}
 
 		/// <summary>

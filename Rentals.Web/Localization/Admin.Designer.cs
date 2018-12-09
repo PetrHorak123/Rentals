@@ -178,15 +178,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Detail předmětu {0}.
-        /// </summary>
-        public static string Detail {
-            get {
-                return ResourceManager.GetString("Detail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Editovat.
         /// </summary>
         public static string Edit {
@@ -252,9 +243,9 @@ namespace Rentals.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Příslušenství.
         /// </summary>
-        public static string Item_Accessory {
+        public static string Item_Accessories {
             get {
-                return ResourceManager.GetString("Item_Accessory", resourceCulture);
+                return ResourceManager.GetString("Item_Accessories", resourceCulture);
             }
         }
         
@@ -304,11 +295,29 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detail předmětu {0}.
+        /// </summary>
+        public static string Item_Detail {
+            get {
+                return ResourceManager.GetString("Item_Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Některé předměty jsou označeny zárověň jako příslušenství a příslušenství k.
         /// </summary>
         public static string Item_DuplicateAccessory {
             get {
                 return ResourceManager.GetString("Item_DuplicateAccessory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seznam fyzických předmětů.
+        /// </summary>
+        public static string Item_ListOfItems {
+            get {
+                return ResourceManager.GetString("Item_ListOfItems", resourceCulture);
             }
         }
         
@@ -354,15 +363,6 @@ namespace Rentals.Web.Localization {
         public static string ItemTypes {
             get {
                 return ResourceManager.GetString("ItemTypes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Seznam fyzických předmětů.
-        /// </summary>
-        public static string ListOfItems {
-            get {
-                return ResourceManager.GetString("ListOfItems", resourceCulture);
             }
         }
         

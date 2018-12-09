@@ -138,6 +138,9 @@
   <data name="Day" xml:space="preserve">
     <value>Den</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
   <data name="Detail" xml:space="preserve">
     <value>Detail</value>
   </data>

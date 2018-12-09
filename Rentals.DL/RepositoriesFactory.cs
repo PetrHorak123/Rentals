@@ -18,6 +18,7 @@ namespace Rentals.DL
 			Rentings = new RentingRepository(context);
 			Roles = new BaseRepository<Role>(context);
 			Users = new UserRepository(context);
+			Accessories = new BaseRepository<ItemTypeToItemType>(context);
 		}
 
 		public IItemRepository Items { get; private set; }
@@ -31,6 +32,8 @@ namespace Rentals.DL
 		public IRepository<Role> Roles { get; private set; }
 
 		public IUserRepository Users { get; private set; }
+
+		public IRepository<ItemTypeToItemType> Accessories { get; private set; }
 
 		public int SaveChanges()
 		{

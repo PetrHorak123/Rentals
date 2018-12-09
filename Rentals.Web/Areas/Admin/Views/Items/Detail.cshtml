@@ -2,14 +2,14 @@
 @using Rentals.Web.Localization
 
 @{
-	ViewBag.Title = string.Format(Admin.Detail, Model.Name);
+	ViewBag.Title = string.Format(Admin.Item_Detail, Model.Name);
 }
 
 <div class="row">
 	<h2>
-		@string.Format(Admin.Detail, Model.Name)
-		@Html.ActionLink(Admin.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('"+ string.Format(Admin.DeleteMessage, Model.Name) + "');" })
-		@Html.ActionLink(Admin.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+		@string.Format(Admin.Item_Detail, Model.Name)
+		@Html.ActionLink(GlobalResources.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + string.Format(Admin.DeleteMessage, Model.Name) + "');" })
+		@Html.ActionLink(GlobalResources.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
 	</h2>
 </div>
 
@@ -17,15 +17,31 @@
 	<h3>@Model.Name</h3>
 	<p>@Model.Description</p>
 
-	<h4>@Admin.ListOfItems <small>@Admin.CustomersView</small></h4>
+	<h4>@Admin.Item_ListOfItems</h4>
 
-	@foreach(var item in Model.Items)
-	{
-		<div class="col-sm-3">
-			<h4>@Model.Name</h4>
-			<img src="@item.CoverImage" alt="@Model.Name" class="img-responsive"/>
-			<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
-			<p>@item.Note</p>
-		</div>
-	}
+	<div class="row">
+		@foreach (var item in Model.Items)
+		{
+			<div class="col-sm-3">
+				<h4>@Model.Name</h4>
+				<img src="@item.CoverImage" alt="@Model.Name" class="img-responsive" />
+				<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
+				<p>@item.Note</p>
+			</div>
+		}
+	</div>
+
+	<h4>@Admin.Item_Accessories</h4>
+
+	<div class="row">
+		@foreach (var item in Model.Accessories)
+		{
+			<div class="col-sm-3">
+				<h4><a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined">@item.Name</a></h4>
+				<img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
+				<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
+				<p>@item.Description</p>
+			</div>
+		}
+	</div>
 </div>

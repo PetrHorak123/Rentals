@@ -249,7 +249,7 @@
   <data name="Item_CoverImage" xml:space="preserve">
     <value>Náhledový obrázek</value>
   </data>
-  <data name="Detail" xml:space="preserve">
+  <data name="Item_Detail" xml:space="preserve">
     <value>Detail předmětu {0}</value>
   </data>
   <data name="Note" xml:space="preserve">
@@ -261,7 +261,7 @@
   <data name="CustomersView" xml:space="preserve">
     <value>Takto je uvidí vaši zákazníci</value>
   </data>
-  <data name="ListOfItems" xml:space="preserve">
+  <data name="Item_ListOfItems" xml:space="preserve">
     <value>Seznam fyzických předmětů</value>
   </data>
   <data name="CreateRenting" xml:space="preserve">
@@ -408,7 +408,7 @@
   <data name="Renting_NoEdit" xml:space="preserve">
     <value>Výpůjčku, která již skončila nelze upravit</value>
   </data>
-  <data name="Item_Accessory" xml:space="preserve">
+  <data name="Item_Accessories" xml:space="preserve">
     <value>Příslušenství</value>
   </data>
   <data name="Item_AccessoryTo" xml:space="preserve">

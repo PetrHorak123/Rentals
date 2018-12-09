@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Rentals.DL.Entities;
 
@@ -87,15 +86,15 @@ namespace Rentals.DL
 			modelBuilder.Entity<ItemTypeToItemType>()
 				.HasKey(iti => new { iti.AccesoryId, iti.AccesoryToId});
 
-			modelBuilder.Entity<ItemType>()
-				.HasMany(t => t.Accessories)
-				.WithOne(a => a.Accesory)
+			modelBuilder.Entity<ItemTypeToItemType>()
+				.HasOne(a => a.Accesory)
+				.WithMany(t => t.AccesoryTo)
 				.HasForeignKey(a => a.AccesoryId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			modelBuilder.Entity<ItemType>()
-				.HasMany(t => t.AccesoryTo)
-				.WithOne(a => a.AccesoryTo)
+			modelBuilder.Entity<ItemTypeToItemType>()
+				.HasOne(a => a.AccesoryTo)
+				.WithMany(t => t.Accessories)
 				.HasForeignKey(iti => iti.AccesoryToId)
 				.OnDelete(DeleteBehavior.Restrict);
 

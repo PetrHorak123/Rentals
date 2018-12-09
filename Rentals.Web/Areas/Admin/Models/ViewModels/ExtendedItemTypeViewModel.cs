@@ -12,6 +12,7 @@ namespace Rentals.Web.Areas.Admin.Models
 			this.Id = type.Id;
 			this.Name = type.Name;
 			this.Description = type.Description;
+			this.Accessories = type.ActualAccessories.Select(t => new ItemTypeViewModel(t));
 			this.Items = type.ActualItems
 				.GroupBy(i => new
 				{
@@ -54,6 +55,15 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Sgroupované předměty podle poznámky a obrázku.
 		/// </summary>
 		public IEnumerable<ItemViewModel> Items
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Příslušenství k tomuto předmětu.
+		/// </summary>
+		public IEnumerable<ItemTypeViewModel> Accessories
 		{
 			get;
 			set;
