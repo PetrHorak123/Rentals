@@ -30,11 +30,7 @@ namespace Rentals.DL.Entities
 					if (accessory == null)
 						continue;
 
-					factory.Accessories.Add(new ItemTypeToItemType()
-					{
-						AccesoryToId = type.Id,
-						AccesoryId = i
-					});
+					factory.Accessories.Add(ItemTypeToItemType.Create(accessoryToId: type.Id, accessoryId: i));
 				}
 
 				factory.SaveChanges();
@@ -49,11 +45,7 @@ namespace Rentals.DL.Entities
 					if (accessory == null)
 						continue;
 
-					factory.Accessories.Add(new ItemTypeToItemType()
-					{
-						AccesoryToId = accessory.Id,
-						AccesoryId = type.Id
-					});
+					factory.Accessories.Add(ItemTypeToItemType.Create(accessoryToId: accessory.Id, accessoryId: type.Id));
 				}
 
 				factory.SaveChanges();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
 using Rentals.Web.Areas.Admin.ViewComponents;
@@ -144,6 +145,31 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				return NotFound();
 
 			itemType.Accessories.Remove(itemType.Accessories.Single(a => a.AccesoryId == accessoryId));
+			this.RepositoriesFactory.SaveChanges();
+
+			return Content("OK");
+		}
+
+		public ActionResult AddAccessory(int accessoryToId, int accessoryId)
+		{
+			var itemType = this.RepositoriesFactory.Types.GetById(accessoryToId);
+
+			if (itemType == null)
+				return NotFound();
+
+			var itemTypeToType = this.RepositoriesFactory.Accessories
+				.Find(a => 
+					(a.AccesoryId == accessoryId && a.AccesoryToId == accessoryToId) &&
+					(a.AccesoryToId == accessoryId && a.AccesoryId == accessoryToId)
+				);
+
+			if(itemTypeToType != null)
+			{
+				return BadRequest();
+			}
+
+			this.RepositoriesFactory.Accessories.Add(ItemTypeToItemType.Create(accessoryToId, accessoryId));
+			this.RepositoriesFactory.SaveChanges();
 
 			return Content("OK");
 		}
@@ -155,7 +181,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 		public JsonResult AvaibleAccessories(int id)
 		{
-			var itemType = RepositoriesFactory.Types.GetById(id);
+			var itemType = this.RepositoriesFactory.Types.GetById(id);
 
 			if (itemType == null)
 				return null;

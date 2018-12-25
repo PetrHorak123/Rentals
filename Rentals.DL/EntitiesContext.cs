@@ -109,7 +109,7 @@ namespace Rentals.DL
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseLazyLoadingProxies();
-			optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-D5HL9IN;Integrated Security=True;");
+			optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;");
 			base.OnConfiguring(optionsBuilder);
 		}
 	}

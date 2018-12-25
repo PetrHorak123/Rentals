@@ -24,23 +24,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		$("#show-select-accessory").click(function () {
+		$("#show-select-accessory").click(function() {
 			$.ajax({
 				url: '@Url.Action("AvaibleAccessories", "Items")',
 				data: { id: @Model.ItemTypeId },
-				success: function (data) {
+				success: function(data) {
 					var $select = $("#select-accessory");
 
-					$(data).each(function (index, value) {
+					$(data).each(function(index, value) {
 						$select.append('<option value="' + value.id + '">' + value.name + '</option>');
-					})
+					});
 
 					$select.show();
 					$("#add-accessory").show();
 					$("#show-select-accessory").hide();
-				},
+				}
 			});
-		})
+		});
 	});
 
 	function removeAccessory(id, message) {
@@ -49,16 +49,25 @@
 				url: '@Url.Action("RemoveAccessory", "Items")',
 				data: {
 					accessoryToId: @Model.ItemTypeId,
-					accessoryId: id,
+					accessoryId: id
 				},
 				success: function (data) {
 					$("#component-container").load('@Url.Action("ReloadComponentView", "Items", new { id = Model.ItemTypeId })');
-				},
+				}
 			});
 		}
 	}
 
 	function addAccessory() {
-		alert($("#select-accessory").val());
+		$.ajax({
+			url: '@Url.Action("AddAccessory", "Items")',
+			data: {
+				accessoryToId: @Model.ItemTypeId,
+				accessoryId: $("#select-accessory").val()
+			},
+			success: function (data) {
+				$("#component-container").load('@Url.Action("ReloadComponentView", "Items", new { id = Model.ItemTypeId })');
+			}
+		});
 	}
 </script>
