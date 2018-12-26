@@ -196,6 +196,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pro zobrazení této stránky nemáte dostatečná oprávnění..
+        /// </summary>
+        public static string SmallCompetency {
+            get {
+                return ResourceManager.GetString("SmallCompetency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nedostatečná oprávnení.
+        /// </summary>
+        public static string SmallCompetency_Title {
+            get {
+                return ResourceManager.GetString("SmallCompetency_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dnes.
         /// </summary>
         public static string Today {

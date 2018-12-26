@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Rentals.DL.Interfaces;
 using Rentals.Web.Models;
 
 namespace Rentals.Web.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
+		public HomeController(IRepositoriesFactory factory) : base(factory)
+		{
+		}
+
 		public IActionResult Index()
 		{
 			return View();

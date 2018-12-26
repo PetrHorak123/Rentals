@@ -1,13 +1,12 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rentals.DL.Entities;
-using Rentals.DL;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Models;
 
 namespace Rentals.Web.Controllers
 {
-	// [Authorize(Policy = "BasicRights")]
+	[Authorize(Policy = "BasicRights")]
 	public class BaseController : Controller
 	{
 		private User currentUser;
