@@ -430,15 +430,6 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Odhlásit.
-        /// </summary>
-        public static string Logout {
-            get {
-                return ResourceManager.GetString("Logout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Odhlášení z administrativy proběhlo úspěšně..
         /// </summary>
         public static string Logout_Succesful {

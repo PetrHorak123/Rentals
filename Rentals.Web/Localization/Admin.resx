@@ -150,9 +150,6 @@
   <data name="Login_Error" xml:space="preserve">
     <value>Nesprávné přihlašovací jméno nebo heslo.</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Odhlásit</value>
-  </data>
   <data name="Logout_Succesful" xml:space="preserve">
     <value>Odhlášení z administrativy proběhlo úspěšně.</value>
   </data>

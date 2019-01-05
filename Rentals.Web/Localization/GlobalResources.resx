@@ -150,14 +150,23 @@
   <data name="Edit" xml:space="preserve">
     <value>Editovat</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>Od</value>
+  </data>
   <data name="Js_TimeFormat" xml:space="preserve">
     <value>dd.mm.yy</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Odhlásit</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
@@ -167,6 +176,9 @@
   </data>
   <data name="SmallCompetency_Title" xml:space="preserve">
     <value>Nedostatečná oprávnení</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Do</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Dnes</value>

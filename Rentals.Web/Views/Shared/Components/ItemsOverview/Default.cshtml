@@ -1,0 +1,27 @@
+﻿@model Rentals.Web.Models.ItemOverviewViewModel
+
+@foreach (var item in Model.Items)
+{
+	<section class="item col-sm-4 margin-top-1">
+		<div class="row">
+			@if (item.IsSpecificItem)
+			{
+				<p>@Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.Replace(" ", string.Empty) }, new { @class = "non-underlined" })</p>
+			}
+			else
+			{
+				<p>@Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.Replace(" ", string.Empty) }, new { @class = "non-underlined" })</p>
+			}
+
+			<img class="img-responsive" src="@item.CoverImage" alt="@item.Name"/>
+			<p>
+				@item.Description
+				@if (item.IsSpecificItem)
+				{
+					@item.Note
+				}
+			</p>
+			<p>@item.NumberOfItems</p>
+		</div>
+	</section>
+}

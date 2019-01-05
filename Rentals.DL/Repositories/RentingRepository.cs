@@ -55,5 +55,15 @@ namespace Rentals.DL.Repositories
 
 			return query;
 		}
+
+		public Renting[] GetRentingsInTimeForItem(string item, DateTime from, DateTime to)
+		{
+			var itemId = this.Context.Items.Where(i => i.UniqueIdentifier == item).First().Id;
+
+			var query = this.RentingInTimeQuery(from, to)
+				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Contains(itemId));
+
+			return query.ToArray();
+		}
 	}
 }

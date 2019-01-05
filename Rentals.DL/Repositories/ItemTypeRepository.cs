@@ -12,11 +12,37 @@ namespace Rentals.DL.Repositories
 		{
 		}
 
+		public ItemType GetByName(string name, bool withSpaces = true)
+		{
+			ItemType result;
+			var query = this.Context.ItemTypes.Where(t => !t.IsDeleted);
+
+			if (withSpaces)
+			{
+				result = query.FirstOrDefault(t => t.Name == name);
+			}
+			else
+			{
+				result = query.FirstOrDefault(t => t.Name.Replace(" ", string.Empty) == name);
+			}
+
+			return result;
+		}
+
 		public ItemType[] GetItemTypes()
 		{
 			var result = this.Context.ItemTypes
 				.Where(t => !t.IsDeleted)
 				.ToArray();
+
+			return result;
+		}
+
+		public Task<ItemType[]> GetItemTypesAsync()
+		{
+			var result = this.Context.ItemTypes
+				.Where(t => !t.IsDeleted)
+				.ToArrayAsync();
 
 			return result;
 		}

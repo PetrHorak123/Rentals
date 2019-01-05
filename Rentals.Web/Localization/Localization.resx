@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TimeLine_Day" xml:space="preserve">
-    <value>Den</value>
+  <data name="Home" xml:space="preserve">
+    <value>Domů</value>
   </data>
-  <data name="TimeLine_Week" xml:space="preserve">
-    <value>Týden</value>
+  <data name="ItemDetail_Accessories" xml:space="preserve">
+    <value>Příslušenství</value>
+  </data>
+  <data name="ItemDetail_AddToCart" xml:space="preserve">
+    <value>Přidat do košíku</value>
+  </data>
+  <data name="ItemDetail_NumberOfItems" xml:space="preserve">
+    <value>Počet předmětů k vypůjčení</value>
+  </data>
+  <data name="ItemDetail_TimeAvaibility" xml:space="preserve">
+    <value>Časová dostupnost</value>
+  </data>
+  <data name="ItemDetail_TimeDependant" xml:space="preserve">
+    <value>Závisí na vámi zvoleném počtu předmětů</value>
+  </data>
+  <data name="ItemOverview_AvaibleFrom" xml:space="preserve">
+    <value>Dostupné od</value>
+  </data>
+  <data name="ItemOverview_UseFilters" xml:space="preserve">
+    <value>Použít filtry</value>
   </data>
 </root>

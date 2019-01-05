@@ -61,20 +61,74 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Den.
+        ///   Looks up a localized string similar to Domů.
         /// </summary>
-        public static string TimeLine_Day {
+        public static string Home {
             get {
-                return ResourceManager.GetString("TimeLine_Day", resourceCulture);
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Týden.
+        ///   Looks up a localized string similar to Příslušenství.
         /// </summary>
-        public static string TimeLine_Week {
+        public static string ItemDetail_Accessories {
             get {
-                return ResourceManager.GetString("TimeLine_Week", resourceCulture);
+                return ResourceManager.GetString("ItemDetail_Accessories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat do košíku.
+        /// </summary>
+        public static string ItemDetail_AddToCart {
+            get {
+                return ResourceManager.GetString("ItemDetail_AddToCart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Počet předmětů k vypůjčení.
+        /// </summary>
+        public static string ItemDetail_NumberOfItems {
+            get {
+                return ResourceManager.GetString("ItemDetail_NumberOfItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Časová dostupnost.
+        /// </summary>
+        public static string ItemDetail_TimeAvaibility {
+            get {
+                return ResourceManager.GetString("ItemDetail_TimeAvaibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Závisí na vámi zvoleném počtu předmětů.
+        /// </summary>
+        public static string ItemDetail_TimeDependant {
+            get {
+                return ResourceManager.GetString("ItemDetail_TimeDependant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dostupné od.
+        /// </summary>
+        public static string ItemOverview_AvaibleFrom {
+            get {
+                return ResourceManager.GetString("ItemOverview_AvaibleFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Použít filtry.
+        /// </summary>
+        public static string ItemOverview_UseFilters {
+            get {
+                return ResourceManager.GetString("ItemOverview_UseFilters", resourceCulture);
             }
         }
     }

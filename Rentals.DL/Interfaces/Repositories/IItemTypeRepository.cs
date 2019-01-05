@@ -10,6 +10,14 @@ namespace Rentals.DL.Interfaces
 		/// </summary>
 		ItemType[] GetItemTypes();
 
+		Task<ItemType[]> GetItemTypesAsync();
+
+		/// <summary>
+		/// Vrací typ předmětu podle jeho jména.
+		/// </summary>
+		/// <param name="withSpaces">Pokud je nastaveno <code>true</code> beze v potaz i mezery, jinak je ignoruje.</param>
+		ItemType GetByName(string name, bool withSpaces = true);
+
 		/// <summary>
 		/// Vrací příslušenství k předmětu.
 		/// </summary>

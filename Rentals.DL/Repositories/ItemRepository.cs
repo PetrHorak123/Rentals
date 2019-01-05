@@ -1,7 +1,9 @@
-﻿using Rentals.DL.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Rentals.DL.Repositories
 {
@@ -9,6 +11,21 @@ namespace Rentals.DL.Repositories
 	{
 		public ItemRepository(EntitiesContext context) : base(context)
 		{
+		}
+
+		public Task<Item[]> GetAllAvaibleItemsAsync(DateTime from, DateTime to)
+		{
+			var items = this.Context.Items
+				.Where(i =>
+					!i.IsDeleted &&
+					!i.RentingToItems
+						.Any(r =>
+							(r.Renting.StartsAt >= from && r.Renting.StartsAt <= to) ||
+							(r.Renting.EndsAt > from && r.Renting.EndsAt < to)
+						))
+				.ToArrayAsync();
+
+			return items;
 		}
 
 		public Item[] GetAvailbeItems(int itemTypeId, DateTime startsAt, DateTime endsAt)
@@ -36,12 +53,20 @@ namespace Rentals.DL.Repositories
 			return items;
 		}
 
-		public Item GetByUniqueIdentifier(string identifier)
+		public Item GetByUniqueIdentifier(string identifier, bool withSpaces = true)
 		{
-			var item = this.Context.Items
-				.FirstOrDefault(i => i.UniqueIdentifier == identifier);
+			Item result;
 
-			return item;
+			if (withSpaces)
+			{
+				result = this.Context.Items.FirstOrDefault(t => t.UniqueIdentifier == identifier);
+			}
+			else
+			{
+				result = this.Context.Items.FirstOrDefault(t => t.UniqueIdentifier.Replace(" ", string.Empty) == identifier && !t.IsDeleted);
+			}
+
+			return result;
 		}
 	}
 }
