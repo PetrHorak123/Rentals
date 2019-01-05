@@ -34,6 +34,25 @@ namespace Rentals.DL.Entities
 		}
 
 		/// <summary>
+		/// Vrací všechny předměty z výpůjčky, které náleží typu.
+		/// </summary>
+		public Item[] ItemsForType(int typeId)
+		{
+			return this.Items.Where(i => i.ItemTypeId == typeId).ToArray();
+		}
+
+		/// <summary>
+		/// Vrací, zda je tato výpůjčka překrývá s jinou.
+		/// </summary>
+		public bool IsOverlapingWith(Renting renting)
+		{
+			bool overlap = this.StartsAt < renting.EndsAt && renting.StartsAt< this.EndsAt;
+
+			return overlap;
+		}
+
+
+		/// <summary>
 		/// Vytvoří entitu, vnitřně nic nekontroluje, je potřeba zkontrolovat předem.
 		/// </summary>
 		public static Renting Create(int customerId, DateTime startsAt, DateTime endsAt, RentalState state, string note, int[] items)

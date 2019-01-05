@@ -12,9 +12,14 @@ namespace Rentals.DL.Interfaces
 		Renting[] GetRentingInTime(DateTime from, DateTime to);
 
 		/// <summary>
-		/// Vrací všechny výpůjčky pro daný předmět (ne typ!!)
+		/// Vrací všechny výpůjčky pro daný předmět (ne typ!!).
 		/// </summary>
-		Renting[] GetRentingsInTimeForItem(string item, DateTime from, DateTime to);
+		Renting[] GetRentingsInTimeForItem(int itemId, DateTime from, DateTime to);
+
+		/// <summary>
+		/// Vrací všechny výpůjčky pro daný typ.
+		/// </summary>
+		Renting[] GetRentingsInTimeForType(int typeId, DateTime from, DateTime to);
 
 		/// <summary>
 		/// Vrátí všechny předměty které jsou v daný čas vypůjčené.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
@@ -53,22 +54,58 @@ namespace Rentals.Web.Controllers
 		{
 			if (isSpecificItem)
 			{
+				var itemId = this.RepositoriesFactory.Items.GetByUniqueIdentifier(item).Id;
+
 				var data = this.RepositoriesFactory.Rentings
-					.GetRentingsInTimeForItem(item, from, to).Select(r => new
-					{
-						start = r.StartsAt,
-						end = r.EndsAt,
-						rendering = "background"
-					});
+					.GetRentingsInTimeForItem(itemId, from, to).Select(r =>
+						new AvaibilityViewModel(r.StartsAt, r.EndsAt)
+					);
 
 				return Json(data);
 			}
 			else
 			{
+				var type = this.RepositoriesFactory.Types.GetByName(item);
 
+				var rentings = this.RepositoriesFactory.Rentings
+					.GetRentingsInTimeForType(type.Id, from, to);
+
+				// Pokud nejsou výpůjčky, nemusím nic dělat.
+				if (rentings.Length == 0)
+				{
+					return Json(new int[0]);
+				}
+
+				// Tady začíná sranda, pokračování ve čtení je pouze na vlasní nebezpečí.
+				var results = new List<AvaibilityViewModel>();
+
+				// Pro všechny výpůjčky z odbodí.
+				foreach (var referenceRenting in rentings)
+				{
+					int overlapingRentings = 0;
+
+					// Pro všechny ostatní, kountroluji překrývání.
+					foreach (var renting in rentings)
+					{
+						// Pokud tato, končí dýl nebo ve stejnou chvíli než tak, u které se pohybu v nadřazeném loopu a překrývají se,
+						// spadne sem i pokud je stejná ajok v nadřazeném loopu, proto inicializuju zpočátku předměty na nulu.
+						if (renting.EndsAt >= referenceRenting.EndsAt && referenceRenting.IsOverlapingWith(renting))
+						{
+							// Přičtu vypůjčené předměty.
+							overlapingRentings += renting.ItemsForType(type.Id).Length;
+						}
+					}
+
+					// Pokud mi po odčetní vypůjčených předmětů od všechny zbylo míň než si chce vypůjčit, zaznamenám to.
+					if (type.ActualItems.Count - overlapingRentings < count)
+					{
+						// Nakonec přidám a konec srandy :(.
+						results.Add(new AvaibilityViewModel(referenceRenting.StartsAt, referenceRenting.EndsAt));
+					}
+				}
+
+				return Json(results);
 			}
-
-			return Json(1);
 		}
 
 		public ActionResult SeeItems(DateTime? from, DateTime? to)
