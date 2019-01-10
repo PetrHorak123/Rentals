@@ -1,5 +1,6 @@
 ﻿using Rentals.Common.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -51,6 +52,10 @@ namespace Rentals.DL.Entities
 			return overlap;
 		}
 
+		public static Renting Create(int customerId, DateTime startsAt, DateTime endsAt, RentalState state, string note, IEnumerable<Item> items)
+		{
+			return Create(customerId, startsAt, endsAt, state, note, items.Select(i => i.Id).ToArray());
+		}
 
 		/// <summary>
 		/// Vytvoří entitu, vnitřně nic nekontroluje, je potřeba zkontrolovat předem.

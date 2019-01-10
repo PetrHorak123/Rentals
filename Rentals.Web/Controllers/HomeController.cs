@@ -68,7 +68,7 @@ namespace Rentals.Web.Controllers
 				var type = this.RepositoriesFactory.Types.GetByName(item);
 
 				var rentings = this.RepositoriesFactory.Rentings
-					.GetRentingsInTimeForType(type.Id, from, to);
+					.GetRentingsInTimeForItems(type.NonSpecificItems.Select(i => i.Id), from, to);
 
 				// Pokud nejsou výpůjčky, nemusím nic dělat.
 				if (rentings.Length == 0)
@@ -97,7 +97,7 @@ namespace Rentals.Web.Controllers
 					}
 
 					// Pokud mi po odčetní vypůjčených předmětů od všechny zbylo míň než si chce vypůjčit, zaznamenám to.
-					if (type.ActualItems.Count - overlapingRentings < count)
+					if (type.NonSpecificItems.Count - overlapingRentings < count)
 					{
 						// Nakonec přidám a konec srandy :(.
 						results.Add(new AvaibilityViewModel(referenceRenting.StartsAt, referenceRenting.EndsAt));

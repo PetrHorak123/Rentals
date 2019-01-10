@@ -7,7 +7,61 @@ namespace Rentals.DL.Entities
 {
 	public partial class ItemType
 	{
-		public static ItemType CreateEntity(string name, string description, ICollection<Item> items, IRepositoriesFactory factory, 
+		/// <summary>
+		/// Smaže (označí jako smazanou) entitu.
+		/// </summary>
+		public void Delete()
+		{
+			this.IsDeleted = true;
+		}
+
+		/// <summary>
+		/// Nesmazané fyzické předměty.
+		/// </summary>
+		[NotMapped]
+		public ICollection<Item> ActualItems
+		{
+			get
+			{
+				return this.Items.Where(i => !i.IsDeleted).ToList();
+			}
+		}
+
+		[NotMapped]
+		public ICollection<Item> NonSpecificItems
+		{
+			get
+			{
+				return this.ActualItems
+					.GroupBy(i => new
+					{
+						i.CoverImage,
+						i.Note,
+					})
+					.Select(g => new
+					{
+						Count = g.Count(),
+						Items = g
+					})
+					.OrderByDescending(g => g.Count)
+					.FirstOrDefault().Items
+					.ToList();
+			}
+		}
+
+		/// <summary>
+		/// Nesmazané příslušenství.
+		/// </summary>
+		[NotMapped]
+		public ICollection<ItemType> ActualAccessories
+		{
+			get
+			{
+				return this.Accessories.Select(a => a.Accesory).Where(a => !a.IsDeleted).ToList();
+			}
+		}
+
+		public static ItemType CreateEntity(string name, string description, ICollection<Item> items, IRepositoriesFactory factory,
 			Rental rental, IEnumerable<int> accesorries = null, IEnumerable<int> accessoryTo = null)
 		{
 			var type = new ItemType()
@@ -58,38 +112,6 @@ namespace Rentals.DL.Entities
 		{
 			this.Name = name;
 			this.Description = description;
-		}
-
-		/// <summary>
-		/// Smaže (označí jako smazanou) entitu.
-		/// </summary>
-		public void Delete()
-		{
-			this.IsDeleted = true;
-		}
-
-		/// <summary>
-		/// Nesmazané fyzické předměty.
-		/// </summary>
-		[NotMapped]
-		public ICollection<Item> ActualItems
-		{
-			get
-			{
-				return this.Items.Where(i => !i.IsDeleted).ToList();
-			}
-		}
-
-		/// <summary>
-		/// Nesmazané příslušenství.
-		/// </summary>
-		[NotMapped]
-		public ICollection<ItemType> ActualAccessories
-		{
-			get
-			{
-				return this.Accessories.Select(a => a.Accesory).Where(a => !a.IsDeleted).ToList();
-			}
 		}
 	}
 }

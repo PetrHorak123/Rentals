@@ -3,6 +3,7 @@ using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,10 +65,10 @@ namespace Rentals.DL.Repositories
 			return query.ToArray();
 		}
 
-		public Renting[] GetRentingsInTimeForType(int typeId, DateTime from, DateTime to)
+		public Renting[] GetRentingsInTimeForItems(IEnumerable<int> items, DateTime from, DateTime to)
 		{
 			var query = this.RentingInTimeQuery(from, to)
-				.Where(r => r.RentingToItems.Select(rti => rti.Item.ItemTypeId).Contains(typeId))
+				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Any(i => items.Contains(i)))
 				.OrderBy(r => r.EndsAt);
 
 			return query.ToArray();

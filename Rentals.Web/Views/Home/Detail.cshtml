@@ -4,10 +4,14 @@
 @{
 	ViewBag.Title = Model.Name;
 }
+
 <section class="row" id="overview">
 	<img class="col-sm-6 img-responsive" src="@Model.CoverImage" alt="@Model.Name" />
 	<div class="col-sm-6">
-		<h1>@Model.Name @if(Model.IsSpecificItem){<small>@Model.UniqueIdentifier</small>}</h1>
+		<h1>
+			@Model.Name @if (Model.IsSpecificItem)
+			{<small>@Model.UniqueIdentifier</small>}
+		</h1>
 		<p>@Model.Description</p>
 		@if (Model.Note != null)
 		{
@@ -16,31 +20,53 @@
 		@if (!Model.IsSpecificItem)
 		{
 			<p>@Localization.ItemDetail_NumberOfItems: @Model.NumberOfItems</p>
-			<form method="post" class="form-inline">
-				<input type="hidden" value="@Model.Name" />
-				<input id="count" type="number" class="form-control" min="1" max="@Model.NumberOfItems" value="1"/>
-				<button type="submit" class="btn btn-success">@Localization.ItemDetail_AddToCart</button>
+			<form method="post" class="form-inline" asp-controller="Basket" asp-action="AddItemsToBasket" id="add-items">
+				<input type="hidden" value="@Model.Name" name="itemType" />
+				<input id="count" type="number" class="form-control" min="1" max="@Model.NumberOfItems" value="@(!Model.User.Basket.ContainsKey(Model.Name) ? 1 : Model.User.Basket[Model.Name])" name="count" />
+				<button type="submit" class="btn btn-success">@(!Model.User.Basket.ContainsKey(Model.Name) ? Localization.ItemDetail_AddToCart : Localization.ItemDetail_ChangeCart)</button>
 			</form>
+
+			@if (Model.User.Basket.ContainsKey(Model.Name))
+			{
+				<form method="post" class="form-inline" asp-controller="Basket" asp-action="RemoveItemFromBasket" id="remove-item">
+					<input type="hidden" value="@Model.Name" name="item" />
+					<input type="hidden" value="False" name="isSpecificItem" />
+					<button type="submit" class="btn btn-danger">@Localization.ItemDetail_RemoveFromCart</button>
+				</form>
+			}
 
 			<script type="text/javascript">
 				jq = jQuery.noConflict(false);
 
 				jq(document).ready(function () {
-					jq("#count").on('input', function () { jq("#calendar").fullCalendar("refetchEvents"); });
+					$("#count").on('input', function () { jq("#calendar").fullCalendar("refetchEvents"); });
 				});
 			</script>
 		}
 		else
 		{
-			<form method="post" class="form-inline">
-				<input type="hidden" value="@Model.UniqueIdentifier" />
-				<button type="submit" class="btn btn-success">@Localization.ItemDetail_AddToCart</button>
-			</form>
+			@if (!Model.User.Basket.ContainsKey(Model.UniqueIdentifier))
+			{
+				<form method="post" class="form-inline" asp-controller="Basket" asp-action="AddItemToBasket" id="add-item">
+					<input type="hidden" value="@Model.UniqueIdentifier" name="uid" />
+					<button type="submit" class="btn btn-success">@Localization.ItemDetail_AddToCart</button>
+				</form>
+			}
+			else
+			{
+				<form method="post" class="form-inline" asp-controller="Basket" asp-action="RemoveItemFromBasket" id="remove-item">
+					<input type="hidden" value="@Model.UniqueIdentifier" name="item" />
+					<input type="hidden" value="True" name="isSpecificItem" />
+					<button type="submit" class="btn btn-danger">@Localization.ItemDetail_RemoveFromCart</button>
+				</form>
+			}
 		}
 	</div>
 </section>
 
 <hr />
+
+@* Možná obojí jako component view a načítat ajaxem, podle zvoleného, něco jako alza. *@
 
 <section class="row" id="accessories">
 	<h2 class="col-xs-12">@Localization.ItemDetail_Accessories</h2>

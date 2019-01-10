@@ -163,7 +163,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 					(a.AccesoryToId == accessoryId && a.AccesoryId == accessoryToId)
 				);
 
-			if(itemTypeToType != null)
+			if(itemTypeToType.Length != 0)
 			{
 				return BadRequest();
 			}

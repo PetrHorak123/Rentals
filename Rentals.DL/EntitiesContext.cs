@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Rentals.DL.Entities;
+using System.Collections.Generic;
 
 namespace Rentals.DL
 {
@@ -103,9 +105,18 @@ namespace Rentals.DL
 				.HasIndex(i => i.UniqueIdentifier)
 				.IsUnique();
 
+			// Konverze přímo do jsonu, abych měl jedoduché ukládání.
+			modelBuilder.Entity<User>()
+				.Property(b => b.Basket)
+				.HasConversion(
+					v => JsonConvert.SerializeObject(v),
+					v => JsonConvert.DeserializeObject<Dictionary<string, int>>(v)
+				);
+
 			base.OnModelCreating(modelBuilder);
 		}
 
+		// Vyhodit ven do I service provideru, takže todle půjde do ctoru
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseLazyLoadingProxies();

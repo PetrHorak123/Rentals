@@ -1,0 +1,54 @@
+﻿@model Rentals.Web.Models.RentingUserCreatorViewModel
+@using Rentals.Web.Localization
+@using Rentals.Web.Code
+
+@{
+	ViewBag.Title = Localization.Basket;
+}
+
+<h2>@foreach (var v in Model.User.Basket) {
+	@v.ToString(); <br />
+}</h2>
+
+
+<form asp-action="CreateRenting" asp-controller="Basket" method="post">
+	<input type="hidden" name="@Html.NameFor(m => m.RentalId)" value="@Model.RentalId" />
+
+	@Html.ValidationSummary()
+
+	<div class="form-group row">
+		<div class="col-xs-12">
+			<label for="starts-at-date" class="control-label">@Localization.Renting_StartsAt</label>
+			<div class="row">
+				<div class="col-sm-6">
+					<input type="date" name="@Html.NameFor(m => m.StartsAtDate)" id="starts-at-date" value="@Model.StartsAtDate" class="form-control" />
+				</div>
+				<div class="col-sm-6">
+					<select asp-for="StartsAtTime"
+							asp-items="@Html.WorkingHourSelectList(Model.Rental.TimeList.ToArray(), Model.StartsAtTime)"
+							class="form-control"></select>
+				</div>
+			</div>
+			@Html.ValidationMessageFor(m => m.StartsAtDate, string.Empty, new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-xs-12">
+			<label for="ends-at-date" class="control-label">@Localization.Renting_EndsAt</label>
+			<div class="row">
+				<div class="col-sm-6">
+					<input type="date" name="@Html.NameFor(m => m.EndsAtDate)" id="ends-at-date" value="@Model.EndsAtDate" class="form-control" />
+				</div>
+				<div class="col-sm-6">
+					<select asp-for="EndsAtTime"
+							asp-items="@Html.WorkingHourSelectList(Model.Rental.TimeList.ToArray(), Model.EndsAtTime)"
+							class="form-control"></select>
+				</div>
+			</div>
+			@Html.ValidationMessageFor(m => m.EndsAtDate, string.Empty, new { @class = "text-danger" })
+		</div>
+	</div>
+
+	<button type="submit">@Localization.Basket_Rent</button>
+</form>

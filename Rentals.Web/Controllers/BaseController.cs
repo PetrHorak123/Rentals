@@ -24,7 +24,7 @@ namespace Rentals.Web.Controllers
 			{
 				if (this.currentUser == null && User.Identity.IsAuthenticated)
 				{
-					currentUser = null;
+					this.currentUser = this.RepositoriesFactory.Users.GetByName(User.Identity.Name);
 				}
 
 				return currentUser;

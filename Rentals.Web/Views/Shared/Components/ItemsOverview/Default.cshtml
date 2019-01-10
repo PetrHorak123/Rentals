@@ -1,4 +1,5 @@
 ﻿@model Rentals.Web.Models.ItemOverviewViewModel
+@using Rentals.Common.Extensions
 
 @foreach (var item in Model.Items)
 {
@@ -6,11 +7,11 @@
 		<div class="row">
 			@if (item.IsSpecificItem)
 			{
-				<p>@Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.Replace(" ", string.Empty) }, new { @class = "non-underlined" })</p>
+				<p>@Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.RemoveSpaces() }, new { @class = "non-underlined" })</p>
 			}
 			else
 			{
-				<p>@Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.Replace(" ", string.Empty) }, new { @class = "non-underlined" })</p>
+				<p>@Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.RemoveSpaces() }, new { @class = "non-underlined" })</p>
 			}
 
 			<img class="img-responsive" src="@item.CoverImage" alt="@item.Name"/>

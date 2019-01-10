@@ -1,5 +1,6 @@
 ﻿using Rentals.DL.Entities;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Rentals.DL.Interfaces
@@ -19,7 +20,7 @@ namespace Rentals.DL.Interfaces
 		/// <summary>
 		/// Vrací všechny výpůjčky pro daný typ.
 		/// </summary>
-		Renting[] GetRentingsInTimeForType(int typeId, DateTime from, DateTime to);
+		Renting[] GetRentingsInTimeForItems(IEnumerable<int> items, DateTime from, DateTime to);
 
 		/// <summary>
 		/// Vrátí všechny předměty které jsou v daný čas vypůjčené.

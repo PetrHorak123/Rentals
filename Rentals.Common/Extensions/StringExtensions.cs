@@ -8,5 +8,10 @@
 
 			return result;
 		}
+
+		public static string RemoveSpaces(this string s)
+		{
+			return s.Replace(" ", string.Empty);
+		}
 	}
 }

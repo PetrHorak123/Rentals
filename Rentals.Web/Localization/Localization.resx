@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Basket" xml:space="preserve">
+    <value>Košík</value>
+  </data>
+  <data name="Basket_Rent" xml:space="preserve">
+    <value>Vypůjčit</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Domů</value>
   </data>
@@ -126,8 +132,14 @@
   <data name="ItemDetail_AddToCart" xml:space="preserve">
     <value>Přidat do košíku</value>
   </data>
+  <data name="ItemDetail_ChangeCart" xml:space="preserve">
+    <value>Změnit v košíku</value>
+  </data>
   <data name="ItemDetail_NumberOfItems" xml:space="preserve">
     <value>Počet předmětů k vypůjčení</value>
+  </data>
+  <data name="ItemDetail_RemoveFromCart" xml:space="preserve">
+    <value>Odebrat z košíku</value>
   </data>
   <data name="ItemDetail_TimeAvaibility" xml:space="preserve">
     <value>Časová dostupnost</value>
@@ -140,5 +152,32 @@
   </data>
   <data name="ItemOverview_UseFilters" xml:space="preserve">
     <value>Použít filtry</value>
+  </data>
+  <data name="Renting_DateInPast" xml:space="preserve">
+    <value>Nesmí být v minulosti</value>
+  </data>
+  <data name="Renting_EndsAt" xml:space="preserve">
+    <value>Konec výpůjčky</value>
+  </data>
+  <data name="Renting_EndsAtNotInWorkingHours" xml:space="preserve">
+    <value>Výpůjčka nesmí končit mimo pracovní dobu</value>
+  </data>
+  <data name="Renting_ItemNotAvaible" xml:space="preserve">
+    <value>Předmět {0} není v danou dobu dostupný.</value>
+  </data>
+  <data name="Renting_ItemsNotAvaible" xml:space="preserve">
+    <value>Od předmětu {0} je v danou dobu dostupno jenom {1} kusů.</value>
+  </data>
+  <data name="Renting_NoRental" xml:space="preserve">
+    <value>Nenalezena půjčovna</value>
+  </data>
+  <data name="Renting_StartsAt" xml:space="preserve">
+    <value>Začátek výpůjčky</value>
+  </data>
+  <data name="Renting_StartsAtNotInWorkingHours" xml:space="preserve">
+    <value>Výpůjčka nesmí začínat mimo pracovní dobu</value>
+  </data>
+  <data name="Renting_WrongDate" xml:space="preserve">
+    <value>Nesmí končit dřív než začíná</value>
   </data>
 </root>

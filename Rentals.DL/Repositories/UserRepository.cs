@@ -19,5 +19,12 @@ namespace Rentals.DL.Repositories
 
 			return customers;
 		}
+
+		public User GetByName(string name)
+		{
+			var user = this.Context.Users.Where(u => u.UserName == name).FirstOrDefault();
+
+			return user;
+		}
 	}
 }

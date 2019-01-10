@@ -8,5 +8,10 @@ namespace Rentals.DL.Interfaces
 		/// Vyhledává zákazníky podle úplné, ale i částečné shody s searchTerm.
 		/// </summary>
 		User[] FindCustomers(string searchTerm);
+
+		/// <summary>
+		/// Vrací uživatele na základě jména.
+		/// </summary>
+		User GetByName(string name);
 	}
 }

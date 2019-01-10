@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Rentals.DL.Interfaces;
 
 namespace Rentals.DL.Entities
@@ -9,6 +10,8 @@ namespace Rentals.DL.Entities
 	/// </summary>
 	public class User : IdentityUser<int>, IEntity
 	{
+		private Dictionary<string, int> basket;
+
 		public User()
 		{
 			this.Rentings = new HashSet<Renting>();
@@ -30,6 +33,30 @@ namespace Rentals.DL.Entities
 		{
 			get;
 			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje obsah košíku uživatele,
+		/// klíčem je předmět který si chce vypůjčit, přičemž hodnota je počet,
+		/// pokud hodnota je -1, znamená to, že uživatel si zažádel specifický předmět.
+		/// Tato položka je convertována přímo entity frameworkem,
+		/// proto je nutné při jakékoliv editaci zavolat <code>instance.Update()</code>.
+		/// </summary>
+		public Dictionary<string, int> Basket
+		{
+			get
+			{
+				if(this.basket == null)
+				{
+					this.basket = new Dictionary<string, int>();
+				}
+
+				return this.basket;
+			}
+			set
+			{
+				this.basket = value;
+			}
 		}
 	}
 }

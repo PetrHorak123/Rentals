@@ -68,5 +68,36 @@ namespace Rentals.DL.Repositories
 
 			return result;
 		}
+
+		public Item[] GetNonSpecificAvaibleItems(int itemTypeId, DateTime startsAt, DateTime endsAt)
+		{
+			var items = this.Context.Items
+				.Where(i =>
+					i.ItemTypeId == itemTypeId &&
+					!i.IsDeleted &&
+					!i.RentingToItems
+						.Any(r =>
+							(r.Renting.StartsAt >= startsAt && r.Renting.StartsAt <= endsAt) ||
+							(r.Renting.EndsAt > startsAt && r.Renting.EndsAt < endsAt)
+				))
+				.GroupBy(i => new
+				{
+					i.CoverImage,
+					i.Note,
+				})
+				.Select(g => new
+				{
+					Count = g.Count(),
+					Items = g
+				})
+				.OrderByDescending(g => g.Count)
+				.FirstOrDefault()?.Items
+				.ToArray();
+
+			if (items == null)
+				return new Item[0];
+
+			return items;
+		}
 	}
 }

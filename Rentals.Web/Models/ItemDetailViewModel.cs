@@ -26,7 +26,7 @@ namespace Rentals.Web.Models
 			this.Id = type.Id;
 			this.Name = type.Name;
 			this.CoverImage = type.ActualItems.FirstOrDefault()?.CoverImage;
-			this.NumberOfItems = type.ActualItems.Count;
+			this.NumberOfItems = type.NonSpecificItems.Count;
 			this.Description = type.Description;
 			this.Accessories = type.ActualAccessories.Select(a => new AccessoryViewModel(a));
 		}
