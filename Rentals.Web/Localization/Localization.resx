@@ -153,6 +153,9 @@
   <data name="ItemOverview_UseFilters" xml:space="preserve">
     <value>Použít filtry</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Přihlášení</value>
+  </data>
   <data name="Renting_DateInPast" xml:space="preserve">
     <value>Nesmí být v minulosti</value>
   </data>

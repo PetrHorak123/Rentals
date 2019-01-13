@@ -8,6 +8,10 @@ namespace Rentals.DL
 {
 	public class EntitiesContext : IdentityDbContext<User, Role, int>
 	{
+		public EntitiesContext(DbContextOptions<EntitiesContext> options) : base(options)
+		{
+		}
+
 		#region Tables
 
 		// Role, Uživatelé a další tabulky, jsou již v Identity DbContextu, tudíž je zde nemusím registrovat.
@@ -86,7 +90,7 @@ namespace Rentals.DL
 
 			// Nastavení vázací tabulky.
 			modelBuilder.Entity<ItemTypeToItemType>()
-				.HasKey(iti => new { iti.AccesoryId, iti.AccesoryToId});
+				.HasKey(iti => new { iti.AccesoryId, iti.AccesoryToId });
 
 			modelBuilder.Entity<ItemTypeToItemType>()
 				.HasOne(a => a.Accesory)
@@ -114,14 +118,6 @@ namespace Rentals.DL
 				);
 
 			base.OnModelCreating(modelBuilder);
-		}
-
-		// Vyhodit ven do I service provideru, takže todle půjde do ctoru
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseLazyLoadingProxies();
-			optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;");
-			base.OnConfiguring(optionsBuilder);
 		}
 	}
 }

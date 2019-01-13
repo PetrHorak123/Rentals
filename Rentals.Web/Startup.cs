@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rentals.Common.Enums;
 using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
+using System;
 
 namespace Rentals.Web
 {
@@ -31,21 +34,45 @@ namespace Rentals.Web
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-			services.AddDbContext<EntitiesContext>();
+			services.AddDbContext<EntitiesContext>(options => 
+				options
+					.UseLazyLoadingProxies()
+					.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;")
+			);
+
 			services.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<EntitiesContext>()
 				.AddDefaultTokenProviders();
 
 			services.AddScoped<IRepositoriesFactory, RepositoriesFactory>();
 
-			services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/DecideLogin");
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.Cookie.HttpOnly = true;
+				options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+
+				options.LoginPath = "/Account/DecideLogin";
+				options.AccessDeniedPath = "/Account/AccessDenied";
+				options.SlidingExpiration = true;
+			});
+
+			services.AddSingleton<IAuthorizationHandler, DomainRequirementHandler>();
 
 			services.AddAuthorization(options => 
 			{
+				options.AddPolicy("Pslib365", policy => policy.AddRequirements(new DomainRequirement("365.pslib.cz")));
+				options.AddPolicy("PslibCloud", policy => policy.AddRequirements(new DomainRequirement("pslib.cloud")));
 				options.AddPolicy("AbsoluteRights", policy => policy.RequireRole(RoleType.Administrator.ToString()));
 				options.AddPolicy("ElevatedRights", policy => policy.RequireRole(RoleType.Administrator.ToString(), RoleType.Employee.ToString()));
 				options.AddPolicy("BasicRights", policy => policy.RequireRole(RoleType.Administrator.ToString(), RoleType.Employee.ToString(), RoleType.Customer.ToString()));
 			});
+
+			services.AddAuthentication()
+				.AddMicrosoftAccount(microsoftOptions =>
+				{
+					microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
+					microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

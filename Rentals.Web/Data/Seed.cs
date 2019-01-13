@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Rentals.Common.Enums;
 using Rentals.DL;
 using Rentals.DL.Entities;
+using Rentals.DL.Interfaces;
 
 namespace Rentals.Web.Data
 {
@@ -47,7 +48,7 @@ namespace Rentals.Web.Data
 				}
 			}
 
-			using(var context = RepositoriesFactory.Create())
+			using(var context = (IRepositoriesFactory)serviceProvider.GetService(typeof(IRepositoriesFactory)))
 			{
 				if(context.Rentals.GetFirst() == null)
 				{

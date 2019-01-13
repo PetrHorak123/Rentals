@@ -39,7 +39,9 @@ namespace Rentals.Web.Models
 			var afterFetchModel = model as IAfterFetchModel;
 			if (afterFetchModel != null)
 			{
-				repositoriesFactory = repositoriesFactory ?? RepositoriesFactory.Create();
+				if (repositoriesFactory == null)
+					throw new Exception("Hey, this should never be null");
+
 				afterFetchModel.AfterFetchModel(repositoriesFactory);
 			}
 

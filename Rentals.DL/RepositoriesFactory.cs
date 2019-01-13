@@ -44,13 +44,5 @@ namespace Rentals.DL
 		{
 			context.Dispose();
 		}
-
-		/// <summary>
-		/// Vrací novou instanci typu RepositoriesFactory.
-		/// </summary>
-		public static RepositoriesFactory Create()
-		{
-			return new RepositoriesFactory(new EntitiesContext());
-		}
 	}
 }
