@@ -20,19 +20,28 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Upload(IFormFile file)
 		{
-			if (!file.ContentType.Contains("image"))
-				return null;
+			try
+			{
 
-			var filePath = Path.GetTempFileName();
 
-			var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-			var fullPath = Path.Combine(uploads, GetUniqueFileName(file.FileName));
-			file.CopyTo(new FileStream(fullPath, FileMode.Create));
+				if (!file.ContentType.Contains("image"))
+					return null;
 
-			var path = fullPath.Replace(hostingEnvironment.WebRootPath, string.Empty);
+				var filePath = Path.GetTempFileName();
 
-			return Content(path);
-		}
+				var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+				var fullPath = Path.Combine(uploads, GetUniqueFileName(file.FileName));
+				file.CopyTo(new FileStream(fullPath, FileMode.Create));
+
+				var path = fullPath.Replace(hostingEnvironment.WebRootPath, string.Empty);
+
+				return Content(path);
+			}
+			catch (Exception e)
+			{
+				return Content(e.Message);
+			}
+	}
 		private string GetUniqueFileName(string fileName)
 		{
 			fileName = Path.GetFileName(fileName);

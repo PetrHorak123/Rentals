@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rentals.Common.Enums;
@@ -14,6 +15,10 @@ namespace Rentals.Web.Data
 	{
 		public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration Configuration)
 		{
+			// var context = serviceProvider.GetService<EntitiesContext>();
+
+			// context.Database.Migrate();
+
 			// Přidání rolí
 			var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
 			var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
@@ -48,11 +53,11 @@ namespace Rentals.Web.Data
 				}
 			}
 
-			using(var context = (IRepositoriesFactory)serviceProvider.GetService(typeof(IRepositoriesFactory)))
+			using(var factory = (IRepositoriesFactory)serviceProvider.GetService(typeof(IRepositoriesFactory)))
 			{
-				if(context.Rentals.GetFirst() == null)
+				if(factory.Rentals.GetFirst() == null)
 				{
-					context.Rentals.Add(new Rental()
+					factory.Rentals.Add(new Rental()
 					{
 						Name = Configuration.GetSection("RentalSettings")["RentalName"],
 						StartsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["StartsAt"]), 0, 0),
@@ -60,7 +65,7 @@ namespace Rentals.Web.Data
 						MinTimeUnit = int.Parse(Configuration.GetSection("RentalSettings")["MinTimeUnit"])
 					});
 
-					context.SaveChanges();
+					factory.SaveChanges();
 				}
 			}
 		}

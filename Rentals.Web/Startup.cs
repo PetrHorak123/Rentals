@@ -37,7 +37,7 @@ namespace Rentals.Web
 			services.AddDbContext<EntitiesContext>(options => 
 				options
 					.UseLazyLoadingProxies()
-					.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;")
+					.UseSqlServer(@"Data Source=SQL6005.site4now.net;Initial Catalog=DB_A4489C_rentals;User Id=DB_A4489C_rentals_admin;Password=vsolstksqb2;")
 			);
 
 			services.AddIdentity<User, Role>()
