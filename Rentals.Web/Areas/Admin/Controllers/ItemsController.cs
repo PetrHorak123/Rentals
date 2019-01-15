@@ -213,10 +213,12 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		{
 			var itemType = RepositoriesFactory.Types.GetById(itemTypeId);
 
-			var startsAtDateTime = DateTime.Parse(startsAt);
-			var endsAtDateTime = DateTime.Parse(endsAt);
+			DateTime startsAtDateTime;
+			DateTime endsAtDateTime;
+			var success = DateTime.TryParseExact(startsAt, "dd.MM.yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out startsAtDateTime);
+			var success2 = DateTime.TryParseExact(endsAt, "dd.MM.yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out endsAtDateTime);
 
-			if (startsAt == null || endsAt == null || itemType == null)
+			if (!success || !success2 || itemType == null)
 				return null;
 
 			var items = this.RepositoriesFactory.Items

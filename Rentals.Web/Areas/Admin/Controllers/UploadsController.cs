@@ -22,8 +22,6 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		{
 			try
 			{
-
-
 				if (!file.ContentType.Contains("image"))
 					return null;
 
