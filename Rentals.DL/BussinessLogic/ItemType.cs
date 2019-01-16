@@ -13,6 +13,11 @@ namespace Rentals.DL.Entities
 		public void Delete()
 		{
 			this.IsDeleted = true;
+
+			foreach (var item in this.Items)
+			{
+				item.IsDeleted = true;
+			}
 		}
 
 		/// <summary>
