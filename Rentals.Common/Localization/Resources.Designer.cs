@@ -95,5 +95,32 @@ namespace Rentals.Common.Localization {
                 return ResourceManager.GetString("RentalState_Returned", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        public static string RoleType_Administrator {
+            get {
+                return ResourceManager.GetString("RoleType_Administrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník.
+        /// </summary>
+        public static string RoleType_Customer {
+            get {
+                return ResourceManager.GetString("RoleType_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaměstnanec.
+        /// </summary>
+        public static string RoleType_Employee {
+            get {
+                return ResourceManager.GetString("RoleType_Employee", resourceCulture);
+            }
+        }
     }
 }

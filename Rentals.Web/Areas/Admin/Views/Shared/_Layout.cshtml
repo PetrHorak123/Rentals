@@ -45,7 +45,7 @@
 						@if (User.IsInRole(RoleType.Administrator.ToString()))
 						{
 							<li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
-							<li><a>@Admin.Employee</a></li>
+							<li>@Html.ActionLink(Admin.Employees, "Index", "Employees")</li>
 						}
 					</ul>
 					<ul class="nav navbar-nav navbar-right">

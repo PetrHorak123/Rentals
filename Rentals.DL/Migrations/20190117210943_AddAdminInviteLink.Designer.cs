@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rentals.DL;
 
 namespace Rentals.DL.Migrations
 {
     [DbContext(typeof(EntitiesContext))]
-    partial class EntitiesContextModelSnapshot : ModelSnapshot
+    [Migration("20190117210943_AddAdminInviteLink")]
+    partial class AddAdminInviteLink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,6 +76,19 @@ namespace Rentals.DL.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId");
@@ -101,10 +116,6 @@ namespace Rentals.DL.Migrations
                         .IsRequired();
 
                     b.Property<bool>("IsRedeemed");
-
-                    b.Property<bool>("WillBeAdmin");
-
-                    b.Property<bool>("WillBeEmployee");
 
                     b.HasKey("Id");
 
@@ -318,19 +329,6 @@ namespace Rentals.DL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Rentals.DL.Entities.UserRole", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Rentals.DL.Entities.Role")
@@ -349,6 +347,19 @@ namespace Rentals.DL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
+                    b.HasOne("Rentals.DL.Entities.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Rentals.DL.Entities.Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Rentals.DL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -410,19 +421,6 @@ namespace Rentals.DL.Migrations
                     b.HasOne("Rentals.DL.Entities.Renting", "Renting")
                         .WithMany("RentingToItems")
                         .HasForeignKey("RentingId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Rentals.DL.Entities.UserRole", b =>
-                {
-                    b.HasOne("Rentals.DL.Entities.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Rentals.DL.Entities.User", "User")
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

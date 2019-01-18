@@ -402,4 +402,43 @@
   <data name="Item_AddAccessory" xml:space="preserve">
     <value>Přidat příslušenství</value>
   </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Zaměstnanci</value>
+  </data>
+  <data name="Employees_ActiveLinks" xml:space="preserve">
+    <value>Aktivní pozvánky</value>
+  </data>
+  <data name="Employees_LinkExpiration" xml:space="preserve">
+    <value>Platná do</value>
+  </data>
+  <data name="Employees_LinkFor" xml:space="preserve">
+    <value>Pozvánka pro</value>
+  </data>
+  <data name="Employees_NewInvite" xml:space="preserve">
+    <value>Nová pozvánka</value>
+  </data>
+  <data name="Employees_NoActiveLinks" xml:space="preserve">
+    <value>Nebyly nalezeny žádné aktivní pozvánky</value>
+  </data>
+  <data name="Employees_LinkForRoles" xml:space="preserve">
+    <value>Pro role</value>
+  </data>
+  <data name="Employees_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Employees_Roles" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Employees_CantBeInPast" xml:space="preserve">
+    <value>Pozvánka nemůže mít splatnost v minulosti</value>
+  </data>
+  <data name="Employees_MustHaveRole" xml:space="preserve">
+    <value>Pozvánka musí být buř pro zaměstance, nebo admina, nebo oba</value>
+  </data>
+  <data name="Employees_WillBeAdmin" xml:space="preserve">
+    <value>Bude admin</value>
+  </data>
+  <data name="Employees_WillBeEmployee" xml:space="preserve">
+    <value>Bude zaměstnanec</value>
+  </data>
 </root>

@@ -88,6 +88,123 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaměstnanci.
+        /// </summary>
+        public static string Employees {
+            get {
+                return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktivní pozvánky.
+        /// </summary>
+        public static string Employees_ActiveLinks {
+            get {
+                return ResourceManager.GetString("Employees_ActiveLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka nemůže mít splatnost v minulosti.
+        /// </summary>
+        public static string Employees_CantBeInPast {
+            get {
+                return ResourceManager.GetString("Employees_CantBeInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Employees_Email {
+            get {
+                return ResourceManager.GetString("Employees_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platná do.
+        /// </summary>
+        public static string Employees_LinkExpiration {
+            get {
+                return ResourceManager.GetString("Employees_LinkExpiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka pro.
+        /// </summary>
+        public static string Employees_LinkFor {
+            get {
+                return ResourceManager.GetString("Employees_LinkFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pro role.
+        /// </summary>
+        public static string Employees_LinkForRoles {
+            get {
+                return ResourceManager.GetString("Employees_LinkForRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka musí být buř pro zaměstance, nebo admina, nebo oba.
+        /// </summary>
+        public static string Employees_MustHaveRole {
+            get {
+                return ResourceManager.GetString("Employees_MustHaveRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nová pozvánka.
+        /// </summary>
+        public static string Employees_NewInvite {
+            get {
+                return ResourceManager.GetString("Employees_NewInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nebyly nalezeny žádné aktivní pozvánky.
+        /// </summary>
+        public static string Employees_NoActiveLinks {
+            get {
+                return ResourceManager.GetString("Employees_NoActiveLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role.
+        /// </summary>
+        public static string Employees_Roles {
+            get {
+                return ResourceManager.GetString("Employees_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bude admin.
+        /// </summary>
+        public static string Employees_WillBeAdmin {
+            get {
+                return ResourceManager.GetString("Employees_WillBeAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bude zaměstnanec.
+        /// </summary>
+        public static string Employees_WillBeEmployee {
+            get {
+                return ResourceManager.GetString("Employees_WillBeEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předměty.
         /// </summary>
         public static string Item {

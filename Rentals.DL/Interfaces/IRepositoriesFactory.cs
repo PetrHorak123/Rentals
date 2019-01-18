@@ -19,6 +19,8 @@ namespace Rentals.DL.Interfaces
 
 		IRepository<ItemTypeToItemType> Accessories { get; }
 
+		IAdminInviteRepository AdminInvites { get; }
+
 		int SaveChanges();
 	}
 }

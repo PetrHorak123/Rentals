@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using Rentals.DL.Interfaces;
 
 namespace Rentals.DL.Entities
@@ -27,6 +26,15 @@ namespace Rentals.DL.Entities
 		}
 
 		/// <summary>
+		/// Vrací nebo nastavuje role uživatele.
+		/// </summary>
+		public virtual ICollection<UserRole> Roles
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Vrací nebo nastavuje, zda je zákazník označen jako smazaný (nemažu na "natvrdo", aby nevznikaly reference ukazující na nic).
 		/// </summary>
 		public bool IsDeleted
@@ -46,7 +54,7 @@ namespace Rentals.DL.Entities
 		{
 			get
 			{
-				if(this.basket == null)
+				if (this.basket == null)
 				{
 					this.basket = new Dictionary<string, int>();
 				}

@@ -129,4 +129,13 @@
   <data name="RentalState_Returned" xml:space="preserve">
     <value>Vráceno</value>
   </data>
+  <data name="RoleType_Administrator" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="RoleType_Customer" xml:space="preserve">
+    <value>Zákazník</value>
+  </data>
+  <data name="RoleType_Employee" xml:space="preserve">
+    <value>Zaměstnanec</value>
+  </data>
 </root>
