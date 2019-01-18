@@ -8,5 +8,10 @@ namespace Rentals.DL.Interfaces
 		/// Vrací všechny aktivní pozvánky do aministrace.
 		/// </summary>
 		AdminInvite[] GetActiveInvites();
+
+		/// <summary>
+		/// Vrací platný invite link podle toho, pro koho byl.
+		/// </summary>
+		AdminInvite GetByUser(string userName);
 	}
 }

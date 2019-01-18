@@ -49,7 +49,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		public AdminInvite Create()
 		{
 			var link = AdminInvite.CreateEntity(this.ForUser, 
-				this.ExpiresAt, this.WillBeAdmin, this.WillBeEmployee);
+				this.ExpiresAt.AddTicks(-1).AddDays(1), this.WillBeAdmin, this.WillBeEmployee);
 
 			return link;
 		}
@@ -57,10 +57,10 @@ namespace Rentals.Web.Areas.Admin.Models
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			if (!this.WillBeEmployee && !this.WillBeAdmin)
-				yield return new ValidationResult(Localization.Admin.Employees_MustHaveRole);
+				yield return new ValidationResult(Localization.Admin.Employees_MustHaveRole, new[] { nameof(this.WillBeAdmin), nameof(this.WillBeEmployee) });
 
-			if (this.ExpiresAt < DateTime.Now)
-				yield return new ValidationResult(Localization.Admin.Employees_CantBeInPast);
+			if (this.ExpiresAt < DateTime.Today)
+				yield return new ValidationResult(Localization.Admin.Employees_CantBeInPast, new[] { nameof(this.ExpiresAt) });
 		}
 	}
 }

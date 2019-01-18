@@ -80,5 +80,17 @@ namespace Rentals.Web.Controllers
 
 			return this.fetchViewModel.FetchModel(result, this.RepositoriesFactory);
 		}
+
+		protected ActionResult RedirectToLocal(string returnUrl)
+		{
+			if (Url.IsLocalUrl(returnUrl))
+			{
+				return Redirect(returnUrl);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
+		}
 	}
 }

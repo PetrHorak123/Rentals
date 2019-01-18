@@ -13,9 +13,18 @@ namespace Rentals.DL.Repositories
 
 		public AdminInvite[] GetActiveInvites()
 		{
-			var query = this.Context.AdminInvites.Where(i => !i.IsRedeemed && i.ExpiresAt > DateTime.Now);
+			var query = this.ActiveLinks;
 
 			return query.ToArray();
 		}
+
+		public AdminInvite GetByUser(string userName)
+		{
+			var query = this.ActiveLinks.Where(i => i.ForUser == userName);
+
+			return query.FirstOrDefault();
+		}
+
+		private IQueryable<AdminInvite> ActiveLinks => this.Context.AdminInvites.Where(i => !i.IsRedeemed && i.ExpiresAt > DateTime.Now);
 	}
 }

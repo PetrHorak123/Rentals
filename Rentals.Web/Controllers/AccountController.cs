@@ -62,6 +62,7 @@ namespace Rentals.Web.Controllers
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
+			// pole 
 			var cloud = await authorization.AuthorizeAsync(this.User, email, "PslibCloud");
 			var office = await authorization.AuthorizeAsync(this.User, email, "Pslib365");
 
@@ -94,18 +95,6 @@ namespace Rentals.Web.Controllers
 			}
 
 			return RedirectToAction(nameof(Login));
-		}
-
-		private ActionResult RedirectToLocal(string returnUrl)
-		{
-			if (Url.IsLocalUrl(returnUrl))
-			{
-				return Redirect(returnUrl);
-			}
-			else
-			{
-				return RedirectToAction("Index", "Home");
-			}
 		}
 
 		public ActionResult DecideLogin(string returnUrl = null)
