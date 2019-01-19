@@ -196,11 +196,38 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bez pozvánky.
+        /// </summary>
+        public static string NotInvited {
+            get {
+                return ResourceManager.GetString("NotInvited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka do administrace s vaším jménem neexistuje, pokud Vám vedoucí půjčovny pozvánku vystavil, kontaktujte ho o její správnost..
+        /// </summary>
+        public static string NotInvited_Text {
+            get {
+                return ResourceManager.GetString("NotInvited_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předchozí.
         /// </summary>
         public static string Previous {
             get {
                 return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pouze pslib.
+        /// </summary>
+        public static string PslibOnly {
+            get {
+                return ResourceManager.GetString("PslibOnly", resourceCulture);
             }
         }
         

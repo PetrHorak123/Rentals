@@ -62,12 +62,10 @@ namespace Rentals.Web.Controllers
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
-			// pole 
-			var cloud = await authorization.AuthorizeAsync(this.User, email, "PslibCloud");
-			var office = await authorization.AuthorizeAsync(this.User, email, "Pslib365");
+			var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
 
-			if (!cloud.Succeeded && !office.Succeeded)
-				return Content("Sorry pslib only");
+			if (!office.Succeeded)
+				return View("PslibOnly");
 
 			var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
 				info.ProviderKey, isPersistent: false, bypassTwoFactor: true);

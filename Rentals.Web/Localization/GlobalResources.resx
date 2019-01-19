@@ -162,8 +162,17 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="NotInvited" xml:space="preserve">
+    <value>Bez pozvánky</value>
+  </data>
+  <data name="NotInvited_Text" xml:space="preserve">
+    <value>Pozvánka do administrace s vaším jménem neexistuje, pokud Vám vedoucí půjčovny pozvánku vystavil, kontaktujte ho o její správnost.</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
+  </data>
+  <data name="PslibOnly" xml:space="preserve">
+    <value>Pouze pslib</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>

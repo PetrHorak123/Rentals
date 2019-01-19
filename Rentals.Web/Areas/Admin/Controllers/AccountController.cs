@@ -93,12 +93,10 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
-			// pole 
-			var cloud = await authorization.AuthorizeAsync(this.User, email, "PslibCloud");
-			var office = await authorization.AuthorizeAsync(this.User, email, "Pslib365");
+			var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
 
-			if (!cloud.Succeeded && !office.Succeeded)
-				return Content("Sorry pslib only");
+			if (!office.Succeeded)
+				return View("PslibOnly");
 
 			var name = info.Principal.FindFirstValue(ClaimTypes.Name);
 
@@ -108,6 +106,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
 			if (result.Succeeded)
 			{
+				// Pokud se přihlásil, tzn. už je v systému, zkusím mu přiat role podle invite linku,
+				// když se to nepovede pustím ho, ale zobrazí se mu že nemá práva.
 				var user = this.RepositoriesFactory.Users.GetByName(email);
 				await TryAddRole(link, user);
 
@@ -138,7 +138,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				}
 			}
 
-			return Content("You are not invited");
+			return View("NotInvited");
 		}
 
 		private async Task TryAddRole(AdminInvite link, User user)

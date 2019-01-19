@@ -6,9 +6,12 @@ public class DomainRequirementHandler : AuthorizationHandler<DomainRequirement>
 	protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
 		DomainRequirement requirement)
 	{
-		if (context.Resource != null && ((string)context.Resource).EndsWith($"@{requirement.Domain}"))
+		foreach (var domain in requirement.Domain)
 		{
-			context.Succeed(requirement);
+			if (context.Resource != null && ((string)context.Resource).EndsWith($"@{domain}"))
+			{
+				context.Succeed(requirement);
+			}
 		}
 
 		return Task.FromResult(0);
