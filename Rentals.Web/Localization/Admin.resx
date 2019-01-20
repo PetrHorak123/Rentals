@@ -465,4 +465,19 @@
   <data name="Employees_RemoveEmployee" xml:space="preserve">
     <value>Odebrat zaměstance</value>
   </data>
+  <data name="Calendar_NoClass" xml:space="preserve">
+    <value>Žádná třída</value>
+  </data>
+  <data name="Calendar_Lended" xml:space="preserve">
+    <value>Probíhající výpůjka</value>
+  </data>
+  <data name="Calendar_NotLended" xml:space="preserve">
+    <value>Zatím nevypůjčená výpůjčka</value>
+  </data>
+  <data name="Calendar_NotReturned" xml:space="preserve">
+    <value>Tato výpůjčka měla být navrácena</value>
+  </data>
+  <data name="Calendar_Returned" xml:space="preserve">
+    <value>Navrácená výpůjčka</value>
+  </data>
 </root>

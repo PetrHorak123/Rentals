@@ -45,3 +45,29 @@ dl.inline dt {
 		display: flex;
 		flex-direction: column;
 	}
+
+.vis-item.blue {
+	background-color: blue;
+	color: white;
+}
+
+.vis-item.red {
+	background-color: red;
+	color: white;
+}
+
+.vis-item.orange {
+	background-color: orange;
+	color: white;
+}
+
+.vis-item.green {
+	background-color: green;
+	color: white;
+}
+
+.timeline-a{
+	color:white;
+	text-decoration: none;
+	display: block;
+}

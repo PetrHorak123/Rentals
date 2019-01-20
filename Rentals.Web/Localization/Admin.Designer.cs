@@ -70,6 +70,51 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Probíhající výpůjka.
+        /// </summary>
+        public static string Calendar_Lended {
+            get {
+                return ResourceManager.GetString("Calendar_Lended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žádná třída.
+        /// </summary>
+        public static string Calendar_NoClass {
+            get {
+                return ResourceManager.GetString("Calendar_NoClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zatím nevypůjčená výpůjčka.
+        /// </summary>
+        public static string Calendar_NotLended {
+            get {
+                return ResourceManager.GetString("Calendar_NotLended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tato výpůjčka měla být navrácena.
+        /// </summary>
+        public static string Calendar_NotReturned {
+            get {
+                return ResourceManager.GetString("Calendar_NotReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navrácená výpůjčka.
+        /// </summary>
+        public static string Calendar_Returned {
+            get {
+                return ResourceManager.GetString("Calendar_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zákazníci.
         /// </summary>
         public static string Customers {
