@@ -55,7 +55,7 @@ namespace Rentals.Web.Controllers
 			}
 
 			var info = await signInManager.GetExternalLoginInfoAsync();
-			if(info == null)
+			if (info == null)
 			{
 				return RedirectToAction(nameof(Login));
 			}
@@ -78,8 +78,16 @@ namespace Rentals.Web.Controllers
 				return Content("Locked");
 			}
 
+			var user = this.RepositoriesFactory.Users.GetByName(email);
+
+			if (user != null)
+			{
+				await signInManager.SignInAsync(user, isPersistent: false);
+				return RedirectToLocal(returnUrl);
+			}
+
 			// Uživatel není v databázi, vytvořím ho.
-			var user = new User { UserName = email, Email = email };
+			user = new User { UserName = email, Email = email };
 			var userResult = await userManager.CreateAsync(user);
 			if (userResult.Succeeded)
 			{

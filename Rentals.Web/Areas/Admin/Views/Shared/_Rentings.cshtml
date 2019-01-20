@@ -34,7 +34,7 @@
 							{
 								<p class="h4"><a class="non-underlined" href="@Url.Action("Detail", "Items", new { item.Key.Id })">@item.Key.Name</a> (@item.Value)</p>
 							}
-							<p class="h4">@renting.CustomerName, <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p>
+							<p class="h4">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId }), <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p>
 							<p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p>
 							<p class="h4">@renting.Note</p>
 						</div>

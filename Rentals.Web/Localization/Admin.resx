@@ -129,9 +129,6 @@
   <data name="Item_Create" xml:space="preserve">
     <value>Vytvořit typ</value>
   </data>
-  <data name="Customer" xml:space="preserve">
-    <value>Zákazníci</value>
-  </data>
   <data name="Employee" xml:space="preserve">
     <value>Zaměstnanci</value>
   </data>
@@ -440,5 +437,23 @@
   </data>
   <data name="Employees_WillBeEmployee" xml:space="preserve">
     <value>Bude zaměstnanec</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Zákazníci</value>
+  </data>
+  <data name="Customers_Class" xml:space="preserve">
+    <value>Třida</value>
+  </data>
+  <data name="Customers_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Customers_Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Customers_Rentings" xml:space="preserve">
+    <value>Zákazníkovy výpůjčky</value>
+  </data>
+  <data name="Customers_NoCustomers" xml:space="preserve">
+    <value>Nemáte žádné zákazníky</value>
   </data>
 </root>

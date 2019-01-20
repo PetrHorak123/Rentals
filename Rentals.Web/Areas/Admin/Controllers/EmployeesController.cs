@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Rentals.Common.Enums;
-using Rentals.Common.Extensions;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 

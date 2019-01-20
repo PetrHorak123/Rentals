@@ -72,9 +72,54 @@ namespace Rentals.Web.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Zákazníci.
         /// </summary>
-        public static string Customer {
+        public static string Customers {
             get {
-                return ResourceManager.GetString("Customer", resourceCulture);
+                return ResourceManager.GetString("Customers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Třida.
+        /// </summary>
+        public static string Customers_Class {
+            get {
+                return ResourceManager.GetString("Customers_Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Customers_Email {
+            get {
+                return ResourceManager.GetString("Customers_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        public static string Customers_Name {
+            get {
+                return ResourceManager.GetString("Customers_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nemáte žádné zákazníky.
+        /// </summary>
+        public static string Customers_NoCustomers {
+            get {
+                return ResourceManager.GetString("Customers_NoCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazníkovy výpůjčky.
+        /// </summary>
+        public static string Customers_Rentings {
+            get {
+                return ResourceManager.GetString("Customers_Rentings", resourceCulture);
             }
         }
         

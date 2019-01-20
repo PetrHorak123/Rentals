@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
@@ -36,7 +39,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
-		/// Jméno zákazníka (pouze pro zobrazení do formuláře)
+		/// Jméno zákazníka (popřípadě email pokud se vytváří nový).
 		/// </summary>
 		public string CustomerName
 		{
@@ -165,7 +168,7 @@ namespace Rentals.Web.Areas.Admin.Models
 					Name = t.Name,
 				});
 
-			this.CustomerName = repositoriesFactory.Users.GetById(this.CustomerId)?.UserName;
+			this.CustomerName = repositoriesFactory.Users.GetById(this.CustomerId)?.UserName ?? this.CustomerName;
 
 			if (this.ItemIds != null)
 			{
@@ -186,8 +189,11 @@ namespace Rentals.Web.Areas.Admin.Models
 
 			if (user == null)
 			{
-				// Tato situace nenastane, pokud někdo nezedituje kód, tudíž vyhodím pouze obecnou validační zprávu.
-				yield return new ValidationResult(Localization.Admin.Renting_NoCustomer, new[] { nameof(this.CustomerId) });
+				if (!Regex.Match(this.CustomerName, "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*").Success)
+				{
+					// Pokud nerozpoznám zákazníka, ať už existujíécího nebo novýho vyhodím hlášku.
+					yield return new ValidationResult(Localization.Admin.Renting_NoCustomer, new[] { nameof(this.CustomerId) });
+				}
 			}
 
 			#endregion
@@ -255,8 +261,21 @@ namespace Rentals.Web.Areas.Admin.Models
 
 		}
 
-		public Renting CreateEntity()
+		public async Task<Renting> CreateEntity(UserManager<User> userManager)
 		{
+			if(this.CustomerId == 0)
+			{
+				// Uživatel není v databázi, vytvořím ho.
+				var user = new User { UserName = this.CustomerName, Email = this.CustomerName };
+				var userResult = await userManager.CreateAsync(user);
+				if (userResult.Succeeded)
+				{
+					await userManager.AddToRoleAsync(user, RoleType.Customer.ToString());
+				}
+
+				this.CustomerId = user.Id;
+			}
+
 			var renting = Renting.Create(
 				this.CustomerId, this.StartsAt, this.EndsAt,
 				this.State, this.Note, this.ItemIds

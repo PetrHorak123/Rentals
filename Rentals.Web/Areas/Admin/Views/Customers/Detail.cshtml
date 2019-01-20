@@ -1,0 +1,42 @@
+﻿@model Rentals.Web.Areas.Admin.Models.CustomerViewModel
+@using Rentals.Web.Localization
+
+@{
+	ViewBag.Title = Model.Name ?? Model.Email;
+}
+
+
+<h2 class="row">
+	@(Model.Name ?? Model.Email)
+</h2>
+
+
+<div class="row col-xs-12">
+	<dl class="inline">
+		<dt class="h4">
+			<strong>@Admin.Customers_Name</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.Name)
+		</dd>
+		<dt class="h4">
+			<strong>@Admin.Customers_Email</strong>
+		</dt>
+		<dd class="h4">
+			<span><a href="mailto:@Model.Email">@Html.DisplayFor(m => m.Email)</a></span>
+		</dd>
+		<dt class="h4">
+			<strong>@Admin.Customers_Class</strong>
+		</dt>
+		<dd class="h4">
+			@Html.DisplayFor(m => m.Class)
+		</dd>
+	</dl>
+</div>
+
+<h3 class="row">
+	@Admin.Customers_Rentings
+</h3>
+
+@(await Html.PartialAsync("_Rentings", Model.Rentings))
+

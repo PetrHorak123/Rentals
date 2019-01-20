@@ -7,32 +7,11 @@ namespace Rentals.Web.Areas.Admin.Models
 	/// <summary>
 	/// Viewmodel reprezentující zaměstance půjčovny.
 	/// </summary>
-	public class EmployeeViewModel
+	public class EmployeeViewModel : UserModel
 	{
-		public EmployeeViewModel(User user)
+		public EmployeeViewModel(User user) : base(user)
 		{
-			this.Id = user.Id;
-			this.Name = user.UserName;
-			this.Email = user.Email;
 			this.Roles = user.Roles.Select(r => r.Role.RoleType).ToArray();
-		}
-
-		public int Id
-		{
-			get;
-			set;
-		}
-
-		public string Name
-		{
-			get;
-			set;
-		}
-
-		public string Email
-		{
-			get;
-			set;
 		}
 
 		/// <summary>

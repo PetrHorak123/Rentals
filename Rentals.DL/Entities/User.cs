@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using Rentals.DL.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rentals.DL.Entities
 {
@@ -38,6 +39,26 @@ namespace Rentals.DL.Entities
 		/// Vrací nebo nastavuje, zda je zákazník označen jako smazaný (nemažu na "natvrdo", aby nevznikaly reference ukazující na nic).
 		/// </summary>
 		public bool IsDeleted
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje jméno uživatele (nepoužívám userName, protože to je logicky něco jiného).
+		/// </summary>
+		[NotMapped]
+		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje třídu.
+		/// </summary>
+		[NotMapped]
+		public string Class
 		{
 			get;
 			set;

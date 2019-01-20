@@ -1,16 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Rentals.Common.Enums;
+using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Rentals.Web.Areas.Admin.Controllers
 {
 	public class RentingController : AdminBaseController
 	{
-		public RentingController(IRepositoriesFactory factory) : base(factory)
+		private UserManager<User> userManager;
+
+		public RentingController(IRepositoriesFactory factory, UserManager<User> userManager) : base(factory)
 		{
+			this.userManager = userManager;
 		}
 
 		public ActionResult Create()
@@ -21,13 +27,13 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Create(RentingCreatorViewModel postedModel)
+		public async Task<ActionResult> Create(RentingCreatorViewModel postedModel)
 		{
 			var model = FetchModel(postedModel);
 
 			if (ModelState.IsValid)
 			{
-				var renting = model.CreateEntity();
+				var renting = await model.CreateEntity(userManager);
 				this.RepositoriesFactory.Rentings.Add(renting);
 
 				this.RepositoriesFactory.SaveChanges();
