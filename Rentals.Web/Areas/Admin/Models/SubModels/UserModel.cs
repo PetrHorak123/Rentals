@@ -8,7 +8,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		public UserModel(User user)
 		{
 			this.Id = user.Id;
-			this.Name = user.Name;
+			this.Name = user.Name ?? user.UserName;
 			this.Email = user.Email;
 		}
 

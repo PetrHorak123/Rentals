@@ -4,6 +4,7 @@ using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
+using Rentals.Web.Areas.Admin.ViewComponents;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,24 +53,34 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			return View(model);
 		}
 
-		// Testovací metoda, TODO: REMOVE
-		public async Task<IActionResult> Create(string name)
+		public async Task<IActionResult> RemoveRole(int id, RoleType role)
 		{
-			var poweruser = new User()
-			{
-				UserName = name
-			};
+			var user = this.RepositoriesFactory.Users.GetById(id);
 
-			string userPassword = "P@ssw0rd";
+			if (role == RoleType.Customer || user == null)
+				return BadRequest();
 
-			var createPowerUser = await userManager.CreateAsync(poweruser, userPassword);
-			if (createPowerUser.Succeeded)
-			{
-				// Přidání Admin role
-				await userManager.AddToRoleAsync(poweruser, RoleType.Employee.ToString());
-			}
+			await userManager.RemoveFromRoleAsync(user, role.ToString());
 
 			return Content("OK");
+		}
+
+		public ActionResult DeleteLink(int id)
+		{
+			var link = this.RepositoriesFactory.AdminInvites.GetById(id);
+
+			if (link == null)
+				return NotFound();
+
+			this.RepositoriesFactory.AdminInvites.Remove(link);
+			this.RepositoriesFactory.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
+
+		public ActionResult ReloadComponentView()
+		{
+			return ViewComponent(nameof(Employees));
 		}
 	}
 }

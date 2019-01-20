@@ -8,6 +8,7 @@
 	{
 		<table class="table table-bordered table-responsive">
 			<tr>
+				<th>@Admin.Employees_Name</th>
 				<th>@Admin.Employees_Email</th>
 				<th>@Admin.Employees_Roles</th>
 				<th> </th>
@@ -15,7 +16,8 @@
 			@foreach (var user in Model)
 			{
 				<tr>
-					<td>@(user.Email ?? user.Name)</td>
+					<td>@user.Name</td>
+					<td>@user.Email</td>
 					<td>
 						@foreach (var role in user.Roles)
 						{
@@ -23,11 +25,33 @@
 						}
 					</td>
 					<td style="width: 75px">
-						<button class="btn btn-danger btn-xs pull-right">@GlobalResources.Delete</button>
+						@if (user.Roles.Contains(RoleType.Employee))
+						{
+							<button class="btn btn-danger btn-xs pull-right" onclick="remove(@user.Id, '@RoleType.Employee')">@Admin.Employees_RemoveAdmin</button>
+						}
+						@if (user.Roles.Contains(RoleType.Administrator))
+						{
+							<button class="btn btn-danger btn-xs pull-right" onclick="remove(@user.Id, '@RoleType.Administrator')">@Admin.Employees_RemoveEmployee</button>
+						}
 					</td>
 				</tr>
 			}
 		</table>
+
+		<script type="text/javascript">
+			function remove(id, role) {
+				$.ajax({
+					url: '@Url.Action("RemoveRole", "Employees")',
+					data: {
+						id: id,
+						role: role
+					},
+					success: function (data) {
+						$("#component-container").load('@Url.Action("ReloadComponentView", "Employees")');
+					}
+				});
+			}
+		</script>
 	}
 	else
 	{

@@ -12,12 +12,19 @@ namespace Rentals.Web.Areas.Admin.Models
 			this.ForUser = invite.ForUser;
 			this.ExpiresAt = invite.ExpiresAt;
 			this.ForRoles = new List<RoleType>();
+			this.Id = invite.Id;
 
 			if (invite.WillBeAdmin)
 				this.ForRoles.Add(RoleType.Administrator);
 
 			if (invite.WillBeEmployee)
 				this.ForRoles.Add(RoleType.Employee);
+		}
+
+		public int Id
+		{
+			get;
+			set;
 		}
 
 		public string ForUser

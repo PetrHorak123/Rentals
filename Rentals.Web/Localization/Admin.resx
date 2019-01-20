@@ -456,4 +456,13 @@
   <data name="Customers_NoCustomers" xml:space="preserve">
     <value>Nemáte žádné zákazníky</value>
   </data>
+  <data name="Employees_Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Employees_RemoveAdmin" xml:space="preserve">
+    <value>Odebrat admina</value>
+  </data>
+  <data name="Employees_RemoveEmployee" xml:space="preserve">
+    <value>Odebrat zaměstance</value>
+  </data>
 </root>

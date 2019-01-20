@@ -13,7 +13,9 @@
 	@Html.ActionLink(Admin.Employees_NewInvite, "CreateInviteLink", "Employees", null, new { @class = "btn btn-primary pull-right" })
 </h2>
 
-@await Component.InvokeAsync(nameof(Employees))
+<div id="component-container">
+	@await Component.InvokeAsync(nameof(Employees))
+</div>
 
 
 <h3 class="row">
@@ -42,7 +44,10 @@
 						}
 					</td>
 					<td style="width: 75px">
-						<button class="btn btn-danger btn-xs pull-right">@GlobalResources.Delete</button>
+						@using (Html.BeginForm("DeleteLink", "Employees", FormMethod.Post))
+						{
+							<button class="btn btn-danger btn-xs pull-right" name="id" value="@link.Id">@GlobalResources.Delete</button>
+						}
 					</td>
 				</tr>
 			}

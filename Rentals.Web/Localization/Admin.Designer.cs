@@ -205,6 +205,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        public static string Employees_Name {
+            get {
+                return ResourceManager.GetString("Employees_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nová pozvánka.
         /// </summary>
         public static string Employees_NewInvite {
@@ -219,6 +228,24 @@ namespace Rentals.Web.Localization {
         public static string Employees_NoActiveLinks {
             get {
                 return ResourceManager.GetString("Employees_NoActiveLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odebrat admina.
+        /// </summary>
+        public static string Employees_RemoveAdmin {
+            get {
+                return ResourceManager.GetString("Employees_RemoveAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odebrat zaměstance.
+        /// </summary>
+        public static string Employees_RemoveEmployee {
+            get {
+                return ResourceManager.GetString("Employees_RemoveEmployee", resourceCulture);
             }
         }
         
