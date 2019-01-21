@@ -1087,6 +1087,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Přejete si přidat záznam do historie k některému z předmětů ?.
+        /// </summary>
+        public static string RentingOverView_RentingReturned {
+            get {
+                return ResourceManager.GetString("RentingOverView_RentingReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navrácení výpůjčky.
+        /// </summary>
+        public static string RentingOverView_RentingReturnedHeader {
+            get {
+                return ResourceManager.GetString("RentingOverView_RentingReturnedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dnes navrácené výpůjčky.
         /// </summary>
         public static string RentingOverview_Returned {

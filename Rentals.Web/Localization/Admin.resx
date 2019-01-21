@@ -480,4 +480,10 @@
   <data name="Calendar_Returned" xml:space="preserve">
     <value>Navrácená výpůjčka</value>
   </data>
+  <data name="RentingOverView_RentingReturned" xml:space="preserve">
+    <value>Přejete si přidat záznam do historie k některému z předmětů ?</value>
+  </data>
+  <data name="RentingOverView_RentingReturnedHeader" xml:space="preserve">
+    <value>Navrácení výpůjčky</value>
+  </data>
 </root>

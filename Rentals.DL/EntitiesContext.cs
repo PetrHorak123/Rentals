@@ -64,6 +64,15 @@ namespace Rentals.DL
 		}
 
 		/// <summary>
+		/// Vrací nebo nastavuje tabulku s historií.
+		/// </summary>
+		public DbSet<History> Histories
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Vrací nebo nastavuje vazební tabulku mezi výpůjčkou a předmětem.
 		/// </summary>
 		public DbSet<RentingToItem> RentingToItems

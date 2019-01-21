@@ -162,6 +162,9 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
   <data name="NotInvited" xml:space="preserve">
     <value>Bez pozvánky</value>
   </data>
@@ -194,5 +197,8 @@
   </data>
   <data name="Week" xml:space="preserve">
     <value>Týden</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
   </data>
 </root>

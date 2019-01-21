@@ -21,6 +21,8 @@ namespace Rentals.DL.Interfaces
 
 		IAdminInviteRepository AdminInvites { get; }
 
+		IRepository<History> Histories { get; }
+
 		int SaveChanges();
 	}
 }

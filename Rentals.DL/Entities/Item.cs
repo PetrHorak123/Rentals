@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Rentals.DL.Interfaces;
@@ -14,6 +13,7 @@ namespace Rentals.DL.Entities
 		public Item()
 		{
 			this.RentingToItems = new HashSet<RentingToItem>();
+			this.History = new HashSet<History>();
 		}
 
 		[Key]
@@ -73,6 +73,15 @@ namespace Rentals.DL.Entities
 		/// Vrací nebo nastavuje, jací zákazníci si tento předmět půjčili.
 		/// </summary>
 		public virtual ICollection<RentingToItem> RentingToItems
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje historii předmětu.
+		/// </summary>
+		public virtual ICollection<History> History
 		{
 			get;
 			set;

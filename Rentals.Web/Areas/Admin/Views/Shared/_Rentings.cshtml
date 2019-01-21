@@ -23,7 +23,7 @@
 								}
 								else
 								{
-									<a class="btn btn-primary btn-sm" onclick="setState('@renting.Id', '@RentalState.Returned')">@Admin.RentingOverview_SetReturned</a>
+									<a class="btn btn-primary btn-sm" onclick="setReturned('@renting.Id')">@Admin.RentingOverview_SetReturned</a>
 								}
 								<a class="btn btn-warning btn-sm" href="@Url.Action("Detail", "Renting", new { id = renting.Id })">@GlobalResources.Detail</a>
 								<a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
@@ -44,5 +44,103 @@
 		}
 	</div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="set-lended-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Admin.RentingOverView_RentingInPastHeader</h4>
+			</div>
+			<div class="modal-body">
+				<p>@Admin.RentingOverView_RentingInPast</p>
+				<p>@Admin.RentingOverView_MarkAs</p>
+				<button type="button" class="btn btn-primary" id="set-lended">@Admin.RentingOverView_MarkAsLended</button>
+				<button type="button" class="btn btn-primary" id="set-returned">@Admin.RentingOverView_MarkAsReturned</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@GlobalResources.Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="set-returned-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">@Admin.RentingOverView_RentingReturnedHeader</h4>
+			</div>
+			<div class="modal-body">
+				<p>@Admin.RentingOverView_RentingReturned</p>
+				<button type="button" class="btn btn-primary" id="set-returned-with-history">@GlobalResources.Yes</button>
+				<button type="button" class="btn btn-primary" id="set-returned-no-history">@GlobalResources.No</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">@GlobalResources.Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function setState(id, state) {
+		$.ajax({
+			url: '@Url.Action("SetState", "Renting")',
+			data: {
+				id: id,
+				state: state
+			},
+			success: function (data) {
+				$("#component-container").load('@Url.Action("ReloadComponentView", "Home")');
+			},
+			error: function (data) {
+				alert('@Html.Raw(Admin.RentingOverview_CannotChangeState)');
+			}
+		});
+	}
+
+	function setReturned(id) {
+		var $modal = $("#set-returned-modal");
+		$modal.modal("show");
+
+		$("#set-returned-no-history").click(function () {
+			setState(id, "@RentalState.Returned");
+			$modal.modal("hide");
+		});
+
+		$("#set-returned-with-history").click(function () {
+			window.location.href = "@Url.Action("Create", "History")" + "/" + id;
+		});
+	}
+
+	function setLended(id, time) {
+		if (time < Date.now()) {
+			var $modal = $("#set-lended-modal");
+			$modal.modal("show");
+
+			$("#set-lended").click(function () {
+				setState(id, "@RentalState.Lended");
+				$modal.modal("hide");
+			})
+			$("#set-returned").click(function () {
+				setState(id, "@RentalState.Returned");
+				$modal.modal("hide");
+			})
+			@* pokud již skončila, a che nastavit že je vypůjčená, zeptát se jestli si tím je jist, nebo jestli zapomněl, pokud zapomněl, rovnou se zeptám jestli ji chce označit jako vrácenou *@
+		}
+		else {
+			return setState(id, "@RentalState.Lended");
+			@* pro teď počítám že předměty již jsou vybraný, později možná dialog jestli chce ještě změnit předměty, což by asi neměl, jestli je chce změnit tak ať zruší výpůjčku a vytvoří novou For now. *@
+		}
+	}
+
+	function setCanceled(id, message) {
+		if (confirm(message)) {
+			setState(id, "@RentalState.Canceled")
+		}
+	}
+</script>
 
 <hr />
