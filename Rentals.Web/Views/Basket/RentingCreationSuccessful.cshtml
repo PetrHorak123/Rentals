@@ -1,7 +1,12 @@
-﻿
+﻿@using Rentals.Web.Localization
+
 @{
-    ViewData["Title"] = "RentingCreationSuccessful";
+	ViewBag.Title = Localization.Renting_Success;
 }
 
-<h2>RentingCreationSuccessful</h2>
+<h2>@Localization.Renting_Success</h2>
+
+<section class="row">
+	<p>@Localization.Renting_PickUp</p>
+</section>
 

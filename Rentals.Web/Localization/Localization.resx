@@ -156,6 +156,9 @@
   <data name="Login" xml:space="preserve">
     <value>Přihlášení</value>
   </data>
+  <data name="Renting_Basket" xml:space="preserve">
+    <value>Obsah košíku</value>
+  </data>
   <data name="Renting_DateInPast" xml:space="preserve">
     <value>Nesmí být v minulosti</value>
   </data>
@@ -174,11 +177,23 @@
   <data name="Renting_NoRental" xml:space="preserve">
     <value>Nenalezena půjčovna</value>
   </data>
+  <data name="Renting_NothingInBasket" xml:space="preserve">
+    <value>Košík je prázdný</value>
+  </data>
+  <data name="Renting_PickUp" xml:space="preserve">
+    <value>Vámi vypůjčené předměty si můžete vyzvednou na adrese:</value>
+  </data>
   <data name="Renting_StartsAt" xml:space="preserve">
     <value>Začátek výpůjčky</value>
   </data>
   <data name="Renting_StartsAtNotInWorkingHours" xml:space="preserve">
     <value>Výpůjčka nesmí začínat mimo pracovní dobu</value>
+  </data>
+  <data name="Renting_Success" xml:space="preserve">
+    <value>Výpůjčení proběhlo v pořádku</value>
+  </data>
+  <data name="Renting_WillBerented" xml:space="preserve">
+    <value>Bude vypůjčeno {0} kusů</value>
   </data>
   <data name="Renting_WrongDate" xml:space="preserve">
     <value>Nesmí končit dřív než začíná</value>

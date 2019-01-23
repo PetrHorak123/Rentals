@@ -37,7 +37,7 @@ namespace Rentals.Web
 			services.AddDbContext<EntitiesContext>(options => 
 				options
 					.UseLazyLoadingProxies()
-					.UseSqlServer(@"Data Source=DESKTOP-D5HL9IN;Integrated Security=True;")
+					.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;")
 			);
 
 			services.AddIdentity<User, Role>()

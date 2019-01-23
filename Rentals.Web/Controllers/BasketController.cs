@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rentals.Common.Enums;
-using Rentals.Common.Extensions;
 using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,9 +22,42 @@ namespace Rentals.Web.Controllers
 		[Route("/Basket")]
 		public ActionResult CreateRenting()
 		{
+			EnsureValidBasket();
+
 			var model = FetchModel(new RentingUserCreatorViewModel());
 
 			return View(model);
+		}
+
+		private void EnsureValidBasket()
+		{
+			var keysToRemove = new List<string>();
+
+			foreach (var itemToRent in this.CurrentUser.Basket)
+			{
+				if (itemToRent.Value == -1)
+				{
+					var item = this.RepositoriesFactory.Items.GetByUniqueIdentifier(itemToRent.Key);
+
+					if (item == null || item.IsDeleted)
+						keysToRemove.Add(itemToRent.Key);
+				}
+				else
+				{
+					var type = this.RepositoriesFactory.Types.GetByName(itemToRent.Key);
+
+					if (type == null || type.IsDeleted)
+						keysToRemove.Add(itemToRent.Key);
+				}
+			}
+
+			foreach(var key in keysToRemove)
+			{
+				this.CurrentUser.Basket.Remove(key);
+			}
+
+			this.context.Users.Update(this.CurrentUser);
+			this.context.SaveChanges();
 		}
 
 		[HttpPost]
@@ -119,7 +152,7 @@ namespace Rentals.Web.Controllers
 			this.context.Users.Update(this.CurrentUser);
 			this.context.SaveChanges();
 
-			return RedirectToAction("TypeDetail", "Home", new { itemType = itemType.RemoveSpaces() });
+			return Redirect(Request.Headers["Referer"].ToString() ?? "/");
 		}
 
 		[HttpPost]
@@ -136,11 +169,11 @@ namespace Rentals.Web.Controllers
 			this.context.Users.Update(this.CurrentUser);
 			this.context.SaveChanges();
 
-			return RedirectToAction("ItemDetail", "Home", new { uid = uid.RemoveSpaces() });
+			return Redirect(Request.Headers["Referer"].ToString() ?? "/");
 		}
 
 		[HttpPost]
-		public ActionResult RemoveItemFromBasket(string item, bool isSpecificItem)
+		public ActionResult RemoveItemFromBasket(string item)
 		{
 			if (item == null)
 				return BadRequest();
@@ -151,10 +184,7 @@ namespace Rentals.Web.Controllers
 				this.context.Users.Update(this.CurrentUser);
 				this.context.SaveChanges();
 
-				if (isSpecificItem)
-					return RedirectToAction("ItemDetail", "Home", new { uid = item.RemoveSpaces() });
-				else
-					return RedirectToAction("TypeDetail", "Home", new { itemType = item.RemoveSpaces() });
+				return Redirect(Request.Headers["Referer"].ToString() ?? "/");
 			}
 
 			return NotFound();
