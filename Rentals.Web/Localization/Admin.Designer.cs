@@ -682,6 +682,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vaše půjčovna se nachází zde:.
+        /// </summary>
+        public static string Rental_Address {
+            get {
+                return ResourceManager.GetString("Rental_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Město.
         /// </summary>
         public static string Rental_City {

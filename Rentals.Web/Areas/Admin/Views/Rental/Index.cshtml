@@ -1,9 +1,15 @@
 ﻿@model Rentals.Web.Models.BaseViewModel
 @using Rentals.Web.Localization
 
-<h2 class="row">
+@{
+	ViewBag.Title = Admin.Rental;
+}
+
+<h2>
 	@Model.Rental.Name
+	@Html.ActionLink(GlobalResources.Edit, "Edit", "Rental", null, new { @class = "btn btn-warning pull-right" })
 </h2>
 
-<address></address>
-@Html.ActionLink(GlobalResources.Edit, "Edit", "Rental", null, new { @class = "btn btn-warning"})
+<div class="row">
+	@await Html.PartialAsync("_RentalAddress", Model, new ViewDataDictionary(ViewData) { { "text", Admin.Rental_Address } })
+</div>

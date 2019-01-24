@@ -72,7 +72,7 @@ namespace Rentals.DL.Entities
 			set;
 		}
 
-		#region Adresa
+		#region Kontaktní údaje
 
 		/// <summary>
 		/// Adresa - Vrací nebo nastavuje město.
@@ -99,6 +99,24 @@ namespace Rentals.DL.Entities
 		{
 			get;
 			set;
+		}
+
+		[NotMapped]
+		public string ContactEmail
+		{
+			get
+			{
+				return "Mail@mail.com";
+			}
+		}
+
+		[NotMapped]
+		public string ContactPhone
+		{
+			get
+			{
+				return "123456789";
+			}
 		}
 
 		#endregion

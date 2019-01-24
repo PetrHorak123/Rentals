@@ -61,6 +61,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontakt.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Najdete nás na adrese.
+        /// </summary>
+        public static string About_Location {
+            get {
+                return ResourceManager.GetString("About_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Košík.
         /// </summary>
         public static string Basket {

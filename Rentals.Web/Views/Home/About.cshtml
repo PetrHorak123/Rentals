@@ -1,0 +1,12 @@
+﻿@using Rentals.Web.Localization
+@model Rentals.Web.Models.BaseViewModel
+
+@{
+	ViewBag.Title = Localization.About;
+}
+
+<h2>@Localization.About</h2>
+
+<div class="row">
+	@await Html.PartialAsync("_RentalAddress", Model, new ViewDataDictionary(ViewData) { { "text", Localization.About_Location } })
+</div>

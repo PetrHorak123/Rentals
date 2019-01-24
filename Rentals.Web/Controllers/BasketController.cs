@@ -120,7 +120,7 @@ namespace Rentals.Web.Controllers
 
 					this.RepositoriesFactory.SaveChanges();
 
-					return View("RentingCreationSuccessful");
+					return View("RentingCreationSuccessful", FetchModel<BaseViewModel>());
 				}
 
 				return View(model);

@@ -486,4 +486,7 @@
   <data name="RentingOverView_RentingReturnedHeader" xml:space="preserve">
     <value>Navrácení výpůjčky</value>
   </data>
+  <data name="Rental_Address" xml:space="preserve">
+    <value>Vaše půjčovna se nachází zde:</value>
+  </data>
 </root>
