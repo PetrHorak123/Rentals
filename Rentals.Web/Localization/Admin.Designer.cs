@@ -322,6 +322,60 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Změnít popisek předmětu.
+        /// </summary>
+        public static string History_ChangeDescription {
+            get {
+                return ResourceManager.GetString("History_ChangeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník nesedí s rezervací..
+        /// </summary>
+        public static string History_InvalidCustomer {
+            get {
+                return ResourceManager.GetString("History_InvalidCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nový záznam do historie.
+        /// </summary>
+        public static string History_New {
+            get {
+                return ResourceManager.GetString("History_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nový popisek.
+        /// </summary>
+        public static string History_NewDescription {
+            get {
+                return ResourceManager.GetString("History_NewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat záznam.
+        /// </summary>
+        public static string History_NewRecord {
+            get {
+                return ResourceManager.GetString("History_NewRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Záznam.
+        /// </summary>
+        public static string History_Record {
+            get {
+                return ResourceManager.GetString("History_Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předměty.
         /// </summary>
         public static string Item {

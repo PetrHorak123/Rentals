@@ -489,4 +489,22 @@
   <data name="Rental_Address" xml:space="preserve">
     <value>Vaše půjčovna se nachází zde:</value>
   </data>
+  <data name="History_ChangeDescription" xml:space="preserve">
+    <value>Změnít popisek předmětu</value>
+  </data>
+  <data name="History_New" xml:space="preserve">
+    <value>Nový záznam do historie</value>
+  </data>
+  <data name="History_NewDescription" xml:space="preserve">
+    <value>Nový popisek</value>
+  </data>
+  <data name="History_NewRecord" xml:space="preserve">
+    <value>Přidat záznam</value>
+  </data>
+  <data name="History_Record" xml:space="preserve">
+    <value>Záznam</value>
+  </data>
+  <data name="History_InvalidCustomer" xml:space="preserve">
+    <value>Zákazník nesedí s rezervací.</value>
+  </data>
 </root>

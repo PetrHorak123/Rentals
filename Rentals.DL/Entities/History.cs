@@ -6,7 +6,7 @@ namespace Rentals.DL.Entities
 	/// <summary>
 	/// Tabulka reprezenzující historii předmětu (co se mu kdy stalo).
 	/// </summary>
-	public class History
+	public partial class History
 	{
 		public int Id
 		{
