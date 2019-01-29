@@ -116,9 +116,9 @@ namespace Rentals.Web.Controllers
 			}
 		}
 
-		public ActionResult SeeItems(DateTime? from, DateTime? to)
+		public ActionResult SeeItems(DateTime? from, DateTime? to, string q)
 		{
-			return ViewComponent(nameof(ItemsOverview), new { from, to });
+			return ViewComponent(nameof(ItemsOverview), new { from, to, q });
 		}
 
 		public IActionResult Privacy()

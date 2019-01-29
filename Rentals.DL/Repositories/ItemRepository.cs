@@ -4,6 +4,7 @@ using Rentals.DL.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Rentals.Common.Extensions;
 
 namespace Rentals.DL.Repositories
 {
@@ -13,19 +14,23 @@ namespace Rentals.DL.Repositories
 		{
 		}
 
-		public Task<Item[]> GetAllAvaibleItemsAsync(DateTime from, DateTime to)
+		public Task<Item[]> GetAllAvaibleItemsAsync(DateTime from, DateTime to, string q = null)
 		{
-			var items = this.Context.Items
+			var query = this.Context.Items
 				.Where(i =>
 					!i.IsDeleted &&
 					!i.RentingToItems
 						.Any(r =>
 							(r.Renting.StartsAt >= from && r.Renting.StartsAt <= to) ||
 							(r.Renting.EndsAt > from && r.Renting.EndsAt < to)
-						))
-				.ToArrayAsync();
+				));
 
-			return items;
+			if (!q.IsNullOrEmpty())
+			{
+				query = query.Where(i => i.Type.Name.Contains(q));
+			}
+
+			return query.ToArrayAsync();
 		}
 
 		public Item[] GetAvailbeItems(int itemTypeId, DateTime startsAt, DateTime endsAt)

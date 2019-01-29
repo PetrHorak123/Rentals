@@ -183,6 +183,15 @@
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Vyhledat</value>
+  </data>
+  <data name="Search_Label" xml:space="preserve">
+    <value>Vyheldat:</value>
+  </data>
+  <data name="Search_Term" xml:space="preserve">
+    <value>Co hledáte?</value>
+  </data>
   <data name="SmallCompetency" xml:space="preserve">
     <value>Pro zobrazení této stránky nemáte dostatečná oprávnění.</value>
   </data>

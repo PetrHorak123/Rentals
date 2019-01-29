@@ -14,9 +14,10 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		{
 		}
 
-		public ActionResult Index()
+		public ActionResult Index(string q = null)
 		{
-			var model = FetchModel(new ItemTypesViewModel(this.RepositoriesFactory.Types.GetItemTypes()));
+			var model = FetchModel(new ItemTypesViewModel(this.RepositoriesFactory.Types.GetItemTypes(q)));
+			ViewData["q"] = q;
 
 			return View(model);
 		}

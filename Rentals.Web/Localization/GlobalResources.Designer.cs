@@ -259,6 +259,33 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vyhledat.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyheldat:.
+        /// </summary>
+        public static string Search_Label {
+            get {
+                return ResourceManager.GetString("Search_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Co hledáte?.
+        /// </summary>
+        public static string Search_Term {
+            get {
+                return ResourceManager.GetString("Search_Term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pro zobrazení této stránky nemáte dostatečná oprávnění..
         /// </summary>
         public static string SmallCompetency {

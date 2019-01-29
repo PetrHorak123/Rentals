@@ -8,9 +8,9 @@ namespace Rentals.DL.Interfaces
 		/// <summary>
 		/// Vrací všechny nesmazané typy předmětů.
 		/// </summary>
-		ItemType[] GetItemTypes();
+		ItemType[] GetItemTypes(string q = null);
 
-		Task<ItemType[]> GetItemTypesAsync();
+		Task<ItemType[]> GetItemTypesAsync(string q = null);
 
 		/// <summary>
 		/// Vrací typ předmětu podle jeho jména.
