@@ -8,7 +8,7 @@ namespace Rentals.DL
 		public EntitiesContext CreateDbContext(string[] args)
 		{
 			var builder = new DbContextOptionsBuilder<EntitiesContext>();
-			builder.UseSqlServer(@"Data Source=DESKTOP-D5HL9IN;Integrated Security=True;");
+			builder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;");
 			builder.UseLazyLoadingProxies();
 
 			return new EntitiesContext(builder.Options);

@@ -16,6 +16,14 @@ namespace Rentals.Web.Areas.Admin.Models
 			}
 		}
 
+		public CustomerViewModel(User user, IEnumerable<History> histories, bool addrentings = false) : this(user, addrentings)
+		{
+			if (histories != null)
+			{
+				this.History = histories.Select(h => new HistoryViewModel(h));
+			}
+		}
+
 		public string Class
 		{
 			get;
@@ -23,6 +31,12 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		public ICollection<RentingViewModel> Rentings
+		{
+			get;
+			set;
+		}
+
+		public IEnumerable<HistoryViewModel> History
 		{
 			get;
 			set;

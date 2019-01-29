@@ -12,7 +12,8 @@ namespace Rentals.Web.Areas.Admin.Models
 			this.Id = type.Id;
 			this.Name = type.Name;
 			this.Description = type.Description;
-			this.Accessories = type.ActualAccessories.Select(t => new ItemTypeViewModel(t));
+			this.Accessories = type.ActualAccessories
+				.Select(t => new ItemTypeViewModel(t));
 			this.Items = type.ActualItems
 				.GroupBy(i => new
 				{
@@ -24,7 +25,11 @@ namespace Rentals.Web.Areas.Admin.Models
 					CoverImage = g.Key.CoverImage,
 					Note = g.Key.Note,
 					NumberOfItems = g.Count(),
-				}).ToArray();
+				});
+			this.History = type.ActualItems
+				.SelectMany(t => t.History)
+				.Select(h => new HistoryViewModel(h));
+
 		}
 
 		public int Id
@@ -64,6 +69,15 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Příslušenství k tomuto předmětu.
 		/// </summary>
 		public IEnumerable<ItemTypeViewModel> Accessories
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Historie všech předmětů tohoto typu.
+		/// </summary>
+		public IEnumerable<HistoryViewModel> History
 		{
 			get;
 			set;

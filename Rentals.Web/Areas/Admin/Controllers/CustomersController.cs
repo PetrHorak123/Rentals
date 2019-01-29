@@ -28,7 +28,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			if (customer == null)
 				return NotFound();
 
-			var model = FetchModel(new CustomerViewModel(customer, addRentings: true));
+			var history = this.RepositoriesFactory.Histories.GetHistoryForUser(customer.Id);
+			var model = FetchModel(new CustomerViewModel(customer, history, addrentings: true));
 
 			return View(model);
 		}

@@ -322,6 +322,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Historie.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Změnít popisek předmětu.
         /// </summary>
         public static string History_ChangeDescription {
@@ -331,11 +340,38 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Co se stalo.
+        /// </summary>
+        public static string History_Content {
+            get {
+                return ResourceManager.GetString("History_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník.
+        /// </summary>
+        public static string History_Customer {
+            get {
+                return ResourceManager.GetString("History_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zákazník nesedí s rezervací..
         /// </summary>
         public static string History_InvalidCustomer {
             get {
                 return ResourceManager.GetString("History_InvalidCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Předmět.
+        /// </summary>
+        public static string History_Item {
+            get {
+                return ResourceManager.GetString("History_Item", resourceCulture);
             }
         }
         
@@ -372,6 +408,15 @@ namespace Rentals.Web.Localization {
         public static string History_Record {
             get {
                 return ResourceManager.GetString("History_Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Čas.
+        /// </summary>
+        public static string History_Time {
+            get {
+                return ResourceManager.GetString("History_Time", resourceCulture);
             }
         }
         

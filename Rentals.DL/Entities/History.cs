@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Rentals.DL.Interfaces;
 
 namespace Rentals.DL.Entities
 {
 	/// <summary>
 	/// Tabulka reprezenzující historii předmětu (co se mu kdy stalo).
 	/// </summary>
-	public partial class History
+	public partial class History : IEntity
 	{
 		public int Id
 		{

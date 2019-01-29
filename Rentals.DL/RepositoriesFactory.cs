@@ -20,7 +20,7 @@ namespace Rentals.DL
 			this.Users = new UserRepository(context);
 			this.Accessories = new BaseRepository<ItemTypeToItemType>(context);
 			this.AdminInvites = new AdminInviteRepository(context);
-			this.Histories = new BaseRepository<History>(context);
+			this.Histories = new HistoryRepository(context);
 		}
 
 		public IItemRepository Items { get; private set; }
@@ -39,7 +39,7 @@ namespace Rentals.DL
 
 		public IAdminInviteRepository AdminInvites { get; private set; }
 
-		public IRepository<History> Histories { get; private set; }
+		public IHistoryRepository Histories { get; private set; }
 
 		public int SaveChanges()
 		{

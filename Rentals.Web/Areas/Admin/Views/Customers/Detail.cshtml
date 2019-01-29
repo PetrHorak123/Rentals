@@ -38,5 +38,30 @@
 	@Admin.Customers_Rentings
 </h3>
 
+@* ajaxově nějak pořešit *@
+
 @(await Html.PartialAsync("_Rentings", Model.Rentings))
+
+@if (Model.History.Any())
+{	
+	<hr />
+
+	<h3 class="row">@Admin.History</h3>
+
+	<table class="table table-bordered table-responsive">
+		<tr>
+			<th>@Admin.History_Item</th>
+			<th>@Admin.History_Time</th>
+			<th>@Admin.History_Content</th>
+		</tr>
+		@foreach (var history in Model.History)
+		{
+			<tr>
+				<td>@Html.ActionLink(history.Item, "Detail", "Items", new { id = history.ItemTypeId })</td>
+				<td>@history.HappenedAt</td>
+				<td>@history.Content</td>
+			</tr>
+		}
+	</table>
+}
 
