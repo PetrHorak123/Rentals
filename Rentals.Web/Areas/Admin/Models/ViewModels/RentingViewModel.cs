@@ -85,6 +85,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Dictionary, kde klíč je typ předmětu a hodnota jsou jednotlivé předmety z typu.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_AllItems), ResourceType = typeof(Localization.Admin))]
 		public Dictionary<ItemTypeViewModel, string> Items
 		{
 			get;

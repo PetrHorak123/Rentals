@@ -82,6 +82,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				var renting = this.RepositoriesFactory.Rentings.GetById(postedModel.RentingId);
 				model.UpdateEntity(renting);
 				this.RepositoriesFactory.SaveChanges();
+
+				return RedirectToAction("Detail", "Renting", new { id = renting.Id });
 			}
 
 			return View(model);

@@ -8,7 +8,7 @@ namespace Rentals.DL.Entities
 	/// <summary>
 	/// Uživatel aplikace.
 	/// </summary>
-	public class User : IdentityUser<int>, IEntity
+	public partial class User : IdentityUser<int>, IEntity
 	{
 		private Dictionary<string, int> basket;
 
@@ -47,7 +47,6 @@ namespace Rentals.DL.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje jméno uživatele (nepoužívám userName, protože to je logicky něco jiného).
 		/// </summary>
-		[NotMapped]
 		public string Name
 		{
 			get;
@@ -57,7 +56,6 @@ namespace Rentals.DL.Entities
 		/// <summary>
 		/// Vrací nebo nastavuje třídu.
 		/// </summary>
-		[NotMapped]
 		public string Class
 		{
 			get;

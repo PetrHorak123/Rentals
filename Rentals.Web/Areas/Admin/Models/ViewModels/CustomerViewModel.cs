@@ -8,7 +8,7 @@ namespace Rentals.Web.Areas.Admin.Models
 	{
 		public CustomerViewModel(User user, bool addRentings = false) : base(user)
 		{
-			this.Class = user.Class;
+			this.Class = user.ActualClass;
 
 			if (addRentings)
 			{

@@ -871,6 +871,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Předměty.
+        /// </summary>
+        public static string Renting_AllItems {
+            get {
+                return ResourceManager.GetString("Renting_AllItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opravdu chcete tudo výpůjčku zrušit ?.
         /// </summary>
         public static string Renting_Cancel {

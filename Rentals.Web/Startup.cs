@@ -71,6 +71,8 @@ namespace Rentals.Web
 				{
 					microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
 					microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+					microsoftOptions.SaveTokens = true;
+					microsoftOptions.Scope.Add("https://graph.microsoft.com/people.read");
 				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

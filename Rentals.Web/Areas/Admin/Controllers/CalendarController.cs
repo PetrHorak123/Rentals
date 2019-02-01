@@ -76,7 +76,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 							"<a href=\"{0}\" class=\"timeline-a\">{1}, {2}</a>",
 							Url.Action("Detail", "Renting", new { id = r.RentingId }),
 							r.Renting.User.Name ?? r.Renting.User.UserName,
-							r.Renting.User.Class ?? Localization.Admin.Calendar_NoClass
+							r.Renting.User.ActualClass ?? Localization.Admin.Calendar_NoClass
 						),
 						start = r.Renting.StartsAt,
 						end = r.Renting.EndsAt,

@@ -522,4 +522,7 @@
   <data name="History_Time" xml:space="preserve">
     <value>Čas</value>
   </data>
+  <data name="Renting_AllItems" xml:space="preserve">
+    <value>Předměty</value>
+  </data>
 </root>
