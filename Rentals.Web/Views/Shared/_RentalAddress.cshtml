@@ -1,13 +1,19 @@
 ﻿@model Rentals.Web.Models.BaseViewModel
 @using Rentals.Web.Localization
+@using Rentals.Common.Extensions
 
 <section id="address" class="col-md-6">
 	<h3>@ViewData["text"]</h3>
 	<address>
 		@Model.Rental.City, @Model.Rental.Street<br />
 		@Model.Rental.ZipCode, Česká republika<br />
-		Kontaktuje nás:
-		<a href="mailto:@Model.Rental.ContactEmail">@Model.Rental.ContactEmail</a>
+
+			@GlobalResources.Contact:
+			<a href="mailto:@Model.Rental.ContactEmail">@Model.Rental.ContactEmail</a>
+			@if (!Model.Rental.ContactPhone.IsNullOrEmpty())
+			{
+				<a href="tel:@Model.Rental.ContactEmail">, @Model.Rental.ContactPhone</a>
+			}
 	</address>
 </section>
 

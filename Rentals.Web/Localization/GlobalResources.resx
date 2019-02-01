@@ -129,6 +129,9 @@
   <data name="Close" xml:space="preserve">
     <value>Zavřít</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontaktujte nás</value>
+  </data>
   <data name="Cs_TimeFormat" xml:space="preserve">
     <value>{0:dd.MM.yyyy}</value>
   </data>

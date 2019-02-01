@@ -799,6 +799,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontaktní email.
+        /// </summary>
+        public static string Rental_ContactEmail {
+            get {
+                return ResourceManager.GetString("Rental_ContactEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefonní čislo.
+        /// </summary>
+        public static string Rental_ContactPhone {
+            get {
+                return ResourceManager.GetString("Rental_ContactPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editace půjčovny.
         /// </summary>
         public static string Rental_Edit {

@@ -525,4 +525,10 @@
   <data name="Renting_AllItems" xml:space="preserve">
     <value>Předměty</value>
   </data>
+  <data name="Rental_ContactEmail" xml:space="preserve">
+    <value>Kontaktní email</value>
+  </data>
+  <data name="Rental_ContactPhone" xml:space="preserve">
+    <value>Telefonní čislo</value>
+  </data>
 </root>

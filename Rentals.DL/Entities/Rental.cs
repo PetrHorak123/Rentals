@@ -101,22 +101,17 @@ namespace Rentals.DL.Entities
 			set;
 		}
 
-		[NotMapped]
+		[Required]
 		public string ContactEmail
 		{
-			get
-			{
-				return "Mail@mail.com";
-			}
+			get;
+			set;
 		}
 
-		[NotMapped]
 		public string ContactPhone
 		{
-			get
-			{
-				return "123456789";
-			}
+			get;
+			set;
 		}
 
 		#endregion
