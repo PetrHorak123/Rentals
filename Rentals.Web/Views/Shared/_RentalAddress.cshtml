@@ -7,13 +7,12 @@
 	<address>
 		@Model.Rental.City, @Model.Rental.Street<br />
 		@Model.Rental.ZipCode, Česká republika<br />
-
-			@GlobalResources.Contact:
-			<a href="mailto:@Model.Rental.ContactEmail">@Model.Rental.ContactEmail</a>
-			@if (!Model.Rental.ContactPhone.IsNullOrEmpty())
-			{
-				<a href="tel:@Model.Rental.ContactEmail">, @Model.Rental.ContactPhone</a>
-			}
+		@GlobalResources.Contact:
+		<a href="mailto:@Model.Rental.ContactEmail">@Model.Rental.ContactEmail</a>
+		@if (!Model.Rental.ContactPhone.IsNullOrEmpty())
+		{
+			<a href="tel:@Model.Rental.ContactEmail">, @Model.Rental.ContactPhone</a>
+		}
 	</address>
 </section>
 
