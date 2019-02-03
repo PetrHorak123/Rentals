@@ -32,7 +32,8 @@
 					@Html.LabelFor(m => m.StartsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
+							<input type="date" asp-for="StartsAtDate" class="form-control"/>
+							@*@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })*@
 						</div>
 						<div class="col-sm-6">
 							@Html.DropDownListFor(
@@ -51,7 +52,8 @@
 					@Html.LabelFor(m => m.EndsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })
+							<input type="date" asp-for="StartsAtDate" class="form-control" />
+							@*@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })*@
 						</div>
 						<div class="col-sm-6">
 							@Html.DropDownListFor(
