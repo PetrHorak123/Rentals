@@ -74,19 +74,6 @@ namespace Rentals.DL.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId");
@@ -100,6 +87,50 @@ namespace Rentals.DL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Rentals.DL.Entities.AdminInvite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ExpiresAt");
+
+                    b.Property<string>("ForUser")
+                        .IsRequired();
+
+                    b.Property<bool>("IsRedeemed");
+
+                    b.Property<bool>("WillBeAdmin");
+
+                    b.Property<bool>("WillBeEmployee");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdminInvites");
+                });
+
+            modelBuilder.Entity("Rentals.DL.Entities.History", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired();
+
+                    b.Property<int>("ItemId");
+
+                    b.Property<int>("RentingId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("RentingId");
+
+                    b.ToTable("Histories");
                 });
 
             modelBuilder.Entity("Rentals.DL.Entities.Item", b =>
@@ -171,6 +202,11 @@ namespace Rentals.DL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City");
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired();
+
+                    b.Property<string>("ContactPhone");
 
                     b.Property<TimeSpan>("EndsAt");
 
@@ -263,6 +299,8 @@ namespace Rentals.DL.Migrations
 
                     b.Property<string>("Basket");
 
+                    b.Property<string>("Class");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -276,6 +314,8 @@ namespace Rentals.DL.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -309,6 +349,19 @@ namespace Rentals.DL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Rentals.DL.Entities.UserRole", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Rentals.DL.Entities.Role")
@@ -333,24 +386,24 @@ namespace Rentals.DL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Rentals.DL.Entities.Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Rentals.DL.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Rentals.DL.Entities.History", b =>
                 {
-                    b.HasOne("Rentals.DL.Entities.User")
+                    b.HasOne("Rentals.DL.Entities.Item", "Item")
+                        .WithMany("History")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Rentals.DL.Entities.Renting", "Renting")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RentingId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -401,6 +454,19 @@ namespace Rentals.DL.Migrations
                     b.HasOne("Rentals.DL.Entities.Renting", "Renting")
                         .WithMany("RentingToItems")
                         .HasForeignKey("RentingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Rentals.DL.Entities.UserRole", b =>
+                {
+                    b.HasOne("Rentals.DL.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Rentals.DL.Entities.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

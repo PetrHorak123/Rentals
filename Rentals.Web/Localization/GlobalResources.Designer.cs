@@ -97,6 +97,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontaktujte nás.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0:dd.MM.yyyy}.
         /// </summary>
         public static string Cs_TimeFormat {
@@ -196,11 +205,47 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ne.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bez pozvánky.
+        /// </summary>
+        public static string NotInvited {
+            get {
+                return ResourceManager.GetString("NotInvited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka do administrace s vaším jménem neexistuje, pokud Vám vedoucí půjčovny pozvánku vystavil, kontaktujte ho o její správnost..
+        /// </summary>
+        public static string NotInvited_Text {
+            get {
+                return ResourceManager.GetString("NotInvited_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Předchozí.
         /// </summary>
         public static string Previous {
             get {
                 return ResourceManager.GetString("Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pouze pslib.
+        /// </summary>
+        public static string PslibOnly {
+            get {
+                return ResourceManager.GetString("PslibOnly", resourceCulture);
             }
         }
         
@@ -219,6 +264,33 @@ namespace Rentals.Web.Localization {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyhledat.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyheldat:.
+        /// </summary>
+        public static string Search_Label {
+            get {
+                return ResourceManager.GetString("Search_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Co hledáte?.
+        /// </summary>
+        public static string Search_Term {
+            get {
+                return ResourceManager.GetString("Search_Term", resourceCulture);
             }
         }
         
@@ -264,6 +336,15 @@ namespace Rentals.Web.Localization {
         public static string Week {
             get {
                 return ResourceManager.GetString("Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ano.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

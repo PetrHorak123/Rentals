@@ -25,7 +25,7 @@ namespace Rentals.DL.Interfaces
 		/// <summary>
 		/// Vrací všechny předměty, které jsou dostupné mezi zadnými datumy.
 		/// </summary>
-		Task<Item[]> GetAllAvaibleItemsAsync(DateTime from, DateTime to);
+		Task<Item[]> GetAllAvaibleItemsAsync(DateTime from, DateTime to, string q = null);
 
 		/// <summary>
 		/// Vrací předměty, které jsou dostupný v daný čas, a zároveň nejsou ničím odlišné od ostatních.

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Rentals.DL.Entities;
@@ -6,7 +7,8 @@ using System.Collections.Generic;
 
 namespace Rentals.DL
 {
-	public class EntitiesContext : IdentityDbContext<User, Role, int>
+	public class EntitiesContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
+		UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 	{
 		public EntitiesContext(DbContextOptions<EntitiesContext> options) : base(options)
 		{
@@ -47,6 +49,24 @@ namespace Rentals.DL
 		/// Vrací nebo nastavuje tabulku s výpůjčkama.
 		/// </summary>
 		public DbSet<Renting> Rentings
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje tabulku s pozvánkami do administrace.
+		/// </summary>
+		public DbSet<AdminInvite> AdminInvites
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje tabulku s historií.
+		/// </summary>
+		public DbSet<History> Histories
 		{
 			get;
 			set;
@@ -118,6 +138,21 @@ namespace Rentals.DL
 				);
 
 			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<UserRole>(userRole =>
+			{
+				userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+				userRole.HasOne(ur => ur.Role)
+					.WithMany(r => r.Users)
+					.HasForeignKey(ur => ur.RoleId)
+					.IsRequired();
+
+				userRole.HasOne(ur => ur.User)
+					.WithMany(r => r.Roles)
+					.HasForeignKey(ur => ur.UserId)
+					.IsRequired();
+			});
 		}
 	}
 }

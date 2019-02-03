@@ -62,7 +62,8 @@ namespace Rentals.Web.Data
 						Name = Configuration.GetSection("RentalSettings")["RentalName"],
 						StartsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["StartsAt"]), 0, 0),
 						EndsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["EndsAt"]), 0, 0),
-						MinTimeUnit = int.Parse(Configuration.GetSection("RentalSettings")["MinTimeUnit"])
+						MinTimeUnit = int.Parse(Configuration.GetSection("RentalSettings")["MinTimeUnit"]),
+						ContactEmail = Configuration.GetSection("RentalSettings")["ContactEmail"]
 					});
 
 					factory.SaveChanges();

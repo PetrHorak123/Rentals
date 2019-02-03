@@ -23,7 +23,7 @@
 			<div class="form-group">
 				@Html.HiddenFor(m => m.CustomerId)
 				@Html.LabelFor(m => m.CustomerId, new { @class = "control-label" })
-				<input type="text" id="autocomplete" class="form-control" value="@Model.CustomerName">
+				<input type="text" id="autocomplete" class="form-control" value="@Model.CustomerName" name="@Html.NameFor(m => m.CustomerName)">
 				@Html.ValidationMessageFor(m => m.CustomerId, string.Empty, new { @class = "text-danger" })
 			</div>
 

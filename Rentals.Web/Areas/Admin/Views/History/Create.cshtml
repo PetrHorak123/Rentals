@@ -1,0 +1,78 @@
+﻿@model Rentals.Web.Areas.Admin.Models.HistoryCreatorViewModel
+@using Rentals.Web.Localization
+
+@{
+	ViewBag.Title = Admin.History_New;
+}
+
+<h2>@Admin.History_New</h2>
+
+<div class="row">
+	<div class="col-md-6">
+		@using (Html.BeginForm("Create", "History", FormMethod.Post))
+		{
+			@Html.ValidationSummary(true)
+			@Html.HiddenFor(m => m.RentingId)
+			@Html.HiddenFor(m => m.CustomerId)
+
+			@for (int i = 0; i < Model.ItemsHistory.Length; i++)
+			{
+				@Html.HiddenFor(m => m.ItemsHistory[i].Item)
+
+				<div class="item">
+					<h3>@Model.ItemsHistory[i].Item</h3>
+
+					<div class="form-group">
+						@Html.LabelFor(m => m.ItemsHistory[i].AddToHistory, new { @class = "btn btn-default" })
+						@Html.CheckBoxFor(m => m.ItemsHistory[i].AddToHistory, new { @class = "checkbox add-history", style="display:none"})
+					</div>
+
+					<div class="dialog" style="display: none">
+						<div class="form-group">
+							@Html.LabelFor(m => m.ItemsHistory[i].Content)
+							@Html.TextAreaFor(m => m.ItemsHistory[i].Content, new { @class = "form-control" })
+						</div>
+						<div class="form-group">
+							@Html.LabelFor(m => m.ItemsHistory[i].IsImportant, new { @class = "btn btn-default" })
+							@Html.CheckBoxFor(m => m.ItemsHistory[i].IsImportant, new { @class = "checkbox add-description", style = "display:none" })
+						</div>
+						<div class="form-group description" style="display: none">
+							@Html.LabelFor(m => m.ItemsHistory[i].NewDescription)
+							@Html.TextAreaFor(m => m.ItemsHistory[i].NewDescription, new { @class = "form-control" })
+						</div>
+					</div>
+				</div>
+			}
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">@GlobalResources.Save</button>
+			</div>
+		}
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$(document).on('change', '.add-history', function () {
+			var $dialog = $(this).closest(".item").find(".dialog");
+			console.log($dialog[0]);
+			if (this.checked) {
+				$dialog.show();
+			}
+			else {
+				$dialog.hide();
+			}
+		});
+
+		$(document).on('change', '.add-description', function () {
+			var $dialog = $(this).closest(".item").find(".description");
+			console.log($dialog[0]);
+			if (this.checked) {
+				$dialog.show();
+			}
+			else {
+				$dialog.hide();
+			}
+		});
+	});
+</script>

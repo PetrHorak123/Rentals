@@ -15,7 +15,8 @@ namespace Rentals.Web.Areas.Admin.Models
 		public RentingViewModel(Renting renting)
 		{
 			this.Id = renting.Id;
-			this.CustomerName = renting.User.UserName;
+			this.CustomerId = renting.User.Id;
+			this.CustomerName = renting.User.Name ?? renting.User.UserName;
 			this.CustomerEmail = renting.User.Email;
 			this.State = renting.State;
 			this.Note = renting.Note;
@@ -38,6 +39,15 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// Id výpůjčky.
 		/// </summary>
 		public int Id
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Id zákazníka.
+		/// </summary>
+		public int CustomerId
 		{
 			get;
 			set;
@@ -75,6 +85,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Dictionary, kde klíč je typ předmětu a hodnota jsou jednotlivé předmety z typu.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_AllItems), ResourceType = typeof(Localization.Admin))]
 		public Dictionary<ItemTypeViewModel, string> Items
 		{
 			get;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Interfaces;
 
@@ -15,6 +16,8 @@ namespace Rentals.Web.Models
 
 			this.StartsAtDate = today;
 			this.EndsAtDate = today;
+
+			this.Items = new List<ItemViewModel>();
 		}
 
 		public int RentalId
@@ -74,6 +77,12 @@ namespace Rentals.Web.Models
 
 		public DateTime EndsAt => this.EndsAtDate.Add(this.EndsAtTime);
 
+		public ICollection<ItemViewModel> Items
+		{
+			get;
+			set;
+		}
+
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
 			var factory = (IRepositoriesFactory)validationContext.GetService(typeof(IRepositoriesFactory));
@@ -112,6 +121,32 @@ namespace Rentals.Web.Models
 		public void AfterFetchModel(IRepositoriesFactory repositoriesFactory)
 		{
 			this.RentalId = this.Rental.Id;
+
+			foreach (var itemToRent in this.User.Basket)
+			{
+				if (itemToRent.Value == -1)
+				{
+					var item = repositoriesFactory.Items.GetByUniqueIdentifier(itemToRent.Key);
+
+					this.Items.Add(new ItemViewModel()
+					{
+						UniqueId = item.UniqueIdentifier,
+						CoverImage = item.CoverImage,
+						NumberOfItems = 1
+					});
+				}
+				else
+				{
+					var type = repositoriesFactory.Types.GetByName(itemToRent.Key);
+
+					this.Items.Add(new ItemViewModel()
+					{
+						Name = type.Name,
+						CoverImage = type.ActualItems.FirstOrDefault()?.CoverImage,
+						NumberOfItems = type.NonSpecificItems.Count
+					});
+				}
+			}
 		}
 	}
 }

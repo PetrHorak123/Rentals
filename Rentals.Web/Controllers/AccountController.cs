@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Security.Claims;
 using Rentals.Common.Enums;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication;
+using Newtonsoft.Json;
 
 namespace Rentals.Web.Controllers
 {
@@ -55,18 +60,21 @@ namespace Rentals.Web.Controllers
 			}
 
 			var info = await signInManager.GetExternalLoginInfoAsync();
-			if(info == null)
+			if (info == null)
 			{
 				return RedirectToAction(nameof(Login));
 			}
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+			var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+			// Když se přihlásil, hned zkusím vytáhnou třídu, pustím to na jiným vlákně, aby se to nebrzdilo, níže se metoda awaituje.
+			var getClass = this.GetClassFromMicrosoft(info.AuthenticationTokens, name);
+			string @class = string.Empty;
 
-			var cloud = await authorization.AuthorizeAsync(this.User, email, "PslibCloud");
-			var office = await authorization.AuthorizeAsync(this.User, email, "Pslib365");
+			var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
 
-			if (!cloud.Succeeded && !office.Succeeded)
-				return Content("Sorry pslib only");
+			if (!office.Succeeded)
+				return View("PslibOnly");
 
 			var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
 				info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
@@ -79,8 +87,20 @@ namespace Rentals.Web.Controllers
 				return Content("Locked");
 			}
 
+			var user = this.RepositoriesFactory.Users.GetByName(email);
+
+			if (user != null)
+			{
+				await signInManager.SignInAsync(user, isPersistent: false);
+				@class = await getClass;
+				user.Class = @class;
+				user.Name = name;
+				return RedirectToLocal(returnUrl);
+			}
+
 			// Uživatel není v databázi, vytvořím ho.
-			var user = new User { UserName = email, Email = email };
+			@class = await getClass;
+			user = new User { UserName = email, Email = email, Name = name, Class = @class };
 			var userResult = await userManager.CreateAsync(user);
 			if (userResult.Succeeded)
 			{
@@ -96,18 +116,6 @@ namespace Rentals.Web.Controllers
 			return RedirectToAction(nameof(Login));
 		}
 
-		private ActionResult RedirectToLocal(string returnUrl)
-		{
-			if (Url.IsLocalUrl(returnUrl))
-			{
-				return Redirect(returnUrl);
-			}
-			else
-			{
-				return RedirectToAction("Index", "Home");
-			}
-		}
-
 		public ActionResult DecideLogin(string returnUrl = null)
 		{
 			// Pokud nevím kam se chtěl dostal, vrátím ho na login pro zákazníky.
@@ -118,7 +126,7 @@ namespace Rentals.Web.Controllers
 			var area = splited.Length > 0 ? splited[0] : string.Empty;
 
 			// Pokud se chtěl dostat do administrativy.
-			if(area.ToLower() == "admin")
+			if (area.ToLower() == "admin")
 			{
 				return RedirectToAction(nameof(Areas.Admin.Controllers.AccountController.Login), "Account", new { returnUrl, Area = "Admin" });
 			}
@@ -136,6 +144,28 @@ namespace Rentals.Web.Controllers
 			await signInManager.SignOutAsync();
 
 			return View();
+		}
+
+		private async Task<string> GetClassFromMicrosoft(IEnumerable<AuthenticationToken> tokens, string name)
+		{
+			HttpClient client = new HttpClient();
+
+			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); // ACCEPT header
+			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokens.First().Value}");
+
+			// OK, přivnávám vypadá to divně, ale /me na api protě department nevrací,
+			// tudíž todle je jediná mě známá metoda k 31.1.2019 jak tento údaj zjistit, 
+			// logicky mi to smysl nedává, ale funguje to prozže má sám sebe v lidech (people), 
+			// tak to vyfiltruju na microsoftích serverech a vrátím si kolekci s právě jedním prvkem, což je přihlášený uživatel, 
+			// aneb přoč dělat věci jednoduše, že ano microsofte ?
+			// spoléhám se na displayname, protože jsem ho obdržel od serveru a šance, 
+			// že se změní mezí tím co jsem ho obdržel a pošlu ho dál je malá, ne-li nulová,
+			// ale pořád exituje (api neumožnuje filtraci podle id, a podle mailu je komplikovanější)
+			var info = await client.GetAsync($"https://graph.microsoft.com/v1.0/me/people/?$filter=displayName eq '{name}'");
+			var content = await info.Content.ReadAsAsync<dynamic>();
+			string result = content.value[0].department;
+
+			return result;
 		}
 	}
 }

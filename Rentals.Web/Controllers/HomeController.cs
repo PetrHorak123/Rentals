@@ -50,6 +50,14 @@ namespace Rentals.Web.Controllers
 			return View("Detail", model);
 		}
 
+		[Route("/About")]
+		public ActionResult About()
+		{
+			var model = FetchModel<BaseViewModel>();
+
+			return View(model);
+		}
+
 		public JsonResult GetTimeLine(string item, int count, bool isSpecificItem, DateTime from, DateTime to)
 		{
 			if (isSpecificItem)
@@ -108,9 +116,9 @@ namespace Rentals.Web.Controllers
 			}
 		}
 
-		public ActionResult SeeItems(DateTime? from, DateTime? to)
+		public ActionResult SeeItems(DateTime? from, DateTime? to, string q)
 		{
-			return ViewComponent(nameof(ItemsOverview), new { from, to });
+			return ViewComponent(nameof(ItemsOverview), new { from, to, q });
 		}
 
 		public IActionResult Privacy()

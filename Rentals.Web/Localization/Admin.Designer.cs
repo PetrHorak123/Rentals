@@ -70,11 +70,101 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Probíhající výpůjka.
+        /// </summary>
+        public static string Calendar_Lended {
+            get {
+                return ResourceManager.GetString("Calendar_Lended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žádná třída.
+        /// </summary>
+        public static string Calendar_NoClass {
+            get {
+                return ResourceManager.GetString("Calendar_NoClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zatím nevypůjčená výpůjčka.
+        /// </summary>
+        public static string Calendar_NotLended {
+            get {
+                return ResourceManager.GetString("Calendar_NotLended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tato výpůjčka měla být navrácena.
+        /// </summary>
+        public static string Calendar_NotReturned {
+            get {
+                return ResourceManager.GetString("Calendar_NotReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navrácená výpůjčka.
+        /// </summary>
+        public static string Calendar_Returned {
+            get {
+                return ResourceManager.GetString("Calendar_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zákazníci.
         /// </summary>
-        public static string Customer {
+        public static string Customers {
             get {
-                return ResourceManager.GetString("Customer", resourceCulture);
+                return ResourceManager.GetString("Customers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Třida.
+        /// </summary>
+        public static string Customers_Class {
+            get {
+                return ResourceManager.GetString("Customers_Class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Customers_Email {
+            get {
+                return ResourceManager.GetString("Customers_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        public static string Customers_Name {
+            get {
+                return ResourceManager.GetString("Customers_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nemáte žádné zákazníky.
+        /// </summary>
+        public static string Customers_NoCustomers {
+            get {
+                return ResourceManager.GetString("Customers_NoCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazníkovy výpůjčky.
+        /// </summary>
+        public static string Customers_Rentings {
+            get {
+                return ResourceManager.GetString("Customers_Rentings", resourceCulture);
             }
         }
         
@@ -84,6 +174,249 @@ namespace Rentals.Web.Localization {
         public static string Employee {
             get {
                 return ResourceManager.GetString("Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaměstnanci.
+        /// </summary>
+        public static string Employees {
+            get {
+                return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktivní pozvánky.
+        /// </summary>
+        public static string Employees_ActiveLinks {
+            get {
+                return ResourceManager.GetString("Employees_ActiveLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka nemůže mít splatnost v minulosti.
+        /// </summary>
+        public static string Employees_CantBeInPast {
+            get {
+                return ResourceManager.GetString("Employees_CantBeInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Employees_Email {
+            get {
+                return ResourceManager.GetString("Employees_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platná do.
+        /// </summary>
+        public static string Employees_LinkExpiration {
+            get {
+                return ResourceManager.GetString("Employees_LinkExpiration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka pro.
+        /// </summary>
+        public static string Employees_LinkFor {
+            get {
+                return ResourceManager.GetString("Employees_LinkFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pro role.
+        /// </summary>
+        public static string Employees_LinkForRoles {
+            get {
+                return ResourceManager.GetString("Employees_LinkForRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozvánka musí být buř pro zaměstance, nebo admina, nebo oba.
+        /// </summary>
+        public static string Employees_MustHaveRole {
+            get {
+                return ResourceManager.GetString("Employees_MustHaveRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        public static string Employees_Name {
+            get {
+                return ResourceManager.GetString("Employees_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nová pozvánka.
+        /// </summary>
+        public static string Employees_NewInvite {
+            get {
+                return ResourceManager.GetString("Employees_NewInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nebyly nalezeny žádné aktivní pozvánky.
+        /// </summary>
+        public static string Employees_NoActiveLinks {
+            get {
+                return ResourceManager.GetString("Employees_NoActiveLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odebrat admina.
+        /// </summary>
+        public static string Employees_RemoveAdmin {
+            get {
+                return ResourceManager.GetString("Employees_RemoveAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odebrat zaměstance.
+        /// </summary>
+        public static string Employees_RemoveEmployee {
+            get {
+                return ResourceManager.GetString("Employees_RemoveEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role.
+        /// </summary>
+        public static string Employees_Roles {
+            get {
+                return ResourceManager.GetString("Employees_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bude admin.
+        /// </summary>
+        public static string Employees_WillBeAdmin {
+            get {
+                return ResourceManager.GetString("Employees_WillBeAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bude zaměstnanec.
+        /// </summary>
+        public static string Employees_WillBeEmployee {
+            get {
+                return ResourceManager.GetString("Employees_WillBeEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Historie.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnít popisek předmětu.
+        /// </summary>
+        public static string History_ChangeDescription {
+            get {
+                return ResourceManager.GetString("History_ChangeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Co se stalo.
+        /// </summary>
+        public static string History_Content {
+            get {
+                return ResourceManager.GetString("History_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník.
+        /// </summary>
+        public static string History_Customer {
+            get {
+                return ResourceManager.GetString("History_Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zákazník nesedí s rezervací..
+        /// </summary>
+        public static string History_InvalidCustomer {
+            get {
+                return ResourceManager.GetString("History_InvalidCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Předmět.
+        /// </summary>
+        public static string History_Item {
+            get {
+                return ResourceManager.GetString("History_Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nový záznam do historie.
+        /// </summary>
+        public static string History_New {
+            get {
+                return ResourceManager.GetString("History_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nový popisek.
+        /// </summary>
+        public static string History_NewDescription {
+            get {
+                return ResourceManager.GetString("History_NewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat záznam.
+        /// </summary>
+        public static string History_NewRecord {
+            get {
+                return ResourceManager.GetString("History_NewRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Záznam.
+        /// </summary>
+        public static string History_Record {
+            get {
+                return ResourceManager.GetString("History_Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Čas.
+        /// </summary>
+        public static string History_Time {
+            get {
+                return ResourceManager.GetString("History_Time", resourceCulture);
             }
         }
         
@@ -448,11 +781,38 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vaše půjčovna se nachází zde:.
+        /// </summary>
+        public static string Rental_Address {
+            get {
+                return ResourceManager.GetString("Rental_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Město.
         /// </summary>
         public static string Rental_City {
             get {
                 return ResourceManager.GetString("Rental_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontaktní email.
+        /// </summary>
+        public static string Rental_ContactEmail {
+            get {
+                return ResourceManager.GetString("Rental_ContactEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefonní čislo.
+        /// </summary>
+        public static string Rental_ContactPhone {
+            get {
+                return ResourceManager.GetString("Rental_ContactPhone", resourceCulture);
             }
         }
         
@@ -525,6 +885,15 @@ namespace Rentals.Web.Localization {
         public static string Rental_ZipCode {
             get {
                 return ResourceManager.GetString("Rental_ZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Předměty.
+        /// </summary>
+        public static string Renting_AllItems {
+            get {
+                return ResourceManager.GetString("Renting_AllItems", resourceCulture);
             }
         }
         
@@ -849,6 +1218,24 @@ namespace Rentals.Web.Localization {
         public static string RentingOverView_RentingInPastHeader {
             get {
                 return ResourceManager.GetString("RentingOverView_RentingInPastHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přejete si přidat záznam do historie k některému z předmětů ?.
+        /// </summary>
+        public static string RentingOverView_RentingReturned {
+            get {
+                return ResourceManager.GetString("RentingOverView_RentingReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navrácení výpůjčky.
+        /// </summary>
+        public static string RentingOverView_RentingReturnedHeader {
+            get {
+                return ResourceManager.GetString("RentingOverView_RentingReturnedHeader", resourceCulture);
             }
         }
         

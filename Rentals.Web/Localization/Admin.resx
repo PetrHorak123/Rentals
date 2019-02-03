@@ -129,9 +129,6 @@
   <data name="Item_Create" xml:space="preserve">
     <value>Vytvořit typ</value>
   </data>
-  <data name="Customer" xml:space="preserve">
-    <value>Zákazníci</value>
-  </data>
   <data name="Employee" xml:space="preserve">
     <value>Zaměstnanci</value>
   </data>
@@ -401,5 +398,137 @@
   </data>
   <data name="Item_AddAccessory" xml:space="preserve">
     <value>Přidat příslušenství</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Zaměstnanci</value>
+  </data>
+  <data name="Employees_ActiveLinks" xml:space="preserve">
+    <value>Aktivní pozvánky</value>
+  </data>
+  <data name="Employees_LinkExpiration" xml:space="preserve">
+    <value>Platná do</value>
+  </data>
+  <data name="Employees_LinkFor" xml:space="preserve">
+    <value>Pozvánka pro</value>
+  </data>
+  <data name="Employees_NewInvite" xml:space="preserve">
+    <value>Nová pozvánka</value>
+  </data>
+  <data name="Employees_NoActiveLinks" xml:space="preserve">
+    <value>Nebyly nalezeny žádné aktivní pozvánky</value>
+  </data>
+  <data name="Employees_LinkForRoles" xml:space="preserve">
+    <value>Pro role</value>
+  </data>
+  <data name="Employees_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Employees_Roles" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Employees_CantBeInPast" xml:space="preserve">
+    <value>Pozvánka nemůže mít splatnost v minulosti</value>
+  </data>
+  <data name="Employees_MustHaveRole" xml:space="preserve">
+    <value>Pozvánka musí být buř pro zaměstance, nebo admina, nebo oba</value>
+  </data>
+  <data name="Employees_WillBeAdmin" xml:space="preserve">
+    <value>Bude admin</value>
+  </data>
+  <data name="Employees_WillBeEmployee" xml:space="preserve">
+    <value>Bude zaměstnanec</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Zákazníci</value>
+  </data>
+  <data name="Customers_Class" xml:space="preserve">
+    <value>Třida</value>
+  </data>
+  <data name="Customers_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Customers_Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Customers_Rentings" xml:space="preserve">
+    <value>Zákazníkovy výpůjčky</value>
+  </data>
+  <data name="Customers_NoCustomers" xml:space="preserve">
+    <value>Nemáte žádné zákazníky</value>
+  </data>
+  <data name="Employees_Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Employees_RemoveAdmin" xml:space="preserve">
+    <value>Odebrat admina</value>
+  </data>
+  <data name="Employees_RemoveEmployee" xml:space="preserve">
+    <value>Odebrat zaměstance</value>
+  </data>
+  <data name="Calendar_NoClass" xml:space="preserve">
+    <value>Žádná třída</value>
+  </data>
+  <data name="Calendar_Lended" xml:space="preserve">
+    <value>Probíhající výpůjka</value>
+  </data>
+  <data name="Calendar_NotLended" xml:space="preserve">
+    <value>Zatím nevypůjčená výpůjčka</value>
+  </data>
+  <data name="Calendar_NotReturned" xml:space="preserve">
+    <value>Tato výpůjčka měla být navrácena</value>
+  </data>
+  <data name="Calendar_Returned" xml:space="preserve">
+    <value>Navrácená výpůjčka</value>
+  </data>
+  <data name="RentingOverView_RentingReturned" xml:space="preserve">
+    <value>Přejete si přidat záznam do historie k některému z předmětů ?</value>
+  </data>
+  <data name="RentingOverView_RentingReturnedHeader" xml:space="preserve">
+    <value>Navrácení výpůjčky</value>
+  </data>
+  <data name="Rental_Address" xml:space="preserve">
+    <value>Vaše půjčovna se nachází zde:</value>
+  </data>
+  <data name="History_ChangeDescription" xml:space="preserve">
+    <value>Změnít popisek předmětu</value>
+  </data>
+  <data name="History_New" xml:space="preserve">
+    <value>Nový záznam do historie</value>
+  </data>
+  <data name="History_NewDescription" xml:space="preserve">
+    <value>Nový popisek</value>
+  </data>
+  <data name="History_NewRecord" xml:space="preserve">
+    <value>Přidat záznam</value>
+  </data>
+  <data name="History_Record" xml:space="preserve">
+    <value>Záznam</value>
+  </data>
+  <data name="History_InvalidCustomer" xml:space="preserve">
+    <value>Zákazník nesedí s rezervací.</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Historie</value>
+  </data>
+  <data name="History_Content" xml:space="preserve">
+    <value>Co se stalo</value>
+  </data>
+  <data name="History_Customer" xml:space="preserve">
+    <value>Zákazník</value>
+  </data>
+  <data name="History_Item" xml:space="preserve">
+    <value>Předmět</value>
+  </data>
+  <data name="History_Time" xml:space="preserve">
+    <value>Čas</value>
+  </data>
+  <data name="Renting_AllItems" xml:space="preserve">
+    <value>Předměty</value>
+  </data>
+  <data name="Rental_ContactEmail" xml:space="preserve">
+    <value>Kontaktní email</value>
+  </data>
+  <data name="Rental_ContactPhone" xml:space="preserve">
+    <value>Telefonní čislo</value>
   </data>
 </root>

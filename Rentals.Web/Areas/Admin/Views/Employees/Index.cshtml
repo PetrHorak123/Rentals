@@ -1,0 +1,60 @@
+﻿@model Rentals.Web.Areas.Admin.Models.EmployeeListViewModel
+@using Rentals.Web.Areas.Admin.ViewComponents
+@using Rentals.Web.Localization
+@using Rentals.Common.Extensions
+@using Rentals.Common.Enums
+
+@{
+	ViewBag.Title = Admin.Employees;
+}
+
+<h2 class="row">
+	@Admin.Employees
+	@Html.ActionLink(Admin.Employees_NewInvite, "CreateInviteLink", "Employees", null, new { @class = "btn btn-primary pull-right" })
+</h2>
+
+<div id="component-container">
+	@await Component.InvokeAsync(nameof(Employees))
+</div>
+
+
+<h3 class="row">
+	@Admin.Employees_ActiveLinks
+</h3>
+
+<div class="row">
+	@if (Model.ActiveLinks.Count > 0)
+	{
+		<table class="table table-bordered table-responsive">
+			<tr>
+				<th>@Admin.Employees_LinkFor</th>
+				<th>@Admin.Employees_LinkExpiration</th>
+				<th>@Admin.Employees_LinkForRoles</th>
+				<th></th>
+			</tr>
+			@foreach (var link in Model.ActiveLinks)
+			{
+				<tr>
+					<td>@link.ForUser</td>
+					<td>@link.ExpiresAt</td>
+					<td>
+						@foreach (var role in link.ForRoles)
+						{
+							<span>@role.ToLocalizedEnum(typeof(RoleType))</span> <br />
+						}
+					</td>
+					<td style="width: 75px">
+						@using (Html.BeginForm("DeleteLink", "Employees", FormMethod.Post))
+						{
+							<button class="btn btn-danger btn-xs pull-right" name="id" value="@link.Id">@GlobalResources.Delete</button>
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	}
+	else
+	{
+		<p>@Admin.Employees_NoActiveLinks</p>
+	}
+</div>

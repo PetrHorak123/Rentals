@@ -3,6 +3,7 @@ using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
+using Rentals.Common.Extensions;
 
 namespace Rentals.DL.Repositories
 {
@@ -29,22 +30,27 @@ namespace Rentals.DL.Repositories
 			return result;
 		}
 
-		public ItemType[] GetItemTypes()
+		public ItemType[] GetItemTypes(string q = null)
 		{
-			var result = this.Context.ItemTypes
-				.Where(t => !t.IsDeleted)
-				.ToArray();
-
-			return result;
+			return GetItemsQuery(q).ToArray();
 		}
 
-		public Task<ItemType[]> GetItemTypesAsync()
+		public Task<ItemType[]> GetItemTypesAsync(string q = null)
 		{
-			var result = this.Context.ItemTypes
-				.Where(t => !t.IsDeleted)
-				.ToArrayAsync();
+			return GetItemsQuery(q).ToArrayAsync();
+		}
 
-			return result;
+		private IQueryable<ItemType> GetItemsQuery(string q)
+		{
+			var query = this.Context.ItemTypes
+				.Where(t => !t.IsDeleted);
+
+			if (!q.IsNullOrEmpty())
+			{
+				query = query.Where(t => t.Name.Contains(q));
+			}
+
+			return query;
 		}
 
 		public Task<ItemType[]> GetAccessoriesAsync(int id)

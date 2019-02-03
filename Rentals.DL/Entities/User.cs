@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using Rentals.DL.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rentals.DL.Entities
 {
 	/// <summary>
 	/// Uživatel aplikace.
 	/// </summary>
-	public class User : IdentityUser<int>, IEntity
+	public partial class User : IdentityUser<int>, IEntity
 	{
 		private Dictionary<string, int> basket;
 
@@ -27,9 +27,36 @@ namespace Rentals.DL.Entities
 		}
 
 		/// <summary>
+		/// Vrací nebo nastavuje role uživatele.
+		/// </summary>
+		public virtual ICollection<UserRole> Roles
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Vrací nebo nastavuje, zda je zákazník označen jako smazaný (nemažu na "natvrdo", aby nevznikaly reference ukazující na nic).
 		/// </summary>
 		public bool IsDeleted
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje jméno uživatele (nepoužívám userName, protože to je logicky něco jiného).
+		/// </summary>
+		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje třídu.
+		/// </summary>
+		public string Class
 		{
 			get;
 			set;
@@ -46,7 +73,7 @@ namespace Rentals.DL.Entities
 		{
 			get
 			{
-				if(this.basket == null)
+				if (this.basket == null)
 				{
 					this.basket = new Dictionary<string, int>();
 				}

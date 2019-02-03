@@ -7,10 +7,23 @@
 
 <div class="row">
 	<h2>
-		@Admin.Item_Type 
-		@Html.ActionLink(Admin.Item_AddNew, "Create", "Items", null, new {@class = "btn btn-primary pull-right"})
+		@Admin.Item_Type
+		@Html.ActionLink(Admin.Item_AddNew, "Create", "Items", null, new { @class = "btn btn-primary pull-right" })
 	</h2>
 </div>
+
+@using (Html.BeginForm("Index", "Items", FormMethod.Post, new { @class = "form-inline" }))
+{
+	<div class="form-group">
+		<label for="q">@GlobalResources.Search_Label</label>
+		<input name="q" id="q" value="@(ViewData["q"] ?? string.Empty)" placeholder="@GlobalResources.Search_Term" class="form-control" />
+	</div>
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">@GlobalResources.Search</button>
+	</div>
+}
+
 
 <div class="row row-eq-height">
 	@foreach (var item in Model.ItemTypes)

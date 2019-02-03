@@ -11,15 +11,6 @@
 </h2>
 
 <div class="row">
-	@*<ul class="col-sm-3 list-group">
-			@foreach (var item in Model.ItemTypes)
-			{
-				<li class="list-group-item clearfix">
-					<input type="checkbox">
-					@item.Name
-				</li>
-			}
-		</ul>*@
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="form-group col-sm-3 padding-0">
@@ -43,13 +34,17 @@
 			groupOrder: 'content',  // groupOrder can be a property name or a sorting function
 			locale: "cs",
 			min: start,
-			max: end
+			max: end,
+			tooltip: {
+				followMouse: true,
+				overflowMethod: 'cap'
+			}
 		};
 
 		console.log(groups);
 		console.log(data);
 
-		timeline = new vis.Timeline(container[0], data, groups, options);
+		timeline = new vis.Timeline(container[0], new vis.DataSet(data), groups, options);
 		timeline.setOptions(options);
 
 		$(".vis-timeline").css('visibility', 'visible');

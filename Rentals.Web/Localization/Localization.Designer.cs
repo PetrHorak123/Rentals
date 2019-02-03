@@ -61,6 +61,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontakt.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Najdete nás na adrese.
+        /// </summary>
+        public static string About_Location {
+            get {
+                return ResourceManager.GetString("About_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Košík.
         /// </summary>
         public static string Basket {
@@ -178,6 +196,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obsah košíku.
+        /// </summary>
+        public static string Renting_Basket {
+            get {
+                return ResourceManager.GetString("Renting_Basket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nesmí být v minulosti.
         /// </summary>
         public static string Renting_DateInPast {
@@ -232,6 +259,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Košík je prázdný.
+        /// </summary>
+        public static string Renting_NothingInBasket {
+            get {
+                return ResourceManager.GetString("Renting_NothingInBasket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vámi vypůjčené předměty si můžete vyzvednou na adrese:.
+        /// </summary>
+        public static string Renting_PickUp {
+            get {
+                return ResourceManager.GetString("Renting_PickUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Začátek výpůjčky.
         /// </summary>
         public static string Renting_StartsAt {
@@ -246,6 +291,24 @@ namespace Rentals.Web.Localization {
         public static string Renting_StartsAtNotInWorkingHours {
             get {
                 return ResourceManager.GetString("Renting_StartsAtNotInWorkingHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výpůjčení proběhlo v pořádku.
+        /// </summary>
+        public static string Renting_Success {
+            get {
+                return ResourceManager.GetString("Renting_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bude vypůjčeno {0} kusů.
+        /// </summary>
+        public static string Renting_WillBerented {
+            get {
+                return ResourceManager.GetString("Renting_WillBerented", resourceCulture);
             }
         }
         

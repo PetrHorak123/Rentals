@@ -1,0 +1,55 @@
+﻿@model Rentals.Web.Models.BaseViewModel
+@using Rentals.Web.Localization
+@using Rentals.Common.Extensions
+
+<section id="address" class="col-md-6">
+	<h3>@ViewData["text"]</h3>
+	<address>
+		@Model.Rental.City, @Model.Rental.Street<br />
+		@Model.Rental.ZipCode, Česká republika<br />
+		@GlobalResources.Contact:
+		<a href="mailto:@Model.Rental.ContactEmail">@Model.Rental.ContactEmail</a>
+		@if (!Model.Rental.ContactPhone.IsNullOrEmpty())
+		{
+			<a href="tel:@Model.Rental.ContactEmail">, @Model.Rental.ContactPhone</a>
+		}
+	</address>
+</section>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+	  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	  crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+		integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+		crossorigin=""></script>
+
+<section id="map" style="height: 300px" class="col-md-6 row"></section>
+
+<script type="text/javascript">
+		$(document).ready(function () {
+			$.ajax({
+				url: "https://nominatim.openstreetmap.org/search/{city}/{street}?format=json&polygon=1&addressdetails=1",
+				data: {
+					city: "@Model.Rental.City",
+					street: "@Model.Rental.Street"
+				},
+				success: function (data) {
+					data = data[0];
+					var lat = data.lat;
+					var lon = data.lon;
+					var mymap = L.map('map').setView([lat, lon], 17);
+
+					L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+						attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+						maxZoom: 18,
+						id: 'mapbox.streets',
+						accessToken: 'pk.eyJ1IjoiaG9uY3lrIiwiYSI6ImNqcjltc3VjdzBoazc0M3FrNGFnczQ3cXMifQ.oPhcl_Xk3EvxcifU8AQUwA'
+					}).addTo(mymap);
+
+					var marker = L.marker([lat, lon]).addTo(mymap);
+					marker.bindPopup("@Model.Rental.Name").openPopup();
+				}
+			})
+		});
+</script>

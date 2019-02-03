@@ -60,8 +60,7 @@ namespace Rentals.Web
 
 			services.AddAuthorization(options => 
 			{
-				options.AddPolicy("Pslib365", policy => policy.AddRequirements(new DomainRequirement("365.pslib.cz")));
-				options.AddPolicy("PslibCloud", policy => policy.AddRequirements(new DomainRequirement("pslib.cloud")));
+				options.AddPolicy("PslibOnly", policy => policy.AddRequirements(new DomainRequirement("pslib.cloud", "365.pslib.cz")));
 				options.AddPolicy("AbsoluteRights", policy => policy.RequireRole(RoleType.Administrator.ToString()));
 				options.AddPolicy("ElevatedRights", policy => policy.RequireRole(RoleType.Administrator.ToString(), RoleType.Employee.ToString()));
 				options.AddPolicy("BasicRights", policy => policy.RequireRole(RoleType.Administrator.ToString(), RoleType.Employee.ToString(), RoleType.Customer.ToString()));
@@ -72,6 +71,8 @@ namespace Rentals.Web
 				{
 					microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
 					microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+					microsoftOptions.SaveTokens = true;
+					microsoftOptions.Scope.Add("https://graph.microsoft.com/people.read");
 				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

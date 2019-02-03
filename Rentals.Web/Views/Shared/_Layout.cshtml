@@ -35,14 +35,14 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a>@User.Identity.Name</a></li>
 					@if (User.IsInRole(RoleType.Employee.ToString()) || User.IsInRole(RoleType.Administrator.ToString()))
 					{
 						<li>@Html.ActionLink("ADMINISTRATIVA", "Index", "Home", new { area = "Admin" })</li>
 					}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>@Html.ActionLink(Localization.Basket, "Index", "Basket")</li>
+					<li>@Html.ActionLink(Localization.Basket, "CreateRenting", "Basket")</li>
+					<li>@Html.ActionLink(Localization.About, "About", "Home")</li>
 					<li>@Html.ActionLink(GlobalResources.Logout, "Logout", "Account")</li>
 				</ul>
 			</div>

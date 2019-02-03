@@ -1,7 +1,11 @@
-﻿
+﻿@using Rentals.Web.Localization
+@model Rentals.Web.Models.BaseViewModel
+
 @{
-    ViewData["Title"] = "RentingCreationSuccessful";
+	ViewBag.Title = Localization.Renting_Success;
 }
 
-<h2>RentingCreationSuccessful</h2>
-
+<div class="row">
+	<h2 class="col-xs-12">@Localization.Renting_Success</h2>
+	@await  Html.PartialAsync("_RentalAddress", Model, new ViewDataDictionary(ViewData) { { "text", Localization.Renting_PickUp } })
+</div>

@@ -59,6 +59,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Datum kdy výpůjčka končí.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_EndsAt), ResourceType = typeof(Localization.Admin))]
 		public DateTime EndsAtDate
 		{
 			get;
@@ -68,6 +69,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Poznámka k výpůjčce.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_Note), ResourceType = typeof(Localization.Admin))]
 		public string Note
 		{
 			get;
@@ -77,6 +79,7 @@ namespace Rentals.Web.Areas.Admin.Models
 		/// <summary>
 		/// Stav rezervace.
 		/// </summary>
+		[Display(Name = nameof(Localization.Admin.Renting_State), ResourceType = typeof(Localization.Admin))]
 		public RentalState State
 		{
 			get;

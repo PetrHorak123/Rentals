@@ -1,0 +1,60 @@
+﻿@model ICollection<Rentals.Web.Areas.Admin.Models.EmployeeViewModel>
+@using Rentals.Web.Localization
+@using Rentals.Common.Enums
+@using Rentals.Common.Extensions
+
+<div class="row">
+	@if (Model.Count > 0)
+	{
+		<table class="table table-bordered table-responsive">
+			<tr>
+				<th>@Admin.Employees_Name</th>
+				<th>@Admin.Employees_Email</th>
+				<th>@Admin.Employees_Roles</th>
+				<th> </th>
+			</tr>
+			@foreach (var user in Model)
+			{
+				<tr>
+					<td>@user.Name</td>
+					<td>@user.Email</td>
+					<td>
+						@foreach (var role in user.Roles)
+						{
+							<span>@role.ToLocalizedEnum(typeof(RoleType))</span> <br />
+						}
+					</td>
+					<td style="width: 75px">
+						@if (user.Roles.Contains(RoleType.Employee))
+						{
+							<button class="btn btn-danger btn-xs pull-right" onclick="remove(@user.Id, '@RoleType.Employee')">@Admin.Employees_RemoveAdmin</button>
+						}
+						@if (user.Roles.Contains(RoleType.Administrator))
+						{
+							<button class="btn btn-danger btn-xs pull-right" onclick="remove(@user.Id, '@RoleType.Administrator')">@Admin.Employees_RemoveEmployee</button>
+						}
+					</td>
+				</tr>
+			}
+		</table>
+
+		<script type="text/javascript">
+			function remove(id, role) {
+				$.ajax({
+					url: '@Url.Action("RemoveRole", "Employees")',
+					data: {
+						id: id,
+						role: role
+					},
+					success: function (data) {
+						$("#component-container").load('@Url.Action("ReloadComponentView", "Employees")');
+					}
+				});
+			}
+		</script>
+	}
+	else
+	{
+		<p>@Admin.Employees_NoActiveLinks</p>
+	}
+</div>

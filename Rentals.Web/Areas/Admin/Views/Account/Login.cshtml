@@ -6,16 +6,14 @@
 	Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
-@Html.HiddenFor(m => m.ReturnUrl)
-@Html.HiddenFor(m => m.ExternalLogins)
-
 <div class="row">
 	<h2>@Admin.Login</h2>
 	<div class="col-md-4">
+		<h4>@Admin.Login_UseAdminAccount</h4>
+		<hr />
 		@using (Html.BeginForm("Login", "Account", FormMethod.Post))
 		{
-			<h4>@Admin.Login_UseAdminAccount</h4>
-			<hr />
+			@Html.HiddenFor(m => m.ReturnUrl)
 			@Html.ValidationSummary(true)
 			<div class="form-group">
 				@Html.LabelFor(m => m.UserName)
@@ -40,18 +38,20 @@
 	<div class="col-md-6 col-md-offset-2">
 		<h4>@Admin.Login_UseExternalLogin</h4>
 		<hr />
-		<form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+		@using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+		{
+			@Html.HiddenFor(m => m.ReturnUrl)
 			<div>
 				<p>
 					@if (Model.ExternalLogins != null)
 					{
 						foreach (var provider in Model.ExternalLogins)
 						{
-							<button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+							<button type="submit" class="btn btn-default" name="@Html.NameFor(m => m.Provider)" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
 						}
 					}
 				</p>
 			</div>
-		</form>
+		}
 	</div>
 </div>

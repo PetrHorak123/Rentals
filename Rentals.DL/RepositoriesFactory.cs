@@ -12,13 +12,15 @@ namespace Rentals.DL
 		{
 			this.context = context;
 
-			Items = new ItemRepository(context);
-			Types = new ItemTypeRepository(context);
-			Rentals = new RentalRepository(context);
-			Rentings = new RentingRepository(context);
-			Roles = new BaseRepository<Role>(context);
-			Users = new UserRepository(context);
-			Accessories = new BaseRepository<ItemTypeToItemType>(context);
+			this.Items = new ItemRepository(context);
+			this.Types = new ItemTypeRepository(context);
+			this.Rentals = new RentalRepository(context);
+			this.Rentings = new RentingRepository(context);
+			this.Roles = new BaseRepository<Role>(context);
+			this.Users = new UserRepository(context);
+			this.Accessories = new BaseRepository<ItemTypeToItemType>(context);
+			this.AdminInvites = new AdminInviteRepository(context);
+			this.Histories = new HistoryRepository(context);
 		}
 
 		public IItemRepository Items { get; private set; }
@@ -34,6 +36,10 @@ namespace Rentals.DL
 		public IUserRepository Users { get; private set; }
 
 		public IRepository<ItemTypeToItemType> Accessories { get; private set; }
+
+		public IAdminInviteRepository AdminInvites { get; private set; }
+
+		public IHistoryRepository Histories { get; private set; }
 
 		public int SaveChanges()
 		{

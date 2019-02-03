@@ -129,6 +129,9 @@
   <data name="Close" xml:space="preserve">
     <value>Zavřít</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontaktujte nás</value>
+  </data>
   <data name="Cs_TimeFormat" xml:space="preserve">
     <value>{0:dd.MM.yyyy}</value>
   </data>
@@ -162,14 +165,35 @@
   <data name="Next" xml:space="preserve">
     <value>Další</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="NotInvited" xml:space="preserve">
+    <value>Bez pozvánky</value>
+  </data>
+  <data name="NotInvited_Text" xml:space="preserve">
+    <value>Pozvánka do administrace s vaším jménem neexistuje, pokud Vám vedoucí půjčovny pozvánku vystavil, kontaktujte ho o její správnost.</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>Předchozí</value>
+  </data>
+  <data name="PslibOnly" xml:space="preserve">
+    <value>Pouze pslib</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Uložit</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Vyhledat</value>
+  </data>
+  <data name="Search_Label" xml:space="preserve">
+    <value>Vyheldat:</value>
+  </data>
+  <data name="Search_Term" xml:space="preserve">
+    <value>Co hledáte?</value>
   </data>
   <data name="SmallCompetency" xml:space="preserve">
     <value>Pro zobrazení této stránky nemáte dostatečná oprávnění.</value>
@@ -185,5 +209,8 @@
   </data>
   <data name="Week" xml:space="preserve">
     <value>Týden</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
   </data>
 </root>

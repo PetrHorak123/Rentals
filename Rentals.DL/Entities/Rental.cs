@@ -72,7 +72,7 @@ namespace Rentals.DL.Entities
 			set;
 		}
 
-		#region Adresa
+		#region Kontaktní údaje
 
 		/// <summary>
 		/// Adresa - Vrací nebo nastavuje město.
@@ -96,6 +96,19 @@ namespace Rentals.DL.Entities
 		/// Adresa - Vrací nebo nastavuje poštovní směrovací číslo.
 		/// </summary>
 		public string ZipCode
+		{
+			get;
+			set;
+		}
+
+		[Required]
+		public string ContactEmail
+		{
+			get;
+			set;
+		}
+
+		public string ContactPhone
 		{
 			get;
 			set;

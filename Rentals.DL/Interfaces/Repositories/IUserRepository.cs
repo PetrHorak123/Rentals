@@ -1,4 +1,6 @@
-﻿using Rentals.DL.Entities;
+﻿using Rentals.Common.Enums;
+using Rentals.DL.Entities;
+using System.Threading.Tasks;
 
 namespace Rentals.DL.Interfaces
 {
@@ -13,5 +15,10 @@ namespace Rentals.DL.Interfaces
 		/// Vrací uživatele na základě jména.
 		/// </summary>
 		User GetByName(string name);
+
+		/// <summary>
+		/// Vrací uživatele, kteří patří do rolí.
+		/// </summary>
+		Task<User[]> GetUsersWithRolesAsync(int except = 0, params RoleType[] types);
 	}
 }

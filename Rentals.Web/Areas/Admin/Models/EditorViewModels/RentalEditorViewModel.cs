@@ -25,6 +25,8 @@ namespace Rentals.Web.Areas.Admin.Models
 				this.City = rental.City;
 				this.Street = rental.Street;
 				this.ZipCode = rental.ZipCode;
+				this.ContactEmail = rental.ContactEmail;
+				this.ContactPhone = rental.ContactPhone;
 			}
 		}
 
@@ -34,6 +36,29 @@ namespace Rentals.Web.Areas.Admin.Models
 		[Required]
 		[Display(Name = nameof(Localization.Admin.Rental_Name), ResourceType = typeof(Localization.Admin))]
 		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vracé nebo nastavuje kontaktní email.
+		/// </summary>
+		[Required]
+		[EmailAddress]
+		[Display(Name = nameof(Localization.Admin.Rental_ContactEmail), ResourceType = typeof(Localization.Admin))]
+		public string ContactEmail
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací nebo nastavuje kontaktní telefon.
+		/// </summary>
+		[Phone]
+		[Display(Name = nameof(Localization.Admin.Rental_ContactPhone), ResourceType = typeof(Localization.Admin))]
+		public string ContactPhone
 		{
 			get;
 			set;
@@ -121,6 +146,8 @@ namespace Rentals.Web.Areas.Admin.Models
 			rental.Street = this.Street;
 			rental.City = this.City;
 			rental.ZipCode = this.ZipCode;
+			rental.ContactEmail = this.ContactEmail;
+			rental.ContactPhone = this.ContactPhone;
 
 			return rental;
 		}

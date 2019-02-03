@@ -31,6 +31,15 @@ namespace Rentals.Web.Areas.Admin.Models
 		}
 
 		/// <summary>
+		/// Provider externí služby pro přihlašování.
+		/// </summary>
+		public string Provider
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Přihlašovací jméno.
 		/// </summary>
 		[Required]

@@ -6,9 +6,42 @@
 	ViewBag.Title = Localization.Basket;
 }
 
-<h2>@foreach (var v in Model.User.Basket) {
-	@v.ToString(); <br />
-}</h2>
+<h2>@Localization.Renting_Basket</h2>
+
+@if (Model.Items.Count > 0)
+{
+	<section>
+		@foreach (var item in Model.Items)
+		{
+		<div class="row">
+			<div class="col-sm-8 col-sm-push-4">
+				<form method="post" class="form-inline pull-right" asp-controller="Basket" asp-action="RemoveItemFromBasket" id="remove-item">
+					<input type="hidden" value="@(item.IsSpecificItem ? item.UniqueId : item.Name)" name="item" />
+					<button type="submit" class="btn btn-danger">x</button>
+				</form>
+				@if (!item.IsSpecificItem)
+				{
+					<form method="post" class="form-inline pull-right" asp-controller="Basket" asp-action="AddItemsToBasket" id="add-items">
+						<input type="hidden" value="@item.Name" name="itemType" />
+						<input id="count" type="number" class="form-control" min="1" max="@item.NumberOfItems" value="@(Model.User.Basket[item.Name])" name="count" />
+						<button type="submit" class="btn btn-success">@Localization.ItemDetail_ChangeCart</button>
+					</form>
+				}
+				<p class="h3">@(item.IsSpecificItem ? item.UniqueId : item.Name)</p>
+				<p class="h4">@string.Format(Localization.Renting_WillBerented, item.IsSpecificItem ? 1 : Model.User.Basket[item.Name])</p>
+				<p>@Localization.ItemDetail_NumberOfItems: @item.NumberOfItems</p>
+			</div>
+			<figure class="col-sm-4 col-sm-pull-8">
+				<img src="@item.CoverImage" class="img-responsive" alt="@item.Name" />
+			</figure>
+		</div>
+		}
+	</section>
+}
+else
+{
+	<p>@Localization.Renting_NothingInBasket</p>
+}
 
 
 <form asp-action="CreateRenting" asp-controller="Basket" method="post">
