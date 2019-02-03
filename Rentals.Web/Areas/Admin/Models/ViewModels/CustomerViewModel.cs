@@ -12,7 +12,7 @@ namespace Rentals.Web.Areas.Admin.Models
 
 			if (addRentings)
 			{
-				this.Rentings = user.Rentings.Select(r => new RentingViewModel(r)).ToList();
+				this.Rentings = user.ActualRentings.Select(r => new RentingViewModel(r)).ToList();
 			}
 		}
 
