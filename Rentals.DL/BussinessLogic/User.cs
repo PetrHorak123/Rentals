@@ -1,12 +1,26 @@
 ﻿using Rentals.Common.Extensions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Rentals.DL.Entities
 {
 	public partial class User
 	{
+		/// <summary>
+		/// Vrací všechny nezrošené výpůjčky.
+		/// </summary>
+		[NotMapped]
+		public ICollection<Renting> ActualRentings
+		{
+			get
+			{
+				return this.Rentings.Where(r => !r.IsCanceled).ToList();
+			}
+		}
+
 		/// <summary>
 		/// Vrací třídu zákazníka, které je už zformátovaná, aby byla dobře čitelná.
 		/// </summary>

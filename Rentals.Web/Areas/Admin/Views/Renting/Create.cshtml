@@ -32,7 +32,7 @@
 					@Html.LabelFor(m => m.StartsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							<input type="date" asp-for="StartsAtDate" class="form-control"/>
+							<input type="date" class="form-control" id="@Html.IdFor(m => m.StartsAtDate)" name="@Html.NameFor(m => m.StartsAtDate)">
 							@*@Html.TextBoxFor(m => m.StartsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })*@
 						</div>
 						<div class="col-sm-6">
@@ -52,7 +52,7 @@
 					@Html.LabelFor(m => m.EndsAtDate, new { @class = "control-label" })
 					<div class="row">
 						<div class="col-sm-6">
-							<input type="date" asp-for="StartsAtDate" class="form-control" />
+							<input type="date" class="form-control" id="@Html.IdFor(m => m.EndsAtDate)" name="@Html.NameFor(m => m.EndsAtDate)">
 							@*@Html.TextBoxFor(m => m.EndsAtDate, GlobalResources.Cs_TimeFormat, new { @class = "form-control reload-items" })*@
 						</div>
 						<div class="col-sm-6">
@@ -166,14 +166,6 @@
 		});
 
 		$('.dropdown-toggle').dropdown();
-
-		$("#@Html.IdFor(m => m.StartsAtDate)").datepicker({
-			dateFormat: "@GlobalResources.Js_TimeFormat"
-		});
-
-		$("#@Html.IdFor(m => m.EndsAtDate)").datepicker({
-			dateFormat: "@GlobalResources.Js_TimeFormat"
-		});
 	});
 
 	var itemsCount = @(Model.ItemIds?.Length ?? 0);

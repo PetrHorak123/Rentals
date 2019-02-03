@@ -216,8 +216,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			DateTime startsAtDateTime;
 			DateTime endsAtDateTime;
-			var success = DateTime.TryParseExact(startsAt, "dd.MM.yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out startsAtDateTime);
-			var success2 = DateTime.TryParseExact(endsAt, "dd.MM.yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out endsAtDateTime);
+			var success = DateTime.TryParseExact(startsAt, "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out startsAtDateTime);
+			var success2 = DateTime.TryParseExact(endsAt, "yyyy-MM-dd HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out endsAtDateTime);
 
 			if (!success || !success2 || itemType == null)
 				return null;
