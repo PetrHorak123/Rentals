@@ -69,8 +69,8 @@ namespace Rentals.Web
 			services.AddAuthentication()
 				.AddMicrosoftAccount(microsoftOptions =>
 				{
-					microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
-					microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+					microsoftOptions.ClientId = "22fd6b8a-14e7-4e7d-ae95-815b3c0ff4a4";
+					microsoftOptions.ClientSecret = "seNLS65153(-*bkmqvFKAX:";
 					microsoftOptions.SaveTokens = true;
 					microsoftOptions.Scope.Add("https://graph.microsoft.com/people.read");
 				});
