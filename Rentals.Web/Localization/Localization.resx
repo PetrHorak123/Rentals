@@ -162,6 +162,12 @@
   <data name="Login" xml:space="preserve">
     <value>Přihlášení</value>
   </data>
+  <data name="NonReturned_Existing" xml:space="preserve">
+    <value>Máte nenavrácené předměty, pokud jste je již navrátil, kontaktujte nás</value>
+  </data>
+  <data name="NonReturned_Rented" xml:space="preserve">
+    <value>Některé z těchto předmětů jsou v následujících 24 hodinách vypůjčeny, uspěchejte prosím navrácení!</value>
+  </data>
   <data name="Renting_Basket" xml:space="preserve">
     <value>Obsah košíku</value>
   </data>

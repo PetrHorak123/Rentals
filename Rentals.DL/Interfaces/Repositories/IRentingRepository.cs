@@ -33,6 +33,11 @@ namespace Rentals.DL.Interfaces
 		Task<Renting[]> GetNonRetruned();
 
 		/// <summary>
+		/// Vrací všechny výpůjčky, které nebyly navráceny daným uživatelem.
+		/// </summary>
+		Task<Renting[]> GetNonReturnedForUser(int userId);
+
+		/// <summary>
 		/// Vrací výpůjčky, které končí dnes.
 		/// </summary>
 		Task<Renting[]> GetRentingsEndingToday();

@@ -1,0 +1,23 @@
+﻿@model Rentals.Web.Models.NonReturnedRentingsViewModel
+@using Rentals.Web.Localization
+
+@if (Model.AreAny)
+{
+	<div class="alert alert-danger">
+		<p><strong>@Localization.NonReturned_Existing</strong></p>
+		@{ var last = Model.Items.Last();}
+		@foreach (var item in Model.Items)
+		{
+			@item
+			if (item != last)
+			{
+				<span>, </span>
+			}
+		}
+
+		@if (Model.AreRented)
+		{
+			<p><strong>@Localization.NonReturned_Rented</strong></p>
+		}
+	</div>
+}

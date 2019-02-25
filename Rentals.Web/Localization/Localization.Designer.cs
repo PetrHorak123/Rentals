@@ -196,6 +196,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Máte nenavrácené předměty, pokud jste je již navrátil, kontaktujte nás.
+        /// </summary>
+        public static string NonReturned_Existing {
+            get {
+                return ResourceManager.GetString("NonReturned_Existing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Některé z těchto předmětů jsou v následujících 24 hodinách vypůjčeny, uspěchejte prosím navrácení!.
+        /// </summary>
+        public static string NonReturned_Rented {
+            get {
+                return ResourceManager.GetString("NonReturned_Rented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obsah košíku.
         /// </summary>
         public static string Renting_Basket {
