@@ -41,5 +41,10 @@ namespace Rentals.DL.Interfaces
 		/// Vrací výpůjčky, které končí dnes.
 		/// </summary>
 		Task<Renting[]> GetRentingsEndingToday();
+
+		/// <summary>
+		/// Vrací výpůjčku podle jejího kódu pro zrušení.
+		/// </summary>
+		Renting GetRentingByCancelationCode(string code);
 	}
 }

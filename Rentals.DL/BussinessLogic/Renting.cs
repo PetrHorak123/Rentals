@@ -1,4 +1,5 @@
 ﻿using Rentals.Common.Enums;
+using Rentals.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -47,7 +48,7 @@ namespace Rentals.DL.Entities
 		/// </summary>
 		public bool IsOverlapingWith(Renting renting)
 		{
-			bool overlap = this.StartsAt < renting.EndsAt && renting.StartsAt< this.EndsAt;
+			bool overlap = this.StartsAt < renting.EndsAt && renting.StartsAt < this.EndsAt;
 
 			return overlap;
 		}
@@ -69,10 +70,11 @@ namespace Rentals.DL.Entities
 				EndsAt = endsAt,
 				State = state,
 				Note = note,
+				CancelationCode = StringExtensions.GetRandomString(25)
 			};
 
 			// Přidám do výpůjčky předměty.
-			foreach(var i in items)
+			foreach (var i in items)
 			{
 				renting.RentingToItems.Add(new RentingToItem()
 				{

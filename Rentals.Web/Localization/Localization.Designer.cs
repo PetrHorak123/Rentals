@@ -223,6 +223,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nelze zrušit výpůjčku, protože již probíhá, nebo brzy začíná..
+        /// </summary>
+        public static string Renting_CancelationLate {
+            get {
+                return ResourceManager.GetString("Renting_CancelationLate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výppůjčka byla úspěšně zrušena..
+        /// </summary>
+        public static string Renting_CancelationSuccessful {
+            get {
+                return ResourceManager.GetString("Renting_CancelationSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nesmí být v minulosti.
         /// </summary>
         public static string Renting_DateInPast {

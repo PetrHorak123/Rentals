@@ -171,6 +171,12 @@
   <data name="Renting_Basket" xml:space="preserve">
     <value>Obsah košíku</value>
   </data>
+  <data name="Renting_CancelationLate" xml:space="preserve">
+    <value>Nelze zrušit výpůjčku, protože již probíhá, nebo brzy začíná.</value>
+  </data>
+  <data name="Renting_CancelationSuccessful" xml:space="preserve">
+    <value>Výppůjčka byla úspěšně zrušena.</value>
+  </data>
   <data name="Renting_DateInPast" xml:space="preserve">
     <value>Nesmí být v minulosti</value>
   </data>

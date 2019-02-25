@@ -94,5 +94,12 @@ namespace Rentals.DL.Repositories
 
 			return query.ToArrayAsync();
 		}
+
+		public Renting GetRentingByCancelationCode(string code)
+		{
+			var renting = this.Context.Rentings.Where(r => r.CancelationCode.Equals(code));
+
+			return renting.FirstOrDefault();
+		}
 	}
 }
