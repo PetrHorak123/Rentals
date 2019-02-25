@@ -90,6 +90,15 @@ namespace Rentals.DL
 			set;
 		}
 
+		/// <summary>
+		/// Vrací nebo nastavuje, tabulky, kde se logují všechny emaily.
+		/// </summary>
+		public DbSet<EmailLog> EmailLog
+		{
+			get;
+			set;
+		}
+
 		#endregion
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

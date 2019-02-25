@@ -12,6 +12,13 @@ using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System;
+using Rentals.Web.Code;
+using Rentals.Web.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
 
 namespace Rentals.Web
 {
@@ -34,7 +41,7 @@ namespace Rentals.Web
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-			services.AddDbContext<EntitiesContext>(options => 
+			services.AddDbContext<EntitiesContext>(options =>
 				options
 					.UseLazyLoadingProxies()
 					.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;")
@@ -45,6 +52,7 @@ namespace Rentals.Web
 				.AddDefaultTokenProviders();
 
 			services.AddScoped<IRepositoriesFactory, RepositoriesFactory>();
+			services.AddScoped<IEmailSender, EmailSender>();
 
 			services.ConfigureApplicationCookie(options =>
 			{
@@ -58,7 +66,7 @@ namespace Rentals.Web
 
 			services.AddSingleton<IAuthorizationHandler, DomainRequirementHandler>();
 
-			services.AddAuthorization(options => 
+			services.AddAuthorization(options =>
 			{
 				options.AddPolicy("PslibOnly", policy => policy.AddRequirements(new DomainRequirement("pslib.cloud", "365.pslib.cz")));
 				options.AddPolicy("AbsoluteRights", policy => policy.RequireRole(RoleType.Administrator.ToString()));
@@ -67,13 +75,17 @@ namespace Rentals.Web
 			});
 
 			services.AddAuthentication()
-				.AddMicrosoftAccount(microsoftOptions =>
-				{
-					microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
-					microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
-					microsoftOptions.SaveTokens = true;
-					microsoftOptions.Scope.Add("https://graph.microsoft.com/people.read");
-				});
+			.AddMicrosoftAccount(microsoftOptions =>
+			{
+				microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
+				microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+				microsoftOptions.SaveTokens = true;
+
+				microsoftOptions.Scope.Add("people.read");
+				microsoftOptions.Scope.Add("mail.send");
+				microsoftOptions.Scope.Add("openid");
+				microsoftOptions.Scope.Add("offline_access");
+			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

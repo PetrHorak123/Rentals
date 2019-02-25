@@ -3,8 +3,8 @@ using Rentals.Common.Enums;
 using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
+using Rentals.Web.Interfaces;
 using Rentals.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,10 +13,12 @@ namespace Rentals.Web.Controllers
 	public class BasketController : BaseController
 	{
 		private readonly EntitiesContext context;
+		private readonly IEmailSender sender;
 
-		public BasketController(IRepositoriesFactory factory, EntitiesContext context) : base(factory)
+		public BasketController(IRepositoriesFactory factory, EntitiesContext context, IEmailSender sender) : base(factory)
 		{
 			this.context = context;
+			this.sender = sender;
 		}
 
 		[Route("/Basket")]
@@ -119,6 +121,8 @@ namespace Rentals.Web.Controllers
 					this.context.Users.Update(this.CurrentUser);
 
 					this.RepositoriesFactory.SaveChanges();
+
+					this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken);
 
 					return View("RentingCreationSuccessful", FetchModel<BaseViewModel>());
 				}

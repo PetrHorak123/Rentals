@@ -61,6 +61,51 @@ namespace Rentals.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zrušení výpůjčky.
+        /// </summary>
+        public static string EmailType_RentingCalcelation {
+            get {
+                return ResourceManager.GetString("EmailType_RentingCalcelation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změna výpůjčky.
+        /// </summary>
+        public static string EmailType_RentingEdit {
+            get {
+                return ResourceManager.GetString("EmailType_RentingEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upozornění na konec výpůjčky.
+        /// </summary>
+        public static string EmailType_RentingEndsReminder {
+            get {
+                return ResourceManager.GetString("EmailType_RentingEndsReminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nová výpůjčka.
+        /// </summary>
+        public static string EmailType_RentingNew {
+            get {
+                return ResourceManager.GetString("EmailType_RentingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NENAVRÁCENÁ VÝPŮJČKA!!.
+        /// </summary>
+        public static string EmailType_RentingNotReturned {
+            get {
+                return ResourceManager.GetString("EmailType_RentingNotReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zrušeno.
         /// </summary>
         public static string RentalState_Canceled {

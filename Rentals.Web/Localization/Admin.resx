@@ -531,4 +531,16 @@
   <data name="Rental_ContactPhone" xml:space="preserve">
     <value>Telefonní čislo</value>
   </data>
+  <data name="RentingOverview_LoginUsingMicrosft" xml:space="preserve">
+    <value>Přihlašte se pomocí microsfot účtu</value>
+  </data>
+  <data name="RentingOverview_MailsSent" xml:space="preserve">
+    <value>Notifikace byly odeslány</value>
+  </data>
+  <data name="RentingOverview_MicrosoftApiDown" xml:space="preserve">
+    <value>Emaily nebyly odeslány, buď vám vypršel token a nebyl obnoven (to lze vyřešit odhlášením a příhlášením) nebo microsoft api je dole</value>
+  </data>
+  <data name="RentingOverview_SendNotifications" xml:space="preserve">
+    <value>Odeslat upozornění</value>
+  </data>
 </root>

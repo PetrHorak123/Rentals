@@ -1,14 +1,34 @@
 ﻿@using Rentals.Web.Localization
 @using Rentals.Web.Areas.Admin.ViewComponents
 
-@{ 
+@{
 	ViewBag.Title = Admin.RentingOverview;
 }
 
+<div class="row" id="messages">
+</div>
+
 <h2 class="row">
 	@Admin.RentingOverview_Today
+	<button class="pull-right btn btn-primary" id="send-mails">@Admin.RentingOverview_SendNotifications</button>
 </h2>
 
 <div class="row" id="component-container">
 	@await Component.InvokeAsync(nameof(RentingOverview))
 </div>
+
+<script type="text/javascript">
+	$(function () {
+		$("#send-mails").click(function() {
+			$.ajax({
+				url: '@Url.Action("SendNotifications", "Home")',
+				success: function() {
+					$("#messages").prepend('<div class="alert alert-success fade in"><a href="#" class="close" data-dismiss="alert">&times;</a>@Admin.RentingOverview_MailsSent</div>');
+				},
+				error: function (message) {
+					$("#messages").prepend('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a>' + message.responseText + '</div>');
+				}
+			});
+		});
+	});
+</script>

@@ -1150,6 +1150,24 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Přihlašte se pomocí microsfot účtu.
+        /// </summary>
+        public static string RentingOverview_LoginUsingMicrosft {
+            get {
+                return ResourceManager.GetString("RentingOverview_LoginUsingMicrosft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifikace byly odeslány.
+        /// </summary>
+        public static string RentingOverview_MailsSent {
+            get {
+                return ResourceManager.GetString("RentingOverview_MailsSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Označit výpůjčku jako.
         /// </summary>
         public static string RentingOverView_MarkAs {
@@ -1173,6 +1191,15 @@ namespace Rentals.Web.Localization {
         public static string RentingOverView_MarkAsReturned {
             get {
                 return ResourceManager.GetString("RentingOverView_MarkAsReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emaily nebyly odeslány, buď vám vypršel token a nebyl obnoven (to lze vyřešit odhlášením a příhlášením) nebo microsoft api je dole.
+        /// </summary>
+        public static string RentingOverview_MicrosoftApiDown {
+            get {
+                return ResourceManager.GetString("RentingOverview_MicrosoftApiDown", resourceCulture);
             }
         }
         
@@ -1245,6 +1272,15 @@ namespace Rentals.Web.Localization {
         public static string RentingOverview_Returned {
             get {
                 return ResourceManager.GetString("RentingOverview_Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odeslat upozornění.
+        /// </summary>
+        public static string RentingOverview_SendNotifications {
+            get {
+                return ResourceManager.GetString("RentingOverview_SendNotifications", resourceCulture);
             }
         }
         

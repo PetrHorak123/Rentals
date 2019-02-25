@@ -73,5 +73,12 @@ namespace Rentals.DL.Repositories
 
 			return query.ToArray();
 		}
+
+		public Task<Renting[]> GetRentingsEndingToday()
+		{
+			var query = this.Context.Rentings.Where(r => r.EndsAt.Date == DateTime.Today && !r.NotificationSent && !r.IsCanceled);
+
+			return query.ToArrayAsync();
+		}
 	}
 }

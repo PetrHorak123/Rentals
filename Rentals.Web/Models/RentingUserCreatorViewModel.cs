@@ -110,7 +110,7 @@ namespace Rentals.Web.Models
 				yield return new ValidationResult(Localization.Localization.Renting_WrongDate, new[] { nameof(this.StartsAtDate) });
 			}
 
-			if (this.StartsAtDate < DateTime.Now)
+			if (this.StartsAt < DateTime.Now)
 			{
 				yield return new ValidationResult(Localization.Localization.Renting_DateInPast, new[] { nameof(this.StartsAtDate) });
 			}

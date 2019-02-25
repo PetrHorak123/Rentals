@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Models;
+using System.Threading.Tasks;
 
 namespace Rentals.Web.Controllers
 {
@@ -12,6 +15,8 @@ namespace Rentals.Web.Controllers
 		private User currentUser;
 		private FetchViewModel fetchViewModel;
 		private Rental rental;
+
+		protected const string accessToken = "access_token";
 
 		public BaseController(IRepositoriesFactory factory)
 		{
@@ -50,6 +55,11 @@ namespace Rentals.Web.Controllers
 			get;
 			private set;
 		}
+
+		/// <summary>
+		/// Vrací token od microsoftu.
+		/// </summary>
+		protected string MicrosoftAccessToken => Request.Cookies[accessToken];
 
 		/// <summary>
 		/// Vytvoří model, který dědí z <see cref="BaseViewModel"/> a naplní ho daty.
