@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Rentals.Common.Enums;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Rentals.Web.Areas.Admin.Controllers
 {
@@ -97,6 +99,14 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			if (!office.Succeeded)
 				return View("PslibOnly");
+
+			var at = info.AuthenticationTokens.First(t => t.Name == accessToken);
+
+			var cookies = new CookieOptions();
+			cookies.Expires = DateTime.Now.AddDays(1);
+
+			Response.Cookies.Delete(accessToken);
+			Response.Cookies.Append(accessToken, at.Value);
 
 			var name = info.Principal.FindFirstValue(ClaimTypes.Name);
 

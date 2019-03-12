@@ -331,7 +331,7 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Změnít popisek předmětu.
+        ///   Looks up a localized string similar to Změnit popisek předmětu.
         /// </summary>
         public static string History_ChangeDescription {
             get {

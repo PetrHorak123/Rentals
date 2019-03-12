@@ -187,6 +187,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Počet předmětů: {0}.
+        /// </summary>
+        public static string Items_NumberOfItems {
+            get {
+                return ResourceManager.GetString("Items_NumberOfItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přihlášení.
         /// </summary>
         public static string Login {
