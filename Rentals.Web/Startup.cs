@@ -14,11 +14,6 @@ using Rentals.DL.Interfaces;
 using System;
 using Rentals.Web.Code;
 using Rentals.Web.Interfaces;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using System.Collections.Generic;
 
 namespace Rentals.Web
 {
@@ -44,7 +39,7 @@ namespace Rentals.Web
 			services.AddDbContext<EntitiesContext>(options =>
 				options
 					.UseLazyLoadingProxies()
-					.UseSqlServer(@"Data Source=.\SQLEXPRESS;Integrated Security=True;")
+					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
 			);
 
 			services.AddIdentity<User, Role>()
@@ -77,8 +72,8 @@ namespace Rentals.Web
 			services.AddAuthentication()
 			.AddMicrosoftAccount(microsoftOptions =>
 			{
-				microsoftOptions.ClientId = "ab5f6bf1-5063-48bd-bd61-12ad4ebffcf5";
-				microsoftOptions.ClientSecret = "khctMQ219#lrtCIYDQ84:@-";
+				microsoftOptions.ClientId = Configuration.GetSection("MicrosftSettings")["ClientId"];
+				microsoftOptions.ClientSecret = Configuration.GetSection("MicrosftSettings")["ClientSecret"];
 				microsoftOptions.SaveTokens = true;
 
 				microsoftOptions.Scope.Add("people.read");

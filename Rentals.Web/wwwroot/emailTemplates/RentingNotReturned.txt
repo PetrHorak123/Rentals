@@ -1,0 +1,8 @@
+﻿Máte nenavrácené předměty!!!
+{{#newline}}
+{{#each Renting.Items}}
+	{{Type.Name}}({{UniqueIdentifier}})
+	{{#newline}}
+{{/each}}
+
+Toto je automaticky vytvořený email.

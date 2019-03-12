@@ -41,7 +41,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 				this.RepositoriesFactory.SaveChanges();
 
-				this.sender.SendRentingCreated(renting, this.CurrentUser, this.MicrosoftAccessToken);
+				await this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode }, HttpContext.Request.Scheme));
 
 				return RedirectToAction("Index", "Calendar");
 			}
@@ -88,7 +88,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				model.UpdateEntity(renting);
 				this.RepositoriesFactory.SaveChanges();
 
-				this.sender.SendRentingEdited(renting, this.MicrosoftAccessToken);
+				var rerult = this.sender.SendRentingEdited(renting, this.MicrosoftAccessToken).Result;
 
 				return RedirectToAction("Detail", "Renting", new { id = renting.Id });
 			}
@@ -126,7 +126,9 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			RepositoriesFactory.SaveChanges();
 
 			if (state == RentalState.Canceled)
-				this.sender.SendRentingCanceled(renting, this.CurrentUser, this.MicrosoftAccessToken);
+			{
+				var result = this.sender.SendRentingCanceled(renting, this.CurrentUser, this.MicrosoftAccessToken).Result;
+			}
 
 			if(redirectToIndex)
 				return RedirectToAction("Index", "Home");

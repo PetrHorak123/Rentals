@@ -126,7 +126,6 @@ namespace Rentals.Web.Controllers
 			return ViewComponent(nameof(ItemsOverview), new { from, to, q });
 		}
 
-		[Route("CancelRenting")]
 		public ActionResult CancelRenting(string code)
 		{
 			var renting = this.RepositoriesFactory.Rentings.Find(x => x.CancelationCode == code).FirstOrDefault();

@@ -5,17 +5,15 @@ using Rentals.Web.Models.Email;
 
 namespace Rentals.Web.Interfaces
 {
+	/// <summary>
+	/// Tasky musí být awaitované kvůli logování emailů.
+	/// </summary>
 	public interface IEmailSender
 	{
 		/// <summary>
 		/// Pošle email o vytvoření výpůjčky.
 		/// </summary>
-		Task<bool> SendRentingCreated(Renting renting, string token);
-
-		/// <summary>
-		/// Pošle email o vytvoření výpůjčky z administrativy.
-		/// </summary>
-		Task<bool> SendRentingCreated(Renting renting, User createdBy, string token);
+		Task<bool> SendRentingCreated(Renting renting, string token, string cancelation);
 
 		/// <summary>
 		/// Pošle email o editaci výpůjčky.

@@ -1,0 +1,9 @@
+﻿Brzy vám končí výpůjčka {{Renting.EndsAt}}, nezapomeňte navrátit předměty.
+{{#newline}}
+Výpůjčka se týká předmětů:
+{{#each Renting.Items}}
+	{{Type.Name}}({{UniqueIdentifier}})
+	{{#newline}}
+{{/each}}
+
+Toto je automaticky vytvořený email.

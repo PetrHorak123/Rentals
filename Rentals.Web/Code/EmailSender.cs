@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Mustache;
@@ -36,19 +37,9 @@ namespace Rentals.Web.Code
 
 		#region Specific mails
 
-		public Task<bool> SendRentingCreated(Renting renting, string token)
+		public Task<bool> SendRentingCreated(Renting renting, string token, string url)
 		{
-			string content = "fasfasfs";
-
-			return SendMail(
-				Message.CreateMessage(renting, EmailType.RentingNew.ToLocalizedEnum(typeof(EmailType)), content),
-				token, EmailType.RentingNew
-			);
-		}
-
-		public Task<bool> SendRentingCreated(Renting renting, User createdBy, string token)
-		{
-			string content = "";
+			var content = this.Process(File.ReadAllText($"wwwroot/emailTemplates/{EmailType.RentingNew.ToString()}.txt", Encoding.UTF8), new { Renting = renting, Url = url });
 
 			return SendMail(
 				Message.CreateMessage(renting, EmailType.RentingNew.ToLocalizedEnum(typeof(EmailType)), content),
@@ -58,7 +49,7 @@ namespace Rentals.Web.Code
 
 		public Task<bool> SendRentingEdited(Renting renting, string token)
 		{
-			string content = "";
+			var content = this.Process(File.ReadAllText($"wwwroot/emailTemplates/{EmailType.RentingEdit.ToString()}.txt", Encoding.UTF8), new { Renting = renting });
 
 			return SendMail(
 				Message.CreateMessage(renting, EmailType.RentingEdit.ToLocalizedEnum(typeof(EmailType)), content),
@@ -68,7 +59,7 @@ namespace Rentals.Web.Code
 
 		public Task<bool> SendRentingCanceled(Renting renting, User canceledBy, string token)
 		{
-			string content = "";
+			var content = this.Process(File.ReadAllText($"wwwroot/emailTemplates/{EmailType.RentingCalcelation.ToString()}.txt", Encoding.UTF8), new { Renting = renting, User = canceledBy });
 
 			return SendMail(
 				Message.CreateMessage(renting, EmailType.RentingCalcelation.ToLocalizedEnum(typeof(EmailType)), content),
@@ -88,7 +79,7 @@ namespace Rentals.Web.Code
 			// Nechám projet všechny, aby bylo lognuté, že se někdo pokusil o poslání.
 			foreach (var renting in rentings)
 			{
-				string content = "";
+				var content = this.Process(File.ReadAllText($"wwwroot/emailTemplates/{EmailType.RentingEndsReminder.ToString()}.txt", Encoding.UTF8), new { Renting = renting });
 
 				var result = await SendMail(
 					Message.CreateMessage(renting, EmailType.RentingEndsReminder.ToLocalizedEnum(typeof(EmailType)), content),
@@ -122,7 +113,7 @@ namespace Rentals.Web.Code
 			// Nechám projet všechny, aby bylo lognuté, že se někdo pokusil o poslání.
 			foreach (var renting in rentings)
 			{
-				string content = "";
+				var content = this.Process(File.ReadAllText($"wwwroot/emailTemplates/{EmailType.RentingNotReturned.ToString()}.txt", Encoding.UTF8), new { Renting = renting });
 
 				var result = await SendMail(
 					Message.CreateMessage(renting, EmailType.RentingNotReturned.ToLocalizedEnum(typeof(EmailType)), content),
@@ -146,7 +137,7 @@ namespace Rentals.Web.Code
 			using (var client = new HttpClient())
 			{
 				client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-				string json = JsonConvert.SerializeObject(new { message= email });
+				string json = JsonConvert.SerializeObject(new { message = email });
 
 				var response = await client.PostAsync(
 					$"https://graph.microsoft.com/v1.0/me/sendMail",

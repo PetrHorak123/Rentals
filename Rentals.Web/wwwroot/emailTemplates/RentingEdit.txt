@@ -1,0 +1,9 @@
+﻿Vaše výpůjčka byla změněna, nyní začíná {{Renting.StartsAt}} a končí {{Renting.EndsAt}}.
+{{#newline}}
+Výpůjčka se týká předmětů:
+{{#each Renting.Items}}
+	{{Type.Name}}({{UniqueIdentifier}})
+	{{#newline}}
+{{/each}}
+
+Toto je automaticky vytvořený email.

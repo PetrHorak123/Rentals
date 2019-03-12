@@ -64,6 +64,7 @@ namespace Rentals.Web.Controllers
 
 		[HttpPost]
 		[Route("/Basket")]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateRenting(RentingUserCreatorViewModel postedModel)
 		{
 			var model = FetchModel(postedModel);
@@ -85,8 +86,9 @@ namespace Rentals.Web.Controllers
 							allItemsAvaible = false;
 							ModelState.AddModelError(string.Empty, 
 								string.Format(Localization.Localization.Renting_ItemNotAvaible, item.Type.Name + " " + item.UniqueIdentifier));
-							items.Add(item);
 						}
+
+						items.Add(item);
 					}
 					// Je obecný
 					else
@@ -122,7 +124,7 @@ namespace Rentals.Web.Controllers
 
 					this.RepositoriesFactory.SaveChanges();
 
-					this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken);
+					var result = this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode}, HttpContext.Request.Scheme)).Result;
 
 					return View("RentingCreationSuccessful", FetchModel<BaseViewModel>());
 				}
