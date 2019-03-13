@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rentals.Common.Enums;
-using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 
@@ -12,7 +11,7 @@ namespace Rentals.Web.Data
 {
 	public static class Seed
 	{
-		public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration Configuration)
+		public static async Task CreateData(IServiceProvider serviceProvider, IConfiguration configuration)
 		{
 			// Přidání rolí
 			var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
@@ -24,21 +23,21 @@ namespace Rentals.Web.Data
 				var roleExist = await roleManager.RoleExistsAsync(type.ToString());
 				if (!roleExist)
 				{
-					await roleManager.CreateAsync(new Role((RoleType) type, type.ToString()));
+					await roleManager.CreateAsync(new Role((RoleType)type, type.ToString()));
 				}
 			}
 
-			var user = await userManager.FindByNameAsync(Configuration.GetSection("UserSettings")["UserName"]);
-			
+			var user = await userManager.FindByNameAsync(configuration.GetSection("UserSettings")["UserName"]);
+
 			// Pokud admin účet neexistuje, vytvořím ho
 			if (user == null)
 			{
 				var poweruser = new User()
 				{
-					UserName = Configuration.GetSection("UserSettings")["UserName"]
+					UserName = configuration.GetSection("UserSettings")["UserName"]
 				};
 
-				string userPassword = Configuration.GetSection("UserSettings")["UserPassword"];
+				string userPassword = configuration.GetSection("UserSettings")["UserPassword"];
 
 				var createPowerUser = await userManager.CreateAsync(poweruser, userPassword);
 				if (createPowerUser.Succeeded)
@@ -48,22 +47,25 @@ namespace Rentals.Web.Data
 				}
 			}
 
-			using(var context = (IRepositoriesFactory)serviceProvider.GetService(typeof(IRepositoriesFactory)))
-			{
-				if(context.Rentals.GetFirst() == null)
-				{
-					context.Rentals.Add(new Rental()
-					{
-						Name = Configuration.GetSection("RentalSettings")["RentalName"],
-						StartsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["StartsAt"]), 0, 0),
-						EndsAt = new TimeSpan(int.Parse(Configuration.GetSection("RentalSettings")["EndsAt"]), 0, 0),
-						MinTimeUnit = int.Parse(Configuration.GetSection("RentalSettings")["MinTimeUnit"]),
-						ContactEmail = Configuration.GetSection("RentalSettings")["ContactEmail"]
-					});
+			var context = (IRepositoriesFactory)serviceProvider.GetService(typeof(IRepositoriesFactory));
 
-					context.SaveChanges();
-				}
+			if (context.Rentals.GetFirst() == null)
+			{
+				context.Rentals.Add(new Rental()
+				{
+					Name = configuration.GetSection("RentalSettings")["RentalName"],
+					StartsAt = new TimeSpan(int.Parse(configuration.GetSection("RentalSettings")["StartsAt"]), 0, 0),
+					EndsAt = new TimeSpan(int.Parse(configuration.GetSection("RentalSettings")["EndsAt"]), 0, 0),
+					MinTimeUnit = int.Parse(configuration.GetSection("RentalSettings")["MinTimeUnit"]),
+					ContactEmail = configuration.GetSection("RentalSettings")["ContactEmail"]
+				});
+
+				context.SaveChanges();
 			}
+
+			await SeedTestData.Create(context, userManager);
+
+			context.Dispose();
 		}
 	}
 }

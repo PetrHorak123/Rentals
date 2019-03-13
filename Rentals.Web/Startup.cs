@@ -39,7 +39,8 @@ namespace Rentals.Web
 			services.AddDbContext<EntitiesContext>(options =>
 				options
 					.UseLazyLoadingProxies()
-					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+					.UseInMemoryDatabase()
+					// .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
 			);
 
 			services.AddIdentity<User, Role>()
