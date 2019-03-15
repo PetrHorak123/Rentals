@@ -68,14 +68,14 @@ namespace Rentals.Web.Controllers
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 			var name = info.Principal.FindFirstValue(ClaimTypes.Name);
-			// Když se přihlásil, hned zkusím vytáhnou třídu, pustím to na jiným vlákně, aby se to nebrzdilo, níže se metoda awaituje.
-			var getClass = this.GetClassFromMicrosoft(info.AuthenticationTokens, name);
-			string @class = string.Empty;
+			// Zíkaní dodatečných dat
+			// var getClass = this.GetClassFromMicrosoft(info.AuthenticationTokens, name);
+			// string @class = string.Empty;
 
-			var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
+			// var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
 
-			if (!office.Succeeded)
-				return View("PslibOnly");
+			// if (!office.Succeeded)
+			//	return View("PslibOnly");
 
 			// Uložím si access token do cookies.
 			var at = info.AuthenticationTokens.First(t => t.Name == accessToken);
@@ -103,15 +103,15 @@ namespace Rentals.Web.Controllers
 			if (user != null)
 			{
 				await signInManager.SignInAsync(user, isPersistent: false);
-				@class = await getClass;
-				user.Class = @class;
+				// @class = await getClass;
+				// user.Class = @class;
 				user.Name = name;
 				return RedirectToLocal(returnUrl);
 			}
 
 			// Uživatel není v databázi, vytvořím ho.
-			@class = await getClass;
-			user = new User { UserName = email, Email = email, Name = name, Class = @class };
+			// @class = await getClass;
+			user = new User { UserName = email, Email = email, Name = name /*, Class = @class */ };
 			var userResult = await userManager.CreateAsync(user);
 			if (userResult.Succeeded)
 			{

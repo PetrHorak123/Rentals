@@ -95,10 +95,11 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
-			var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
+			// Ukázka implementace zamčení na utčitou doménu.
+			// var office = await authorization.AuthorizeAsync(this.User, email, "PslibOnly");
 
-			if (!office.Succeeded)
-				return View("PslibOnly");
+			// if (!office.Succeeded)
+			//	return View("PslibOnly");
 
 			var at = info.AuthenticationTokens.First(t => t.Name == accessToken);
 

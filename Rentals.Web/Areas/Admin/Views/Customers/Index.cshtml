@@ -16,7 +16,6 @@
 			<tr>
 				<th>@Admin.Customers_Name</th>
 				<th>@Admin.Customers_Email</th>
-				<th>@Admin.Customers_Class</th>
 				<th></th>
 			</tr>
 			@foreach (var user in Model)
@@ -24,7 +23,6 @@
 				<tr>
 					<td>@user.Name</td>
 					<td>@user.Email</td>
-					<td>@user.Class</td>
 					<td style="width: 75px">
 						@Html.ActionLink(GlobalResources.Detail, "Detail", "Customers", new { id = user.Id}, new { @class = "btn btn-warning btn-xs pull-right" })
 					</td>

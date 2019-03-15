@@ -54,8 +54,9 @@ namespace Rentals.DL.Entities
 		}
 
 		/// <summary>
-		/// Vrací nebo nastavuje třídu.
+		/// Vrací nebo nastavuje třídu(příklad dodatečných informací k zákazníkovy).
 		/// </summary>
+		/// <remarks>Implementace ůdaje navíc</remarks>
 		public string Class
 		{
 			get;
