@@ -3,8 +3,8 @@ using Rentals.Common.Enums;
 using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
+using Rentals.Web.Interfaces;
 using Rentals.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,10 +13,12 @@ namespace Rentals.Web.Controllers
 	public class BasketController : BaseController
 	{
 		private readonly EntitiesContext context;
+		private readonly IEmailSender sender;
 
-		public BasketController(IRepositoriesFactory factory, EntitiesContext context) : base(factory)
+		public BasketController(IRepositoriesFactory factory, EntitiesContext context, IEmailSender sender) : base(factory)
 		{
 			this.context = context;
+			this.sender = sender;
 		}
 
 		[Route("/Basket")]
@@ -62,6 +64,7 @@ namespace Rentals.Web.Controllers
 
 		[HttpPost]
 		[Route("/Basket")]
+		[ValidateAntiForgeryToken]
 		public ActionResult CreateRenting(RentingUserCreatorViewModel postedModel)
 		{
 			var model = FetchModel(postedModel);
@@ -83,8 +86,9 @@ namespace Rentals.Web.Controllers
 							allItemsAvaible = false;
 							ModelState.AddModelError(string.Empty, 
 								string.Format(Localization.Localization.Renting_ItemNotAvaible, item.Type.Name + " " + item.UniqueIdentifier));
-							items.Add(item);
 						}
+
+						items.Add(item);
 					}
 					// Je obecný
 					else
@@ -119,6 +123,8 @@ namespace Rentals.Web.Controllers
 					this.context.Users.Update(this.CurrentUser);
 
 					this.RepositoriesFactory.SaveChanges();
+
+					var result = this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode}, HttpContext.Request.Scheme)).Result;
 
 					return View("RentingCreationSuccessful", FetchModel<BaseViewModel>());
 				}

@@ -21,13 +21,12 @@ namespace Rentals.Web
 				{
 					var serviceProvider = services.GetRequiredService<IServiceProvider>();
 					var configuration = services.GetRequiredService<IConfiguration>();
-					Seed.CreateRoles(serviceProvider, configuration).Wait();
-
+					Seed.CreateData(serviceProvider, configuration).Wait();
 				}
 				catch (Exception exception)
 				{
 					var logger = services.GetRequiredService<ILogger<Program>>();
-					logger.LogError(exception, "An error occurred while creating roles");
+					logger.LogError(exception, "An error occurred while creating data");
 				}
 			}
 

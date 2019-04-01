@@ -61,6 +61,24 @@ namespace Rentals.DL.Entities
 		}
 
 		/// <summary>
+		/// Vrací, nebo nastavuje, zda bylo odesláno upozornění na konec výpůjčky.
+		/// </summary>
+		public bool NotificationSent
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Vrací, nebo nastavuje kód pro zrušení výpůjčky uživatelem.
+		/// </summary>
+		public string CancelationCode
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Zákazník, který si předmět zapůjčil.
 		/// </summary>
 		public int UserId

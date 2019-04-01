@@ -1,5 +1,6 @@
 ﻿@using Rentals.Common.Enums
 @using Rentals.Web.Localization
+@using Rentals.Web.ViewComponents
 
 <!DOCTYPE html>
 <html>
@@ -52,10 +53,11 @@
 	<partial name="_CookieConsentPartial" />
 
 	<div class="container body-content">
+		@await Component.InvokeAsync(nameof(NonReturnedRentings))
 		@RenderBody()
 		<hr />
 		<footer>
-			<p>&copy; 2018 - Rentals.Web</p>
+			<p>&copy; Aplikace pro půjčovaní školního vybavení</p>
 		</footer>
 	</div>
 

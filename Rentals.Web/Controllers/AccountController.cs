@@ -13,8 +13,9 @@ using Rentals.Common.Enums;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Rentals.Web.Controllers
 {
@@ -76,8 +77,18 @@ namespace Rentals.Web.Controllers
 			if (!office.Succeeded)
 				return View("PslibOnly");
 
+			// Uložím si access token do cookies.
+			var at = info.AuthenticationTokens.First(t => t.Name == accessToken);
+
+			var cookies = new CookieOptions();
+			cookies.Expires = DateTime.Now.AddDays(1);
+
+			Response.Cookies.Delete(accessToken);
+			Response.Cookies.Append(accessToken, at.Value);
+
 			var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
 				info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
 			if (result.Succeeded)
 			{
 				return RedirectToLocal(returnUrl);
@@ -151,7 +162,7 @@ namespace Rentals.Web.Controllers
 			HttpClient client = new HttpClient();
 
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); // ACCEPT header
-			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokens.First().Value}");
+			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokens.First(t => t.Name == accessToken).Value}");
 
 			// OK, přivnávám vypadá to divně, ale /me na api protě department nevrací,
 			// tudíž todle je jediná mě známá metoda k 31.1.2019 jak tento údaj zjistit, 

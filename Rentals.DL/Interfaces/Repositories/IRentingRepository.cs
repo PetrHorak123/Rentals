@@ -31,5 +31,20 @@ namespace Rentals.DL.Interfaces
 		/// Vrací všenchy výpůjčky, které nebyly navráceny.
 		/// </summary>
 		Task<Renting[]> GetNonRetruned();
+
+		/// <summary>
+		/// Vrací všechny výpůjčky, které nebyly navráceny daným uživatelem.
+		/// </summary>
+		Task<Renting[]> GetNonReturnedForUser(int userId);
+
+		/// <summary>
+		/// Vrací výpůjčky, které končí dnes.
+		/// </summary>
+		Task<Renting[]> GetRentingsEndingToday();
+
+		/// <summary>
+		/// Vrací výpůjčku podle jejího kódu pro zrušení.
+		/// </summary>
+		Renting GetRentingByCancelationCode(string code);
 	}
 }

@@ -187,6 +187,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Počet předmětů: {0}.
+        /// </summary>
+        public static string Items_NumberOfItems {
+            get {
+                return ResourceManager.GetString("Items_NumberOfItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přihlášení.
         /// </summary>
         public static string Login {
@@ -196,11 +205,47 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Máte nenavrácené předměty, pokud jste je již navrátil, kontaktujte nás.
+        /// </summary>
+        public static string NonReturned_Existing {
+            get {
+                return ResourceManager.GetString("NonReturned_Existing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Některé z těchto předmětů jsou v následujících 24 hodinách vypůjčeny, uspěchejte prosím navrácení!.
+        /// </summary>
+        public static string NonReturned_Rented {
+            get {
+                return ResourceManager.GetString("NonReturned_Rented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obsah košíku.
         /// </summary>
         public static string Renting_Basket {
             get {
                 return ResourceManager.GetString("Renting_Basket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nelze zrušit výpůjčku, protože již probíhá, nebo brzy začíná..
+        /// </summary>
+        public static string Renting_CancelationLate {
+            get {
+                return ResourceManager.GetString("Renting_CancelationLate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výppůjčka byla úspěšně zrušena..
+        /// </summary>
+        public static string Renting_CancelationSuccessful {
+            get {
+                return ResourceManager.GetString("Renting_CancelationSuccessful", resourceCulture);
             }
         }
         

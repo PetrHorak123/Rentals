@@ -13,6 +13,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181201195535_OpeningHoursAndAccesories.cs" />
     <Compile Remove="Migrations\20181201200030_AddOpeningHoursAndAccesories.cs" />
+    <Compile Remove="Migrations\20190224134540_addEmailLogAndEmailPropsToRenting.cs" />
   </ItemGroup>
 
   <ItemGroup>

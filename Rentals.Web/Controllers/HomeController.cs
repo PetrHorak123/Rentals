@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Rentals.Common.Enums;
 using Rentals.DL.Interfaces;
+using Rentals.Web.Interfaces;
 using Rentals.Web.Models;
 using Rentals.Web.ViewComponents;
 
@@ -12,8 +14,11 @@ namespace Rentals.Web.Controllers
 {
 	public class HomeController : BaseController
 	{
-		public HomeController(IRepositoriesFactory factory) : base(factory)
+		private readonly IEmailSender sender;
+
+		public HomeController(IRepositoriesFactory factory, IEmailSender sender) : base(factory)
 		{
+			this.sender = sender;
 		}
 
 		public ActionResult Index(DateTime? from = null, DateTime? to = null)
@@ -119,6 +124,31 @@ namespace Rentals.Web.Controllers
 		public ActionResult SeeItems(DateTime? from, DateTime? to, string q)
 		{
 			return ViewComponent(nameof(ItemsOverview), new { from, to, q });
+		}
+
+		public ActionResult CancelRenting(string code)
+		{
+			var renting = this.RepositoriesFactory.Rentings.Find(x => x.CancelationCode == code).FirstOrDefault();
+
+			if (renting == null || renting.UserId != this.CurrentUser.Id)
+				return BadRequest();
+
+			var now = DateTime.Now;
+
+			// Pouze hodinu před tím než začala
+			if (renting.StartsAt > now.AddHours(1))
+			{
+				renting.State = RentalState.Canceled;
+				this.RepositoriesFactory.SaveChanges();
+
+				var result = this.sender.SendRentingCanceled(renting, this.CurrentUser, this.MicrosoftAccessToken).Result;
+
+				ViewBag.CancelationSuccessful = true;
+				return View();
+			}
+
+			ViewBag.CancelationSuccessful = false;
+			return View();
 		}
 
 		public IActionResult Privacy()

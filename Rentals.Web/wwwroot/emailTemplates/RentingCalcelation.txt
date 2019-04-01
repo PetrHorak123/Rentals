@@ -1,0 +1,9 @@
+﻿Vaše výpůjčka začínající probíhající od {{Renting.StartsAt}} do {{Renting.EndsAt}} byla zrušena.
+{{#newline}}
+Výpůjčka se týká předmětů:
+{{#each Renting.Items}}
+	{{Type.Name}}({{UniqueIdentifier}})
+	{{#newline}}
+{{/each}}
+
+Toto je automaticky vytvořený email.

@@ -1,0 +1,10 @@
+﻿Byla vám vytvořena nová výpůjčka od {{Renting.StartsAt}} do {{Renting.EndsAt}}.
+Pokud si přejete výpůjčku zrušit, můžete tak učinit na {{Url}}.
+{{#newline}}
+Výpůjčka se týká předmětů:
+{{#each Renting.Items}}
+	{{Type.Name}}({{UniqueIdentifier}})
+	{{#newline}}
+{{/each}}
+
+Toto je automaticky vytvořený email.

@@ -4,6 +4,7 @@ using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using Rentals.Web.Areas.Admin.Models;
+using Rentals.Web.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +13,13 @@ namespace Rentals.Web.Areas.Admin.Controllers
 {
 	public class RentingController : AdminBaseController
 	{
-		private UserManager<User> userManager;
+		private readonly UserManager<User> userManager;
+		private readonly IEmailSender sender;
 
-		public RentingController(IRepositoriesFactory factory, UserManager<User> userManager) : base(factory)
+		public RentingController(IRepositoriesFactory factory, UserManager<User> userManager, IEmailSender sender) : base(factory)
 		{
 			this.userManager = userManager;
+			this.sender = sender;
 		}
 
 		public ActionResult Create()
@@ -37,6 +40,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				this.RepositoriesFactory.Rentings.Add(renting);
 
 				this.RepositoriesFactory.SaveChanges();
+
+				await this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode }, HttpContext.Request.Scheme));
 
 				return RedirectToAction("Index", "Calendar");
 			}
@@ -83,6 +88,8 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				model.UpdateEntity(renting);
 				this.RepositoriesFactory.SaveChanges();
 
+				var rerult = this.sender.SendRentingEdited(renting, this.MicrosoftAccessToken).Result;
+
 				return RedirectToAction("Detail", "Renting", new { id = renting.Id });
 			}
 
@@ -117,6 +124,11 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 			renting.State = state.Value;
 			RepositoriesFactory.SaveChanges();
+
+			if (state == RentalState.Canceled)
+			{
+				var result = this.sender.SendRentingCanceled(renting, this.CurrentUser, this.MicrosoftAccessToken).Result;
+			}
 
 			if(redirectToIndex)
 				return RedirectToAction("Index", "Home");

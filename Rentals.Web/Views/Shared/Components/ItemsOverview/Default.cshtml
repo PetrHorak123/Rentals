@@ -1,5 +1,6 @@
 ﻿@model Rentals.Web.Models.ItemOverviewViewModel
 @using Rentals.Common.Extensions
+@using Rentals.Web.Localization
 
 @foreach (var item in Model.Items)
 {
@@ -14,7 +15,9 @@
 				<p>@Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.RemoveSpaces() }, new { @class = "non-underlined" })</p>
 			}
 
-			<img class="img-responsive" src="@item.CoverImage" alt="@item.Name"/>
+			<div class="image-itself">
+				<img class="item-cover" src="@item.CoverImage" alt="@item.Name" />
+			</div>
 			<p>
 				@item.Description
 				@if (item.IsSpecificItem)
@@ -22,7 +25,7 @@
 					@item.Note
 				}
 			</p>
-			<p>@item.NumberOfItems</p>
+			<p>@string.Format(Localization.Items_NumberOfItems, item.NumberOfItems)</p>
 		</div>
 	</section>
 }

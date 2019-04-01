@@ -159,11 +159,26 @@
   <data name="ItemOverview_UseFilters" xml:space="preserve">
     <value>Použít filtry</value>
   </data>
+  <data name="Items_NumberOfItems" xml:space="preserve">
+    <value>Počet předmětů: {0}</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Přihlášení</value>
   </data>
+  <data name="NonReturned_Existing" xml:space="preserve">
+    <value>Máte nenavrácené předměty, pokud jste je již navrátil, kontaktujte nás</value>
+  </data>
+  <data name="NonReturned_Rented" xml:space="preserve">
+    <value>Některé z těchto předmětů jsou v následujících 24 hodinách vypůjčeny, uspěchejte prosím navrácení!</value>
+  </data>
   <data name="Renting_Basket" xml:space="preserve">
     <value>Obsah košíku</value>
+  </data>
+  <data name="Renting_CancelationLate" xml:space="preserve">
+    <value>Nelze zrušit výpůjčku, protože již probíhá, nebo brzy začíná.</value>
+  </data>
+  <data name="Renting_CancelationSuccessful" xml:space="preserve">
+    <value>Výppůjčka byla úspěšně zrušena.</value>
   </data>
   <data name="Renting_DateInPast" xml:space="preserve">
     <value>Nesmí být v minulosti</value>

@@ -31,17 +31,24 @@ namespace Rentals.DL.Repositories
 
 		public Task<Renting[]> GetNonRetruned()
 		{
+			var query = this.RentingNonReturnedQuery().ToArrayAsync();
+
+			return query;
+		}
+
+
+		private IQueryable<Renting> RentingNonReturnedQuery()
+		{
 			var now = DateTime.Now;
 
-			var renting = this.Context.Rentings.Where(
+			var query = this.Context.Rentings.Where(
 				r => !r.IsCanceled &&
 				r.EndsAt < now &&
 				r.State == RentalState.Lended
-			).ToArrayAsync();
+			);
 
-			return renting;
+			return query;
 		}
-
 
 		/// <summary>
 		/// Vytvoří pouze query pro databázi, které následně metody pouštějí.
@@ -72,6 +79,27 @@ namespace Rentals.DL.Repositories
 				.OrderBy(r => r.EndsAt);
 
 			return query.ToArray();
+		}
+
+		public Task<Renting[]> GetRentingsEndingToday()
+		{
+			var query = this.Context.Rentings.Where(r => r.EndsAt.Date == DateTime.Today && !r.NotificationSent && !r.IsCanceled);
+
+			return query.ToArrayAsync();
+		}
+
+		public Task<Renting[]> GetNonReturnedForUser(int userId)
+		{
+			var query = this.RentingNonReturnedQuery().Where(r => r.UserId == userId);
+
+			return query.ToArrayAsync();
+		}
+
+		public Renting GetRentingByCancelationCode(string code)
+		{
+			var renting = this.Context.Rentings.Where(r => r.CancelationCode.Equals(code));
+
+			return renting.FirstOrDefault();
 		}
 	}
 }
