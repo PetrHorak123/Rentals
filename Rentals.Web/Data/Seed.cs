@@ -13,7 +13,7 @@ namespace Rentals.Web.Data
 {
 	public static class Seed
 	{
-		public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration Configuration)
+		public static async Task CreateData(IServiceProvider serviceProvider, IConfiguration Configuration)
 		{
 			// var context = serviceProvider.GetService<EntitiesContext>();
 

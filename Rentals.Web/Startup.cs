@@ -12,6 +12,8 @@ using Rentals.DL;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
 using System;
+using Rentals.Web.Code;
+using Rentals.Web.Interfaces;
 
 namespace Rentals.Web
 {
@@ -34,10 +36,11 @@ namespace Rentals.Web
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-			services.AddDbContext<EntitiesContext>(options => 
+			services.AddDbContext<EntitiesContext>(options =>
 				options
 					.UseLazyLoadingProxies()
-					.UseSqlServer(@"Data Source=SQL6005.site4now.net;Initial Catalog=DB_A4489C_rentals;User Id=DB_A4489C_rentals_admin;Password=vsolstksqb2;")
+					// .UseInMemoryDatabase()
+					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
 			);
 
 			services.AddIdentity<User, Role>()
@@ -45,6 +48,7 @@ namespace Rentals.Web
 				.AddDefaultTokenProviders();
 
 			services.AddScoped<IRepositoriesFactory, RepositoriesFactory>();
+			services.AddScoped<IEmailSender, EmailSender>();
 
 			services.ConfigureApplicationCookie(options =>
 			{
@@ -58,7 +62,7 @@ namespace Rentals.Web
 
 			services.AddSingleton<IAuthorizationHandler, DomainRequirementHandler>();
 
-			services.AddAuthorization(options => 
+			services.AddAuthorization(options =>
 			{
 				options.AddPolicy("PslibOnly", policy => policy.AddRequirements(new DomainRequirement("pslib.cloud", "365.pslib.cz")));
 				options.AddPolicy("AbsoluteRights", policy => policy.RequireRole(RoleType.Administrator.ToString()));
@@ -67,13 +71,17 @@ namespace Rentals.Web
 			});
 
 			services.AddAuthentication()
-				.AddMicrosoftAccount(microsoftOptions =>
-				{
-					microsoftOptions.ClientId = "22fd6b8a-14e7-4e7d-ae95-815b3c0ff4a4";
-					microsoftOptions.ClientSecret = "seNLS65153(-*bkmqvFKAX:";
-					microsoftOptions.SaveTokens = true;
-					microsoftOptions.Scope.Add("https://graph.microsoft.com/people.read");
-				});
+			.AddMicrosoftAccount(microsoftOptions =>
+			{
+				microsoftOptions.ClientId = Configuration.GetSection("MicrosftSettings")["ClientId"];
+				microsoftOptions.ClientSecret = Configuration.GetSection("MicrosftSettings")["ClientSecret"];
+				microsoftOptions.SaveTokens = true;
+
+				microsoftOptions.Scope.Add("people.read");
+				microsoftOptions.Scope.Add("mail.send");
+				microsoftOptions.Scope.Add("openid");
+				microsoftOptions.Scope.Add("offline_access");
+			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}

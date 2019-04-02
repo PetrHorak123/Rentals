@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rentals.Common.Enums;
 using Rentals.DL.Interfaces;
@@ -156,6 +157,7 @@ namespace Rentals.Web.Controllers
 			return View();
 		}
 
+		[AllowAnonymous]
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
