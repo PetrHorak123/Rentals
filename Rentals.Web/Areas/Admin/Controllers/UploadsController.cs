@@ -21,9 +21,10 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		public async Task<IActionResult> Upload(IFormFile file)
 		{
 			if (!file.ContentType.Contains("image"))
-				return null;
+				return BadRequest(Localization.Admin.Item_FileUploadFailed);
 
-			var filePath = Path.GetTempFileName();
+			if (file.Length > 2097152)
+				return BadRequest(Localization.Admin.Item_FileUploadFailedBigSize);
 
 			var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
 			var fullPath = Path.Combine(uploads, GetUniqueFileName(file.FileName));

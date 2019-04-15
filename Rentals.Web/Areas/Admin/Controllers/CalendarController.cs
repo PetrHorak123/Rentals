@@ -38,6 +38,7 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				{
 					id = itemType.Id,
 					content = itemType.Name,
+					showNested = false,
 					nestedGroups = new List<int>()
 				};
 
@@ -63,8 +64,6 @@ namespace Rentals.Web.Areas.Admin.Controllers
 
 		public JsonResult GetRentings(DateTime from, DateTime to)
 		{
-			
-
 			var rentings = this.RepositoriesFactory.Rentings
 				.GetRentingInTime(from, to)
 				.SelectMany(r => r.RentingToItems)
