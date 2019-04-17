@@ -159,9 +159,10 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				return NotFound();
 
 			var itemTypeToType = this.RepositoriesFactory.Accessories
-				.Find(a => 
-					(a.AccesoryId == accessoryId && a.AccesoryToId == accessoryToId) &&
-					(a.AccesoryToId == accessoryId && a.AccesoryId == accessoryToId)
+				.Find(a =>
+					a.AccesoryId == accessoryId
+					// (a.AccesoryId == accessoryId && a.AccesoryToId == accessoryToId) &&
+					// (a.AccesoryToId == accessoryId && a.AccesoryId == accessoryToId)
 				);
 
 			if(itemTypeToType.Length != 0)

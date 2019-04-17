@@ -71,8 +71,8 @@ namespace Rentals.DL.Repositories
 			var itemTypes = this.Context.ItemTypes.Where(
 				t => !t.IsDeleted &&
 				t.Id != id &&
-				!itemType.Accessories.Select(a => a.AccesoryId).Contains(t.Id) &&
-				!itemType.AccesoryTo.Select(a => a.AccesoryToId).Contains(t.Id)
+				!itemType.Accessories.Select(a => a.AccesoryId).Contains(t.Id) 
+				// && !itemType.AccesoryTo.Select(a => a.AccesoryToId).Contains(t.Id)
 			).ToArray();
 
 			return itemTypes;
