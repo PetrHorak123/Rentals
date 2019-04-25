@@ -543,4 +543,7 @@
   <data name="RentingOverview_SendNotifications" xml:space="preserve">
     <value>Odeslat upozornění</value>
   </data>
+  <data name="Item_FileUploadFailedBigSize" xml:space="preserve">
+    <value>Nahrajte obrázek s velikosší menší než 2MB</value>
+  </data>
 </root>

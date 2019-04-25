@@ -601,6 +601,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nahrajte obrázek s velikosší menší než 2MB.
+        /// </summary>
+        public static string Item_FileUploadFailedBigSize {
+            get {
+                return ResourceManager.GetString("Item_FileUploadFailedBigSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Seznam fyzických předmětů.
         /// </summary>
         public static string Item_ListOfItems {
