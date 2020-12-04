@@ -211,7 +211,7 @@
 	}
 
 	function addItem(id, identifier) {
-		if (!$("#" + identifier.replace(/\s/g, ''))[0]) {
+		if (!$("#" + identifier.replace(/\s/g, ''))[0]) {     /*chyba*/
 			$("#items").append(
 				'<div class="col-xs-4" id="' + identifier.replace(/\s/g, '') + '">' +
 					'<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'' + identifier.replace(/\s/g, '') + '\')">x</a></h5>' +
