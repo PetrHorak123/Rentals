@@ -92,13 +92,13 @@
 					</div>
 					<div id="items" class="row">
 						@if (Model.Items != null)
-						{
-							for (int i = 0; i < Model.Items.Count(); i++)
-							{
+                        {
+                            for (int i = 0; i < Model.Items.Count(); i++)
+                            {
 								<div class="col-xs-4" id="@Model.Items[i].UniqueIdentifier.Replace(" ", string.Empty)">
 									<h5>
 										@Model.Items[i].UniqueIdentifier
-										<a class="btn btn-xs btn-danger pull-right" onclick="removeItem('@Model.Items[i].UniqueIdentifier.Replace(" ", string.Empty)')">x</a>
+										<a class="btn btn-xs btn-danger pull-right" onclick="removeItem('@Model.Items[i].Id.ToString()')">x</a> @*fix*@
 									</h5>
 								</div>
 								@Html.HiddenFor(m => m.ItemIds[i])
@@ -210,17 +210,28 @@
 		});
 	}
 
-	function addItem(id, identifier) {
-		if (!$("#" + identifier.replace(/\s/g, ''))[0]) {     /*chyba*/
-			$("#items").append(
-				'<div class="col-xs-4" id="' + identifier.replace(/\s/g, '') + '">' +
-					'<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'' + identifier.replace(/\s/g, '') + '\')">x</a></h5>' +
-				'</div>' +
-				'<input type="hidden" value="' + id + '" name="ItemIds[' + itemsCount + ']" class="item-id"/>'
-			);
-			itemsCount++;
-		}
-	}
+	//function addItem(id, identifier) {       
+	//	if (!$("#" + identifier.replace(/\s/g, ''))[0]) {     /*chyba*/
+	//		$("#items").append(
+	//			'<div class="col-xs-4" id="' + identifier.replace(/\s/g, '') + '">' +
+	//				'<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'' + identifier.replace(/\s/g, '') + '\')">x</a></h5>' +
+	//			'</div>' +
+	//			'<input type="hidden" value="' + id + '" name="ItemIds[' + itemsCount + ']" class="item-id"/>'
+	//		);
+	//		itemsCount++;
+	//	}
+	//}
+
+	/* OPRAVA */
+    function addItem(id, identifier) {
+            $("#items").append(
+                '<div class="col-xs-4" id="id' + id + '">' +
+                '<h5>' + identifier + '<a class="btn btn-xs btn-danger pull-right" onclick="removeItem(\'id' + id + '\')">x</a></h5>' +
+                '</div>' +
+                '<input type="hidden" value="' + id + '" name="ItemIds[' + itemsCount + ']" class="item-id"/>'
+            );
+            itemsCount++;   
+    }
 
 	function removeItem(elem) {
 		var $elem = $("#" + elem);
