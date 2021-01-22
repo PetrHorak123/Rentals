@@ -22,6 +22,12 @@ namespace Rentals.DL.Interfaces
 		/// </summary>
 		Renting[] GetRentingsInTimeForItems(IEnumerable<int> items, DateTime from, DateTime to);
 
+		//PH
+		/// <summary>
+		/// Vrací všechny výpůjčky pro daný typ předmětu nezávisle na čase.
+		/// </summary>
+		Renting[] GetRentingsForItems(IEnumerable<int> items);
+
 		/// <summary>
 		/// Vrátí všechny předměty které jsou v daný čas vypůjčené.
 		/// </summary>

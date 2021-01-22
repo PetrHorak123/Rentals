@@ -546,4 +546,7 @@
   <data name="Item_FileUploadFailedBigSize" xml:space="preserve">
     <value>Nahrajte obrázek s velikosší menší než 2MB</value>
   </data>
+  <data name="Renting_History" xml:space="preserve">
+    <value>Historie výpůjček</value>
+  </data>
 </root>

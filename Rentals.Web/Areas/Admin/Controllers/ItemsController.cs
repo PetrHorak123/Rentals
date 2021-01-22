@@ -26,10 +26,14 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		{
 			var itemType = RepositoriesFactory.Types.GetById(id);
 
+            ////předat modelu také Rentings (které obsahuje userId) podle id itemu
+            var rentings = this.RepositoriesFactory.Rentings.GetRentingsForItems(itemType.NonSpecificItems.Select(i => i.Id));
+
+
 			if (itemType == null)
 				return NotFound();
 
-			var model = FetchModel(new ExtendedItemTypeViewModel(itemType));
+			var model = FetchModel(new ExtendedItemTypeViewModel(itemType, rentings));
 
 			return View(model);
 		}

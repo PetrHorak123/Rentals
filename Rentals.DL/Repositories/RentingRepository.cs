@@ -72,6 +72,16 @@ namespace Rentals.DL.Repositories
 			return query.ToArray();
 		}
 
+		//PH
+		public Renting[] GetRentingsForItems(IEnumerable<int> items)
+		{
+			var query = this.Context.Rentings
+				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Any(i => items.Contains(i)))
+				.OrderBy(r => r.EndsAt);
+
+			return query.ToArray();
+		}
+
 		public Renting[] GetRentingsInTimeForItems(IEnumerable<int> items, DateTime from, DateTime to)
 		{
 			var query = this.RentingInTimeQuery(from, to)

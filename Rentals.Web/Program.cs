@@ -21,7 +21,7 @@ namespace Rentals.Web
 				{
 					var serviceProvider = services.GetRequiredService<IServiceProvider>();
 					var configuration = services.GetRequiredService<IConfiguration>();
-					Seed.CreateData(serviceProvider, configuration).Wait();
+					//Seed.CreateData(serviceProvider, configuration).Wait();
 				}
 				catch (Exception exception)
 				{

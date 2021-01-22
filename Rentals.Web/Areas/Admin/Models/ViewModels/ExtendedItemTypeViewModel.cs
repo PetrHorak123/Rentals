@@ -7,7 +7,7 @@ namespace Rentals.Web.Areas.Admin.Models
 {
 	public class ExtendedItemTypeViewModel : BaseViewModel
 	{
-		public ExtendedItemTypeViewModel(ItemType type)
+		public ExtendedItemTypeViewModel(ItemType type, Renting[] rentings)
 		{
 			this.Id = type.Id;
 			this.Name = type.Name;
@@ -29,6 +29,9 @@ namespace Rentals.Web.Areas.Admin.Models
 			this.History = type.ActualItems
 				.SelectMany(t => t.History)
 				.Select(h => new HistoryViewModel(h));
+
+			//PH
+			this.Rentings = rentings.Select(r => new RentingViewModel(r)).ToList();
 
 		}
 
@@ -82,5 +85,16 @@ namespace Rentals.Web.Areas.Admin.Models
 			get;
 			set;
 		}
-	}
+
+
+        //PH
+        /// <summary>
+        /// Historie všech výpujček tohoto typu.
+        /// </summary>
+        public IEnumerable<RentingViewModel> Rentings
+		{
+			get;
+			set;
+		}
+}
 }

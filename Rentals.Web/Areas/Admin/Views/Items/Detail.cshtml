@@ -14,63 +14,66 @@
 </div>
 
 <div class="row">
-	<h3>@Model.Name</h3>
-	<p>@Model.Description</p>
+    <h3>@Model.Name</h3>
+    <p>@Model.Description</p>
 
-	<hr />
+    <hr />
 
-	<h4><strong>@Admin.Item_ListOfItems</strong></h4>
+    <h4><strong>@Admin.Item_ListOfItems</strong></h4>
 
-	<div class="row row-eq-height">
-		@foreach (var item in Model.Items)
-		{
-			<div class="col-sm-3">
-				<h4>@Model.Name</h4>
-				<img src="@item.CoverImage" alt="@Model.Name" class="img-responsive" />
-				<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
-				<p>@item.Note</p>
-			</div>
-		}
-	</div>
+    <div class="row row-eq-height">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-sm-3">
+                <h4>@Model.Name</h4>
+                <img src="@item.CoverImage" alt="@Model.Name" class="img-responsive" />
+                <p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
+                <p>@item.Note</p>
+            </div>
+        }
+    </div>
 
-	<hr />
+    <hr />
 
-	<h4><strong>@Admin.Item_Accessories</strong></h4>
+    <h4><strong>@Admin.Item_Accessories</strong></h4>
 
-	<div class="row row-eq-height">
-		@foreach (var item in Model.Accessories)
-		{
-			<div class="col-sm-3">
-				<h4><a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined">@item.Name</a></h4>
-				<img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
-				<p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
-				<p>@item.Description</p>
-			</div>
-		}
-	</div>
+    <div class="row row-eq-height">
+        @foreach (var item in Model.Accessories)
+        {
+            <div class="col-sm-3">
+                <h4><a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined">@item.Name</a></h4>
+                <img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
+                <p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
+                <p>@item.Description</p>
+            </div>
+        }
+    </div>
 
-	@if (Model.History.Any())
-	{
-		<hr />
+    @if (Model.History.Any())
+    {
+        <hr />
 
-		<h4><strong>@Admin.History</strong></h4>
+        <h4><strong>@Admin.History</strong></h4>
 
-		<table class="table table-bordered table-responsive">
-			<tr>
-				<th>@Admin.History_Item</th>
-				<th>@Admin.History_Time</th>
-				<th>@Admin.History_Content</th>
-				<th>@Admin.History_Customer</th>
-			</tr>
-			@foreach (var history in Model.History)
-			{
-				<tr>
-					<td>@history.Item</td>
-					<td>@history.HappenedAt</td>
-					<td>@history.Content</td>
-					<td>@Html.ActionLink(history.CausedBy, "Detail", "Customers", new { id = history.CausedById })</td>
-				</tr>
-			}
-		</table>
-	}
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>@Admin.History_Item</th>
+                <th>@Admin.History_Time</th>
+                <th>@Admin.History_Content</th>
+                <th>@Admin.History_Customer</th>
+            </tr>
+            @foreach (var history in Model.History)
+            {
+                <tr>
+                    <td>@history.Item</td>
+                    <td>@history.HappenedAt</td>
+                    <td>@history.Content</td>
+                    <td>@Html.ActionLink(history.CausedBy, "Detail", "Customers", new { id = history.CausedById })</td>
+                </tr>
+            }
+        </table>
+    }
+
+    <h4><strong>@Admin.Renting_History</strong></h4>
+    @(await Html.PartialAsync("_Rentings", Model.Rentings))
 </div>
