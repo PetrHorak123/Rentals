@@ -77,7 +77,7 @@ namespace Rentals.DL.Repositories
 		{
 			var query = this.Context.Rentings
 				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Any(i => items.Contains(i)))
-				.OrderBy(r => r.EndsAt);
+				.OrderByDescending(r => r.EndsAt);
 
 			return query.ToArray();
 		}

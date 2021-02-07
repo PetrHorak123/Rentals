@@ -14,30 +14,58 @@
 				@foreach (var renting in Model)
 				{
 					<div class="list-group-item">
-						@if (renting.State != RentalState.Returned)
-						{
-							<div class="btn-group pull-right">
-								@if (renting.State == RentalState.NotLended)
-								{
-									<a class="btn btn-primary btn-sm" onclick="setLended('@renting.Id', '@((renting.EndsAt.ToUniversalTime()-new DateTime(1970,1,1)).TotalMilliseconds)')">@Admin.RentingOverview_SetLended</a>
-								}
-								else
-								{
-									<a class="btn btn-primary btn-sm" onclick="setReturned('@renting.Id')">@Admin.RentingOverview_SetReturned</a>
-								}
-								<a class="btn btn-warning btn-sm" href="@Url.Action("Detail", "Renting", new { id = renting.Id })">@GlobalResources.Detail</a>
-								<a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
-							</div>
-						}
-						<div>
-							@foreach (var item in renting.Items)
-							{
-								<p class="h4"><a class="non-underlined" href="@Url.Action("Detail", "Items", new { item.Key.Id })">@item.Key.Name</a> (@item.Value)</p>
-							}
-							<p class="h4">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId }), <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p>
-							<p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p>
-							<p class="h4">@renting.Note</p>
-						</div>
+                        <details>
+                            <summary style="outline: none">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-4"><p class="h4">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId }), <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p></div>
+                                    <div class="col-xs-12 col-md-4"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p></div>
+                                        <div class="col-xs-12 col-md-4">
+                                            @if (renting.State != RentalState.Returned)
+                                            {
+                                                <div class="btn-group pull-right">
+                                                    @if (renting.State == RentalState.NotLended)
+                                                    {
+                                                        <a class="btn btn-primary btn-sm" onclick="setLended('@renting.Id', '@((renting.EndsAt.ToUniversalTime()-new DateTime(1970,1,1)).TotalMilliseconds)')">@Admin.RentingOverview_SetLended</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn btn-primary btn-sm" onclick="setReturned('@renting.Id')">@Admin.RentingOverview_SetReturned</a>
+                                                    }
+                                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Detail", "Renting", new { id = renting.Id })">@GlobalResources.Detail</a>
+                                                    <a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+							</summary>
+							<hr />
+                            <div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-8">
+										<div class="list-group">
+											@foreach (var item in renting.Items)
+											{
+												<div class="list-group-item">
+                                                
+													<h4 class="list-group-item-heading"><a class="non-underlined" href="@Url.Action("Detail", "Items", new { item.Key.Id })">@item.Key.Name</a></h4>
+													<p class="list-group-item-text">(@item.Value)</p>
+												</div>
+											}
+										</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="row">
+                                            <div class="col-xs-12"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p></div>
+											<hr />
+                                            <div class="col-xs-12"><p class="h4">@renting.Note</p></div>
+                                        </div>
+
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
 					</div>
 				}
 			</div>
