@@ -16,27 +16,28 @@
 					<div class="list-group-item">
                         <details>
                             <summary style="outline: none">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-4"><p class="h4">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId }), <a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p></div>
-                                    <div class="col-xs-12 col-md-4"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p></div>
-                                        <div class="col-xs-12 col-md-4">
-                                            @if (renting.State != RentalState.Returned)
-                                            {
-                                                <div class="btn-group pull-right">
-                                                    @if (renting.State == RentalState.NotLended)
-                                                    {
-                                                        <a class="btn btn-primary btn-sm" onclick="setLended('@renting.Id', '@((renting.EndsAt.ToUniversalTime()-new DateTime(1970,1,1)).TotalMilliseconds)')">@Admin.RentingOverview_SetLended</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a class="btn btn-primary btn-sm" onclick="setReturned('@renting.Id')">@Admin.RentingOverview_SetReturned</a>
-                                                    }
-                                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Detail", "Renting", new { id = renting.Id })">@GlobalResources.Detail</a>
-                                                    <a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
-                                                </div>
-                                            }
-                                        </div>
+                                <div class="row">                                   
+                                    <div class="col-xs-12 col-md-3"><p class="h4 name">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId })</p></div>
+                                    <div class="col-xs-12 col-md-3"><p class="h4"><a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p></div>
+                                    <div class="col-xs-12 col-md-3"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormat, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormat, renting.EndsAt)</p></div>
+                                    <div class="col-xs-12 col-md-3">
+                                        @if (renting.State != RentalState.Returned)
+                                        {
+                                            <div class="btn-group pull-right">
+                                                @if (renting.State == RentalState.NotLended)
+                                                {
+                                                    <a class="btn btn-primary btn-sm" onclick="setLended('@renting.Id', '@((renting.EndsAt.ToUniversalTime()-new DateTime(1970,1,1)).TotalMilliseconds)')">@Admin.RentingOverview_SetLended</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-primary btn-sm" onclick="setReturned('@renting.Id')">@Admin.RentingOverview_SetReturned</a>
+                                                }
+                                                <a class="btn btn-warning btn-sm" href="@Url.Action("Detail", "Renting", new { id = renting.Id })">@GlobalResources.Detail</a>
+                                                <a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
+                                            </div>
+                                        }
                                     </div>
+                                </div>
 							</summary>
 							<hr />
                             <div>
@@ -53,12 +54,25 @@
 											}
 										</div>
                                     </div>
-                                    <div class="col-xs-12 col-md-4">
-                                        <div class="row">
-                                            <div class="col-xs-12"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p></div>
+                                    <div class="col-xs-12 col-md-4" style="text-align: center">
+                                        
+                                            <div class="row">
+                                                <div class="row"><p class="h4">@GlobalResources.From: @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.StartsAt)</p></div>
+                                                <div class="row"><p class="h4">@GlobalResources.To: @string.Format(GlobalResources.Cs_TimeFormatWithTime, renting.EndsAt)</p></div>                                               
+                                            </div>
 											<hr />
-                                            <div class="col-xs-12"><p class="h4">@renting.Note</p></div>
-                                        </div>
+                                            <div class="row">                            
+                                                @if (renting.Note != "")
+                                                {
+                                                    <p class="h4">@renting.Note</p>
+                                                }
+                                                else
+                                                {
+													<p class="h6">@Admin.Item_NoNote</p>
+                                                }
+
+                                            </div>
+                                        
 
                                         
                                         

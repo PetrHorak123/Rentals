@@ -73,6 +73,12 @@ dl.inline dt {
 }
 
 details summary::-webkit-details-marker {
-	display: none;
+	display: block;
+	position: absolute;
+	top: 1.7em;
+	left: .5em;
 }
 
+.name{
+	margin-left: 10px;
+}

@@ -549,4 +549,7 @@
   <data name="Renting_History" xml:space="preserve">
     <value>Historie výpůjček</value>
   </data>
+  <data name="Item_NoNote" xml:space="preserve">
+    <value>Žádné poznámky</value>
+  </data>
 </root>

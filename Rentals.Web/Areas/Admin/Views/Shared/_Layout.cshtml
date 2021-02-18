@@ -39,16 +39,17 @@
 					@Html.ActionLink(Admin.RentingOverview, "Index", "Home", null, new { @class = "navbar-brand" })
 				</div>
 				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li>@Html.ActionLink(Admin.Calendar, "Index", "Calendar")</li>
-						<li>@Html.ActionLink(Admin.Item, "Index", "Items")</li>
-						<li>@Html.ActionLink(Admin.Customers, "Index", "Customers")</li>
-						@if (User.IsInRole(RoleType.Administrator.ToString()))
-						{
-							<li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
-							<li>@Html.ActionLink(Admin.Employees, "Index", "Employees")</li>
-						}
-					</ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink(Admin.Calendar, "Index", "Calendar")</li>
+                        <li>@Html.ActionLink(Admin.Item, "Index", "Items")</li>
+                        <li>@Html.ActionLink(Admin.Customers, "Index", "Customers")</li>
+                        @if (User.IsInRole(RoleType.Administrator.ToString()))
+                        {
+                            <li>@Html.ActionLink(Admin.Rental, "Index", "Rental")</li>
+                            <li>@Html.ActionLink(Admin.Employees, "Index", "Employees")</li>
+                        }
+                        <li>@Html.ActionLink(Localization.Home, "Index", "Home", new { area = "" })</li>
+                    </ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>@Html.ActionLink(GlobalResources.Logout, "Logout", "Account")</li>
 					</ul>

@@ -628,6 +628,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Žádné poznámky.
+        /// </summary>
+        public static string Item_NoNote {
+            get {
+                return ResourceManager.GetString("Item_NoNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poznámka.
         /// </summary>
         public static string Item_Note {
