@@ -38,7 +38,7 @@ namespace Rentals.DL.Repositories
 						.Select(r => r.Role.RoleType)
 						.Any(r => types.Contains(r) && 
 					u.Id != except)
-				);
+				).OrderBy(x => x.Name);
 
 			return query.ToArrayAsync();
 		}

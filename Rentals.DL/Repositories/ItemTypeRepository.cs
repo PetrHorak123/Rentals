@@ -43,11 +43,11 @@ namespace Rentals.DL.Repositories
 		private IQueryable<ItemType> GetItemsQuery(string q)
 		{
 			var query = this.Context.ItemTypes
-				.Where(t => !t.IsDeleted);
+				.Where(t => !t.IsDeleted).OrderBy(x => x.Name);
 
 			if (!q.IsNullOrEmpty())
 			{
-				query = query.Where(t => t.Name.Contains(q));
+				query = query.Where(t => t.Name.Contains(q)).OrderBy(x => x.Name);
 			}
 
 			return query;

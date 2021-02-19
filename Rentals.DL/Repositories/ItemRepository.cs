@@ -23,11 +23,12 @@ namespace Rentals.DL.Repositories
 						.Any(r =>
 							(r.Renting.StartsAt >= from && r.Renting.StartsAt <= to) ||
 							(r.Renting.EndsAt > from && r.Renting.EndsAt < to)
-				));
+								
+				)).OrderBy(x => x.UniqueIdentifier);
 
 			if (!q.IsNullOrEmpty())
 			{
-				query = query.Where(i => i.Type.Name.Contains(q));
+				query = query.Where(i => i.Type.Name.Contains(q)).OrderBy(x => x.UniqueIdentifier);
 			}
 
 			return query.ToArrayAsync();
@@ -43,7 +44,7 @@ namespace Rentals.DL.Repositories
 						.Any(r =>
 							(r.Renting.StartsAt >= startsAt && r.Renting.StartsAt <= endsAt) ||
 							(r.Renting.EndsAt > startsAt && r.Renting.EndsAt < endsAt)
-						))
+						)).OrderBy(x => x.UniqueIdentifier)
 				.ToArray();
 
 			return items;
