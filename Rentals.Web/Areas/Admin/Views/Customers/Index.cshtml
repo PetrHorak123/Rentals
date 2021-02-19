@@ -2,38 +2,50 @@
 @using Rentals.Web.Localization
 
 @{
-	ViewBag.Title = Admin.Customers;
+    ViewBag.Title = Admin.Customers;
 }
 
 <h2 class="row">
-	@Admin.Customers
+    @Admin.Customers
 </h2>
 
 <div class="row">
-	@if (Model.Count > 0)
-	{
-		<table class="table table-bordered table-responsive">
-			<tr>
-				<th>@Admin.Customers_Name</th>
-				<th>@Admin.Customers_Email</th>
-				<th>@Admin.Customers_Class</th>
-				<th></th>
-			</tr>
-			@foreach (var user in Model)
-			{
-				<tr>
-					<td>@user.Name</td>
-					<td>@user.Email</td>
-					<td>@user.Class</td>
-					<td style="width: 75px">
-						@Html.ActionLink(GlobalResources.Detail, "Detail", "Customers", new { id = user.Id}, new { @class = "btn btn-warning btn-xs pull-right" })
-					</td>
-				</tr>
-			}
-		</table>
-	}
-	else
-	{
-		<p>@Admin.Customers_NoCustomers</p>
-	}
+    @if (Model.Count > 0)
+    {
+        <table id="dtExample" class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>@Admin.Customers_Name</th>
+                    <th>@Admin.Customers_Email</th>
+                    <th>@Admin.Customers_Class</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Class</td>
+                    <td style="width: 75px">
+                        @Html.ActionLink(GlobalResources.Detail, "Detail", "Customers", new { id = user.Id }, new { @class = "btn btn-warning btn-xs pull-right" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>@Admin.Customers_NoCustomers</p>
+    }
 </div>
+
+<script>
+    const dataTable = new simpleDatatables.DataTable("#dtExample", {
+        searchable: true,
+        columns: [
+            { select: [3], sortable: false }
+        ],
+        perPage: 15,
+        })
+</script>
