@@ -4,28 +4,28 @@
 
 @foreach (var item in Model.Items)
 {
-	<section class="item col-sm-4 margin-top-1">
-		<div class="row">
-			@if (item.IsSpecificItem)
-			{
-				<p>@Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.RemoveSpaces() }, new { @class = "non-underlined" })</p>
-			}
-			else
-			{
-				<p>@Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.RemoveSpaces() }, new { @class = "non-underlined" })</p>
-			}
-
-			<div class="image-itself">
-				<img class="item-cover" src="@item.CoverImage" alt="@item.Name" />
-			</div>
-			<p>
-				@item.Description
-				@if (item.IsSpecificItem)
-				{
-					@item.Note
-				}
-			</p>
-			<p>@string.Format(Localization.Items_NumberOfItems, item.NumberOfItems)</p>
-		</div>
-	</section>
+    <section class="item col-sm-6 col-md-4 margin-top-1 d-flex">
+        <div class="card flex-fill">
+            <img class="card-img-top" src="@item.CoverImage" alt="@item.Name">
+            <div class="card-body">
+                @if (item.IsSpecificItem)
+                {
+                    @Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.RemoveSpaces() }, new { @class = "non-underlined card-title" })
+                }
+                else
+                {
+                    @Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.RemoveSpaces() }, new { @class = "non-underlined card-title" })
+                }
+                <h6 class="card-subtitle text-muted">@string.Format(Localization.Items_NumberOfItems, item.NumberOfItems)</h6>
+                <p class="card-text">
+                    @item.Description
+                    @if (item.IsSpecificItem)
+                    {
+                        @item.Note
+                    }
+                </p>
+                
+            </div>
+        </div>
+    </section>
 }

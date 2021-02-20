@@ -24,7 +24,7 @@
 	</form>
 </section>
 
-<section id="items" class="clearfix row-eq-height">
+<section id="items" class="row">
 	@await Component.InvokeAsync(nameof(ItemsOverview), new { Model.from, Model.to })
 </section>
 
