@@ -1609,6 +1609,10 @@ pre code {
   margin-left: auto;
 }
 .row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.rowNewBS {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;

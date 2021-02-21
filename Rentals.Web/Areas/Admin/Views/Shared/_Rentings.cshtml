@@ -17,10 +17,10 @@
                         <details>
                             <summary style="outline: none">
                                 <div class="row">                                   
-                                    <div class="col-xs-12 col-md-3"><p class="h4 name">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId })</p></div>
-                                    <div class="col-xs-12 col-md-3"><p class="h4"><a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p></div>
-                                    <div class="col-xs-12 col-md-3"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormat, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormat, renting.EndsAt)</p></div>
-                                    <div class="col-xs-12 col-md-3">
+                                    <div class="col-xs-12 col-sm-4 col-md-3"><p class="h4 name">@Html.ActionLink(renting.CustomerName, "Detail", "Customers", new { id = renting.CustomerId })</p></div>
+                                    <div class="col-xs-12 col-sm-4 col-md-3"><p class="h4"><a href="mailto:@renting.CustomerEmail">@renting.CustomerEmail</a></p></div>
+                                    <div class="col-xs-12 col-sm-4 col-md-3"><p class="h4">@string.Format(GlobalResources.Cs_TimeFormat, renting.StartsAt) - @string.Format(GlobalResources.Cs_TimeFormat, renting.EndsAt)</p></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
                                         @if (renting.State != RentalState.Returned)
                                         {
                                             <div class="btn-group pull-right">

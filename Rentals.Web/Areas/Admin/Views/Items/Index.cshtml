@@ -25,14 +25,18 @@
 }
 
 
-<div class="row row-eq-height">
+<div class="rowNewBS">
 	@foreach (var item in Model.ItemTypes)
 	{
-		<div class="col-sm-4">
-			<h3>@Html.ActionLink(item.Name, "Detail", "Items", new { id = item.Id }, new { @class = "non-underlined" })</h3>
-			<img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
-			<h4>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</h4>
-			<p class="text-justify">@item.Description</p>
+		<div class="item col-sm-6 col-md-4 margin-top-1 d-flex">
+			<div class="card flex-fill">
+				<img class="card-img-top" src="@item.CoverImage" alt="@item.Name">
+				<div class="card-body">
+					@Html.ActionLink(item.Name, "Detail", "Items", new { id = item.Id }, new { @class = "non-underlined card-title" })
+					<h6 class="card-subtitle text-muted">@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</h6>
+					<p class="card-text">@item.Description</p>
+				</div>
+			</div>
 		</div>
 	}
 </div>
