@@ -10,10 +10,10 @@
 		}
 		else
 		{
-			<div class="list-group">
+			<div class="list-group pag-container">
 				@foreach (var renting in Model)
 				{
-					<div class="list-group-item">
+					<div class="list-group-item pag-item">
                         <details>
                             <summary style="outline: none">
                                 <div class="row">                                   
@@ -180,7 +180,10 @@
 
 	function setCanceled(id, message) {
 		if (confirm(message)) {
-			setState(id, "@RentalState.Canceled")
+			setState(id, "@RentalState.Canceled")			
 		}
 	}
+
+	//pagination
+    $(".pag-container").pagify(10, ".pag-item");
 </script>

@@ -73,10 +73,13 @@ namespace Rentals.DL.Repositories
 		}
 
 		//PH
+		/// <summary>
+		/// Vrací všechny nezrušené výpůjčky. 
+		/// </summary>
 		public Renting[] GetRentingsForItems(IEnumerable<int> items)
 		{
 			var query = this.Context.Rentings
-				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Any(i => items.Contains(i)))
+				.Where(r => r.RentingToItems.Select(rti => rti.ItemId).Any(i => items.Contains(i)) && r.State != 0)
 				.OrderByDescending(r => r.EndsAt);
 
 			return query.ToArray();
