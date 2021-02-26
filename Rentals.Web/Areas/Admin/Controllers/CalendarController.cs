@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Rentals.Common.Extensions;
+using Rentals.Web.Areas.Admin.Models.ViewModels;
 
 namespace Rentals.Web.Areas.Admin.Controllers
 {
@@ -132,6 +133,66 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			}
 
 			return text;
+		}
+
+		/// <summary>
+		/// Vrací data pro měsíční verzi fullcalendar
+		/// </summary>
+		public JsonResult GetCalendarEvents(string item, bool isSpecificItem, DateTime from, DateTime to)
+		{
+			if (isSpecificItem)
+			{
+				var itemId = this.RepositoriesFactory.Items.GetByUniqueIdentifier(item).Id;
+
+				var data = this.RepositoriesFactory.Rentings
+					.GetRentingsInTimeForItem(itemId, from, to).Select(r =>
+						new CalendarEventViewModel(r.User.Name, r.StartsAt, r.EndsAt, Url.Action("Detail", "Renting", new { id = r.Id }))
+					);
+
+				return Json(data);
+			}
+			else
+			{
+				var type = this.RepositoriesFactory.Types.GetByName(item);
+
+				var rentings = this.RepositoriesFactory.Rentings
+					.GetRentingsInTimeForItems(type.NonSpecificItems.Select(i => i.Id), from, to);
+
+				// Pokud nejsou výpůjčky, nemusím nic dělat.
+				if (rentings.Length == 0)
+				{
+					return Json(new int[0]);
+				}
+
+				// Tady začíná sranda, pokračování ve čtení je pouze na vlasní nebezpečí.
+				var results = new List<CalendarEventViewModel>();
+
+				// Pro všechny výpůjčky z odbodí.
+				foreach (var referenceRenting in rentings)
+				{
+					int overlapingRentings = 0;
+
+					// Pro všechny ostatní, kountroluji překrývání.
+					foreach (var renting in rentings)
+					{
+						// Pokud tato, končí dýl nebo ve stejnou chvíli než tak, u které se pohybu v nadřazeném loopu a překrývají se,
+						// spadne sem i pokud je stejná ajok v nadřazeném loopu, proto inicializuju zpočátku předměty na nulu.
+						if (renting.EndsAt >= referenceRenting.EndsAt && referenceRenting.IsOverlapingWith(renting))
+						{
+							// Přičtu vypůjčené předměty.
+							overlapingRentings += renting.ItemsForType(type.Id).Length;
+						}
+					}
+
+					
+					
+					// Nakonec přidám a konec srandy :(.
+					results.Add(new CalendarEventViewModel(referenceRenting.User.Name, referenceRenting.StartsAt, referenceRenting.EndsAt, Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" })));
+					
+				}
+
+				return Json(results);
+			}
 		}
 	}
 }

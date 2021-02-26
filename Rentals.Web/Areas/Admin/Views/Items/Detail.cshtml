@@ -2,15 +2,15 @@
 @using Rentals.Web.Localization
 
 @{
-	ViewBag.Title = string.Format(Admin.Item_Detail, Model.Name);
+    ViewBag.Title = string.Format(Admin.Item_Detail, Model.Name);
 }
 
 <div class="row">
-	<h2>
-		@string.Format(Admin.Item_Detail, Model.Name)
-		@Html.ActionLink(GlobalResources.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + string.Format(Admin.Item_DeleteMessage, Model.Name) + "');" })
-		@Html.ActionLink(GlobalResources.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
-	</h2>
+    <h2>
+        @string.Format(Admin.Item_Detail, Model.Name)
+        @Html.ActionLink(GlobalResources.Delete, "DeleteType", "Items", new { id = Model.Id }, new { @class = "btn btn-danger pull-right", onclick = "return confirm('" + string.Format(Admin.Item_DeleteMessage, Model.Name) + "');" })
+        @Html.ActionLink(GlobalResources.Edit, "Edit", "Items", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+    </h2>
 </div>
 
 <div class="row">
@@ -74,6 +74,47 @@
         </table>
     }
 
+    <div class="row">
+        <div id="calendar" class="col-xs-12"></div>
+    </div>
+
     <h4><strong>@Admin.Renting_History</strong></h4>
     @(await Html.PartialAsync("_Rentings", Model.Rentings))
 </div>
+
+
+
+
+<script type="text/javascript">
+	jq = jQuery.noConflict(false);
+
+	jq(document).ready(function () {
+		jq("#calendar").fullCalendar({
+            defaultView: "month",
+            eventOverlap: false,
+			locale: "cs",
+            slotDuration: "00:@Model.Rental.MinTimeUnit:00",
+            allDaySlot: false,
+			events: function (start, end, timezone, callback) {
+				console.log(start);
+				jq.ajax({
+					url: '@Url.Action("GetCalendarEvents", "Calendar")',
+					method: 'get',
+					data: {
+						item: "@Html.Raw(Model.Name)",
+						count: 10,
+						isSpecificItem: false,
+						from: start.toJSON(),
+						to: end.toJSON()
+					},
+					success: function (data) {
+						callback(data);
+					},
+					error: function () {
+						alert("Kalendářová chyba");
+					}
+				});
+			}
+		});
+	});
+</script>
