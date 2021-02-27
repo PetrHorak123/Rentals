@@ -552,4 +552,7 @@
   <data name="Item_NoNote" xml:space="preserve">
     <value>Žádné poznámky</value>
   </data>
+  <data name="Calendar_ItemsOverview" xml:space="preserve">
+    <value>Vyberte předměty, pro které chcete zobrazit jejich výpůjčky:</value>
+  </data>
 </root>

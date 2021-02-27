@@ -2,101 +2,78 @@
 @using Rentals.Web.Localization
 
 @{
-	ViewBag.Title = Admin.Calendar;
+    ViewBag.Title = Admin.Calendar;
 }
 
 <h2 class="row">
-	@Admin.Calendar
-	@Html.ActionLink(Admin.Renting_Create, "Create", "Renting", null, new { @class = "btn btn-primary pull-right" })
+    @Admin.Calendar
+    @Html.ActionLink(Admin.Renting_Create, "Create", "Renting", null, new { @class = "btn btn-primary pull-right" })
 </h2>
 
+<h5 class="row">
+    @Admin.Calendar_ItemsOverview
+</h5>
+
 <div class="row">
-	<div class="col-sm-12">
-		<div class="row">
-			<div class="form-group col-sm-3 padding-0">
-				<input type="text" name="datetimes" class="form-control" />
-			</div>
-		</div>
-		<div id="visualization" class="row"></div>
-	</div>
+    <form id="itemChooser">
+        @foreach (var item in Model.ItemTypes)
+        {
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <input id="@item.Name" type="checkbox" name="@item.Name" value="@item.Id" checked="checked">
+                <label for="@item.Name"> @item.Name</label><br>
+            </div>
+        }
+    </form>
 </div>
 
-<script>
-	var startDate;
-	var endDate;
-	var timeline;
-	var groups = new vis.DataSet();
+<div class="row">
+    <div id="calendar" class="col-xs-12 margin-top-1"></div>
+</div>
 
-	function updateTimeline(start, end, data) {
-		var container = $("#visualization");
-		container.empty();
-		var options = {
-			groupOrder: 'content',  // groupOrder can be a property name or a sorting function
+
+<script type="text/javascript">
+    jq = jQuery.noConflict(false);
+
+	jq(document).ready(function () {
+        var searchIDs = jq("#itemChooser input:checkbox:checked").map(function () {
+            return parseInt(jq(this).val());
+        }).get();;
+
+
+        jq('#itemChooser :checkbox').change(function () {
+            console.log(searchIDs);
+            searchIDs = jq("#itemChooser input:checkbox:checked").map(function () {
+                return parseInt(jq(this).val());
+            }).get();   
+            jq("#calendar").fullCalendar('refetchEvents');
+        });
+
+		jq("#calendar").fullCalendar({
+            defaultView: "month",    
+            height: "auto",
+            eventOverlap: false,
 			locale: "cs",
-			min: start,
-			max: end,
-			tooltip: {
-				followMouse: true,
-				overflowMethod: 'cap'
+            slotDuration: "00:@Model.Rental.MinTimeUnit:00",
+            allDaySlot: false,
+			events: function (start, end, timezone, callback) {
+                console.log(searchIDs);
+				jq.ajax({
+					url: '@Url.Action("GetCalendarEventsForSelectedItemTypes", "Calendar")',
+					method: 'get',
+					traditional: true,
+					data: {
+                        itemtypes: searchIDs,
+						from: start.toJSON(),
+						to: end.toJSON()
+					},
+					success: function (data) {
+						callback(data);
+					},
+					error: function () {
+						alert("Kalendářová chyba");
+					}
+				});
 			}
-		};
-
-		console.log(groups);
-		console.log(data);
-
-		timeline = new vis.Timeline(container[0], new vis.DataSet(data), groups, options);
-		timeline.setOptions(options);
-
-		$(".vis-timeline").css('visibility', 'visible');
-	}
-
-	$(function () {
-		startDate = moment().startOf('day');
-		endDate = moment().add(1, "week").endOf("day");
-
-
-		@* To je zde jenom kvůli správnému načtení lokalizace *@
-		timeline = new vis.Timeline($("#visualization")[0], { id: 1 }, { locale: "cs" });
-
-		getItems();
-
-		$('input[name="datetimes"]').daterangepicker({
-			startDate: startDate,
-			endDate: endDate,
-			locale: "cs"
-		},
-		function (start, end) {
-			getData(start, end.add(1, "seconds"));
 		});
 	});
-
-	function getData(start, end) {
-		$.ajax({
-			url: '@Url.Action("GetRentings", "Calendar")',
-			data: {
-				from: start.toJSON(),
-				to: end.toJSON()
-			},
-			success: function (data) {
-				updateTimeline(start, end, data);
-			},
-			error: function (data) {
-				alert("Huups");
-			}
-		});
-	}
-
-	function getItems() {
-		$.ajax({
-			url: '@Url.Action("GetTypesAndItems", "Calendar")',
-			success: function (data) {
-				groups.add(data.types);
-				groups.add(data.items);
-				getData(startDate, endDate.add(1, "seconds"));
-			},
-			error: function (data) {
-				alert("Huups");
-			}
-		});
-	}
 </script>

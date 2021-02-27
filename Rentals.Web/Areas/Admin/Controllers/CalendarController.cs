@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Rentals.Common.Extensions;
 using Rentals.Web.Areas.Admin.Models.ViewModels;
+using System.Diagnostics;
 
 namespace Rentals.Web.Areas.Admin.Controllers
 {
@@ -163,11 +164,50 @@ namespace Rentals.Web.Areas.Admin.Controllers
 					referenceRenting.StartsAt, 
 					referenceRenting.EndsAt, 
 					Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" })
-				));
-					
+				));					
 			}
 
 			return Json(results);
+			
+		}
+
+		/// <summary>
+		/// Vrací data pro měsíční verzi fullcalendar
+		/// </summary>
+		public JsonResult GetCalendarEventsForSelectedItemTypes(IEnumerable<int> itemtypes, DateTime from, DateTime to) //vyřešit duplicitu zobrazovaných výpůjček
+		{
+            if (itemtypes.Count() == 0)
+            {
+                return Json(new int[0]);
+            }
+
+            var types = this.RepositoriesFactory.Types.GetItemTypes().Where(t => itemtypes.Contains(t.Id)).ToList(); // předělat do Rentals.DL
+
+            var results = new List<CalendarEventViewModel>();
+
+			
+			foreach (var itemType in types)
+            {
+
+				var rentings = this.RepositoriesFactory.Rentings
+				.GetRentingsInTimeForItems(itemType.NonSpecificItems.Select(i => i.Id), from, to);
+
+				if (rentings.Length != 0)
+				{					
+					foreach (var referenceRenting in rentings)
+					{
+						results.Add(new CalendarEventViewModel(
+							referenceRenting.User.Name,
+							referenceRenting.StartsAt,
+							referenceRenting.EndsAt,
+							Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" })
+						));
+
+					}
+				}
+			}
+
+            return Json(results);
 			
 		}
 	}

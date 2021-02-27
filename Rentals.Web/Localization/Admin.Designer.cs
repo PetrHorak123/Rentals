@@ -70,6 +70,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vyberte předměty, pro které chcete zobrazit jejich výpůjčky:.
+        /// </summary>
+        public static string Calendar_ItemsOverview {
+            get {
+                return ResourceManager.GetString("Calendar_ItemsOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Probíhající výpůjka.
         /// </summary>
         public static string Calendar_Lended {
