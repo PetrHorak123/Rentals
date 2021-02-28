@@ -10,15 +10,23 @@ namespace Rentals.Web.Areas.Admin.Models.ViewModels
 	/// </summary>
 	public class CalendarEventViewModel
     {
-		public CalendarEventViewModel(string title, DateTime from, DateTime to, string url)
+		public CalendarEventViewModel(string title, string desc, DateTime from, DateTime to, string url, string color)
 		{
 			this.Title = title;
+			this.Description = desc;
 			this.Start = from;
 			this.End = to;
 			this.Url = url;
+			this.Color = color;
 		}
 
 		public string Title
+		{
+			get;
+			set;
+		}
+
+		public string Description
 		{
 			get;
 			set;
@@ -41,7 +49,10 @@ namespace Rentals.Web.Areas.Admin.Models.ViewModels
 			get;
 			set;
 		}
-
-		//public string Rendering => "background";
+		public string Color
+		{
+			get;
+			set;
+		}		
 	}
 }

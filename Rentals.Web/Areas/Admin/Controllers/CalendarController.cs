@@ -160,10 +160,12 @@ namespace Rentals.Web.Areas.Admin.Controllers
 			foreach (var referenceRenting in rentings)
 			{
 				results.Add(new CalendarEventViewModel(
-					referenceRenting.User.Name, 
+					referenceRenting.User.Name,
+					String.Join(" , ", referenceRenting.Items.Select(p => p.UniqueIdentifier).ToArray()),
 					referenceRenting.StartsAt, 
 					referenceRenting.EndsAt, 
-					Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" })
+					Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" }),
+					DecideColor(referenceRenting.State, referenceRenting.EndsAt)
 				));					
 			}
 
@@ -192,23 +194,39 @@ namespace Rentals.Web.Areas.Admin.Controllers
 				var rentings = this.RepositoriesFactory.Rentings
 				.GetRentingsInTimeForItems(itemType.NonSpecificItems.Select(i => i.Id), from, to);
 
-				if (rentings.Length != 0)
+				if (rentings.Count() != 0)
 				{					
 					foreach (var referenceRenting in rentings)
 					{
 						results.Add(new CalendarEventViewModel(
 							referenceRenting.User.Name,
+							String.Join(" , ", referenceRenting.Items.Select(p => p.UniqueIdentifier).ToArray()),
 							referenceRenting.StartsAt,
 							referenceRenting.EndsAt,
-							Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" })
+							Url.Action("Detail", "Renting", new { id = referenceRenting.Id, Area = "Admin" }),
+							DecideColor(referenceRenting.State, referenceRenting.EndsAt)
 						));
 
 					}
 				}
 			}
-
-            return Json(results);
 			
+
+            return Json(results.Distinct(new CalendarEventCompare()));
+			
+		}
+	}
+
+	public class CalendarEventCompare : IEqualityComparer<CalendarEventViewModel>
+	{
+		public bool Equals(CalendarEventViewModel x, CalendarEventViewModel y)
+		{
+			return Equals(x.Url, y.Url);
+		}
+
+		public int GetHashCode(CalendarEventViewModel obj)
+		{
+			return obj.Url.GetHashCode();
 		}
 	}
 }

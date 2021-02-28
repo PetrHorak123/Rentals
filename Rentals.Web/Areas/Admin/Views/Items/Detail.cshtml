@@ -95,6 +95,15 @@
 			locale: "cs",
             slotDuration: "00:@Model.Rental.MinTimeUnit:00",
             allDaySlot: false,
+            eventRender: function (eventObj, $el) {
+                $el.popover({
+                    title: eventObj.title,
+                    content: eventObj.description,
+                    trigger: 'hover',
+                    placement: 'top',
+                    container: 'body'
+                });
+            },
 			events: function (start, end, timezone, callback) {
 				console.log(start);
 				jq.ajax({

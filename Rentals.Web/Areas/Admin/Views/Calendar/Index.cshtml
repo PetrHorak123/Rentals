@@ -10,20 +10,36 @@
     @Html.ActionLink(Admin.Renting_Create, "Create", "Renting", null, new { @class = "btn btn-primary pull-right" })
 </h2>
 
-<h5 class="row">
-    @Admin.Calendar_ItemsOverview
-</h5>
-
 <div class="row">
-    <form id="itemChooser">
-        @foreach (var item in Model.ItemTypes)
-        {
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <input id="@item.Name" type="checkbox" name="@item.Name" value="@item.Id" checked="checked">
-                <label for="@item.Name"> @item.Name</label><br>
+    <div class="col-xs-12 list-group-item">
+        <details class="itemsOverview">
+            <summary style="outline: none">
+                <div class="row">
+                    <div class="col-xs-12 col-md-10">
+                        <h4 class="row name">
+                            @Admin.Calendar_ItemsOverview
+                        </h4>
+                    </div>
+                    <div class="col-xs-12 col-md-2">
+                        
+                    </div>
+                </div>
+            </summary>
+            <div class="row padding-1">
+                <form id="itemChooser">
+                    @foreach (var item in Model.ItemTypes)
+                    {
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <input id="@item.Name" type="checkbox" name="@item.Name" value="@item.Id" checked="checked">
+                            <label for="@item.Name"> @item.Name</label><br>
+                        </div>
+                    }
+                </form>
             </div>
-        }
-    </form>
+        </details>
+    </div>
+
+
 </div>
 
 <div class="row">
@@ -38,7 +54,6 @@
         var searchIDs = jq("#itemChooser input:checkbox:checked").map(function () {
             return parseInt(jq(this).val());
         }).get();;
-
 
         jq('#itemChooser :checkbox').change(function () {
             console.log(searchIDs);
@@ -55,6 +70,15 @@
 			locale: "cs",
             slotDuration: "00:@Model.Rental.MinTimeUnit:00",
             allDaySlot: false,
+            eventRender: function (eventObj, $el) {
+                $el.popover({
+                    title: eventObj.title,
+                    content: eventObj.description,
+                    trigger: 'hover',
+                    placement: 'top',
+                    container: 'body'
+                });
+            },
 			events: function (start, end, timezone, callback) {
                 console.log(searchIDs);
 				jq.ajax({
