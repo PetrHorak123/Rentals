@@ -72,9 +72,13 @@
 	<h2 class="col-xs-12">@Localization.ItemDetail_Accessories</h2>
 	@foreach (var accessory in Model.Accessories)
 	{
-		<div class="col-sm-4">
-			<p>@Html.ActionLink(accessory.Name, "TypeDetail", "Home", new { itemType = accessory.Name.Replace(" ", string.Empty) }, new { @class = "non-underlined" })</p>
-			<img src="@accessory.CoverImage" class="img-responsive" />
+		<div class="col-sm-4 margin-top-1">
+			<div class="card">
+				<div class="card-body">
+					<img src="@accessory.CoverImage" class="card-img-top" />
+					@Html.ActionLink(accessory.Name, "TypeDetail", "Home", new { id = accessory.ItemTypeId }, new { @class = "non-underlined card-title" })
+				</div>
+			</div>
 		</div>
 	}
 </section>

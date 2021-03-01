@@ -10,11 +10,11 @@
             <div class="card-body">
                 @if (item.IsSpecificItem)
                 {
-                    @Html.ActionLink(item.Name, "ItemDetail", "Home", new { uid = item.UniqueId.RemoveSpaces() }, new { @class = "non-underlined card-title" })
+                    @Html.ActionLink(item.Name, "ItemDetail", "Home", new { id = item.ItemId }, new { @class = "non-underlined card-title" })
                 }
                 else
                 {
-                    @Html.ActionLink(item.Name, "TypeDetail", "Home", new { itemType = item.Name.RemoveSpaces() }, new { @class = "non-underlined card-title" })
+                    @Html.ActionLink(item.Name, "TypeDetail", "Home", new { id = item.ItemTypeId }, new { @class = "non-underlined card-title" }) //item.Id
                 }
                 <h6 class="card-subtitle text-muted">@string.Format(Localization.Items_NumberOfItems, item.NumberOfItems)</h6>
                 <p class="card-text">

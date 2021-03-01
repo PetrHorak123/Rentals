@@ -31,10 +31,10 @@ namespace Rentals.Web.Controllers
 			return View(vm);
 		}
 
-		[Route("/TypeDetail/{itemType}")]
-		public ActionResult TypeDetail(string itemType)
+		[Route("/TypeDetail/{id}")]
+		public ActionResult TypeDetail(int id)
 		{
-			var item = this.RepositoriesFactory.Types.GetByName(itemType, withSpaces: false);
+			var item = this.RepositoriesFactory.Types.GetById(id);
 			if (item == null)
 				return NotFound();
 
@@ -43,10 +43,10 @@ namespace Rentals.Web.Controllers
 			return View("Detail", model);
 		}
 
-		[Route("ItemDetail/{uid}")]
-		public ActionResult ItemDetail(string uid)
+		[Route("/ItemDetail/{id}")]
+		public ActionResult ItemDetail(int id)
 		{
-			var item = this.RepositoriesFactory.Items.GetByUniqueIdentifier(uid, withSpaces: false);
+			var item = this.RepositoriesFactory.Items.GetById(id);
 			if (item == null)
 				return NotFound();
 

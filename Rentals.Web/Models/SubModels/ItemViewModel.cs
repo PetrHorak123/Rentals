@@ -15,6 +15,24 @@
 		}
 
 		/// <summary>
+		/// Databázové Id předmětu (Item). 
+		/// </summary>
+		public int ItemId
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Databázové Id předmětu (ItemType). 
+		/// </summary>
+		public int ItemTypeId
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
 		/// Počet přetmětů, které je možno si zapůjčit.
 		/// </summary>
 		public int NumberOfItems

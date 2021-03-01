@@ -15,6 +15,8 @@ namespace Rentals.Web.Models
 			}).Select(g => new ItemViewModel()
 			{
 				Name = g.First().Type.Name,
+				ItemId = g.First().Id,
+				ItemTypeId = g.First().ItemTypeId,
 				UniqueId = g.First().UniqueIdentifier,
 				CoverImage = g.Key.CoverImage,
 				Description = g.First().Type.Description,
@@ -32,6 +34,8 @@ namespace Rentals.Web.Models
 			}).Select(g => new ItemViewModel()
 			{
 				Name = g.First().Type.Name,
+				ItemId = g.First().Id,
+				ItemTypeId = g.First().ItemTypeId,
 				UniqueId = g.First().UniqueIdentifier,
 				CoverImage = g.Key.CoverImage,
 				Description = g.First().Type.Description,

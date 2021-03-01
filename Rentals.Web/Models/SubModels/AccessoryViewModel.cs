@@ -12,6 +12,7 @@ namespace Rentals.Web.Models
 		{
 			this.Name = type.Name;
 			this.CoverImage = type.Items.FirstOrDefault()?.CoverImage;
+			this.ItemTypeId = type.Id;
 		}
 
 		/// <summary>
@@ -27,6 +28,15 @@ namespace Rentals.Web.Models
 		/// Náhledový obrázek příslušenství.
 		/// </summary>
 		public string CoverImage
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Id typu předmětu (ItemType)
+		/// </summary>
+		public int ItemTypeId
 		{
 			get;
 			set;
