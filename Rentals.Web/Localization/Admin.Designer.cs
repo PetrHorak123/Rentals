@@ -1150,6 +1150,15 @@ namespace Rentals.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Výpůjčka byla vrácena.
+        /// </summary>
+        public static string Renting_WasReturned {
+            get {
+                return ResourceManager.GetString("Renting_WasReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Výpůjčka nemůže končit dřív než začíná.
         /// </summary>
         public static string Renting_WrongDate {

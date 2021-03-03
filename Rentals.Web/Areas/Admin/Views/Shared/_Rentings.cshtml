@@ -36,6 +36,10 @@
                                                 <a class="btn btn-danger btn-sm" onclick="setCanceled('@renting.Id', '@string.Format(Admin.RentingOverView_CancelConfrim, renting.CustomerName)')">@GlobalResources.CancelRenting</a>
                                             </div>
                                         }
+                                        else
+                                        {
+											<p class="h5">@Admin.Renting_WasReturned</p>
+                                        }
                                     </div>
                                 </div>
 							</summary>
@@ -128,14 +132,19 @@
 
 <script type="text/javascript">
 	function setState(id, state) {
-		$.ajax({
+        jQuery.ajax({
 			url: '@Url.Action("SetState", "Renting")',
 			data: {
 				id: id,
 				state: state
 			},
 			success: function (data) {
-				$("#component-container").load('@Url.Action("ReloadComponentView", "Home")');
+				if (jQuery("#component-container").length) {
+					jQuery("#component-container").load('@Url.Action("ReloadComponentView", "Home")');
+                }
+                else {
+                    location.reload();
+                }
 			},
 			error: function (data) {
 				alert('@Html.Raw(Admin.RentingOverview_CannotChangeState)');
@@ -144,29 +153,29 @@
 	}
 
 	function setReturned(id) {
-		var $modal = $("#set-returned-modal");
+        var $modal = jQuery("#set-returned-modal");
 		$modal.modal("show");
 
-		$("#set-returned-no-history").click(function () {
+        jQuery("#set-returned-no-history").click(function () {
 			setState(id, "@RentalState.Returned");
 			$modal.modal("hide");
 		});
 
-		$("#set-returned-with-history").click(function () {
+        jQuery("#set-returned-with-history").click(function () {
 			window.location.href = "@Url.Action("Create", "History")" + "/" + id;
 		});
 	}
 
 	function setLended(id, time) {
 		if (time < Date.now()) {
-			var $modal = $("#set-lended-modal");
+            var $modal = jQuery("#set-lended-modal");
 			$modal.modal("show");
 
-			$("#set-lended").click(function () {
+            jQuery("#set-lended").click(function () {
 				setState(id, "@RentalState.Lended");
 				$modal.modal("hide");
 			})
-			$("#set-returned").click(function () {
+            jQuery("#set-returned").click(function () {
 				setState(id, "@RentalState.Returned");
 				$modal.modal("hide");
 			})
@@ -180,10 +189,10 @@
 
 	function setCanceled(id, message) {
 		if (confirm(message)) {
-			setState(id, "@RentalState.Canceled")			
+			setState(id, "@RentalState.Canceled")
 		}
 	}
 
 	//pagination
-    $(".pag-container").pagify(10, ".pag-item");
+    jQuery(".pag-container").pagify(10, ".pag-item");
 </script>

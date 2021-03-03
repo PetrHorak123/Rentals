@@ -555,4 +555,7 @@
   <data name="Calendar_ItemsOverview" xml:space="preserve">
     <value>Vyberte předměty, pro které chcete zobrazit jejich výpůjčky:</value>
   </data>
+  <data name="Renting_WasReturned" xml:space="preserve">
+    <value>Výpůjčka byla vrácena</value>
+  </data>
 </root>
