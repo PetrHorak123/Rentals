@@ -72,11 +72,20 @@ dl.inline dt {
 	display: block;
 }
 
-details summary::-webkit-details-marker {
+details summary::marker,
+details summary::-webkit-details-marker { /*nefunguje viz https://chromestatus.com/feature/6730096436051968 */
 	display: block;
 	position: absolute;
 	top: 1.7em;
 	left: .5em;
+}
+
+/*summary{*/ /* hides summary::mareker */
+	/*display: block;
+}*/
+
+details{
+	display: block;
 }
 
 .name{

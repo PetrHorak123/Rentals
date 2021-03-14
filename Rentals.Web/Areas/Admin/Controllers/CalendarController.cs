@@ -176,14 +176,14 @@ namespace Rentals.Web.Areas.Admin.Controllers
 		/// <summary>
 		/// Vrací data pro měsíční verzi fullcalendar
 		/// </summary>
-		public JsonResult GetCalendarEventsForSelectedItemTypes(IEnumerable<int> itemtypes, DateTime from, DateTime to) //vyřešit duplicitu zobrazovaných výpůjček
+		public JsonResult GetCalendarEventsForSelectedItemTypes(IEnumerable<int> itemtypes, DateTime from, DateTime to) 
 		{
             if (itemtypes.Count() == 0)
             {
                 return Json(new int[0]);
             }
 
-            var types = this.RepositoriesFactory.Types.GetItemTypes().Where(t => itemtypes.Contains(t.Id)).ToList(); // předělat do Rentals.DL
+            var types = this.RepositoriesFactory.Types.GetItemTypes().Where(t => itemtypes.Contains(t.Id)).ToList();
 
             var results = new List<CalendarEventViewModel>();
 

@@ -14,7 +14,7 @@
                 }
                 else
                 {
-                    @Html.ActionLink(item.Name, "TypeDetail", "Home", new { id = item.ItemTypeId }, new { @class = "non-underlined card-title" }) //item.Id
+                    @Html.ActionLink(item.Name, "TypeDetail", "Home", new { id = item.ItemTypeId }, new { @class = "non-underlined card-title" }) 
                 }
                 <h6 class="card-subtitle text-muted">@string.Format(Localization.Items_NumberOfItems, item.NumberOfItems)</h6>
                 <p class="card-text">
@@ -23,8 +23,7 @@
                     {
                         @item.Note
                     }
-                </p>
-                
+                </p>              
             </div>
         </div>
     </section>

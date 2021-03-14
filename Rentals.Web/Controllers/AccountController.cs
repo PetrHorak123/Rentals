@@ -164,31 +164,12 @@ namespace Rentals.Web.Controllers
 
 		private async Task<string> GetClassFromMicrosoft(IEnumerable<AuthenticationToken> tokens, string providerUserId)
 		{
-			//HttpClient client = new HttpClient();
-
-			//client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); // ACCEPT header
-			//client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokens.First(t => t.Name == accessToken).Value}");
-
-			//// OK, přivnávám vypadá to divně, ale /me na api protě department nevrací,
-			//// tudíž todle je jediná mě známá metoda k 31.1.2019 jak tento údaj zjistit, 
-			//// logicky mi to smysl nedává, ale funguje to prozže má sám sebe v lidech (people), 
-			//// tak to vyfiltruju na microsoftích serverech a vrátím si kolekci s právě jedním prvkem, což je přihlášený uživatel, 
-			//// aneb přoč dělat věci jednoduše, že ano microsofte ?
-			//// spoléhám se na displayname, protože jsem ho obdržel od serveru a šance, 
-			//// že se změní mezí tím co jsem ho obdržel a pošlu ho dál je malá, ne-li nulová,
-			//// ale pořád exituje (api neumožnuje filtraci podle id, a podle mailu je komplikovanější)
-			//var info = await client.GetAsync($"https://graph.microsoft.com/v1.0/me/people/?$filter=displayName eq '{name}'");
-			//var content = await info.Content.ReadAsAsync<dynamic>();
-			//string result = content.value[0].department;
-
-
-			//hotfix
 			string result;
 
 			HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));			
 			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokens.First(t => t.Name == accessToken).Value}");
-			var info = await client.GetAsync($"https://graph.microsoft.com/v1.0/users/{providerUserId}?$select=businessPhones,displayName,givenName,id,jobTitle,mail,mobilePhone,preferredLanguage,surname,userPrincipalName,department");
+			var info = await client.GetAsync($"https://graph.microsoft.com/v1.0/users/{providerUserId}?$select=department");
             var content = await info.Content.ReadAsAsync<dynamic>();
             if (content != null)
             {
@@ -196,7 +177,6 @@ namespace Rentals.Web.Controllers
 				return result;
 
 			}
-
 			return null;
 		}
 	}

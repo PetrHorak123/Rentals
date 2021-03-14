@@ -29,6 +29,15 @@ namespace Rentals.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(
+					builder =>
+					{
+						builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+					});
+			});
+
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -93,6 +102,7 @@ namespace Rentals.Web
 			{
 				app.UseDeveloperExceptionPage();
 				app.UseDatabaseErrorPage();
+				app.UseCors();
 			}
 			else
 			{
