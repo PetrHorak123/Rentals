@@ -56,7 +56,6 @@
         }).get();;
 
         jq('#itemChooser :checkbox').change(function () {
-            console.log(searchIDs);
             searchIDs = jq("#itemChooser input:checkbox:checked").map(function () {
                 return parseInt(jq(this).val());
             }).get();   

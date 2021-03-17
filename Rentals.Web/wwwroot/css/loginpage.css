@@ -1,0 +1,26 @@
+.body-content {
+    background-image: url('../images/lens.jpg');
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-left: 10vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 1350px) {
+    .body-content {
+        flex-direction: row;
+        padding: 0;
+        padding-top: 10vh;
+    }
+}

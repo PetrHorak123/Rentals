@@ -35,24 +35,31 @@
 
     <hr />
 
-    <h4><strong>@Admin.Item_Accessories</strong></h4>
+    @if (Model.Accessories.Any())
+    {
+        <h4><strong>@Admin.Item_Accessories</strong></h4>
 
-    <div class="row row-eq-height">
-        @foreach (var item in Model.Accessories)
-        {
-            <div class="col-sm-3">
-                <h4><a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined">@item.Name</a></h4>
-                <img src="@item.CoverImage" alt="@item.Name" class="img-responsive" />
-                <p>@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</p>
-                <p>@item.Description</p>
-            </div>
-        }
-    </div>
+        <div class="rowNewBS">
+            @foreach (var item in Model.Accessories)
+            {
+                <div class="col-sm-6 col-md-4 margin-top-1 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-body">
+                            <img src="@item.CoverImage" alt="@item.Name" class="card-img-top" />
+                            <a href="@Url.Action("Detail", "Items", new { id = item.Id })" class="non-underlined card-title">@item.Name</a>
+                            <h6 class="card-subtitle text-muted">@string.Format(Admin.Item_NumberOfItems, item.NumberOfItems)</h6>
+                            <p class="card-text">@item.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <hr />
+    }
 
     @if (Model.History.Any())
     {
-        <hr />
-
         <h4><strong>@Admin.History</strong></h4>
 
         <table class="table table-bordered table-responsive">
@@ -72,8 +79,11 @@
                 </tr>
             }
         </table>
+
+        <hr />
     }
 
+    <h4><strong>@Admin.Calendar</strong></h4>
     <div class="row">
         <div id="calendar" class="col-xs-12"></div>
     </div>
@@ -91,6 +101,7 @@
 	jq(document).ready(function () {
 		jq("#calendar").fullCalendar({
             defaultView: "month",
+            height: "auto",
             eventOverlap: false,
 			locale: "cs",
             slotDuration: "00:@Model.Rental.MinTimeUnit:00",
