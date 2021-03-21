@@ -11,6 +11,8 @@ namespace Rentals.DL.Interfaces
 		/// </summary>
 		User[] FindCustomers(string searchTerm);
 
+		User[] FindCustomersByName(string searchTerm);
+
 		/// <summary>
 		/// Vrací uživatele na základě jména.
 		/// </summary>

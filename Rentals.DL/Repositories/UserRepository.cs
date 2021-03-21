@@ -23,6 +23,16 @@ namespace Rentals.DL.Repositories
 			return customers;
 		}
 
+		public User[] FindCustomersByName(string searchTerm)
+		{
+			var customers = this.Context.Users
+				.Where(u =>
+					u.Name.Contains(searchTerm.Normalize().ToUpper())
+				).ToArray();
+
+			return customers;
+		}
+
 		public User GetByName(string name)
 		{
 			var user = this.Context.Users.Where(u => u.UserName == name).FirstOrDefault();

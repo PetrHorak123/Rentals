@@ -179,5 +179,10 @@ namespace Rentals.Web.Controllers
 			}
 			return null;
 		}
+
+		public string EligibleUser()
+        {
+			return this.CurrentUser.Id.ToString();
+		}
 	}
 }

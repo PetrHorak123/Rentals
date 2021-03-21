@@ -29,6 +29,14 @@ namespace Rentals.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(
+					builder =>
+					{
+						builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+					});
+			});
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
@@ -85,6 +93,8 @@ namespace Rentals.Web
 			});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +104,7 @@ namespace Rentals.Web
 			{
 				app.UseDeveloperExceptionPage();
 				app.UseDatabaseErrorPage();
+				app.UseCors();
 			}
 			else
 			{
@@ -116,7 +127,10 @@ namespace Rentals.Web
 				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
+
 			});
+
+			
 		}
 	}
 }
