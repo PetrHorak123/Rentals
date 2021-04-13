@@ -7,6 +7,7 @@
 
 <h2 class="row">
     @Admin.Calendar
+    @Html.ActionLink("Do Reactu", "ToReact", "React", new { area = "", user = User.ToString() }, new { @class = "btn btn-info pull-right" })
     @Html.ActionLink(Admin.Renting_Create, "Create", "Renting", null, new { @class = "btn btn-primary pull-right" })
 </h2>
 

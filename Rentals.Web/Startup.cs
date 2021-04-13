@@ -14,6 +14,9 @@ using Rentals.DL.Interfaces;
 using System;
 using Rentals.Web.Code;
 using Rentals.Web.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Rentals.Web
 {
@@ -91,6 +94,24 @@ namespace Rentals.Web
 				microsoftOptions.Scope.Add("openid");
 				microsoftOptions.Scope.Add("offline_access");
 			});
+
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.SaveToken = true;
+					options.RequireHttpsMetadata = true;
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateAudience = true,
+						ValidateLifetime = true,
+						ValidateIssuerSigningKey = true,
+						ValidIssuer = Configuration["Jwt:Issuer"],
+						ValidAudience = Configuration["Jwt:Issuer"],
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
+						ClockSkew = TimeSpan.FromMinutes(1)
+					};
+				});
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

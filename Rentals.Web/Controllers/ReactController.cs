@@ -37,11 +37,26 @@ namespace Rentals.Web.Controllers
         }
 
         [HttpGet("bafbaf")]
-        public ActionResult<string> Test()
+        public async Task<ActionResult<string>> Test()
         {
-            var user = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
-            return Ok("jetodobry");
+            //var user = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
+
+            var info = await signInManager.GetExternalLoginInfoAsync();
+
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+            return Ok(email);
         }
+
+        public ActionResult ToReact(User user)
+        {
+            var x = user;
+
+
+            return Redirect("http://localhost:3000/Create"); ;
+        }
+
+        #region form
 
         [HttpGet("customers/{term}")]
         public JsonResult GetCustomers(string term)
@@ -58,6 +73,60 @@ namespace Rentals.Web.Controllers
 
             return Json(customers);
         }
+
+        [HttpGet("GetItemTypes")]
+        public JsonResult GetItemTypes()
+        {
+            var itemTypes = this.RepositoriesFactory.Types.GetItemTypes();
+
+            var results = new List<TreeSelectViewModel>();
+
+            foreach (var item in itemTypes)
+            {
+                results.Add(new TreeSelectViewModel(
+                    item.Name,
+                    item.Id + 100000,
+                    item.Id + 100000,
+                    null,
+                    false,
+                    true,
+                    false,
+                    false
+                ));
+            }
+
+            return Json(results);
+        }
+
+        [HttpGet("GetAvaibleItems")]
+        public JsonResult GetAvaibleItems(int itemTypeId, string startsAt, string endsAt)
+        {
+            var itemType = RepositoriesFactory.Types.GetById(itemTypeId);
+
+            var startsAtDateTime = DateTime.Parse(startsAt);
+            var endsAtDateTime = DateTime.Parse(endsAt);
+
+            if (startsAt == null || endsAt == null || itemType == null)
+                return null;
+
+            var items = this.RepositoriesFactory.Items
+                .GetAvailbeItems(itemTypeId, startsAtDateTime, endsAtDateTime)
+                .Select(i => new TreeSelectViewModel(
+                    i.UniqueIdentifier,
+                    i.Id,
+                    i.Id,
+                    null,
+                    true,
+                    false,
+                    true,
+                    true
+                    ))
+                .ToArray();
+
+            return Json(items);
+        }
+
+        #endregion
 
         //[HttpPost]
         //public async Task<ActionResult> Create(RentingCreatorViewModel postedModel)
