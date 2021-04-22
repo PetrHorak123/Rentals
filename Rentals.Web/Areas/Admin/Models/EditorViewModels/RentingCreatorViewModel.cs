@@ -283,5 +283,15 @@ namespace Rentals.Web.Areas.Admin.Models
 
 			return renting;
 		}
+		//Pro React verzi vytváření výpůjčky (nevytváří se nový uživatel)
+		public Renting CreateEntity()
+		{
+			var renting = Renting.Create(
+				this.CustomerId, this.StartsAt, this.EndsAt,
+				this.State, this.Note, this.ItemIds
+			);
+
+			return renting;
+		}
 	}
 }

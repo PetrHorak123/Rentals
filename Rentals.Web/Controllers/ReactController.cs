@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rentals.Common.Enums;
 using Rentals.DL.Entities;
 using Rentals.DL.Interfaces;
+using Rentals.Web.Areas.Admin.Models;
 using Rentals.Web.ReactExtensions.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -48,12 +50,9 @@ namespace Rentals.Web.Controllers
             return Ok(email);
         }
 
-        public ActionResult ToReact(User user)
+        public ActionResult ToReact()
         {
-            var x = user;
-
-
-            return Redirect("http://localhost:3000/Create"); ;
+            return Redirect("http://localhost:3000/Create"); 
         }
 
         #region form
@@ -65,7 +64,7 @@ namespace Rentals.Web.Controllers
                 return null;
 
             var customers = this.RepositoriesFactory.Users.FindCustomersByName(term)
-                .Select(c => new CustomerSearchModel()
+                .Select(c => new CustomerReactSearchModel()
                 {
                     Label = c.Name,
                     Value = c.Id,
@@ -128,24 +127,38 @@ namespace Rentals.Web.Controllers
 
         #endregion
 
-        //[HttpPost]
-        //public async Task<ActionResult> Create(RentingCreatorViewModel postedModel)
-        //{
-        //    var model = FetchModel(postedModel);
+        [HttpPost("Form")]
+        public ActionResult Create(CreateRentingInputModel x)
+        {
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        var renting = await model.CreateEntity(userManager);
-        //        this.RepositoriesFactory.Rentings.Add(renting);
+            var origRentingModel = new RentingCreatorViewModel() { 
+                CustomerId = x.userId, 
+                StartsAtDate = DateTime.Parse(x.startsAt).Date, 
+                StartsAtTime = DateTime.Parse(x.startsAt).TimeOfDay, 
+                EndsAtDate = DateTime.Parse(x.endsAt).Date, 
+                EndsAtTime = DateTime.Parse(x.endsAt).TimeOfDay, 
+                ItemIds = x.items, Note = x.note, 
+                State = (RentalState)x.state
+            };
+            
+            
+            var model = FetchModel(origRentingModel);
 
-        //        this.RepositoriesFactory.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var renting = model.CreateEntity();
+                this.RepositoriesFactory.Rentings.Add(renting);
 
-        //        await this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode }, HttpContext.Request.Scheme));
+                this.RepositoriesFactory.SaveChanges();
 
-        //        return RedirectToAction("Index", "Calendar");
-        //    }
+                //await this.sender.SendRentingCreated(renting, this.MicrosoftAccessToken, Url.Action("CancelRenting", "Home", new { code = renting.CancelationCode }, HttpContext.Request.Scheme));
 
-        //    return View(model);
-        //}
+                return Redirect("https://localhost:44347/Admin/Calendar");
+            }
+
+            //return View(model);
+            return NotFound();
+            
+        }
     }
 }

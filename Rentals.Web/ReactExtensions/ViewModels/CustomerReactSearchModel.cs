@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rentals.Web.ReactExtensions.ViewModels
 {
-    public class CustomerSearchModel
+    public class CustomerReactSearchModel
     {
 		public string Label
 		{
